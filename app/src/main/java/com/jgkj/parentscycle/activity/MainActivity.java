@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
@@ -23,19 +24,19 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.main_activity_bottom_bar_main_channel_tv)
-    private TextView mBtmMainChannelTv;
+    TextView mBtmMainChannelTv;
 
     @Bind(R.id.main_activity_bottom_bar_dynamic_tv)
-    private TextView mBtmDynamicTv;
+    TextView mBtmDynamicTv;
 
     @Bind(R.id.main_activity_bottom_bar_find_tv)
-    private TextView mBtmFindTv;
+    TextView mBtmFindTv;
 
     @Bind(R.id.main_activity_bottom_bar_mine_tv)
-    private TextView mBtmMineTv;
+    TextView mBtmMineTv;
 
     @Bind(R.id.main_activity_bottom_bar_publish_iv)
-    private TextView mBtmPublishIv;
+    ImageView mBtmPublishIv;
 
 
 
@@ -45,12 +46,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private  HallFindFragement mHallFindFragement;
     private  HallMainChannelFragement mHallMainChannelFragement;
     private  HallMeFragement mHallMeFragement;
-
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+    private  FragmentManager mFragmentManager;
 
 
     @Override
@@ -68,9 +64,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mHallMainChannelFragement = new HallMainChannelFragement();
         mHallMeFragement = new HallMeFragement();
 
-        FragmentManager mFragmentManager = this.getSupportFragmentManager();
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.add(R.id.main_activity_content_fl,mHallMainChannelFragement).commit();
+        mFragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.add(R.id.main_activity_content_fl,mHallMainChannelFragement).commit();
     }
 
 
@@ -79,16 +75,62 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        FragmentTransaction transaction = mFragmentManager
+                .beginTransaction();
+        hideAllFrament(transaction);
         if (v == mBtmMainChannelTv) {
-
+            transaction.show(mHallMainChannelFragement).commitAllowingStateLoss();
         } else if (v == mBtmDynamicTv) {
-
+            if (mHallDynamicFragement.isAdded()) {
+                transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
+            } else {
+                transaction.add(R.id.main_activity_content_fl, mHallDynamicFragement);
+                transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
+            }
         }  else if (v == mBtmFindTv) {
-
+            if (mHallFindFragement.isAdded()) {
+                transaction.show(mHallFindFragement).commitAllowingStateLoss();
+            } else {
+                transaction.add(R.id.main_activity_content_fl,mHallFindFragement);
+                transaction.show(mHallFindFragement).commitAllowingStateLoss();
+            }
         }  else if (v == mBtmMineTv) {
-
+            if (mHallMeFragement.isAdded()) {
+                transaction.show(mHallMeFragement).commitAllowingStateLoss();
+            } else {
+                transaction.add(R.id.main_activity_content_fl,mHallMeFragement);
+                transaction.show(mHallMeFragement).commitAllowingStateLoss();
+            }
         }  else if (v == mBtmPublishIv) {
+            if (mHallCircleMenuFragement.isAdded()) {
+                transaction.show(mHallCircleMenuFragement).commitAllowingStateLoss();
+            } else {
+                transaction.add(R.id.main_activity_content_fl, mHallCircleMenuFragement);
+                transaction.show(mHallCircleMenuFragement).commitAllowingStateLoss();
+            }
+        }
+    }
 
+    private void hideAllFrament(FragmentTransaction transaction) {
+
+        if (mHallCircleMenuFragement.isAdded()) {
+            transaction.hide(mHallCircleMenuFragement);
+        }
+
+        if (mHallDynamicFragement.isAdded()) {
+            transaction.hide(mHallDynamicFragement);
+        }
+
+        if (mHallFindFragement.isAdded()) {
+            transaction.hide(mHallFindFragement);
+        }
+
+        if (mHallMainChannelFragement.isAdded()) {
+            transaction.hide(mHallMainChannelFragement);
+        }
+
+        if (mHallMeFragement.isAdded()) {
+            transaction.hide(mHallMeFragement);
         }
     }
 }

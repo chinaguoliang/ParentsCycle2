@@ -72,18 +72,14 @@
                 android:text="我" />
 
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/main_activity_bottom_bar_publish_iv"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_weight="1"
                 android:src="@mipmap/main_activity_publish_no_selected" />
-        </RelativeLayout>
 
     </RelativeLayout>
 
