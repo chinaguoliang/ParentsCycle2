@@ -24,6 +24,7 @@
             android:src="@mipmap/login_account" />
 
         <EditText
+            android:id="@+id/register_activity_phone_num_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入手机号"
@@ -51,6 +52,7 @@
             android:src="@mipmap/login_pass" />
 
         <EditText
+            android:id="@+id/register_activity_password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入密码"
@@ -95,6 +97,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/register_activity_submit_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="注册"
