@@ -5,13 +5,29 @@ import com.jgkj.parentscycle.net.NetBeanSuper;
 import java.io.Serializable;
 
 /**
- * Created by chen on 16/7/7.
+ * Created by chen on 16/7/12.
  */
-public class LoginInfo extends NetBeanSuper implements Serializable{
-    String msg;
-    boolean success;
+public class ModifyPassInfo extends NetBeanSuper implements Serializable {
     String phone;
     String passwd;
+    String msg;
+    boolean success;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
 
     @Override
     public String getMsg() {
@@ -29,21 +45,5 @@ public class LoginInfo extends NetBeanSuper implements Serializable{
 
     public void setSuccess(boolean success) {
         this.success = success;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
     }
 }
