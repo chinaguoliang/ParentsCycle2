@@ -68,7 +68,6 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     public void requestResponse(Object obj) {
         if (obj instanceof  LoginInfo) {
             LoginInfo loginInfo = (LoginInfo)obj;
-            LogUtil.d(TAG,"response:" + loginInfo.getStatus());
         }
     }
 }

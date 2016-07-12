@@ -1,14 +1,11 @@
 package com.jgkj.parentscycle.activity;
 
-import android.app.Activity;
-
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
@@ -26,14 +23,41 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.main_activity_bottom_bar_main_channel_tv)
     TextView mBtmMainChannelTv;
 
+    @Bind(R.id.main_activity_bottom_bar_main_channel_iv)
+    ImageView mBtmMainChannelIv;
+
+    @Bind(R.id.main_activity_bottom_bar_main_channel_ll)
+    LinearLayout mBtmMainChannelLl;
+
+
+
     @Bind(R.id.main_activity_bottom_bar_dynamic_tv)
     TextView mBtmDynamicTv;
+
+    @Bind(R.id.main_activity_bottom_bar_dynamic_iv)
+    ImageView mBtmDynamicIv;
+
+    @Bind(R.id.main_activity_bottom_bar_dynamic_ll)
+    LinearLayout mBtmDynamicLl;
 
     @Bind(R.id.main_activity_bottom_bar_find_tv)
     TextView mBtmFindTv;
 
+    @Bind(R.id.main_activity_bottom_bar_find_iv)
+    ImageView mBtmFindIv;
+
+    @Bind(R.id.main_activity_bottom_bar_find_ll)
+    LinearLayout mBtmFindLl;
+
     @Bind(R.id.main_activity_bottom_bar_mine_tv)
     TextView mBtmMineTv;
+
+    @Bind(R.id.main_activity_bottom_bar_mine_iv)
+    ImageView mBtmMineIv;
+
+    @Bind(R.id.main_activity_bottom_bar_mine_ll)
+    LinearLayout mBtmMineLl;
+
 
     @Bind(R.id.main_activity_bottom_bar_publish_iv)
     ImageView mBtmPublishIv;
@@ -70,31 +94,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
 
-    @OnClick({R.id.main_activity_bottom_bar_main_channel_tv,R.id.main_activity_bottom_bar_dynamic_tv,R.id.main_activity_bottom_bar_find_tv
-            ,R.id.main_activity_bottom_bar_mine_tv,R.id.main_activity_bottom_bar_publish_iv})
+    @OnClick({R.id.main_activity_bottom_bar_main_channel_ll,R.id.main_activity_bottom_bar_dynamic_ll,R.id.main_activity_bottom_bar_find_ll
+            ,R.id.main_activity_bottom_bar_mine_ll,R.id.main_activity_bottom_bar_publish_iv})
 
     @Override
     public void onClick(View v) {
         FragmentTransaction transaction = mFragmentManager
                 .beginTransaction();
-        hideAllFrament(transaction);
-        if (v == mBtmMainChannelTv) {
+        resetViews(transaction);
+        if (v == mBtmMainChannelLl) {
             transaction.show(mHallMainChannelFragement).commitAllowingStateLoss();
-        } else if (v == mBtmDynamicTv) {
+        } else if (v == mBtmDynamicLl) {
+            mBtmDynamicIv.setImageResource(R.mipmap.main_activity_btm_dynamic_selected);
             if (mHallDynamicFragement.isAdded()) {
                 transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
             } else {
                 transaction.add(R.id.main_activity_content_fl, mHallDynamicFragement);
                 transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
             }
-        }  else if (v == mBtmFindTv) {
+        }  else if (v == mBtmFindLl) {
+            mBtmFindIv.setImageResource(R.mipmap.main_activity_find_selected);
             if (mHallFindFragement.isAdded()) {
                 transaction.show(mHallFindFragement).commitAllowingStateLoss();
             } else {
                 transaction.add(R.id.main_activity_content_fl,mHallFindFragement);
                 transaction.show(mHallFindFragement).commitAllowingStateLoss();
             }
-        }  else if (v == mBtmMineTv) {
+        }  else if (v == mBtmMineLl) {
+            mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_selected);
             if (mHallMeFragement.isAdded()) {
                 transaction.show(mHallMeFragement).commitAllowingStateLoss();
             } else {
@@ -102,6 +129,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 transaction.show(mHallMeFragement).commitAllowingStateLoss();
             }
         }  else if (v == mBtmPublishIv) {
+            mBtmPublishIv.setImageResource(R.mipmap.main_activity_publish_selected);
             if (mHallCircleMenuFragement.isAdded()) {
                 transaction.show(mHallCircleMenuFragement).commitAllowingStateLoss();
             } else {
@@ -111,7 +139,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private void hideAllFrament(FragmentTransaction transaction) {
+    private void resetViews(FragmentTransaction transaction) {
 
         if (mHallCircleMenuFragement.isAdded()) {
             transaction.hide(mHallCircleMenuFragement);
@@ -132,5 +160,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         if (mHallMeFragement.isAdded()) {
             transaction.hide(mHallMeFragement);
         }
+
+        mBtmDynamicIv.setImageResource(R.mipmap.main_activity_btm_dynamic_no_selected);
+//        mBtmMainChannelIv
+        mBtmPublishIv.setImageResource(R.mipmap.main_activity_publish_no_selected);
+        mBtmFindIv.setImageResource(R.mipmap.main_activity_find_no_selected);
+        mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_no_selected);
     }
 }
