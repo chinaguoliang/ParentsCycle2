@@ -14,6 +14,8 @@ import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
+import org.json.JSONObject;
+
 
 public class NetRequest {
 	private static final String TAG = "NetRequest";
@@ -48,12 +50,14 @@ public class NetRequest {
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
+						LogUtil.d(TAG,"net request 1");
 						try {
 							LogUtil.bigLog(TAG, "response:" + response);
 							Object obj = pj.parseJSonObject(response);
 							netListener.requestResponse(obj);
 						} catch (Exception e) {
 							e.printStackTrace();
+							LogUtil.d(TAG, "net request 2");
 							if (!isNetConnected) {
 								netListener.requestResponse(pj
 										.getNetNotConnectData());

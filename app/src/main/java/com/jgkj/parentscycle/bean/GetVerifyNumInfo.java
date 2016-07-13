@@ -1,8 +1,20 @@
 package com.jgkj.parentscycle.bean;
 
+import com.jgkj.parentscycle.net.NetBeanSuper;
+
+import java.io.Serializable;
+
 /**
  * Created by chen on 16/7/8.
  */
-public class GetVerifyNumInfo {
+public class GetVerifyNumInfo extends NetBeanSuper implements Serializable {
+    boolean success;
 
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 }
