@@ -58,7 +58,8 @@ public class HallCircleMenuFragement extends Fragment {
         int height = wm.getDefaultDisplay().getHeight();
 
         ViewGroup.LayoutParams params = mCircleMenu.getLayoutParams();
-        params.height = width;
+        params.height = width - 30;
+        params.width = params.height;
         mCircleMenu.setLayoutParams(params);
 
         return view;

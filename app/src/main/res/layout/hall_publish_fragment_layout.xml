@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@mipmap/hall_fragment_publie_bg"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/hall_publish_fragment_circle_bg_rel"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="350dp"
         android:background="@drawable/circle_bg"
+        android:padding="10dp"
         >
 
         <LinearLayout
@@ -30,24 +32,51 @@
                     android:layout_weight="1"
                     />
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitEnd"
-                    android:src="@mipmap/ic_launcher" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/hall_fragment_publish_course" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="5dp"
+                        android:text="课程"
+                        />
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     />
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    android:src="@mipmap/ic_launcher" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/hall_fragment_publish_parents_cycle" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="5dp"
+                        android:text="父母圈"
+                        />
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -63,23 +92,60 @@
                 android:gravity="center"
                 android:layout_weight="1">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@mipmap/ic_launcher" />
+                    android:gravity="top|center_horizontal"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/hall_fragment_publish_chat" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="5dp"
+                        android:text="聊天"
+                        />
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:src="@mipmap/ic_launcher" />
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@mipmap/ic_launcher" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+
+                    >
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="bottom|center_horizontal"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/hall_fragment_public_baby_document" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="宝宝档案"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -94,24 +160,51 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     />
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitEnd"
-                    android:src="@mipmap/ic_launcher" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/hall_fragment_publish_question_answer" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="5dp"
+                        android:text="问答"
+                        />
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     />
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitStart"
-                    android:src="@mipmap/ic_launcher" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/hall_fragment_publish_send_notification" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="发布通知"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -122,6 +215,25 @@
             </LinearLayout>
 
         </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/baby_show_circle_bg"
+            android:layout_centerInParent="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:drawableTop="@mipmap/hall_fragment_publish_photo_machine"
+                android:layout_centerInParent="true"
+                android:drawablePadding="5dp"
+                android:text="宝宝秀"
+                />
+        </RelativeLayout>
 
 
     </RelativeLayout>
