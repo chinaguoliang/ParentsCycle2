@@ -1,5 +1,7 @@
 package com.jgkj.parentscycle.net;
 
+import android.text.TextUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,28 +56,22 @@ public class NetRequest {
 						try {
 							LogUtil.bigLog(TAG, "response:" + response);
 							Object obj = pj.parseJSonObject(response);
-							netListener.requestResponse(obj);
+
+							if (obj == null) {
+								responseError(pj,isNetConnected,netListener);
+							} else {
+								netListener.requestResponse(obj);
+							}
 						} catch (Exception e) {
 							e.printStackTrace();
 							LogUtil.d(TAG, "net request 2");
-							if (!isNetConnected) {
-								netListener.requestResponse(pj
-										.getNetNotConnectData());
-							} else {
-								netListener.requestResponse(pj
-										.getErrorBeanData());
-							}
+							responseError(pj,isNetConnected,netListener);
 						}
 					}
 				}, new Response.ErrorListener() {
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						if (!isNetConnected) {
-							netListener.requestResponse(pj
-									.getNetNotConnectData());
-						} else {
-							netListener.requestResponse(pj.getErrorBeanData());
-						}
+						responseError(pj,isNetConnected,netListener);
 					}
 				}) {
 			@Override
@@ -94,6 +90,16 @@ public class NetRequest {
 		mQueue.add(request);
 	}
 
+
+	private void responseError(PaserJson pj,boolean isNetConnected, NetListener netListener) {
+		if (!isNetConnected) {
+			netListener.requestResponse(pj
+					.getNetNotConnectData());
+		} else {
+			netListener.requestResponse(pj
+					.getErrorBeanData());
+		}
+	}
 
 
 	public void requestGet(RequestQueue mQueue, final NetListener netListener,
