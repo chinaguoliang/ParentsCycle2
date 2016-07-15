@@ -44,6 +44,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.register_activity_get_verify_phone_num_tv)
     TextView getVerifyPhoneNumTv;
 
+    @Bind(R.id.register_activity_verify_phone_num_et)
+    EditText phoneVerifyNumEt;
+
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -58,10 +61,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == submitTv) {
-            mProgressDialog = ProgressDialog.show(this, "", "请稍后", true, false);
+            boolean hadShow = showProgressDialog();
+            if (!hadShow) {
+                return;
+            }
             requestRegister();
         } else if (v == getVerifyPhoneNumTv) {
-            mProgressDialog = ProgressDialog.show(this, "", "请稍后", true, false);
+            boolean hadShow = showProgressDialog();
+            if (!hadShow) {
+                return;
+            }
             requestVerifyNum();
         }
     }
@@ -75,7 +84,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         if (obj instanceof RegisterInfo) {
             RegisterInfo ri = (RegisterInfo)obj;
             if (ri.isSuccess()) {
-
+                ToastUtil.showToast(this,"成功",Toast.LENGTH_SHORT);
+                finish();
             } else {
                 ToastUtil.showToast(this,ri.getMsg(),Toast.LENGTH_SHORT);
             }
@@ -93,7 +103,17 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     public void requestRegister() {
+        String phone = phoneNumEt.getText().toString().trim();
+        String password = passwordEt.getText().toString().trim();
+        String verifyNum = phoneVerifyNumEt.getText().toString().trim();
+
+
         HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("phone",phone);
+        requestData.put("passwd",password);
+        requestData.put("phoneCode",verifyNum);
+
+
         RegisterPaser lp = new RegisterPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.REGISTER_URL, requestData, lp);

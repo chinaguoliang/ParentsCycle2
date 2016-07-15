@@ -36,6 +36,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -70,6 +71,8 @@ import com.jgkj.parentscycle.application.MyApplication;
 
 
 public class UtilTools {
+
+
 //
 //	public static Bitmap getBitmap(String url) {
 //

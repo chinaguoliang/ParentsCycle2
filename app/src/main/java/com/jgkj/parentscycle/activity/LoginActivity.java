@@ -1,9 +1,11 @@
 package com.jgkj.parentscycle.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
@@ -27,6 +29,13 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity implements NetListener,View.OnClickListener {
     private static final String TAG = "LoginActivity";
 
+    @Bind(R.id.login_activity_user_name_et)
+    EditText userNameEt;
+
+    @Bind(R.id.login_activity_password_et)
+    EditText passwordEt;
+
+
     @Bind(R.id.login_activity_login_tv)
     TextView loginTv;
 
@@ -36,6 +45,8 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     @Bind(R.id.login_activity_forget_pass_tv)
     TextView forgetPassTv;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +54,19 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
         ButterKnife.bind(this);
     }
 
-    public void requestRegister() {
+    public void requestLogin() {
+
+
+        String phone = userNameEt.getText().toString();
+        String password = passwordEt.getText().toString();
+
+
         HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("phone", phone);
+        requestData.put("passwd", password);
         LoginPaser lp = new LoginPaser();
         NetRequest.getInstance().request(mQueue, this,
-                BgGlobal.REGISTER_URL, requestData, lp);
+                BgGlobal.LOGIN_URL, requestData, lp);
     }
 
 
@@ -56,7 +75,12 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     @Override
     public void onClick(View v) {
         if (v == loginTv) {
-            requestRegister();
+            boolean hadShow = showProgressDialog();
+            if (!hadShow) {
+                return;
+            }
+
+            requestLogin();
         } else if (v == registerTv) {
             startActivity(new Intent(this,RegisterActivity.class));
         } else if (v == forgetPassTv) {
@@ -64,10 +88,19 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
         }
     }
 
+
     @Override
     public void requestResponse(Object obj) {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
         if (obj instanceof  LoginInfo) {
             LoginInfo loginInfo = (LoginInfo)obj;
+            if (loginInfo.isSuccess()) {
+
+            } else {
+
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ import com.jgkj.parentscycle.utils.LogUtil;
 public class BaseActivity extends FragmentActivity {
     public RequestQueue mQueue;
     private PopupWindow mMsgPopWindow;
+    public ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,9 +112,19 @@ public class BaseActivity extends FragmentActivity {
             public void run() {
                 finish();
             }
-        },300);
+        }, 300);
     }
 
+
+    //防止按钮重复点击
+    public boolean showProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            return false;
+        }
+
+        mProgressDialog = ProgressDialog.show(this, "", "请稍后", true, false);
+        return true;
+    }
 
 
 }
