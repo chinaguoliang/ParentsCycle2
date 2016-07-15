@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.LoginInfo;
@@ -15,6 +16,7 @@ import com.jgkj.parentscycle.json.LoginPaser;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.utils.LogUtil;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.util.HashMap;
 
@@ -97,9 +99,10 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
         if (obj instanceof  LoginInfo) {
             LoginInfo loginInfo = (LoginInfo)obj;
             if (loginInfo.isSuccess()) {
-
+                //ToastUtil.showToast(this,"");
+                finish();
             } else {
-
+                ToastUtil.showToast(this,loginInfo.getMsg(), Toast.LENGTH_SHORT);
             }
         }
     }

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">父母圈</string>
     <string name="action_settings">Settings</string>
+    <string name="request_net_success">Settings</string>
+
+
 </resources>

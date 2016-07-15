@@ -1,5 +1,7 @@
 package com.jgkj.parentscycle.json;
 
+import android.text.TextUtils;
+
 import com.jgkj.parentscycle.bean.ModifyPassInfo;
 import com.jgkj.parentscycle.bean.RegisterInfo;
 import com.jgkj.parentscycle.net.JsonUtil;
@@ -19,10 +21,15 @@ public class ModifyPassPaser implements PaserJson {
     }
 
     @Override
-    public Object getErrorBeanData() {
+    public Object getErrorBeanData(String msg) {
         ModifyPassInfo meData = new ModifyPassInfo();
         meData.setResult(NetListener.REQUEST_NET_ERROR_CODE);
-        meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
+        if (TextUtils.isEmpty(msg)) {
+            meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
+        } else {
+            meData.setMsg(msg);
+        }
+
         return meData;
     }
 

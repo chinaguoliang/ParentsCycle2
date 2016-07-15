@@ -16,6 +16,7 @@ import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -58,20 +59,20 @@ public class NetRequest {
 							Object obj = pj.parseJSonObject(response);
 
 							if (obj == null) {
-								responseError(pj,isNetConnected,netListener);
+								responseError(pj,isNetConnected,netListener,response);
 							} else {
 								netListener.requestResponse(obj);
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
 							LogUtil.d(TAG, "net request 2");
-							responseError(pj,isNetConnected,netListener);
+							responseError(pj,isNetConnected,netListener,null);
 						}
 					}
 				}, new Response.ErrorListener() {
 					@Override
 					public void onErrorResponse(VolleyError error) {
-						responseError(pj,isNetConnected,netListener);
+						responseError(pj,isNetConnected,netListener,null);
 					}
 				}) {
 			@Override
@@ -91,14 +92,25 @@ public class NetRequest {
 	}
 
 
-	private void responseError(PaserJson pj,boolean isNetConnected, NetListener netListener) {
-		if (!isNetConnected) {
-			netListener.requestResponse(pj
-					.getNetNotConnectData());
-		} else {
-			netListener.requestResponse(pj
-					.getErrorBeanData());
+	private void responseError(PaserJson pj,boolean isNetConnected, NetListener netListener,String response) {
+		String msg = null;
+		if (!TextUtils.isEmpty(response)) {
+			try {
+				JSONObject json = new JSONObject(response);
+				msg = json.getString("msg").toString();
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
 		}
+
+//		if (!isNetConnected) {
+//			netListener.requestResponse(pj
+//					.getNetNotConnectData());
+//		} else {
+			netListener.requestResponse(pj
+					.getErrorBeanData(msg));
+//		}
 	}
 
 

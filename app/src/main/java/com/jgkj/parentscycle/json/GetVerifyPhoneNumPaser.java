@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.json;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.jgkj.parentscycle.bean.GetVerifyNumInfo;
@@ -22,10 +23,15 @@ public class GetVerifyPhoneNumPaser implements PaserJson {
     }
 
     @Override
-    public Object getErrorBeanData() {
+    public Object getErrorBeanData(String msg) {
         GetVerifyNumInfo meData = new GetVerifyNumInfo();
         meData.setResult(NetListener.REQUEST_NET_ERROR_CODE);
-        meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
+        if (TextUtils.isEmpty(msg)) {
+            meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
+        } else {
+            meData.setMsg(msg);
+        }
+
         return meData;
     }
 

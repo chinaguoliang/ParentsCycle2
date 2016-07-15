@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.json;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.jgkj.parentscycle.bean.LoginInfo;
@@ -22,10 +23,14 @@ public class RegisterPaser implements PaserJson{
     }
 
     @Override
-    public Object getErrorBeanData() {
+    public Object getErrorBeanData(String msg) {
         RegisterInfo meData = new RegisterInfo();
         meData.setResult(NetListener.REQUEST_NET_ERROR_CODE);
-        meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
+        if (TextUtils.isEmpty(msg)) {
+            meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
+        } else {
+            meData.setMsg(msg);
+        }
         return meData;
     }
 
