@@ -7,10 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.AccountInfoActivity;
 import com.jgkj.parentscycle.activity.LoginActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
 
@@ -37,6 +39,17 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         mUserIconIv = (ImageView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_user_icon_iv);
 
         mUserIconIv.setOnClickListener(this);
+
+        mMyItemContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 1:
+                        startActivity(new Intent(mUserIconIv.getContext(), AccountInfoActivity.class));
+                        break;
+                }
+            }
+        });
 
         return view;
     }
