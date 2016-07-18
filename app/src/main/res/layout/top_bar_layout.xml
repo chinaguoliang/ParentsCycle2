@@ -2,9 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/top_bar_bg"
+    android:background="@color/main_blue_color"
+
     >
     <ImageView
+        android:id="@+id/top_bar_back_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/login_back"
@@ -14,6 +16,7 @@
 
 
     <TextView
+        android:id="@+id/top_bar_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
