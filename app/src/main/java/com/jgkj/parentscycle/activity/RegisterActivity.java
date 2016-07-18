@@ -47,7 +47,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.register_activity_verify_phone_num_et)
     EditText phoneVerifyNumEt;
 
-    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
