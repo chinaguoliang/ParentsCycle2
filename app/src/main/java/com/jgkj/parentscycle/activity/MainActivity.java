@@ -104,6 +104,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         resetViews(transaction);
         if (v == mBtmMainChannelLl) {
             transaction.show(mHallMainChannelFragement).commitAllowingStateLoss();
+            mBtmMainChannelTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         } else if (v == mBtmDynamicLl) {
             mBtmDynamicIv.setImageResource(R.mipmap.main_activity_btm_dynamic_selected);
             if (mHallDynamicFragement.isAdded()) {
@@ -112,6 +113,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 transaction.add(R.id.main_activity_content_fl, mHallDynamicFragement);
                 transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
             }
+            mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmFindLl) {
             mBtmFindIv.setImageResource(R.mipmap.main_activity_find_selected);
             if (mHallFindFragement.isAdded()) {
@@ -120,6 +122,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 transaction.add(R.id.main_activity_content_fl,mHallFindFragement);
                 transaction.show(mHallFindFragement).commitAllowingStateLoss();
             }
+            mBtmFindTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmMineLl) {
             mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_selected);
             if (mHallMeFragement.isAdded()) {
@@ -128,6 +131,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 transaction.add(R.id.main_activity_content_fl,mHallMeFragement);
                 transaction.show(mHallMeFragement).commitAllowingStateLoss();
             }
+            mBtmMineTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmPublishIv) {
             mBtmPublishIv.setImageResource(R.mipmap.main_activity_publish_selected);
             if (mHallCircleMenuFragement.isAdded()) {
@@ -166,5 +170,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mBtmPublishIv.setImageResource(R.mipmap.main_activity_publish_no_selected);
         mBtmFindIv.setImageResource(R.mipmap.main_activity_find_no_selected);
         mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_no_selected);
+
+        mBtmMainChannelTv.setTextColor(this.getResources().getColor(R.color.white));
+        mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.white));
+        mBtmFindTv.setTextColor(this.getResources().getColor(R.color.white));
+        mBtmMineTv.setTextColor(this.getResources().getColor(R.color.white));
     }
 }
