@@ -1,15 +1,22 @@
 package com.jgkj.parentscycle.fragement;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.ParentsCycleActivity;
+import com.jgkj.parentscycle.adapter.HallFindAdapter;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,6 +34,8 @@ public class HallFindFragement extends Fragment {
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTitleTv;
 
+    @Bind(R.id.hall_find_fragment_layout_lv)
+    ListView contentLv;
 
     @Nullable
     @Override
@@ -42,6 +51,16 @@ public class HallFindFragement extends Fragment {
         backIv.setVisibility(View.GONE);
         titleTv.setText("发现");
         rightTitleTv.setVisibility(View.GONE);
+        ArrayList<String> dataList = new ArrayList<String>();
+        dataList.add("父母圈");
+        HallFindAdapter hallFindAdapter = new HallFindAdapter(this.getContext(),dataList);
+        contentLv.setAdapter(hallFindAdapter);
+        contentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(view.getContext(),ParentsCycleActivity.class));
+            }
+        });
     }
 
     @Override
