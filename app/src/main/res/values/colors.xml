@@ -12,5 +12,6 @@
     <color name="tab_normal_color">#888888</color>
     <color name="bg_gray">#f2f2f2</color>
     <color name="text_gray">#c9c7c7</color>
+    <color name="title_gray">#4f4c96</color>
 
 </resources>
