@@ -1,15 +1,18 @@
 package com.jgkj.parentscycle.fragement;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.DynamicContentActivity;
 import com.jgkj.parentscycle.adapter.HallDynamicAdapter;
 import com.jgkj.parentscycle.bean.HallDynamicInfo;
 
@@ -68,6 +71,12 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
         initTestData();
         HallDynamicAdapter hallDynamicAdapter = new HallDynamicAdapter(view.getContext(),dataList);
         mListView.setAdapter(hallDynamicAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(view.getContext(),DynamicContentActivity.class));
+            }
+        });
         blueColor = this.getResources().getColor(R.color.main_blue_color);
         gryaColor = this.getResources().getColor(R.color.text_gray);
         whiteColor = this.getResources().getColor(R.color.white);
