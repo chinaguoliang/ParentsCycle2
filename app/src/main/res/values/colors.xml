@@ -7,4 +7,8 @@
     <color name="black">#000000</color>
     <color name="top_bar_bg">#373533</color>
     <color name="main_blue_color">#7e7be5</color>
+    <color name="gray">#aa000000</color>
+    <color name="bg_black_color">#66000000</color>
+    <color name="tab_line_color">#b1b1b1</color>
+    <color name="tab_normal_color">#888888</color>
 </resources>

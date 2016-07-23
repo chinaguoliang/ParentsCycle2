@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.BabyDocumentActivity;
+import com.jgkj.parentscycle.activity.BabyShowActivity;
 import com.jgkj.parentscycle.utils.LogUtil;
 
 import butterknife.Bind;
@@ -27,6 +28,7 @@ public class HallCircleMenuFragement extends Fragment implements View.OnClickLis
     RelativeLayout mCircleMenu;
     private  final String TAG = "HallCircleMenuFragement";
     private View babyDocument;
+    private View babyShowView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +52,10 @@ public class HallCircleMenuFragement extends Fragment implements View.OnClickLis
 
     private void findViews(View view) {
         babyDocument = view.findViewById(R.id.hall_publish_fragment_baby_document_ll);
+        babyShowView = view.findViewById(R.id.hall_publish_fragment_layout_baby_show_rel);
+
         babyDocument.setOnClickListener(this);
+        babyShowView.setOnClickListener(this);
     }
 
 
@@ -66,6 +71,8 @@ public class HallCircleMenuFragement extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         if (v == babyDocument) {
             startActivity(new Intent(v.getContext(), BabyDocumentActivity.class));
+        } else if (v == babyShowView) {
+            startActivity(new Intent(v.getContext(), BabyShowActivity.class));
         }
     }
 }

@@ -219,6 +219,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/hall_publish_fragment_layout_baby_show_rel"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/baby_show_circle_bg"

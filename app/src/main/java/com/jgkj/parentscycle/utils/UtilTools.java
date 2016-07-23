@@ -71,8 +71,8 @@ import com.jgkj.parentscycle.application.MyApplication;
 
 
 public class UtilTools {
-
-
+	public static int SCREEN_WIDTH = 0;
+	public static int SCREEN_HEIGHT = 0;
 //
 //	public static Bitmap getBitmap(String url) {
 //
@@ -134,7 +134,9 @@ public class UtilTools {
 
 		return bitmap;
 	}
-	
+
+
+
 
 //	public static void post(final Handler mHandler, final String actionUrl,
 //			final Map<String, String> params, final File file) {
