@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_corners_white_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:text="选择班级"
+        android:textColor="@color/text_gray" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="大一班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="大二班"
+            android:textColor="@color/black"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="大三班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="中一班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="中二班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="中三班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="小一班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="小二班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="小三班"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:drawableRight="@drawable/course_activity_sel_course_dialog"
+            android:text="大一班"
+            android:textColor="@color/black" />
+    </RadioGroup>
+
+
+
+    <Button
+        android:id="@+id/select_course_activity_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bottom_corner_btn_blue"
+        android:text="完成"
+        android:paddingTop="15dp"
+        android:textColor="@color/white"
+        android:paddingBottom="15dp"
+        />
+</LinearLayout>
