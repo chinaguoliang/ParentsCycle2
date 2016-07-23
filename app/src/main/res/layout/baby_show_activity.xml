@@ -39,7 +39,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/gray" />
+            android:background="@color/text_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:paddingRight="10dp"
                 android:paddingTop="5dp"
                 android:text="照片描述"
-                android:textColor="@color/gray"
+                android:textColor="@color/text_gray"
                 android:textSize="@dimen/normal_text_size" />
 
             <EditText
@@ -67,7 +67,7 @@
                 android:gravity="top"
                 android:hint="描述一下您的照片，让大家更感兴趣"
                 android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="@dimen/normal_text_size" />
 
         </LinearLayout>
@@ -83,7 +83,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/gray" />
+            android:background="@color/text_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                 android:paddingRight="10dp"
                 android:text="选择照片"
                 android:textSize="@dimen/normal_text_size"
-                android:textColor="@color/gray" />
+                android:textColor="@color/text_gray" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -110,7 +110,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/gray" />
+            android:background="@color/text_gray" />
 
 
         <LinearLayout
@@ -118,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:paddingLeft="20dp"
+            android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
@@ -136,6 +136,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/gray" />
+            android:background="@color/text_gray" />
     </LinearLayout>
 </LinearLayout>

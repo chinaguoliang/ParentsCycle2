@@ -75,6 +75,11 @@
             android:label="@string/app_name"
             >
         </activity>
+        <activity
+            android:name=".activity.CourseActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
 
 
     </application>
