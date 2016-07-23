@@ -2,13 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#878087"
+    android:background="@color/bg_gray"
     android:orientation="vertical">
+
+    <include
+        layout="@layout/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></include>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="主频道"
-        />
+        android:layout_marginLeft="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="育才回龙观幼儿园小区"
+        android:textColor="@color/text_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/hall_main_channel_fragment_layout_Lv"
+            android:dividerHeight="10dp"
+            android:divider="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </RelativeLayout>
 
 </LinearLayout>
