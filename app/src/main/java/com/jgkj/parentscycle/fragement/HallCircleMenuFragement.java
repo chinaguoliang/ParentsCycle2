@@ -17,6 +17,7 @@ import com.jgkj.parentscycle.activity.BabyDocumentActivity;
 import com.jgkj.parentscycle.activity.BabyShowActivity;
 import com.jgkj.parentscycle.activity.CourseActivity;
 import com.jgkj.parentscycle.utils.LogUtil;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,7 +46,7 @@ public class HallCircleMenuFragement extends Fragment implements View.OnClickLis
         int height = wm.getDefaultDisplay().getHeight();
 
         ViewGroup.LayoutParams params = mCircleMenu.getLayoutParams();
-        params.height = width - 30;
+        params.height = width - UtilTools.dip2px(view.getContext(),20);
         params.width = params.height;
         mCircleMenu.setLayoutParams(params);
         findViews(view);
