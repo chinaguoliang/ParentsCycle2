@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/user_default_icon" />
 
         <TextView
             android:id="@+id/baby_document_lv_item_baby_name_tv"

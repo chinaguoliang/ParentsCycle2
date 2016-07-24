@@ -128,7 +128,7 @@
                 android:id="@+id/baby_show_activity_take_photo_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/user_default_icon"
                 />
 
         </LinearLayout>
