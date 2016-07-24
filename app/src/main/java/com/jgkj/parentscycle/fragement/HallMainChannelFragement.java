@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,6 +33,8 @@ public class HallMainChannelFragement  extends Fragment {
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTitleTv;
 
+    @Bind(R.id.baby_document_activity_back_iv)
+    ImageView backIv;
 
     HallMainChannelAdapter mHallMainChannelAdapter;
 
@@ -51,6 +54,7 @@ public class HallMainChannelFragement  extends Fragment {
         rightTitleTv.setText("添加设备");
         mHallMainChannelAdapter = new HallMainChannelAdapter(view.getContext(), classInfoList);
         mListView.setAdapter(mHallMainChannelAdapter);
+        backIv.setVisibility(View.GONE);
 
         return view;
     }

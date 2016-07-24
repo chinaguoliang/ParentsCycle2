@@ -48,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/main_blue_color"
                         android:gravity="center"
                         android:text="主频道" />
                 </LinearLayout>

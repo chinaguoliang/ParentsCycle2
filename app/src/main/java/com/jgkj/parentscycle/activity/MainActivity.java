@@ -103,6 +103,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 .beginTransaction();
         resetViews(transaction);
         if (v == mBtmMainChannelLl) {
+            mBtmMainChannelIv.setImageResource(R.mipmap.main_activity_home_channel_no_selected);
             transaction.show(mHallMainChannelFragement).commitAllowingStateLoss();
             mBtmMainChannelTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         } else if (v == mBtmDynamicLl) {
@@ -166,7 +167,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
 
         mBtmDynamicIv.setImageResource(R.mipmap.main_activity_btm_dynamic_no_selected);
-//        mBtmMainChannelIv
+        mBtmMainChannelIv.setImageResource(R.mipmap.main_activity_home_channel_gray_selected);
         mBtmPublishIv.setImageResource(R.mipmap.main_activity_publish_no_selected);
         mBtmFindIv.setImageResource(R.mipmap.main_activity_find_no_selected);
         mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_no_selected);
