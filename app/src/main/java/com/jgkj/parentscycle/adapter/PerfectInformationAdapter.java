@@ -14,12 +14,12 @@ import com.jgkj.parentscycle.R;
 import java.util.List;
 
 /**
- * Created by chen on 16/7/18.
+ * Created by chen on 16/7/24.
  */
-public class AccountInfoAdapter extends BaseAdapter{
+public class PerfectInformationAdapter extends BaseAdapter {
     private List<String> contentData;
     private Context mContext;
-    public AccountInfoAdapter(Context context, List<String> data){
+    public PerfectInformationAdapter(Context context, List<String> data){
         contentData = data;
         mContext = context;
     }
@@ -46,11 +46,12 @@ public class AccountInfoAdapter extends BaseAdapter{
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             holder = new MineViewHolder();
-            convertView = mInflater.inflate(R.layout.account_info_activity_lv_item, null);
+            convertView = mInflater.inflate(R.layout.perfect_information_activity_lv_item, null);
             convertView.setTag(holder);
-            holder.contentDescTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_tv);
-            holder.conentNameTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_content_tv);
-            holder.rightArrowIv = (ImageView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_arrow_iv);
+            holder.contentDescTv = (TextView)convertView.findViewById(R.id.perfect_information_activity_lv_item_name_tv);
+            holder.conentNameTv = (TextView)convertView.findViewById(R.id.perfect_information_activity_lv_item_desc_tv);
+            holder.rightArrowIv = (ImageView)convertView.findViewById(R.id.perfect_information_activity_lv_item_right_arrow_iv);
+            holder.grayLine = convertView.findViewById(R.id.perfect_information_activity_lv_item_gray_line);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -58,13 +59,11 @@ public class AccountInfoAdapter extends BaseAdapter{
         String contentStr = contentData.get(position);
         String names[] =contentStr.split("_");
         holder.contentDescTv.setText(names[0]);
-        if (TextUtils.equals(names[1],"0")) {
-            holder.rightArrowIv.setVisibility(View.VISIBLE);
-            holder.conentNameTv.setVisibility(View.GONE);
+        holder.conentNameTv.setText(names[1]);
+        if (position == 0 || position == 5) {
+            holder.grayLine.setVisibility(View.VISIBLE);
         } else {
-            holder.conentNameTv.setVisibility(View.VISIBLE);
-            holder.conentNameTv.setText(names[1]);
-            holder.rightArrowIv.setVisibility(View.GONE);
+            holder.grayLine.setVisibility(View.GONE);
         }
 
         return convertView;
@@ -74,5 +73,6 @@ public class AccountInfoAdapter extends BaseAdapter{
         TextView contentDescTv;	// 消息未读条数
         TextView conentNameTv;
         ImageView rightArrowIv;
+        View grayLine;
     }
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.AccountInfoActivity;
 import com.jgkj.parentscycle.activity.LoginActivity;
+import com.jgkj.parentscycle.activity.PerfectInformationActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         userNameTv = (TextView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_user_name_tv);
         HallMineAdapter hallMineAdapter = new HallMineAdapter(container.getContext(),getContentData());
         mMyItemContentLv.setAdapter(hallMineAdapter);
-        mMyItemContentLv.addHeaderView(headerView,null,false);
+        mMyItemContentLv.addHeaderView(headerView, null, false);
         mUserIconIv = (ImageView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_user_icon_iv);
 
         mUserIconIv.setOnClickListener(this);
@@ -101,7 +102,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == rightTitleTv) {
-
+            startActivity(new Intent(v.getContext(),PerfectInformationActivity.class));
         } else if (v == mUserIconIv) {
             startActivity(new Intent(v.getContext(),LoginActivity.class));
         } else if (v == userNameTv) {

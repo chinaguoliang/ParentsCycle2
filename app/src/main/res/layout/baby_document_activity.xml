@@ -35,6 +35,8 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="@color/text_gray"
+        android:dividerHeight="1dp"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

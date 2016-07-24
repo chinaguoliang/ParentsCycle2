@@ -1,10 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -13,6 +9,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.AccountInfoAdapter;
+import com.jgkj.parentscycle.adapter.PerfectInformationAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +19,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by chen on 16/7/18.
+ * Created by chen on 16/7/24.
  */
-public class AccountInfoActivity extends BaseActivity implements View.OnClickListener{
-    @Bind(R.id.account_info_activity_lv)
-    ListView mContentLv;
+public class PerfectInformationActivity extends BaseActivity implements View.OnClickListener{
+    @Bind(R.id.perfect_information_activity_lv)
+    ListView mListView;
 
     @Bind(R.id.baby_document_activity_back_iv)
     ImageView backIv;
@@ -43,34 +40,32 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_info_activity_layout);
+        setContentView(R.layout.perfect_information_activity);
         ButterKnife.bind(this);
-        mContentLv.setAdapter(new AccountInfoAdapter(this, getContentData()));
-        titleTv.setText("帐号信息");
+        mListView.setAdapter(new PerfectInformationAdapter(this, getContentData()));
+        titleTv.setText("完善资料");
         rightTitleTv.setVisibility(View.GONE);
-        mWrapTitleRel.setBackgroundColor(Color.parseColor("#00000000"));
     }
 
     private List<String> getContentData() {
         ArrayList<String> data = new ArrayList<String>();
-        data.add("昵称_老师");
-        data.add("姓名_小李");
+        data.add("头像_ ");
+        data.add("昵称_奋斗的小鸟");
+        data.add("帐号_36222@163.com");
+        data.add("地区_北京");
         data.add("性别_女");
-        data.add("民族_汉");
-        data.add("出生日期_1985");
-        data.add("手机号_13673668068");
-        data.add("账户安全_0");
-        data.add("捆绑微信_已捆绑");
-        data.add("捆绑QQ_0");
-
+        data.add("家庭角色_妈妈");
+        data.add("宝宝名字_花泽类");
+        data.add("宝宝性别_男");
+        data.add("宝宝年龄_3岁");
         return data;
     }
 
     @OnClick({R.id.baby_document_activity_back_iv})
     @Override
     public void onClick(View v) {
-       if (v == backIv) {
-           finish();
-       }
+        if (v == backIv) {
+            finish();
+        }
     }
 }

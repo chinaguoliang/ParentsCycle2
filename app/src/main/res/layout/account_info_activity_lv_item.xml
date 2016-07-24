@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:background="@color/white"
    >
 
     <TextView
@@ -10,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="小明"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:textColor="@color/black"
         android:paddingTop="10dp"
         android:layout_centerVertical="true"
@@ -22,12 +21,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="小明"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="15dp"
+        android:textColor="@color/text_gray"
         android:paddingTop="10dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:paddingBottom="10dp"
         />
 
+    <ImageView
+        android:id="@+id/hall_mine_fragment_lv_item_right_arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/right_arrow"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        />
 
 </RelativeLayout>

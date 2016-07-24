@@ -97,6 +97,11 @@
             android:label="@string/app_name"
             >
         </activity>
+        <activity
+            android:name=".activity.PerfectInformationActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
 
     </application>
 
