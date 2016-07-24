@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.AccountInfoActivity;
@@ -19,10 +20,24 @@ import com.jgkj.parentscycle.adapter.HallMineAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by chen on 16/7/9.
  */
 public class HallMeFragement extends Fragment implements View.OnClickListener{
+
+    @Bind(R.id.baby_document_activity_back_iv)
+    ImageView backIv;
+
+    @Bind(R.id.baby_document_activity_title)
+    TextView titleTv;
+
+    @Bind(R.id.baby_document_right_title_tv)
+    TextView rightTitleTv;
+
     private ListView mMyItemContentLv;
     private ImageView mUserIconIv;
     @Nullable
@@ -30,6 +45,14 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.hall_mine_fragment_layout, container,
                 false);
+
+        ButterKnife.bind(this,view);
+
+
+        backIv.setVisibility(View.GONE);
+        titleTv.setText("个人中心");
+        rightTitleTv.setText("编辑");
+
         mMyItemContentLv = (ListView)view.findViewById(R.id.hall_mine_fragment_lv);
         View headerView = inflater.inflate(R.layout.hall_mine_fragment_lv_header_layout, container,
                 false);
@@ -70,11 +93,11 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         super.onActivityCreated(savedInstanceState);
     }
 
-
+    @OnClick({R.id.baby_document_right_title_tv})
     @Override
     public void onClick(View v) {
-        if (v == mUserIconIv) {
-            startActivity(new Intent(v.getContext(), LoginActivity.class));
+        if (v == rightTitleTv) {
+
         }
     }
 }
