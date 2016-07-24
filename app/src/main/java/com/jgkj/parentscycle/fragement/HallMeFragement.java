@@ -98,6 +98,8 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if (v == rightTitleTv) {
 
+        } else if (v == mUserIconIv) {
+            startActivity(new Intent(v.getContext(),LoginActivity.class));
         }
     }
 }
