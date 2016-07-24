@@ -2,8 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_gray"
+        >
+
+    </View>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -29,5 +35,13 @@
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
+    <View
+        android:id="@+id/hall_mine_fragment_lv_item_btm_divider"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_gray"
+        >
 
+    </View>
 </LinearLayout>

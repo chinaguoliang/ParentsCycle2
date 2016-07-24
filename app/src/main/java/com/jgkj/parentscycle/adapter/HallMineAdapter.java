@@ -49,16 +49,23 @@ public class HallMineAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.hall_mine_fragment_lv_item, null);
             convertView.setTag(holder);
             holder.contentDescTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_desc_tv);
+            holder.btmDivider = convertView.findViewById(R.id.hall_mine_fragment_lv_item_btm_divider);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
 
         holder.contentDescTv.setText(contentData.get(position));
+        if (position == (contentData.size() - 1)) {
+            holder.btmDivider.setVisibility(View.VISIBLE);
+        } else {
+            holder.btmDivider.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
     class MineViewHolder {
         TextView contentDescTv;	// 消息未读条数
-
+        View btmDivider;
     }
 }

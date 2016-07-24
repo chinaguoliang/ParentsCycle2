@@ -58,7 +58,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                 false);
         HallMineAdapter hallMineAdapter = new HallMineAdapter(container.getContext(),getContentData());
         mMyItemContentLv.setAdapter(hallMineAdapter);
-        mMyItemContentLv.addHeaderView(headerView);
+        mMyItemContentLv.addHeaderView(headerView,null,false);
         mUserIconIv = (ImageView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_user_icon_iv);
 
         mUserIconIv.setOnClickListener(this);
