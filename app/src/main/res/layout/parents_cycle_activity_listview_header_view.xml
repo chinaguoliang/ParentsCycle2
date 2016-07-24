@@ -73,6 +73,7 @@
         android:background="@color/white"
         >
         <TextView
+            android:id="@+id/parents_cycle_activity_listview_header_view_newest_topic_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -83,6 +84,7 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/parents_cycle_activity_listview_header_view_recommend_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
@@ -93,6 +95,7 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/parents_cycle_activity_listview_header_my_cycle_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
