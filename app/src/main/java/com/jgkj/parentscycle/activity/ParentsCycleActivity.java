@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -79,6 +80,12 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
 
         mParentsCycleAdapter = new ParentsCycleAdapter(this,dataList);
         mContentLv.setAdapter(mParentsCycleAdapter);
+        mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
+            }
+        });
     }
 
     private  ArrayList<ParentsCycleInfo> getTestData(int flag) {
