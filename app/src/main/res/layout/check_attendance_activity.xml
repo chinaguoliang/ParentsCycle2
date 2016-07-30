@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:selectedWeekBackgroundColor="#aff"
+            android:focusedMonthDateColor="#f00"
+            android:weekSeparatorLineColor="#ff0"
+            android:unfocusedMonthDateColor="#f9f"
+
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true" />
+
+
+        <Button
+            android:id="@+id/check_attendance_activity_modify_attendance_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/main_blue_color"
+            android:textColor="@color/white"
+            android:text="修改考勤"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

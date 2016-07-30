@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.BabyDocumentActivity;
 import com.jgkj.parentscycle.activity.BabyShowActivity;
+import com.jgkj.parentscycle.activity.CheckAttendanceActivity;
 import com.jgkj.parentscycle.activity.CourseActivity;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
@@ -32,6 +33,7 @@ public class HallCircleMenuFragement extends Fragment implements View.OnClickLis
     private View babyDocument;
     private View babyShowView;
     private View courseView;
+    private View questionAnswerView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,10 +59,12 @@ public class HallCircleMenuFragement extends Fragment implements View.OnClickLis
         babyDocument = view.findViewById(R.id.hall_publish_fragment_baby_document_ll);
         babyShowView = view.findViewById(R.id.hall_publish_fragment_layout_baby_show_rel);
         courseView = view.findViewById(R.id.hall_publish_fragment_course_ll);
+        questionAnswerView = view.findViewById(R.id.hall_publish_fragment_layout_question_answer_ll);
 
         babyDocument.setOnClickListener(this);
         babyShowView.setOnClickListener(this);
         courseView.setOnClickListener(this);
+        questionAnswerView.setOnClickListener(this);
     }
 
 
@@ -80,6 +84,8 @@ public class HallCircleMenuFragement extends Fragment implements View.OnClickLis
             startActivity(new Intent(v.getContext(), BabyShowActivity.class));
         } else if (v == courseView) {
             startActivity(new Intent(v.getContext(), CourseActivity.class));
+        } else if (v == questionAnswerView) {
+            startActivity(new Intent(v.getContext(), CheckAttendanceActivity.class));
         }
     }
 }
