@@ -14,5 +14,8 @@
     <color name="text_gray">#c9c7c7</color>
     <color name="title_gray">#4f4c96</color>
     <color name="dark_gray">#2d2d2d</color>
+    <color name="blue">#528DE6</color>
+    <color name="yellow">#F3BB48</color>
+    <color name="green">#C2E891</color>
 
 </resources>
