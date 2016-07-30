@@ -19,7 +19,8 @@ public class HallMineAdapter extends BaseAdapter {
 
     private List<String> contentData;
     private Context mContext;
-    public HallMineAdapter(Context context, List<String> data){
+
+    public HallMineAdapter(Context context, List<String> data) {
         contentData = data;
         mContext = context;
     }
@@ -48,7 +49,7 @@ public class HallMineAdapter extends BaseAdapter {
             holder = new MineViewHolder();
             convertView = mInflater.inflate(R.layout.hall_mine_fragment_lv_item, null);
             convertView.setTag(holder);
-            holder.contentDescTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_desc_tv);
+            holder.contentDescTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_desc_tv);
             holder.btmDivider = convertView.findViewById(R.id.hall_mine_fragment_lv_item_btm_divider);
         } else {
             holder = (MineViewHolder) convertView.getTag();
@@ -65,7 +66,7 @@ public class HallMineAdapter extends BaseAdapter {
     }
 
     class MineViewHolder {
-        TextView contentDescTv;	// 消息未读条数
+        TextView contentDescTv;    // 消息未读条数
         View btmDivider;
     }
 }

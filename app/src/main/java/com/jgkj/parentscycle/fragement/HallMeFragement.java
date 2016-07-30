@@ -57,12 +57,13 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         rightTitleTv.setText("编辑");
 
         mMyItemContentLv = (ListView)view.findViewById(R.id.hall_mine_fragment_lv);
-        View headerView = inflater.inflate(R.layout.hall_mine_fragment_lv_header_layout, container,
-                false);
-        userNameTv = (TextView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_user_name_tv);
-        HallMineAdapter hallMineAdapter = new HallMineAdapter(container.getContext(),getContentData());
-        mMyItemContentLv.setAdapter(hallMineAdapter);
+        View headerView = inflater.inflate(R.layout.hall_mine_fragment_lv_header_layout,null,false);
         mMyItemContentLv.addHeaderView(headerView, null, false);
+
+        userNameTv = (TextView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_user_name_tv);
+        HallMineAdapter hallMineAdapter = new HallMineAdapter(this.getContext(),getContentData());
+
+        mMyItemContentLv.setAdapter(hallMineAdapter);
         mUserIconIv = (ImageView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_user_icon_iv);
 
         mUserIconIv.setOnClickListener(this);
