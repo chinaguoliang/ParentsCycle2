@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.jgkj.parentscycle.bean.ModifyPassInfo;
 import com.jgkj.parentscycle.bean.RegisterInfo;
 import com.jgkj.parentscycle.net.JsonUtil;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.PaserJson;
 
@@ -15,8 +16,8 @@ import org.json.JSONException;
  */
 public class ModifyPassPaser implements PaserJson {
     @Override
-    public Object parseJSonObject(String response) throws JSONException {
-        ModifyPassInfo atatol=(ModifyPassInfo) JsonUtil.getObject(response, ModifyPassInfo.class);
+    public Object parseJSonObject(NetBeanSuper response) throws JSONException {
+        ModifyPassInfo atatol=(ModifyPassInfo) JsonUtil.getObject(response.getObj().toString(), ModifyPassInfo.class);
         return atatol;
     }
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.jgkj.parentscycle.bean.CheckFindPasswordInfo;
 import com.jgkj.parentscycle.bean.ResetPasswordInfo;
 import com.jgkj.parentscycle.net.JsonUtil;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.PaserJson;
 
@@ -16,9 +17,9 @@ import org.json.JSONException;
  */
 public class ResetPasswordPaser implements PaserJson{
     @Override
-    public Object parseJSonObject(String response) throws JSONException {
+    public Object parseJSonObject(NetBeanSuper response) throws JSONException {
         Log.d("result", "the response code:" + response);
-        ResetPasswordInfo atatol=(ResetPasswordInfo) JsonUtil.getObject(response, ResetPasswordInfo.class);
+        ResetPasswordInfo atatol=(ResetPasswordInfo) JsonUtil.getObject(response.getObj().toString(), ResetPasswordInfo.class);
         return atatol;
     }
 

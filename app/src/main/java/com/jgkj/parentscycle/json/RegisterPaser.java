@@ -6,6 +6,7 @@ import android.util.Log;
 import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.bean.RegisterInfo;
 import com.jgkj.parentscycle.net.JsonUtil;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.PaserJson;
 import com.jgkj.parentscycle.utils.LogUtil;
@@ -17,8 +18,8 @@ import org.json.JSONException;
  */
 public class RegisterPaser implements PaserJson{
     @Override
-    public Object parseJSonObject(String response) throws JSONException {
-        RegisterInfo atatol=(RegisterInfo) JsonUtil.getObject(response, RegisterInfo.class);
+    public Object parseJSonObject(NetBeanSuper response) throws JSONException {
+        RegisterInfo atatol=(RegisterInfo) JsonUtil.getObject(response.getObj().toString(), RegisterInfo.class);
         return atatol;
     }
 

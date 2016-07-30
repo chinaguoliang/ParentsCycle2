@@ -3,6 +3,7 @@ package com.jgkj.parentscycle.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.LoginPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.utils.LogUtil;
@@ -93,16 +95,17 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
 
     @Override
     public void requestResponse(Object obj) {
+        NetBeanSuper nbs = (NetBeanSuper)obj;
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
-        if (obj instanceof  LoginInfo) {
-            LoginInfo loginInfo = (LoginInfo)obj;
-            if (loginInfo.isSuccess()) {
-                //ToastUtil.showToast(this,"");
-                finish();
+
+        if (nbs.obj instanceof  LoginInfo) {
+            if (nbs.isSuccess()) {
+                LoginInfo loginInfo = (LoginInfo)nbs.obj;
+                Log.d("result",nbs.getMsg());
             } else {
-                ToastUtil.showToast(this,loginInfo.getMsg(), Toast.LENGTH_SHORT);
+
             }
         }
     }

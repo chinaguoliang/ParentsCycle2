@@ -1,14 +1,27 @@
 package com.jgkj.parentscycle.net;
 
+import com.jgkj.parentscycle.bean.LoginInfo;
+
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/1/8.
  */
-public class NetBeanSuper {
+public class NetBeanSuper implements Serializable{
     int result = Integer.MAX_VALUE;
-    String msg = null;
+    String msg = "";
     String all_page = null;
     String page = null;
-    String all = null;
+    boolean success;
+    public Object obj;
+
+    public Object getObj() {
+        return obj;
+    }
+
+    public void setObj(Object obj) {
+        this.obj = obj;
+    }
 
     public int getResult() {
         return result;
@@ -42,11 +55,11 @@ public class NetBeanSuper {
         this.page = page;
     }
 
-    public String getAll() {
-        return all;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setAll(String all) {
-        this.all = all;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

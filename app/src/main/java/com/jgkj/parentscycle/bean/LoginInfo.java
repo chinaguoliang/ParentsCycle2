@@ -7,29 +7,68 @@ import java.io.Serializable;
 /**
  * Created by chen on 16/7/7.
  */
-public class LoginInfo extends NetBeanSuper implements Serializable{
-    String msg;
-    boolean success;
+public class LoginInfo {
+    String company;
+    String id;
+    String iocimg;
+    String name;
+    String openId;
+    String page;
     String phone;
-    String passwd;
+    String position;
+    String qq;
+    String rows;
+    String url;
+    String username;
 
-    @Override
-    public String getMsg() {
-        return msg;
+    public String getPage() {
+        return page;
     }
 
-    @Override
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setPage(String page) {
+        this.page = page;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public String getCompany() {
+        return company;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setCompany(String company) {
+        this.company = company;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIocimg() {
+        return iocimg;
+    }
+
+    public void setIocimg(String iocimg) {
+        this.iocimg = iocimg;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
 
     public String getPhone() {
         return phone;
@@ -39,11 +78,43 @@ public class LoginInfo extends NetBeanSuper implements Serializable{
         this.phone = phone;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getRows() {
+        return rows;
+    }
+
+    public void setRows(String rows) {
+        this.rows = rows;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

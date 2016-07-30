@@ -6,12 +6,31 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 /**
  * Created by chen on 16/7/7.
  */
 public class JsonUtil {
+
+    /**
+     * 对单个javabean进行解析
+     * @param <T>
+     * @param json 要解析的json字符串
+     * @param cls
+     * @return
+     */
+    public static <T>T getTopObject(String json,Class<T> cls){
+        T t = null;
+        try {
+            t = JSON.parseObject(json, cls);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
     /**
      * 对单个javabean进行解析
      *

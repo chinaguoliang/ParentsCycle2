@@ -56,7 +56,9 @@ public class NetRequest {
 						LogUtil.d(TAG,"net request 1");
 						try {
 							LogUtil.bigLog(TAG, "response:" + response);
-							Object obj = pj.parseJSonObject(response);
+							response = "{\"msg\":\"登录成功！\",\"obj\":{\"company\":\"\",\"id\":\"1\",\"iocimg\":\"\",\"name\":\"\",\"openId\":\"\",\"page\":0,\"phone\":\"15810697038\",\"position\":\"\",\"qq\":\"\",\"rows\":0,\"url\":\"\",\"username\":\"\"},\"success\":true}";
+							NetBeanSuper nbs = (NetBeanSuper)JsonUtil.getTopObject(response, NetBeanSuper.class);
+							Object obj = pj.parseJSonObject(nbs);
 
 							if (obj == null) {
 								responseError(pj,isNetConnected,netListener,response);
