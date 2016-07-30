@@ -11,6 +11,7 @@ import com.jgkj.parentscycle.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import sun.bob.mcalendarview.views.ExpCalendarView;
 
 /**
  * 1宝宝档案-教师版-修改考勤
@@ -29,6 +30,8 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
     @Bind(R.id.check_attendance_activity_modify_attendance_btn)
     Button mCheckAttendance;
 
+    @Bind(R.id.check_attendance_activity_calendar_view)
+    ExpCalendarView expCalendarView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
     private void initViews() {
         rightTv.setVisibility(View.GONE);
         titleTv.setText("2016.3");
+        expCalendarView.markDate(2016, 3, 16);
     }
 
     @OnClick({R.id.baby_document_activity_back_iv})

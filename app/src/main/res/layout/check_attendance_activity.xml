@@ -12,23 +12,78 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
 
-        <sun.bob.mcalendarview.MCalendarView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/calendar"
-            />
+            android:orientation="vertical">
+
+            <sun.bob.mcalendarview.views.WeekColumnView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <sun.bob.mcalendarview.views.ExpCalendarView
+                android:id="@+id/check_attendance_activity_calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/blue_cycle"
+                    android:drawablePadding="5dp"
+                    android:text="到园"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/small_text_size" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/yellow_cycle"
+                    android:drawablePadding="5dp"
+                    android:text="请假"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/small_text_size" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/green_cycle"
+                    android:drawablePadding="5dp"
+                    android:text="未到"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/small_text_size" />
+
+            </LinearLayout>
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/check_attendance_activity_modify_attendance_btn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/main_blue_color"
-            android:textColor="@color/white"
-            android:text="修改考勤"
             android:layout_alignParentBottom="true"
-            />
+            android:background="@color/main_blue_color"
+            android:text="修改考勤"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
