@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by chen on 16/7/24.
  */
-public class ResetPasswordInfo extends NetBeanSuper implements Serializable {
+public class ResetPasswordInfo implements Serializable {
     boolean success;
     String msg;
 
@@ -19,13 +19,4 @@ public class ResetPasswordInfo extends NetBeanSuper implements Serializable {
         this.success = success;
     }
 
-    @Override
-    public String getMsg() {
-        return msg;
-    }
-
-    @Override
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 }

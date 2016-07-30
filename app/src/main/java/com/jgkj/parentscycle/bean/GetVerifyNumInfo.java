@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by chen on 16/7/8.
  */
-public class GetVerifyNumInfo extends NetBeanSuper implements Serializable {
+public class GetVerifyNumInfo implements Serializable {
     boolean success;
 
     public boolean isSuccess() {

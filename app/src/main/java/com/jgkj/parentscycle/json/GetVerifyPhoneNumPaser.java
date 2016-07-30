@@ -19,13 +19,13 @@ public class GetVerifyPhoneNumPaser implements PaserJson {
     @Override
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
         Log.d("result", "the response code:" + response);
-        GetVerifyNumInfo atatol=(GetVerifyNumInfo) JsonUtil.getObject(response.getObj().toString(), GetVerifyNumInfo.class);
-        return atatol;
+        response.setObj(new GetVerifyNumInfo());
+        return response;
     }
 
     @Override
     public Object getErrorBeanData(String msg) {
-        GetVerifyNumInfo meData = new GetVerifyNumInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_ERROR_CODE);
         if (TextUtils.isEmpty(msg)) {
             meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
@@ -38,7 +38,7 @@ public class GetVerifyPhoneNumPaser implements PaserJson {
 
     @Override
     public Object getNetNotConnectData() {
-        GetVerifyNumInfo meData = new GetVerifyNumInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_NOT_CONNECT_CODE);
         meData.setMsg(NetListener.REQUEST_NOT_NET_ERROR_MSG);
         return meData;

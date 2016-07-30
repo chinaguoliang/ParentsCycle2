@@ -14,6 +14,7 @@ import com.jgkj.parentscycle.bean.GetVerifyNumInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.CheckFindResetPasswordPaser;
 import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.utils.ButtonTimeCount;
@@ -99,6 +100,8 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void requestResponse(Object obj) {
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
@@ -110,8 +113,8 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
                 LogUtil.d(TAG,"get verify 2");
                 ToastUtil.showToast(this, "成功", Toast.LENGTH_SHORT);
             } else {
-                ToastUtil.showToast(this,gvn.getMsg(),Toast.LENGTH_SHORT);
-                LogUtil.d(TAG, "get verify 3" + gvn.getMsg());
+                ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
+                LogUtil.d(TAG, "get verify 3" + nbs.getMsg());
             }
         } else if (obj instanceof CheckFindPasswordInfo) {
             CheckFindPasswordInfo cfpi = (CheckFindPasswordInfo)obj;
@@ -121,7 +124,7 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
                 intent.putExtra("phone",phoneNumEt.getText().toString());
                 startActivity(intent);
             } else {
-                ToastUtil.showToast(this, cfpi.getMsg(), Toast.LENGTH_SHORT);
+                ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
             }
         }
     }

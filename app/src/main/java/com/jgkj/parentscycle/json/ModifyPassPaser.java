@@ -18,12 +18,13 @@ public class ModifyPassPaser implements PaserJson {
     @Override
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
         ModifyPassInfo atatol=(ModifyPassInfo) JsonUtil.getObject(response.getObj().toString(), ModifyPassInfo.class);
-        return atatol;
+        response.setObj(atatol);
+        return response;
     }
 
     @Override
     public Object getErrorBeanData(String msg) {
-        ModifyPassInfo meData = new ModifyPassInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_ERROR_CODE);
         if (TextUtils.isEmpty(msg)) {
             meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
@@ -36,7 +37,7 @@ public class ModifyPassPaser implements PaserJson {
 
     @Override
     public Object getNetNotConnectData() {
-        ModifyPassInfo meData = new ModifyPassInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_NOT_CONNECT_CODE);
         meData.setMsg(NetListener.REQUEST_NOT_NET_ERROR_MSG);
         return meData;

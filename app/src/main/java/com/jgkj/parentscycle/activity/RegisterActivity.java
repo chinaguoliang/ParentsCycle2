@@ -15,6 +15,7 @@ import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
 import com.jgkj.parentscycle.json.LoginPaser;
 import com.jgkj.parentscycle.json.RegisterPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.utils.LogUtil;
@@ -76,6 +77,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void requestResponse(Object obj) {
+        NetBeanSuper nbs = (NetBeanSuper)obj;
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
@@ -86,7 +88,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 ToastUtil.showToast(this,"成功",Toast.LENGTH_SHORT);
                 finish();
             } else {
-                ToastUtil.showToast(this,ri.getMsg(),Toast.LENGTH_SHORT);
+                ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
             }
         } else if (obj instanceof GetVerifyNumInfo) {
             GetVerifyNumInfo gvn = (GetVerifyNumInfo)obj;
@@ -95,8 +97,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 LogUtil.d(TAG,"get verify 2");
                 ToastUtil.showToast(this,"成功",Toast.LENGTH_SHORT);
             } else {
-                ToastUtil.showToast(this,gvn.getMsg(),Toast.LENGTH_SHORT);
-                LogUtil.d(TAG, "get verify 3" + gvn.getMsg());
+                ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
+                LogUtil.d(TAG, "get verify 3" + nbs.getMsg());
             }
         }
     }

@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by chen on 16/7/12.
  */
-public class ModifyPassInfo extends NetBeanSuper implements Serializable {
+public class ModifyPassInfo implements Serializable {
     String phone;
     String passwd;
     String msg;
@@ -29,15 +29,6 @@ public class ModifyPassInfo extends NetBeanSuper implements Serializable {
         this.passwd = passwd;
     }
 
-    @Override
-    public String getMsg() {
-        return msg;
-    }
-
-    @Override
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public boolean isSuccess() {
         return success;

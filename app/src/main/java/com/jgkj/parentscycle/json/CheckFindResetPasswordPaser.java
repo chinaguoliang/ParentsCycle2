@@ -19,13 +19,14 @@ public class CheckFindResetPasswordPaser implements PaserJson {
     @Override
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
         Log.d("result", "the response code:" + response);
-        CheckFindPasswordInfo atatol=(CheckFindPasswordInfo) JsonUtil.getObject(response.getObj().toString(), CheckFindPasswordInfo.class);
-        return atatol;
+
+        response.setObj(new CheckFindPasswordInfo());
+        return response;
     }
 
     @Override
     public Object getErrorBeanData(String msg) {
-        CheckFindPasswordInfo meData = new CheckFindPasswordInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_ERROR_CODE);
         if (TextUtils.isEmpty(msg)) {
             meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
@@ -38,7 +39,7 @@ public class CheckFindResetPasswordPaser implements PaserJson {
 
     @Override
     public Object getNetNotConnectData() {
-        CheckFindPasswordInfo meData = new CheckFindPasswordInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_NOT_CONNECT_CODE);
         meData.setMsg(NetListener.REQUEST_NOT_NET_ERROR_MSG);
         return meData;

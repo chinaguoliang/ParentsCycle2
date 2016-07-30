@@ -11,6 +11,7 @@ import com.jgkj.parentscycle.bean.ResetPasswordInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
@@ -71,6 +72,7 @@ public class SetPasswordActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void requestResponse(Object obj) {
+        NetBeanSuper nbs = (NetBeanSuper)obj;
         if (obj instanceof ResetPasswordInfo) {
             ResetPasswordInfo rpi = (ResetPasswordInfo) obj;
             if (rpi.isSuccess()) {
@@ -78,7 +80,7 @@ public class SetPasswordActivity extends BaseActivity implements View.OnClickLis
                 UserInfo.isLogined = true;
                 finish();
             } else {
-                ToastUtil.showToast(this, rpi.getMsg(), Toast.LENGTH_SHORT);
+                ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
             }
         }
     }

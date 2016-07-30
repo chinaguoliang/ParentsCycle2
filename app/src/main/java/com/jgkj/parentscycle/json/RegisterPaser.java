@@ -19,13 +19,13 @@ import org.json.JSONException;
 public class RegisterPaser implements PaserJson{
     @Override
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
-        RegisterInfo atatol=(RegisterInfo) JsonUtil.getObject(response.getObj().toString(), RegisterInfo.class);
-        return atatol;
+        response.setObj(new RegisterInfo());
+        return response;
     }
 
     @Override
     public Object getErrorBeanData(String msg) {
-        RegisterInfo meData = new RegisterInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_ERROR_CODE);
         if (TextUtils.isEmpty(msg)) {
             meData.setMsg(NetListener.REQUEST_NET_ERROR_MSG);
@@ -37,7 +37,7 @@ public class RegisterPaser implements PaserJson{
 
     @Override
     public Object getNetNotConnectData() {
-        RegisterInfo meData = new RegisterInfo();
+        NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_NOT_CONNECT_CODE);
         meData.setMsg(NetListener.REQUEST_NOT_NET_ERROR_MSG);
         return meData;
