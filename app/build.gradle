@@ -19,6 +19,8 @@ android {
     }
 }
 
+repositories { flatDir { dirs 'libs' } }
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -27,4 +29,5 @@ dependencies {
     compile files('libs/Volley.jar')
     compile files('libs/gson-2.6.1.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile(name: 'mcalendarview-release', ext: 'aar')
 }
