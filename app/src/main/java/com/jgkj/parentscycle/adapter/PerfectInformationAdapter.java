@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.widget.CircularImage;
 
 import java.util.List;
 
@@ -19,9 +21,14 @@ import java.util.List;
 public class PerfectInformationAdapter extends BaseAdapter {
     private List<String> contentData;
     private Context mContext;
+    private Bitmap userIcon;
     public PerfectInformationAdapter(Context context, List<String> data){
         contentData = data;
         mContext = context;
+    }
+
+    public void setUserIcon(Bitmap icon) {
+        userIcon = icon;
     }
 
     @Override
@@ -52,6 +59,7 @@ public class PerfectInformationAdapter extends BaseAdapter {
             holder.conentNameTv = (TextView)convertView.findViewById(R.id.perfect_information_activity_lv_item_desc_tv);
             holder.rightArrowIv = (ImageView)convertView.findViewById(R.id.perfect_information_activity_lv_item_right_arrow_iv);
             holder.grayLine = convertView.findViewById(R.id.perfect_information_activity_lv_item_gray_line);
+            holder.userIconIv = (CircularImage)convertView.findViewById(R.id.perfect_information_activity_lv_item_user_icon_iv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -66,6 +74,15 @@ public class PerfectInformationAdapter extends BaseAdapter {
             holder.grayLine.setVisibility(View.GONE);
         }
 
+        if (position == 0) {
+            if (userIcon != null) {
+                holder.userIconIv.setVisibility(View.VISIBLE);
+                holder.userIconIv.setImageBitmap(userIcon);
+            }
+        } else {
+            holder.userIconIv.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
@@ -73,6 +90,7 @@ public class PerfectInformationAdapter extends BaseAdapter {
         TextView contentDescTv;	// 消息未读条数
         TextView conentNameTv;
         ImageView rightArrowIv;
+        CircularImage userIconIv;
         View grayLine;
     }
 }

@@ -76,6 +76,9 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                     case 1:
                         startActivity(new Intent(mUserIconIv.getContext(), AccountInfoActivity.class));
                         break;
+                    case 2:
+                        startActivity(new Intent(mUserIconIv.getContext(), PerfectInformationActivity.class));
+                        break;
                 }
             }
         });

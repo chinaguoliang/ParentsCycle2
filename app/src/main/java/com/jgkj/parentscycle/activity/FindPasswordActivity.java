@@ -3,7 +3,6 @@ package com.jgkj.parentscycle.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +16,7 @@ import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
-import com.jgkj.parentscycle.utils.ButtonTimeCount;
+import com.jgkj.parentscycle.widget.ButtonTimeCount;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
