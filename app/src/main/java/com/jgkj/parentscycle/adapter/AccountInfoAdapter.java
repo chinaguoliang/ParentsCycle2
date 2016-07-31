@@ -16,10 +16,11 @@ import java.util.List;
 /**
  * Created by chen on 16/7/18.
  */
-public class AccountInfoAdapter extends BaseAdapter{
+public class AccountInfoAdapter extends BaseAdapter {
     private List<String> contentData;
     private Context mContext;
-    public AccountInfoAdapter(Context context, List<String> data){
+
+    public AccountInfoAdapter(Context context, List<String> data) {
         contentData = data;
         mContext = context;
     }
@@ -48,17 +49,17 @@ public class AccountInfoAdapter extends BaseAdapter{
             holder = new MineViewHolder();
             convertView = mInflater.inflate(R.layout.account_info_activity_lv_item, null);
             convertView.setTag(holder);
-            holder.contentDescTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_tv);
-            holder.conentNameTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_content_tv);
-            holder.rightArrowIv = (ImageView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_arrow_iv);
+            holder.contentDescTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_tv);
+            holder.conentNameTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_content_tv);
+            holder.rightArrowIv = (ImageView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_arrow_iv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
 
         String contentStr = contentData.get(position);
-        String names[] =contentStr.split("_");
+        String names[] = contentStr.split("_");
         holder.contentDescTv.setText(names[0]);
-        if (TextUtils.equals(names[1],"0")) {
+        if (TextUtils.equals(names[1], "0")) {
             holder.rightArrowIv.setVisibility(View.VISIBLE);
             holder.conentNameTv.setVisibility(View.GONE);
         } else {
@@ -71,7 +72,7 @@ public class AccountInfoAdapter extends BaseAdapter{
     }
 
     class MineViewHolder {
-        TextView contentDescTv;	// 消息未读条数
+        TextView contentDescTv;    // 消息未读条数
         TextView conentNameTv;
         ImageView rightArrowIv;
     }

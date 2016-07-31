@@ -9,4 +9,5 @@ public class UserInfo {
     public static String phoneNumber;
     public static boolean isLogined;
     public static LoginInfo loginInfo;
+    public static String Id;
 }

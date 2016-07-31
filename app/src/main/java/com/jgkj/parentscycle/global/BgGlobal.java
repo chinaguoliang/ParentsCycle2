@@ -13,4 +13,5 @@ public class BgGlobal {
     public static final String CHECK_RESET_PASSWORD = "jgkj/jgkjGetPassCheck";  //找回密码校验
     public static final String LOGIN_URL = "jgkj/loginUser";
     public static final String TEACHER_INFO_SAVE = "jgkj/teacherinfoSave";
+    public static final String TEACHER_INFO_LIST = "teacherinfo/getTeacherinfo";  //教师个人中心
 }
