@@ -126,5 +126,11 @@ public class BaseActivity extends FragmentActivity {
         return true;
     }
 
+    public void hideProgressDialog() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
 
 }
