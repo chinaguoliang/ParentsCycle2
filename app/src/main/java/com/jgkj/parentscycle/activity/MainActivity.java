@@ -81,6 +81,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         initFragment();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mHallMeFragement != null) {
+            mHallMeFragement.refreshUI();
+        }
+    }
+
     private void initFragment() {
         mHallCircleMenuFragement = new HallCircleMenuFragement();
         mHallDynamicFragement = new HallDynamicFragement();

@@ -17,6 +17,7 @@ import com.jgkj.parentscycle.json.LoginPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
@@ -104,9 +105,11 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
             if (nbs.isSuccess()) {
                 LoginInfo loginInfo = (LoginInfo)nbs.obj;
                 Log.d("result",nbs.getMsg());
-            } else {
-
+                UserInfo.isLogined = true;
+                UserInfo.loginInfo = loginInfo;
+                finish();
             }
+            ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
         }
     }
 }

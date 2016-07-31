@@ -17,6 +17,7 @@ import com.jgkj.parentscycle.activity.AccountInfoActivity;
 import com.jgkj.parentscycle.activity.LoginActivity;
 import com.jgkj.parentscycle.activity.PerfectInformationActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
+import com.jgkj.parentscycle.user.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,10 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     TextView rightTitleTv;
 
     TextView  userNameTv;
-
+    TextView  phoneNumTv;
     private ListView mMyItemContentLv;
     private ImageView mUserIconIv;
+    private View phoneNumberLl;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +63,10 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         mMyItemContentLv.addHeaderView(headerView, null, false);
 
         userNameTv = (TextView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_user_name_tv);
+        phoneNumTv = (TextView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_phone_number_tv);
+
+        phoneNumberLl = headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_phone_number_ll);
+
         HallMineAdapter hallMineAdapter = new HallMineAdapter(this.getContext(),getContentData());
 
         mMyItemContentLv.setAdapter(hallMineAdapter);
@@ -83,7 +89,17 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
             }
         });
 
+
+
         return view;
+    }
+
+    public void refreshUI() {
+        if (UserInfo.isLogined) {
+            userNameTv.setText(UserInfo.loginInfo.getName());
+            phoneNumberLl.setVisibility(View.VISIBLE);
+            phoneNumTv.setText(UserInfo.loginInfo.getPhone());
+        }
     }
 
     private List<String> getContentData() {
