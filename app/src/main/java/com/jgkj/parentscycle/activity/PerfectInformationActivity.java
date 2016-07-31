@@ -20,8 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
-import com.jgkj.parentscycle.adapter.AccountInfoAdapter;
 import com.jgkj.parentscycle.adapter.PerfectInformationAdapter;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
@@ -30,6 +34,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -39,7 +44,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/7/24.
  */
-public class PerfectInformationActivity extends BaseActivity implements View.OnClickListener{
+public class PerfectInformationActivity extends BaseActivity implements View.OnClickListener,NetListener{
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 20;
     public static final int REQUEST_CODE_PICK_IMAGE = 21;
     public static final int PHOTORESOULT = 22;
@@ -61,6 +66,9 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
 
     @Bind(R.id.title_bar_layout_rel)
     RelativeLayout mWrapTitleRel;
+
+    @Bind(R.id.perfect_information_activity_save_btn)
+    Button saveBtn;
 
     private Dialog mChangePhotoDialog;
     String avatarTempPath;
@@ -104,11 +112,14 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         return data;
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.perfect_information_activity_save_btn})
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             finish();
+        } else if (v == saveBtn) {
+            showProgressDialog();
+            requestSave();
         }
     }
 
@@ -135,6 +146,37 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         intent_camera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         intent_camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(avatarTempPath)));
         startActivityForResult(intent_camera, REQUEST_CODE_CAPTURE_CAMEIA);
+    }
+
+    public void requestSave() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
+        requestData.put("tmpinfoid","1");
+        requestData.put("babyname",data.get(0));
+        requestData.put("familyrole",data.get(1));
+        requestData.put("babyage",data.get(2));
+        requestData.put("nickname",data.get(3));
+        requestData.put("babysex",data.get(4));
+        requestData.put("sex",data.get(5));
+        requestData.put("familyrole","2");
+        requestData.put("babyname","2");
+        requestData.put("babysex","2");
+        requestData.put("region","2");
+        requestData.put("fmbg","http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg");
+        requestData.put("account","chen");
+        requestData.put("sex","1");
+        requestData.put("headportrait","http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg");
+        requestData.put("teachername","2");
+        requestData.put("teachersex","4");
+        requestData.put("nationality","3");
+        requestData.put("birthdate","3");
+        requestData.put("phone","15810697038");
+        requestData.put("kbwx","3");
+        requestData.put("kbqq","5");
+        requestData.put("classid","5");
+        requestData.put("onthejob","6");
+        GetVerifyPhoneNumPaser lp = new GetVerifyPhoneNumPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
     }
 
     protected void getImageFromAlbum() {
@@ -277,5 +319,15 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         if (mChangePhotoDialog != null) {
             mChangePhotoDialog.dismiss();
         }
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        hideProgressDialog();
+//        if (nbs.isSuccess()) {
+//
+//        }
+
     }
 }

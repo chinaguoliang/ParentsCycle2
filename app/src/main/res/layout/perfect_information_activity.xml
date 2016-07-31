@@ -11,16 +11,33 @@
         android:layout_height="50dp">
 
     </include>
-
-    <ListView
-        android:id="@+id/perfect_information_activity_lv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:listSelector="@drawable/listview_selector"
-        android:dividerHeight="1dp"
-        android:divider="@color/text_gray"
-        >
+        android:layout_height="match_parent">
 
-    </ListView>
+        <Button
+            android:id="@+id/perfect_information_activity_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/main_blue_color"
+            android:layout_alignParentBottom="true"
+            android:text="保存"
+            android:textColor="@color/white"
+            />
+
+
+        <ListView
+            android:id="@+id/perfect_information_activity_lv"
+            android:layout_above="@+id/perfect_information_activity_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@drawable/listview_selector"
+            android:dividerHeight="1dp"
+            android:divider="@color/text_gray"
+            >
+        </ListView>
+    </RelativeLayout>
+
+
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.widget.CircularImage;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,9 +24,19 @@ public class PerfectInformationAdapter extends BaseAdapter {
     private List<String> contentData;
     private Context mContext;
     private Bitmap userIcon;
+    public HashMap<Integer,String> dataMap = new HashMap<Integer,String>();
     public PerfectInformationAdapter(Context context, List<String> data){
         contentData = data;
         mContext = context;
+
+        //初始化map 内容
+        for(int i = 0 ; i < 15 ; i++) {
+            dataMap.put(i,"");
+        }
+    }
+
+    public HashMap<Integer,String> getData() {
+        return dataMap;
     }
 
     public void setUserIcon(Bitmap icon) {
@@ -48,8 +59,9 @@ public class PerfectInformationAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        MineViewHolder holder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        dataMap.put(position,"");
+        final MineViewHolder holder;
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,6 +77,18 @@ public class PerfectInformationAdapter extends BaseAdapter {
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
+
+        holder.mContentEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                } else {
+                    dataMap.put(position,holder.mContentEt.getText().toString());
+                }
+
+            }
+        });
 
         String contentStr = contentData.get(position);
         String names[] =contentStr.split("_");
