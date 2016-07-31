@@ -45,6 +45,18 @@
             android:visibility="gone"
             android:layout_marginRight="10dp" />
 
+        <EditText
+            android:id="@+id/perfect_information_activity_lv_item_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:background="@null"
+            android:layout_toLeftOf="@+id/perfect_information_activity_lv_item_right_arrow_iv"
+            android:minWidth="100dp"
+            />
+
         <TextView
             android:id="@+id/perfect_information_activity_lv_item_desc_tv"
             android:layout_width="wrap_content"

@@ -105,19 +105,19 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
             mProgressDialog.dismiss();
         }
 
-        if (obj instanceof GetVerifyNumInfo) {
-            GetVerifyNumInfo gvn = (GetVerifyNumInfo)obj;
+        if (nbs.obj instanceof GetVerifyNumInfo) {
+            GetVerifyNumInfo gvn = (GetVerifyNumInfo)nbs.obj;
             LogUtil.d(TAG, "get verify 1");
-            if (gvn.isSuccess()) {
+            if (nbs.isSuccess()) {
                 LogUtil.d(TAG,"get verify 2");
-                ToastUtil.showToast(this, "成功", Toast.LENGTH_SHORT);
+                ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
             } else {
                 ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
                 LogUtil.d(TAG, "get verify 3" + nbs.getMsg());
             }
-        } else if (obj instanceof CheckFindPasswordInfo) {
-            CheckFindPasswordInfo cfpi = (CheckFindPasswordInfo)obj;
-            if (cfpi.isSuccess()) {
+        } else if (nbs.obj instanceof CheckFindPasswordInfo) {
+            CheckFindPasswordInfo cfpi = (CheckFindPasswordInfo)nbs.obj;
+            if (nbs.isSuccess()) {
                 ToastUtil.showToast(this, "成功", Toast.LENGTH_SHORT);
                 Intent intent = new Intent(FindPasswordActivity.this,SetPasswordActivity.class);
                 intent.putExtra("phone",phoneNumEt.getText().toString());

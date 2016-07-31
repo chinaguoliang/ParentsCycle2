@@ -20,6 +20,7 @@ import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
+import com.jgkj.parentscycle.widget.ButtonTimeCount;
 
 import java.util.HashMap;
 
@@ -48,12 +49,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.register_activity_verify_phone_num_et)
     EditText phoneVerifyNumEt;
 
-
+    ButtonTimeCount mTimeCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity_layout);
         ButterKnife.bind(this);
+        mTimeCount = new ButtonTimeCount(60000, 1000);
+        mTimeCount.setSendButton(getVerifyPhoneNumTv);
     }
 
     @OnClick({R.id.register_activity_submit_tv,R.id.register_activity_get_verify_phone_num_tv})
@@ -71,6 +74,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             if (!hadShow) {
                 return;
             }
+            mTimeCount.start();
             requestVerifyNum();
         }
     }
@@ -82,20 +86,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             mProgressDialog.dismiss();
         }
 
-        if (obj instanceof RegisterInfo) {
-            RegisterInfo ri = (RegisterInfo)obj;
-            if (ri.isSuccess()) {
+        if (nbs.obj instanceof RegisterInfo) {
+            RegisterInfo ri = (RegisterInfo)nbs.obj;
+            if (nbs.isSuccess()) {
                 ToastUtil.showToast(this,"成功",Toast.LENGTH_SHORT);
                 finish();
             } else {
                 ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
             }
-        } else if (obj instanceof GetVerifyNumInfo) {
-            GetVerifyNumInfo gvn = (GetVerifyNumInfo)obj;
+        } else if (nbs.obj instanceof GetVerifyNumInfo) {
+            GetVerifyNumInfo gvn = (GetVerifyNumInfo)nbs.obj ;
             LogUtil.d(TAG,"get verify 1");
-            if (gvn.isSuccess()) {
+            if (nbs.isSuccess()) {
                 LogUtil.d(TAG,"get verify 2");
-                ToastUtil.showToast(this,"成功",Toast.LENGTH_SHORT);
+                ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
             } else {
                 ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
                 LogUtil.d(TAG, "get verify 3" + nbs.getMsg());

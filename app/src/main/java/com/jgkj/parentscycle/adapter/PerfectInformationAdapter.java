@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -60,6 +61,7 @@ public class PerfectInformationAdapter extends BaseAdapter {
             holder.rightArrowIv = (ImageView)convertView.findViewById(R.id.perfect_information_activity_lv_item_right_arrow_iv);
             holder.grayLine = convertView.findViewById(R.id.perfect_information_activity_lv_item_gray_line);
             holder.userIconIv = (CircularImage)convertView.findViewById(R.id.perfect_information_activity_lv_item_user_icon_iv);
+            holder.mContentEt = (EditText)convertView.findViewById(R.id.perfect_information_activity_lv_item_et);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -78,9 +80,11 @@ public class PerfectInformationAdapter extends BaseAdapter {
             if (userIcon != null) {
                 holder.userIconIv.setVisibility(View.VISIBLE);
                 holder.userIconIv.setImageBitmap(userIcon);
+                holder.mContentEt.setVisibility(View.GONE);
             }
         } else {
             holder.userIconIv.setVisibility(View.GONE);
+            holder.mContentEt.setVisibility(View.VISIBLE);
         }
 
         return convertView;
@@ -91,6 +95,7 @@ public class PerfectInformationAdapter extends BaseAdapter {
         TextView conentNameTv;
         ImageView rightArrowIv;
         CircularImage userIconIv;
+        EditText mContentEt;
         View grayLine;
     }
 }
