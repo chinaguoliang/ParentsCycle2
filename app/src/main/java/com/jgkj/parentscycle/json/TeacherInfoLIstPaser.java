@@ -20,9 +20,15 @@ public class TeacherInfoLIstPaser implements PaserJson{
     @Override
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
         Log.d("result", "the response code:" + response);
-        TeacherInfoListInfo atatol=(TeacherInfoListInfo) JsonUtil.getObject(response.getObj().toString(), TeacherInfoListInfo.class);
-        response.setObj(atatol);
-        return response;
+        if (response.obj != null) {
+            TeacherInfoListInfo atatol=(TeacherInfoListInfo) JsonUtil.getObject(response.getObj().toString(), TeacherInfoListInfo.class);
+            response.setObj(atatol);
+            return response;
+        } else {
+            response.setObj(new TeacherInfoListInfo());
+            return response;
+        }
+
     }
 
     @Override

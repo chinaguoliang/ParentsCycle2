@@ -8,6 +8,6 @@ import com.jgkj.parentscycle.bean.LoginInfo;
 public class UserInfo {
     public static String phoneNumber;
     public static boolean isLogined;
-    public static LoginInfo loginInfo;
+    public static LoginInfo loginInfo = new LoginInfo();
     public static String Id;
 }

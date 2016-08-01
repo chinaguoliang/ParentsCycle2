@@ -8,18 +8,18 @@ import java.io.Serializable;
  * Created by chen on 16/7/7.
  */
 public class LoginInfo {
-    String company;
-    String id;
-    String iocimg;
-    String name;
-    String openId;
-    String page;
-    String phone;
-    String position;
-    String qq;
-    String rows;
-    String url;
-    String username;
+    String company = "";
+    String id = "";
+    String iocimg = "";
+    String name = "";
+    String openId = "";
+    String page = "";
+    String phone = "";
+    String position = "";
+    String qq = "";
+    String rows = "";
+    String url = "";
+    String username = "";
 
     public String getPage() {
         return page;

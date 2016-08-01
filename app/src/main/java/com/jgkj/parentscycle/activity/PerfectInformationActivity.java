@@ -26,6 +26,7 @@ import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
@@ -151,7 +152,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
     public void requestSave() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
-        requestData.put("tmpinfoid","1");
+        requestData.put("tmpinfoid", UserInfo.loginInfo.getId());
         requestData.put("babyname",data.get(0));
         requestData.put("familyrole",data.get(1));
         requestData.put("babyage",data.get(2));

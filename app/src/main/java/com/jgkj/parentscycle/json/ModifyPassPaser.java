@@ -17,9 +17,15 @@ import org.json.JSONException;
 public class ModifyPassPaser implements PaserJson {
     @Override
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
-        ModifyPassInfo atatol=(ModifyPassInfo) JsonUtil.getObject(response.getObj().toString(), ModifyPassInfo.class);
-        response.setObj(atatol);
-        return response;
+        if (response.obj != null) {
+            ModifyPassInfo atatol=(ModifyPassInfo) JsonUtil.getObject(response.getObj().toString(), ModifyPassInfo.class);
+            response.setObj(atatol);
+            return response;
+        } else {
+            response.setObj(new ModifyPassInfo());
+            return response;
+        }
+
     }
 
     @Override
