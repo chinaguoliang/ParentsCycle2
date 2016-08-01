@@ -21,8 +21,10 @@ import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.PerfectInformationAdapter;
+import com.jgkj.parentscycle.bean.PerfectInfoInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
+import com.jgkj.parentscycle.json.PerfectInfoPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
@@ -153,18 +155,18 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         HashMap<String, String> requestData = new HashMap<String, String>();
         HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
         requestData.put("tmpinfoid", UserInfo.loginInfo.getId());
-        requestData.put("babyname",data.get(0));
-        requestData.put("familyrole",data.get(1));
-        requestData.put("babyage",data.get(2));
-        requestData.put("nickname",data.get(3));
-        requestData.put("babysex",data.get(4));
-        requestData.put("sex",data.get(5));
+        requestData.put("babyname",data.get(6));
+        requestData.put("familyrole",data.get(5));
+        requestData.put("babyage",data.get(8));
+        requestData.put("nickname",data.get(1));
+        requestData.put("babysex",data.get(7));
+        requestData.put("sex",data.get(4));
         requestData.put("familyrole","2");
         requestData.put("babyname","2");
         requestData.put("babysex","2");
-        requestData.put("region","2");
+        requestData.put("region",data.get(3));
         requestData.put("fmbg","http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg");
-        requestData.put("account","chen");
+        requestData.put("account",data.get(2));
         requestData.put("sex","1");
         requestData.put("headportrait","http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg");
         requestData.put("teachername","2");
@@ -176,7 +178,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         requestData.put("kbqq","5");
         requestData.put("classid","5");
         requestData.put("onthejob","6");
-        GetVerifyPhoneNumPaser lp = new GetVerifyPhoneNumPaser();
+        PerfectInfoPaser lp = new PerfectInfoPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
     }
 
@@ -326,9 +328,9 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
     public void requestResponse(Object obj) {
         NetBeanSuper nbs = (NetBeanSuper)obj;
         hideProgressDialog();
-//        if (nbs.isSuccess()) {
-//
-//        }
+        if (nbs.obj instanceof PerfectInfoInfo) {
+            ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
+        }
 
     }
 }
