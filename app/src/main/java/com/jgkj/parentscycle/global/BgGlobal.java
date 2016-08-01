@@ -14,4 +14,9 @@ public class BgGlobal {
     public static final String LOGIN_URL = "jgkj/loginUser";
     public static final String TEACHER_INFO_SAVE = "jgkj/teacherinfoSave";
     public static final String TEACHER_INFO_LIST = "teacherinfo/getTeacherinfo";  //教师个人中心
+
+    public static final String CREATE_CLASS = "classinfo/save";  //建立班级
+
+    public static final String MODIFY_TEACHER_PERMISSION = "teacherinfo/updateTeacherinfo";  //修改教师权限
+    public static final String CLASS_TEACHER_MANGEMENT = "classTeacher/updateClassinfoList"; //班级教师管理
 }

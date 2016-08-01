@@ -16,6 +16,7 @@ import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.AccountInfoActivity;
 import com.jgkj.parentscycle.activity.LoginActivity;
 import com.jgkj.parentscycle.activity.PerfectInformationActivity;
+import com.jgkj.parentscycle.activity.SchoolInfoActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
 import com.jgkj.parentscycle.user.UserInfo;
 
@@ -84,6 +85,9 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                         break;
                     case 2:
                         startActivity(new Intent(mUserIconIv.getContext(), PerfectInformationActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(mUserIconIv.getContext(),SchoolInfoActivity.class));
                         break;
                 }
             }

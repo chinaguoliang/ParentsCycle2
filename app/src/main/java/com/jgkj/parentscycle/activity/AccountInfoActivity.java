@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,13 +110,15 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         int year=d.get(Calendar.YEAR);
         int month=d.get(Calendar.MONTH);
         int day=d.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog dpd = new DatePickerDialog(this,this,year,month,day);
+
+        DatePickerDialog dpd = new DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog,this,year,month,day);
+        dpd.getWindow().setBackgroundDrawable(new BitmapDrawable()); //设置为透明
         dpd.show();
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
+        String date = year + "-" + (monthOfYear + 1) + dayOfMonth;
     }
 
     private void requestNet() {
