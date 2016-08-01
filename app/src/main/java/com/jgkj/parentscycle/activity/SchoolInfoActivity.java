@@ -1,7 +1,11 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jgkj.parentscycle.R;
@@ -17,11 +21,24 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by chen on 16/7/18.
  */
-public class SchoolInfoActivity extends BaseActivity implements NetListener{
+public class SchoolInfoActivity extends BaseActivity implements NetListener,View.OnClickListener{
+    @Bind(R.id.title_bar_layout_rel)
+    View titleBg;
+
+    @Bind(R.id.baby_document_activity_back_iv)
+    ImageView backIv;
+
+    @Bind(R.id.baby_document_activity_title)
+    TextView titleTv;
+
+    @Bind(R.id.baby_document_right_title_tv)
+    TextView rightTv;
+
     @Bind(R.id.shool_info_activity_job_rel)
     RelativeLayout jobRel;
 
@@ -49,8 +66,14 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.school_info_activity);
         ButterKnife.bind(this);
+        initViews();
 //        requestNet();
-        requestModifyTeacherPermission();
+//        requestModifyTeacherPermission();
+    }
+
+    private void initViews() {
+        titleTv.setText("学校信息");
+        rightTv.setVisibility(View.GONE);
     }
 
     //建立班级
@@ -98,5 +121,13 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener{
     @Override
     public void requestResponse(Object obj) {
 
+    }
+
+    @OnClick({R.id.baby_document_activity_back_iv})
+    @Override
+    public void onClick(View v) {
+        if (v == backIv) {
+            finish();
+        }
     }
 }
