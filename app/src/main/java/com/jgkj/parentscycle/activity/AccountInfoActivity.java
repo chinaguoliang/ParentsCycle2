@@ -75,6 +75,9 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 4) {
                     showDateDialog();
+                } else if (position == 6) {
+                    //帐号信息
+                    startActivity(new Intent(AccountInfoActivity.this,AccountSafeActivity.class));
                 }
             }
         });

@@ -116,6 +116,21 @@
             >
         </activity>
 
+        <activity
+            android:name=".activity.AccountSafeActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
+        <activity
+            android:name=".activity.AccountSafeResetPassActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
+        <activity
+            android:name=".activity.AccountSafeResetPhoneActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
     </application>
 
 </manifest>
