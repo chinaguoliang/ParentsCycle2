@@ -67,8 +67,11 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         setContentView(R.layout.school_info_activity);
         ButterKnife.bind(this);
         initViews();
-//        requestNet();
-//        requestModifyTeacherPermission();
+
+
+        //requestCreateClass();
+        //requestModifyTeacherPermission();
+        requestClassTeacherMangement();
     }
 
     private void initViews() {
@@ -77,28 +80,29 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     }
 
     //建立班级
-    private void requestNet() {
+    private void requestCreateClass() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("schoolid", "1");
+        requestData.put("schoolid", "1"); //暂时传1
         requestData.put("classname", "大二班");
         requestData.put("classadviser", "老韩");
-        List<String> ids = new ArrayList<String>();
-        ids.add("2");
-        ids.add("3");
-        ids.add("7");
+        String teacheerid[]=new String[2];
+        teacheerid[0]="1";
+        teacheerid[1]="2";
         Gson gson = new Gson();
-        requestData.put("teacheerid", gson.toJson(ids));
+        requestData.put("teacheerid", gson.toJson(teacheerid));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CREATE_CLASS, requestData, lp);
     }
 
 
-    //修改教师接口
+
+    //修改教师权限
     private void requestModifyTeacherPermission() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("ostmpinfoid", UserInfo.loginInfo.getId());  //登录时ID
-        requestData.put("permissions", "1");
-        requestData.put("analysis", "teacher");
+        requestData.put("permissions", UserInfo.LOOK_AFTER_TEACHER_PERMISSION);
+        requestData.put("analysis", "laosh11i");
+        requestData.put("teacherid", UserInfo.loginInfo.getId());
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.MODIFY_TEACHER_PERMISSION, requestData, lp);
     }
@@ -106,14 +110,13 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     //班级教师管理
     private void requestClassTeacherMangement() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("schoolid", UserInfo.loginInfo.getId());
+        requestData.put("schoolid", "1");
         requestData.put("classid", "1");
-        List<String> ids = new ArrayList<String>();
-        ids.add("2");
-        ids.add("3");
-        ids.add("7");
+        String teacheerid[]=new String[2];
+        teacheerid[0]="1";
+        teacheerid[1]="2";
         Gson gson = new Gson();
-        requestData.put("teacheerid", gson.toJson(ids));
+        requestData.put("teacheerid", gson.toJson(teacheerid));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CLASS_TEACHER_MANGEMENT, requestData, lp);
     }

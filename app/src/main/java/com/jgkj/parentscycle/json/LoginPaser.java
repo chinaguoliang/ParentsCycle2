@@ -19,11 +19,12 @@ public class LoginPaser implements PaserJson {
     @Override
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
         Log.d("result","the response code:" + response);
-//        String resultStr = "{\"msg\":\"登录成功！\",\"obj\":{\"company\":\"\",\"id\":\"1\",\"iocimg\":\"\",\"name\":\"\",\"openId\":\"\",\"page\":0,\"phone\":\"15810697038\",\"position\":\"\",\"qq\":\"\",\"rows\":0,\"url\":\"\",\"username\":\"\"},\"success\":true}";
-//        NetBeanSuper as = (NetBeanSuper) JsonUtil.getTopObject(resultStr, NetBeanSuper.class);
-//        String str = as.obj.toString();
-        LoginInfo atatol=(LoginInfo) JsonUtil.getObject(response.getObj().toString(), LoginInfo.class);
-        response.setObj(atatol);
+        if (response.obj == null) {
+            response.setObj(new LoginInfo());
+        } else {
+            LoginInfo atatol=(LoginInfo) JsonUtil.getObject(response.getObj().toString(), LoginInfo.class);
+            response.setObj(atatol);
+        }
         return response;
     }
 
@@ -36,7 +37,7 @@ public class LoginPaser implements PaserJson {
         } else {
             meData.setMsg(msg);
         }
-
+        meData.setObj(new LoginInfo());
         return meData;
     }
 
@@ -45,6 +46,7 @@ public class LoginPaser implements PaserJson {
         NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_NOT_CONNECT_CODE);
         meData.setMsg(NetListener.REQUEST_NOT_NET_ERROR_MSG);
+        meData.setObj(new LoginInfo());
         return meData;
     }
 }

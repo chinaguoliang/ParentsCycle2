@@ -31,7 +31,7 @@ public class PerfectInfoPaser implements PaserJson {
         } else {
             meData.setMsg(msg);
         }
-
+        meData.setObj(new PerfectInfoInfo());
         return meData;
     }
 
@@ -40,6 +40,7 @@ public class PerfectInfoPaser implements PaserJson {
         NetBeanSuper meData = new NetBeanSuper();
         meData.setResult(NetListener.REQUEST_NET_NOT_CONNECT_CODE);
         meData.setMsg(NetListener.REQUEST_NOT_NET_ERROR_MSG);
+        meData.setObj(new PerfectInfoInfo());
         return meData;
     }
 }

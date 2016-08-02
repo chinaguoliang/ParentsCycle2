@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.AccountInfoActivity;
@@ -19,6 +20,7 @@ import com.jgkj.parentscycle.activity.PerfectInformationActivity;
 import com.jgkj.parentscycle.activity.SchoolInfoActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +81,10 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         mMyItemContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (!UserInfo.isLogined) {
+                    ToastUtil.showToast(mMyItemContentLv.getContext(),"请先登录", Toast.LENGTH_SHORT);
+                    return;
+                }
                 switch (position){
                     case 1:
                         startActivity(new Intent(mUserIconIv.getContext(), AccountInfoActivity.class));
