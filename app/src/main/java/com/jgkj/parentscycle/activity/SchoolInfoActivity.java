@@ -14,6 +14,7 @@ import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,11 +86,12 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         requestData.put("schoolid", "1"); //暂时传1
         requestData.put("classname", "大二班");
         requestData.put("classadviser", "老韩");
-        String teacheerid[]=new String[2];
-        teacheerid[0]="1";
-        teacheerid[1]="2";
-        Gson gson = new Gson();
-        requestData.put("teacheerid", gson.toJson(teacheerid));
+        ArrayList <String> ids = new ArrayList<String>();
+        ids.add("1");
+        ids.add("2");
+        ids.add("3");
+        ids.add("4");
+        requestData.put("teacherid", UtilTools.getRequestNetIds(ids));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CREATE_CLASS, requestData, lp);
     }
@@ -111,12 +113,12 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     private void requestClassTeacherMangement() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("schoolid", "1");
-        requestData.put("classid", "1");
-        String teacheerid[]=new String[2];
-        teacheerid[0]="1";
-        teacheerid[1]="2";
-        Gson gson = new Gson();
-        requestData.put("teacheerid", gson.toJson(teacheerid));
+        requestData.put("classid", "6");
+        requestData.put("classname", "apple class");
+        ArrayList <String> ids = new ArrayList<String>();
+        ids.add("1");
+        ids.add("2");
+        requestData.put("teacherid", UtilTools.getRequestNetIds(ids));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CLASS_TEACHER_MANGEMENT, requestData, lp);
     }
