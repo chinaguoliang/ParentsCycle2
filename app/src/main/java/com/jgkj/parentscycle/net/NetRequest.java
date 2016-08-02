@@ -44,8 +44,7 @@ public class NetRequest {
 			final HashMap<String, String> requestParams, final PaserJson pj) {
 		String url = BgGlobal.BASE_URL + requestUrl + BgGlobal.DEVICE_PARAMS;
 		LogUtil.d(TAG, "request params:" + requestParams.toString());
-		LogUtil.d(TAG, "request url:" + url);
-		LogUtil.d(TAG, "request url api:" + requestUrl);
+		LogUtil.d(TAG, "request url api:" + url);
 		final boolean isNetConnected = UtilTools.isNetworkConnected();
 
 	
@@ -53,7 +52,6 @@ public class NetRequest {
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
-						LogUtil.d(TAG,"net request 1");
 						try {
 							LogUtil.bigLog(TAG, "response:" + response);
 							NetBeanSuper nbs = (NetBeanSuper)JsonUtil.getTopObject(response, NetBeanSuper.class);
