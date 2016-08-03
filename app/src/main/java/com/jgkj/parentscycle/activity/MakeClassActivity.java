@@ -3,11 +3,14 @@ package com.jgkj.parentscycle.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.utils.LogUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,6 +20,8 @@ import butterknife.OnClick;
  * Created by chen on 16/8/2.
  */
 public class MakeClassActivity extends BaseActivity implements View.OnClickListener{
+    private static final String TAG = "MakeClassActivity";
+
     @Bind(R.id.title_bar_layout_rel)
     View titleBg;
 
@@ -29,6 +34,10 @@ public class MakeClassActivity extends BaseActivity implements View.OnClickListe
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTv;
 
+    @Bind(R.id.make_class_activity_add_teacher_rel)
+    RelativeLayout addTeacherRel;
+
+    private String teacherIdsDataStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +55,28 @@ public class MakeClassActivity extends BaseActivity implements View.OnClickListe
         titleBg.setBackgroundColor(Color.WHITE);
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.make_class_activity_add_teacher_rel})
     @Override
     public void onClick(View v) {
        if (v == backIv) {
             finish();
+        } else if (v == addTeacherRel) {
+           startActivityForResult(new Intent(this, MakeClassAddPersonActivity.class), 1);
+       }
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            teacherIdsDataStr = data.getStringExtra("teacher_ids_data");
+            if (TextUtils.isEmpty(teacherIdsDataStr)) {
+                teacherIdsDataStr = "";
+            }
+            LogUtil.d(TAG,teacherIdsDataStr);
         }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
