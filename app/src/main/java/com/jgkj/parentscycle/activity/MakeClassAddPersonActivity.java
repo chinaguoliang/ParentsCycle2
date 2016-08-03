@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,6 +40,9 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
     @Bind(R.id.make_class_add_person_activity_content_lv)
     ListView mContentLv;
 
+    @Bind(R.id.make_class_add_person_activity_submit_btn)
+    Button confirmBtn;
+
     MakeClassAddPersonAdapter makeClassAddPersonAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,21 +74,19 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
         });
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.make_class_add_person_activity_submit_btn})
 
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             setIdsData();
             finish();
+        } else if (v == confirmBtn) {
+            setIdsData();
+            finish();
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        setIdsData();
-        super.onBackPressed();
-    }
 
     private void setIdsData(){
         Intent intent = new Intent();
