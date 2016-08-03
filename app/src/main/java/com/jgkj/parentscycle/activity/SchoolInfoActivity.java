@@ -91,7 +91,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         ids.add("2");
         ids.add("3");
         ids.add("4");
-        requestData.put("teacherid", UtilTools.getRequestNetIds(ids));
+        requestData.put("teacherids", UtilTools.getRequestNetIds(ids));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CREATE_CLASS, requestData, lp);
     }
@@ -116,9 +116,11 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         requestData.put("classid", "6");
         requestData.put("classname", "apple class");
         ArrayList <String> ids = new ArrayList<String>();
-        ids.add("1");
-        ids.add("2");
-        requestData.put("teacherid", UtilTools.getRequestNetIds(ids));
+        ids.add("5");
+        ids.add("9");
+        ids.add("33");
+        ids.add("90");
+        requestData.put("teacherids", UtilTools.getRequestNetIds(ids));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CLASS_TEACHER_MANGEMENT, requestData, lp);
     }
