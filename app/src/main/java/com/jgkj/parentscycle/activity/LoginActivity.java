@@ -3,6 +3,7 @@ package com.jgkj.parentscycle.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -65,6 +66,22 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
         String phone = userNameEt.getText().toString();
         String password = passwordEt.getText().toString();
 
+        if (TextUtils.isEmpty(phone)) {
+            ToastUtil.showToast(this,"手机号不能为空",Toast.LENGTH_SHORT);
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            ToastUtil.showToast(this,"密码不能为空",Toast.LENGTH_SHORT);
+            return;
+        }
+
+
+        boolean hadShow = showProgressDialog();
+        if (!hadShow) {
+            return;
+        }
+
 
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("phone", phone);
@@ -80,11 +97,6 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     @Override
     public void onClick(View v) {
         if (v == loginTv) {
-            boolean hadShow = showProgressDialog();
-            if (!hadShow) {
-                return;
-            }
-
             requestLogin();
         } else if (v == registerTv) {
             startActivity(new Intent(this,RegisterActivity.class));
