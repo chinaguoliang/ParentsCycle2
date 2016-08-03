@@ -19,5 +19,8 @@ public class BgGlobal {
 
     public static final String MODIFY_TEACHER_PERMISSION = "schoolTeacher/schoolTeacherUpdate";  //修改教师权限
     public static final String CLASS_TEACHER_MANGEMENT = "classTeacher/updateClassinfoList"; //班级教师管理
-
+    public static final String ANNOUNCEMENT_PUBLISH = "announcement/save"; //公告发布
+    public static final String SEARCH_CLASS_LIST_BY_SCHOOL_ID = "classinfo/getClassList";
+    public static final String ANNOUNCEMENT_LIST = "announcement/announcementList"; //公告列表
+    public static final String ANNOUNCEMENT_COMMENT_SAVE = "announcementComment/save"; //公告评论保存
 }

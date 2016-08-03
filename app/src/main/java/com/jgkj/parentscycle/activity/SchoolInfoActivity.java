@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
@@ -18,7 +17,6 @@ import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -72,7 +70,11 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
 
         //requestCreateClass();
         //requestModifyTeacherPermission();
-        requestClassTeacherMangement();
+        //requestClassTeacherMangement();
+        //requestAnnouncementPublish();
+        //requestClassListBySchoolId();
+        //requestAnnouncementList();
+        requestAnnouncementCommentSave();
     }
 
     private void initViews() {
@@ -91,7 +93,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         ids.add("2");
         ids.add("3");
         ids.add("4");
-        requestData.put("teacherids", UtilTools.getRequestNetIds(ids));
+        requestData.put("teacherids", UtilTools.getRequestParams(ids));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CREATE_CLASS, requestData, lp);
     }
@@ -120,10 +122,69 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         ids.add("9");
         ids.add("33");
         ids.add("90");
-        requestData.put("teacherids", UtilTools.getRequestNetIds(ids));
+        requestData.put("teacherids", UtilTools.getRequestParams(ids));
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CLASS_TEACHER_MANGEMENT, requestData, lp);
     }
+
+    //公告发布
+    private void requestAnnouncementPublish() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("title", "论三国");
+        requestData.put("bannerimg", "6");
+        requestData.put("announcement", "apple class");
+        requestData.put("selectrange", "6");
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("1.jpg");
+        result.add("2.jpg");
+        requestData.put("imags", UtilTools.getRequestParams(result));
+        requestData.put("voidurls", "6");
+        requestData.put("ospersion", "apple class");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_PUBLISH, requestData, lp);
+    }
+
+    //按学校ID 查询班级列表 （发布选择班级展示）
+    private void requestClassListBySchoolId() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("schoolid", "1");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
+    }
+
+    //公告列表
+    private void requestAnnouncementList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("id", UserInfo.loginInfo.getId());
+        requestData.put("page", "1");
+        requestData.put("rows", "10");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_LIST, requestData, lp);
+    }
+
+
+    //公告评论保存
+    private void requestAnnouncementCommentSave() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("id", UserInfo.loginInfo.getId());
+        requestData.put("title", "奥巴马");
+        requestData.put("bannerimg", "1.jpg");
+        requestData.put("announcement", "bullshit");
+        requestData.put("selectrange", "10");
+        ArrayList<String> imgs = new ArrayList<String>();
+        imgs.add("a.jpg");
+        imgs.add("b.jpg");
+        requestData.put("imags", UtilTools.getRequestParams(imgs));
+        requestData.put("voidurls", "6.avi");
+        requestData.put("ospersion", "10");
+        requestData.put("criticsid","2");
+        requestData.put("announid","2");
+        requestData.put("isdispy","1");
+        requestData.put("critics","奥巴马 bullshit");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_COMMENT_SAVE, requestData, lp);
+    }
+
 
     @Override
     public void requestResponse(Object obj) {

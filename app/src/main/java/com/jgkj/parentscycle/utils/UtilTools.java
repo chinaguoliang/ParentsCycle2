@@ -74,7 +74,7 @@ public class UtilTools {
 	public static int SCREEN_WIDTH = 0;
 	public static int SCREEN_HEIGHT = 0;
 
-	public static String getRequestNetIds(ArrayList<String> data) {
+	public static String getRequestParams(ArrayList<String> data) {
 		if (data.size() == 1) {
 			return data.get(0);
 		}
