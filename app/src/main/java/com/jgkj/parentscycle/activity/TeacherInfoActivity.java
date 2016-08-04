@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.ModifyClassDialogLvAdapter;
+import com.jgkj.parentscycle.adapter.ModifyPermissionDialogLvAdapter;
 import com.jgkj.parentscycle.adapter.TeacherInfoAdapter;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
 import com.jgkj.parentscycle.utils.ToastUtil;
@@ -49,6 +50,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     TeacherInfoAdapter teacherInfoAdapter;
     Dialog mLeaveSchoolDialog;
     Dialog mModifyClassDialog;
+    Dialog mModifyPermissionDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,8 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
                 } else if (position == 11) {
                     //班级管理
                     showModifyClassDialog();
+                } else if (position == 1) {
+                    showModifyPermissionDialog();
                 }
             }
         });
@@ -114,6 +118,8 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
                 mLeaveSchoolDialog.dismiss();
             } else if (v.getId() == R.id.modify_class_dialog_confirm_btn) {
                 mModifyClassDialog.dismiss();
+            } else if (v.getId() == R.id.modify_permission_dialog_cancel_btn) {
+                mModifyPermissionDialog.dismiss();
             }
         }
     };
@@ -164,6 +170,39 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         params.gravity = Gravity.BOTTOM;
         params.width = UtilTools.SCREEN_WIDTH;
         mModifyClassDialog.getWindow().setAttributes(params);
+    }
+
+    private void showModifyPermissionDialog() {
+        mModifyPermissionDialog = new Dialog(this, R.style.DialogTheme);
+        mModifyPermissionDialog.getWindow().setWindowAnimations(R.style.dialogWindowAnim);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.modify_permission_dialog, null);
+        Button cancel = (Button) contentView.findViewById(R.id.modify_permission_dialog_cancel_btn);
+        ListView classLv = (ListView) contentView.findViewById(R.id.modify_permission_dialog_lv);
+        cancel.setOnClickListener(changePhotoListener);
+
+        ArrayList <String> data = new ArrayList<String>();
+        data.add("权限更改");
+        data.add("管理员");
+        data.add("普通老师");
+        data.add("网站管理员");
+        data.add("保育员老师");
+
+        final ModifyPermissionDialogLvAdapter mcda = new ModifyPermissionDialogLvAdapter(this,data);
+        classLv.setAdapter(mcda);
+        classLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            }
+        });
+
+        mModifyPermissionDialog.setContentView(contentView);
+        mModifyPermissionDialog.setCanceledOnTouchOutside(true);
+        mModifyPermissionDialog.show();
+
+        WindowManager.LayoutParams params = mModifyPermissionDialog.getWindow().getAttributes();
+        params.gravity = Gravity.BOTTOM;
+        params.width = UtilTools.SCREEN_WIDTH;
+        mModifyPermissionDialog.getWindow().setAttributes(params);
     }
 
     private ArrayList<MakeClassAddPersonInfo> getTestData() {
