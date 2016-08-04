@@ -191,7 +191,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
 
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv,R.id.shool_info_activity_make_class_rel,R.id.shool_info_activity_teacher_mangement_rel})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.shool_info_activity_make_class_rel,R.id.shool_info_activity_teacher_mangement_rel,R.id.shool_info_activity_class_mangement_rel})
     @Override
     public void onClick(View v) {
         if (v == backIv) {
@@ -200,6 +200,8 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
             startActivity(new Intent(SchoolInfoActivity.this,MakeClassActivity.class));
         } else if (v == teacherManagementRel) {
             startActivity(new Intent(this,TeacherInfoActivity.class));
+        } else if (v == classMangementRel) {
+            startActivity(new Intent(this,MangementClassActivity.class));
         }
     }
 }
