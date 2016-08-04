@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="更改班级"
+        android:textColor="@color/text_gray" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg_gray">
+
+    </View>
+
+    <ListView
+        android:id="@+id/modify_class_dialog_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#00000000"
+        android:dividerHeight="1dp"
+        android:divider="@color/bg_gray"
+        >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/modify_class_dialog_confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/main_blue_color"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="确定"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>
