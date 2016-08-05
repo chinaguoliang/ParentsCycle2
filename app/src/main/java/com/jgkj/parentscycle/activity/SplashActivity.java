@@ -13,6 +13,7 @@ import android.view.WindowManager;
  * Created by chen on 16/7/6.
  */
 public class SplashActivity extends Activity{
+    //首页
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
