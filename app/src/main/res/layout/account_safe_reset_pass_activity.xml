@@ -13,6 +13,7 @@
 
 
     <EditText
+        android:id="@+id/account_safe_reset_pass_activity_current_pass_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -30,6 +31,7 @@
         android:background="@color/bg_gray"></View>
 
     <EditText
+        android:id="@+id/account_safe_reset_pass_activity_new_pass_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -46,6 +48,7 @@
         android:background="@color/bg_gray"></View>
 
     <EditText
+        android:id="@+id/account_safe_reset_pass_activity_second_new_pass_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"

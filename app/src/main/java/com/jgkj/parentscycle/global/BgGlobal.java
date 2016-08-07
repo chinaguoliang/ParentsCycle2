@@ -23,4 +23,6 @@ public class BgGlobal {
     public static final String SEARCH_CLASS_LIST_BY_SCHOOL_ID = "classinfo/getClassList";
     public static final String ANNOUNCEMENT_LIST = "announcement/announcementList"; //公告列表
     public static final String ANNOUNCEMENT_COMMENT_SAVE = "announcementComment/save"; //公告评论保存
+    public static final String MODIFY_PASS_BY_OLD_PASS = "jgkj/jgeditOldPass";  //根据旧密码修改新密码
+    public static final String MODIFY_PHONE_BY_OLD_PHONE = "jgkj/jgeditOldPhone";//根据旧手机号修改手机号
 }
