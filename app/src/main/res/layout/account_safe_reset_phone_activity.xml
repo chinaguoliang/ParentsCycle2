@@ -17,6 +17,7 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/account_safe_reset_phone_activity_phone_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -39,6 +40,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/account_safe_reset_phone_activity_verify_num_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
