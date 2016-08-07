@@ -115,7 +115,7 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
         requestData.put("classname", classNameStr);
         requestData.put("classadviser", classMasterStr);
         ArrayList<String> ids = new ArrayList<String>();
-        requestData.put("teacherids", teacherIdsDataStr);
+        requestData.put("teacherid", teacherIdsDataStr);
         MakeClassPaser lp = new MakeClassPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.CREATE_CLASS, requestData, lp);
     }

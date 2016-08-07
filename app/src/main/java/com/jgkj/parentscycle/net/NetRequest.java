@@ -82,10 +82,10 @@ public class NetRequest {
 
 		if (requestParams.containsKey(NET_RETRY_TIMES_KEY)) {
 			int retryTime = Integer.parseInt(requestParams.get(NET_RETRY_TIMES_KEY).toString());
-			request.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, retryTime, 1.0f));
+			request.setRetryPolicy(new DefaultRetryPolicy(60 * 1000, retryTime, 1.0f));
 		} else {
 			// 设定超时后不重试
-			request.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 0, 1.0f));
+			request.setRetryPolicy(new DefaultRetryPolicy(60 * 1000, 0, 1.0f));
 		}
 		mQueue.add(request);
 	}

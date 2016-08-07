@@ -129,6 +129,7 @@ public class AccountSafeResetPhoneActivity extends BaseActivity implements View.
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("phone",phoneStr);
         requestData.put("oldphone", UserInfo.loginInfo.getPhone());
+        requestData.put("role","1"); //暂时定为1
         AccountSafeModifyPhonePaser lp = new AccountSafeModifyPhonePaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.MODIFY_PHONE_BY_OLD_PHONE, requestData, lp);
