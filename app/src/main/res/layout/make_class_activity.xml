@@ -25,6 +25,7 @@
             android:textColor="@color/black" />
 
         <EditText
+            android:id="@+id/make_class_activity_class_name_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -37,7 +38,8 @@
             android:gravity="right"
             android:textSize="@dimen/normal_text_size"
             android:minWidth="200dp"
-            android:textColor="@color/text_gray" />
+            android:textColorHint="@color/text_gray"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
     <View
@@ -58,16 +60,23 @@
             android:text="添加班主任"
             android:textColor="@color/black" />
 
-        <TextView
+        <EditText
+            android:id="@+id/make_class_activity_class_master_name_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:drawablePadding="5dp"
-            android:drawableRight="@mipmap/right_arrow"
             android:paddingBottom="10dp"
+            android:background="@null"
             android:paddingTop="10dp"
-            android:textColor="@color/text_gray" />
+            android:hint="请输入班主任名字"
+            android:gravity="right"
+            android:textSize="@dimen/normal_text_size"
+            android:minWidth="200dp"
+            android:textColorHint="@color/text_gray"
+            android:textColor="@color/black"
+            />
     </RelativeLayout>
 
     <View

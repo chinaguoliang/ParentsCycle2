@@ -82,21 +82,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         rightTv.setVisibility(View.GONE);
     }
 
-    //建立班级
-    private void requestCreateClass() {
-        HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("schoolid", "1"); //暂时传1
-        requestData.put("classname", "大二班");
-        requestData.put("classadviser", "老韩");
-        ArrayList <String> ids = new ArrayList<String>();
-        ids.add("1");
-        ids.add("2");
-        ids.add("3");
-        ids.add("4");
-        requestData.put("teacherids", UtilTools.getRequestParams(ids));
-        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.CREATE_CLASS, requestData, lp);
-    }
+
 
 
 
