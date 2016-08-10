@@ -27,9 +27,9 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/7/9.
  */
-public class HallCircleMenuFragement extends Fragment implements View.OnClickListener{
+public class HallPublishMenuFragment extends Fragment implements View.OnClickListener{
     RelativeLayout mCircleMenu;
-    private  final String TAG = "HallCircleMenuFragement";
+    private  final String TAG = "HallPublishMenuFragment";
     private View babyDocument;
     private View babyShowView;
     private View courseView;

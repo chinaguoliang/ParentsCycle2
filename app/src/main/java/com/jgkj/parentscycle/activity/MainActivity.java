@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
-import com.jgkj.parentscycle.fragement.HallCircleMenuFragement;
+import com.jgkj.parentscycle.fragement.HallPublishMenuFragment;
 import com.jgkj.parentscycle.fragement.HallDynamicFragement;
 import com.jgkj.parentscycle.fragement.HallFindFragement;
 import com.jgkj.parentscycle.fragement.HallMainChannelFragement;
@@ -62,10 +62,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.main_activity_bottom_bar_publish_iv)
     ImageView mBtmPublishIv;
 
+    @Bind(R.id.main_activity_publish_menu_layout)
+    View publicMenuView;
 
 
-
-    private  HallCircleMenuFragement mHallCircleMenuFragement;
     private  HallDynamicFragement mHallDynamicFragement;
     private  HallFindFragement mHallFindFragement;
     private  HallMainChannelFragement mHallMainChannelFragement;
@@ -90,7 +90,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initFragment() {
-        mHallCircleMenuFragement = new HallCircleMenuFragement();
         mHallDynamicFragement = new HallDynamicFragement();
         mHallFindFragement = new HallFindFragement();
         mHallMainChannelFragement = new HallMainChannelFragement();
@@ -111,10 +110,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 .beginTransaction();
         resetViews(transaction);
         if (v == mBtmMainChannelLl) {
+            publicMenuView.setVisibility(View.GONE);
             mBtmMainChannelIv.setImageResource(R.mipmap.main_activity_home_channel_no_selected);
             transaction.show(mHallMainChannelFragement).commitAllowingStateLoss();
             mBtmMainChannelTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         } else if (v == mBtmDynamicLl) {
+            publicMenuView.setVisibility(View.GONE);
             mBtmDynamicIv.setImageResource(R.mipmap.main_activity_btm_dynamic_selected);
             if (mHallDynamicFragement.isAdded()) {
                 transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
@@ -124,6 +125,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
             mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmFindLl) {
+            publicMenuView.setVisibility(View.GONE);
             mBtmFindIv.setImageResource(R.mipmap.main_activity_find_selected);
             if (mHallFindFragement.isAdded()) {
                 transaction.show(mHallFindFragement).commitAllowingStateLoss();
@@ -133,6 +135,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
             mBtmFindTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmMineLl) {
+            publicMenuView.setVisibility(View.GONE);
             mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_selected);
             if (mHallMeFragement.isAdded()) {
                 transaction.show(mHallMeFragement).commitAllowingStateLoss();
@@ -142,21 +145,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
             mBtmMineTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmPublishIv) {
-            mBtmPublishIv.setImageResource(R.mipmap.main_activity_publish_selected);
-            if (mHallCircleMenuFragement.isAdded()) {
-                transaction.show(mHallCircleMenuFragement).commitAllowingStateLoss();
+            if (publicMenuView.getVisibility() == View.VISIBLE) {
+                publicMenuView.setVisibility(View.GONE);
             } else {
-                transaction.add(R.id.main_activity_content_fl, mHallCircleMenuFragement);
-                transaction.show(mHallCircleMenuFragement).commitAllowingStateLoss();
+                publicMenuView.setVisibility(View.VISIBLE);
             }
+
         }
     }
 
     private void resetViews(FragmentTransaction transaction) {
 
-        if (mHallCircleMenuFragement.isAdded()) {
-            transaction.hide(mHallCircleMenuFragement);
-        }
 
         if (mHallDynamicFragement.isAdded()) {
             transaction.hide(mHallDynamicFragement);

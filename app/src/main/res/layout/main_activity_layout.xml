@@ -5,25 +5,40 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-
-        <FrameLayout
-            android:id="@+id/main_activity_content_fl"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp">
+            android:layout_height="match_parent">
 
 
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/main_activity_content_fl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp">
 
-        <include
-            android:id="@+id/main_activity_btm_bar_layout"
-            layout="@layout/main_activity_bottom_bar"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_alignParentBottom="true" />
-    </RelativeLayout>
+
+            </FrameLayout>
+
+            <include
+                android:id="@+id/main_activity_publish_menu_layout"
+                layout="@layout/main_channel_select_menu_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="55dp"
+                >
+
+            </include>
+
+            <include
+                android:id="@+id/main_activity_btm_bar_layout"
+                layout="@layout/main_activity_bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
 </LinearLayout>
