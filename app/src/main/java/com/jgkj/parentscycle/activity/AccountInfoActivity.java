@@ -147,7 +147,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
             data.add("性别_ ");
             data.add("民族_ ");
             data.add("出生日期_ ");
-            data.add("手机号_ ");
+            data.add("手机号_ " + tii.getPhone() );
             data.add("账户安全_ ");
             data.add("捆绑微信_ ");
             data.add("捆绑QQ_ ");

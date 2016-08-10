@@ -59,7 +59,7 @@ public class AccountInfoAdapter extends BaseAdapter {
         String contentStr = contentData.get(position);
         String names[] = contentStr.split("_");
         holder.contentDescTv.setText(names[0]);
-        if (TextUtils.equals(names[1], "0")) {
+        if (names.length == 1 || TextUtils.equals(names[1], "0")) {
             holder.rightArrowIv.setVisibility(View.VISIBLE);
             holder.conentNameTv.setVisibility(View.GONE);
         } else {
