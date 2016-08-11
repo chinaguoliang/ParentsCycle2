@@ -35,7 +35,6 @@ public class ImageHandler extends Handler{
     private WeakReference<MainActivity> weakReference;
     private int currentItem = 0;  
 
-
     public ImageHandler(WeakReference<MainActivity> wk){
         weakReference = wk;  
     }  
