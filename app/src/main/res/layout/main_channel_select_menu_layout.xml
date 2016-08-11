@@ -17,9 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/video_course"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="视频公开课"
             android:textColor="@color/black" />
 
         <TextView
@@ -27,9 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/safe_get_send"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="安全接送"
             android:textColor="@color/black" />
 
         <TextView
@@ -37,9 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/food_and_drink"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="饮食"
             android:textColor="@color/black" />
 
         <TextView
@@ -47,9 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/course_list"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="课程表"
             android:textColor="@color/black" />
     </LinearLayout>
 
@@ -65,9 +65,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/parents_cycle"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="父母圈"
             android:textColor="@color/black" />
 
         <TextView
@@ -75,9 +75,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/baby_doc"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="宝宝档案"
             android:textColor="@color/black" />
 
         <TextView
@@ -85,9 +85,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/online_course"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="在线课堂"
             android:textColor="@color/black" />
 
         <TextView
@@ -95,9 +95,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@mipmap/listen_place"
             android:gravity="center_horizontal"
-            android:text="发现"
+            android:text="听吧"
             android:textColor="@color/black" />
     </LinearLayout>
 

@@ -8,19 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.MainActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
-import com.jgkj.parentscycle.bean.HallMainChannelLvInfo;
 import com.jgkj.parentscycle.utils.ImageHandler;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Handler;
+
 import android.os.Message;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,9 +59,9 @@ public class HallMainChannelFragement  extends Fragment {
     }
 
     private void resetCircle() {
-        circleIv1.setImageResource(R.drawable.gray_circle);
-        circleIv2.setImageResource(R.drawable.gray_circle);
-        circleIv3.setImageResource(R.drawable.gray_circle);
+        circleIv1.setImageResource(R.drawable.white_circle);
+        circleIv2.setImageResource(R.drawable.white_circle);
+        circleIv3.setImageResource(R.drawable.white_circle);
     }
 
     private void initViews() {
@@ -95,11 +91,11 @@ public class HallMainChannelFragement  extends Fragment {
                 handler.sendMessage(Message.obtain(handler, ImageHandler.MSG_PAGE_CHANGED, arg0, 0));
                 resetCircle();
                 if (arg0 % 3 == 0) {
-                    circleIv1.setImageResource(R.drawable.white_circle);
+                    circleIv1.setImageResource(R.drawable.blue_circle);
                 } else if (arg0 % 3 == 1) {
-                    circleIv2.setImageResource(R.drawable.white_circle);
+                    circleIv2.setImageResource(R.drawable.blue_circle);
                 } else if (arg0 % 3 == 2) {
-                    circleIv3.setImageResource(R.drawable.white_circle);
+                    circleIv3.setImageResource(R.drawable.blue_circle);
                 }
             }
 

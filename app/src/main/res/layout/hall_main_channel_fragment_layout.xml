@@ -31,7 +31,7 @@
                 android:id="@+id/main_activity_circle_iv_1"
                 android:layout_width="5dp"
                 android:layout_height="5dp"
-                android:src="@drawable/white_circle" />
+                android:src="@drawable/blue_circle" />
 
             <View
                 android:layout_width="3dp"
@@ -41,7 +41,7 @@
                 android:id="@+id/main_activity_circle_iv_2"
                 android:layout_width="5dp"
                 android:layout_height="5dp"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/white_circle" />
 
             <View
                 android:layout_width="3dp"
@@ -51,7 +51,7 @@
                 android:id="@+id/main_activity_circle_iv_3"
                 android:layout_width="5dp"
                 android:layout_height="5dp"
-                android:src="@drawable/gray_circle" />
+                android:src="@drawable/white_circle" />
         </LinearLayout>
     </RelativeLayout>
 
