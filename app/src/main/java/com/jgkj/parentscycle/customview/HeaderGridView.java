@@ -105,7 +105,7 @@ public class HeaderGridView extends GridView {
      *
      * @param v            The view to add.
      * @param data         Data to associate with this view
-     * @param isSelectable whether the item is selectable
+     * @param isSelectable whether the main_viewpager_item_layout is selectable
      */
     public void addHeaderView(View v, Object data, boolean isSelectable) {
         ListAdapter adapter = getAdapter();
@@ -372,7 +372,7 @@ public class HeaderGridView extends GridView {
                     if (convertView == null) {
                         convertView = new View(parent.getContext());
                     }
-                    // We need to do this because GridView uses the height of the last item
+                    // We need to do this because GridView uses the height of the last main_viewpager_item_layout
                     // in a row to determine the height for the entire row.
                     convertView.setVisibility(View.INVISIBLE);
                     convertView.setMinimumHeight(headerViewContainer.getHeight());

@@ -142,7 +142,7 @@ public class MangementClassExpanLvAdapter extends BaseExpandableListAdapter {
         return true;
     }
     /**
-     * show the text on the child and group item
+     * show the text on the child and group main_viewpager_item_layout
      */
     private class GroupHolder
     {

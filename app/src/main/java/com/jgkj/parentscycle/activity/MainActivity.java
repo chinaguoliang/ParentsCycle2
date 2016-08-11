@@ -14,6 +14,9 @@ import com.jgkj.parentscycle.fragement.HallDynamicFragement;
 import com.jgkj.parentscycle.fragement.HallFindFragement;
 import com.jgkj.parentscycle.fragement.HallMainChannelFragement;
 import com.jgkj.parentscycle.fragement.HallMeFragement;
+import com.jgkj.parentscycle.utils.ImageHandler;
+
+import java.lang.ref.WeakReference;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -65,12 +68,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.main_activity_publish_menu_layout)
     View publicMenuView;
 
-
+    public ImageHandler handler = new ImageHandler(new WeakReference<MainActivity>(this));
     private  HallDynamicFragement mHallDynamicFragement;
     private  HallFindFragement mHallFindFragement;
     private  HallMainChannelFragement mHallMainChannelFragement;
     private  HallMeFragement mHallMeFragement;
     private  FragmentManager mFragmentManager;
+
 
 
     @Override
@@ -79,6 +83,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.main_activity_layout);
         ButterKnife.bind(this);
         initFragment();
+    }
+
+    public void setViewPagerCurrentItem(int position) {
+        if (mHallMainChannelFragement != null) {
+            mHallMainChannelFragement.setViewPagerCurrentItem(position);
+        }
     }
 
     @Override
