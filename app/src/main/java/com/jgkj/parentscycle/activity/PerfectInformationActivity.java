@@ -247,35 +247,45 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
     public void requestSave() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
-        requestData.put("tmpinfoid", UserInfo.loginInfo.getId());
-        requestData.put("babyname",data.get(6));
-        requestData.put("familyrole",data.get(5));
-        requestData.put("babyage",data.get(8));
-        requestData.put("nickname",data.get(1));
-        requestData.put("babysex",data.get(7));
-        requestData.put("sex",data.get(4));
-        requestData.put("familyrole","2");
-        requestData.put("babyname","2");
-        requestData.put("babysex","2");
-        requestData.put("region",data.get(3));
-        requestData.put("fmbg","http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg");
-        requestData.put("account",data.get(2));
-        requestData.put("sex","1");
+        requestData.put("analysis","1");
+        requestData.put("birthdate","1987-11-11");
+        requestData.put("classid","1,2,3");
         if (TextUtils.isEmpty(uploadImgKeyStr)) {
             requestData.put("headportrait","");
         } else {
             requestData.put("headportrait",BgGlobal.IMG_SERVER_PRE_URL + uploadImgKeyStr);
         }
+        requestData.put("kbwx","1"); //1: 是  0：否
+        requestData.put("kbqq","1");
+        requestData.put("nationality","1");
+        requestData.put("nickname",data.get(1));
+        requestData.put("onthejob","1"); // 1:在职  0： 离职
+        requestData.put("permissions","1");
+        requestData.put("phone",UserInfo.loginInfo.getPhone());
+        requestData.put("schoolname","橙子班");
+        requestData.put("teacherid","1");
+        requestData.put("teachername","哈哈");
+        requestData.put("teachersex","0");
+        requestData.put("tmpinfoid", UserInfo.loginInfo.getId());
 
-        requestData.put("teachername","2");
-        requestData.put("teachersex","4");
-        requestData.put("nationality","3");
-        requestData.put("birthdate","3");
+
+//        requestData.put("schoolid","1");
+//        requestData.put("babyname",data.get(6));
+//        requestData.put("familyrole",data.get(5));
+//        requestData.put("babyage",data.get(8));
+//
+//        requestData.put("babysex",data.get(7));
+//        requestData.put("sex",data.get(4));
+//        requestData.put("region",data.get(3));
+//        requestData.put("account",data.get(2));
+//        requestData.put("sex","1");
+
+
+
         requestData.put("phone","15810697038");
-        requestData.put("kbwx","3");
-        requestData.put("kbqq","5");
-        requestData.put("classid","5");
-        requestData.put("onthejob","6");
+
+
+
         PerfectInfoPaser lp = new PerfectInfoPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
     }
