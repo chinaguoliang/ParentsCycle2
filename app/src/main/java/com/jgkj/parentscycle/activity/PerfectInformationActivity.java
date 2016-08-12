@@ -3,10 +3,12 @@ package com.jgkj.parentscycle.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,20 +23,41 @@ import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.PerfectInformationAdapter;
+import com.jgkj.parentscycle.bean.GetSevenCowTokenInfo;
 import com.jgkj.parentscycle.bean.PerfectInfoInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.GetSevenCowTokenPaser;
 import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
 import com.jgkj.parentscycle.json.PerfectInfoPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.LogUtil;
+import com.jgkj.parentscycle.utils.QiNiuUploadImgManager;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
+import com.qiniu.android.common.Zone;
+import com.qiniu.android.http.ResponseInfo;
+import com.qiniu.android.storage.Configuration;
+import com.qiniu.android.storage.KeyGenerator;
+import com.qiniu.android.storage.Recorder;
+import com.qiniu.android.storage.UpCancellationSignal;
+import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
+import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
+import com.qiniu.android.storage.persistent.FileRecorder;
+import com.qiniu.android.utils.UrlSafeBase64;
+
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,12 +71,10 @@ import butterknife.OnClick;
  * Created by chen on 16/7/24.
  */
 public class PerfectInformationActivity extends BaseActivity implements View.OnClickListener,NetListener{
+    private static final String TAG = "PerfectInformationActivity";
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 20;
     public static final int REQUEST_CODE_PICK_IMAGE = 21;
     public static final int PHOTORESOULT = 22;
-    public static final int UPLOAD_AVATAR_ERROR = 1;
-    public static final int UPLOAD_AVATAR_SUCCESS = 0;
-    public static final int DOWNLOAD_AVATAR_SUCCESS = 3;
 
     @Bind(R.id.perfect_information_activity_lv)
     ListView mListView;
@@ -77,9 +98,80 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
     String avatarTempPath;
 
     Bitmap mPhoto;
-    Bitmap mModifyedIcon;
+    //Bitmap mModifyedIcon;
     Bitmap circleBitmap;
     PerfectInformationAdapter mPerfectInformationAdapter;
+    UploadManager uploadManager;
+    private volatile boolean isCancelled = false;
+
+    public PerfectInformationActivity() {
+        //断点上传
+        String dirPath = "/storage/emulated/0/Download";
+        Recorder recorder = null;
+        try{
+            File f = File.createTempFile("qiniu_xxxx", ".tmp");
+            Log.d("qiniu", f.getAbsolutePath().toString());
+            dirPath = f.getParent();
+            recorder = new FileRecorder(dirPath);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        final String dirPath1 = dirPath;
+        //默认使用 key 的url_safe_base64编码字符串作为断点记录文件的文件名。
+        //避免记录文件冲突（特别是key指定为null时），也可自定义文件名(下方为默认实现)：
+        KeyGenerator keyGen = new KeyGenerator(){
+            public String gen(String key, File file){
+                // 不必使用url_safe_base64转换，uploadManager内部会处理
+                // 该返回值可替换为基于key、文件内容、上下文的其它信息生成的文件名
+                String path = key + "_._" + new StringBuffer(file.getAbsolutePath()).reverse();
+                Log.d("qiniu", path);
+                File f = new File(dirPath1, UrlSafeBase64.encodeToString(path));
+                BufferedReader reader = null;
+                try {
+                    reader = new BufferedReader(new FileReader(f));
+                    String tempString = null;
+                    int line = 1;
+                    try {
+                        while ((tempString = reader.readLine()) != null) {
+//							System.out.println("line " + line + ": " + tempString);
+                            Log.d("qiniu", "line " + line + ": " + tempString);
+                            line++;
+                        }
+
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } finally {
+                        try{
+                            reader.close();
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                return path;
+            }
+        };
+
+        Configuration config = new Configuration.Builder()
+                // recorder 分片上传时，已上传片记录器
+                // keyGen 分片上传时，生成标识符，用于片记录器区分是那个文件的上传记录
+                .recorder(recorder, keyGen)
+                .zone(Zone.zone1)
+                .build();
+
+        // 实例化一个上传的实例
+        uploadManager = new UploadManager(config);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,8 +223,10 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         public void onClick(View v) {
             Button btn = (Button) v;
             if (btn.getId() == R.id.change_photo_camera_btn) {
+                QiNiuUploadImgManager.verifyStoragePermissions(PerfectInformationActivity.this);
                 getImageFromCamera();
             } else if (btn.getId() == R.id.change_photo_album_btn) {
+                QiNiuUploadImgManager.verifyStoragePermissions(PerfectInformationActivity.this);
                 getImageFromAlbum();
             } else if (btn.getId() == R.id.change_photo_cancel_btn) {
                 mChangePhotoDialog.dismiss();
@@ -180,6 +274,13 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         requestData.put("onthejob","6");
         PerfectInfoPaser lp = new PerfectInfoPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
+    }
+
+    private void requestGetSevenCowToken() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("bucketname", "testjg");
+        GetSevenCowTokenPaser lp = new GetSevenCowTokenPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.GET_SEVEN_COW_TOKEN, requestData, lp);
     }
 
     protected void getImageFromAlbum() {
@@ -279,39 +380,40 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
             Bundle extras = data.getExtras();
 //			data.get
             if (extras != null) {
-                Bitmap bitmap = extras.getParcelable("data");
-                File newfile = new File(avatarTempPath);
-                String path = newfile.getPath();
-                int degree = UtilTools.readPictureDegree(path);
-                mModifyedIcon = UtilTools.rotaingImageView(degree, bitmap);
-
-//				if (photo != null) {
-//					headIv.setImageBitmap(photo);
-//				}
-
-                File file = null;
-                try {
-                    file = new File(avatarTempPath);// 创建文件
-                    if (!file.exists()) {
-                        file.createNewFile();
-                    }
-
-                    BufferedOutputStream bos = new BufferedOutputStream(
-                            new FileOutputStream(file));
-                    mModifyedIcon.compress(Bitmap.CompressFormat.JPEG, 60, bos);
-
-                    bos.flush();
-                    bos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if (file != null) {
-//                    uploadAvatar(file);
-                }
+//                Bitmap bitmap = extras.getParcelable("data");
+//                File newfile = new File(avatarTempPath);
+//                String path = newfile.getPath();
+//                int degree = UtilTools.readPictureDegree(path);
+//                mModifyedIcon = UtilTools.rotaingImageView(degree, bitmap);
+//
+////				if (photo != null) {
+////					headIv.setImageBitmap(photo);
+////				}
+//
+//                File file = null;
+//                try {
+//                    file = new File(avatarTempPath);// 创建文件
+//                    if (!file.exists()) {
+//                        file.createNewFile();
+//                    }
+//
+//                    BufferedOutputStream bos = new BufferedOutputStream(
+//                            new FileOutputStream(file));
+//                    mModifyedIcon.compress(Bitmap.CompressFormat.JPEG, 60, bos);
+//
+//                    bos.flush();
+//                    bos.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                if (file != null) {
+////                    uploadAvatar(file);
+//                }
                 hideSelectDialog();
 //                addAImgToActivity(mModifyedIcon);
-                mPerfectInformationAdapter.setUserIcon(mModifyedIcon);
+
+                requestGetSevenCowToken();
                 mPerfectInformationAdapter.notifyDataSetChanged();
             }
         }
@@ -329,8 +431,69 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         NetBeanSuper nbs = (NetBeanSuper)obj;
         hideProgressDialog();
         if (nbs.obj instanceof PerfectInfoInfo) {
-            ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
+            ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
+        } else if (nbs.obj instanceof GetSevenCowTokenInfo) {
+            GetSevenCowTokenInfo gct = (GetSevenCowTokenInfo)nbs.obj;
+            if (nbs.isSuccess()) {
+                LogUtil.d(TAG,"success get token:" + gct.getToken());
+                uploadImg(avatarTempPath, gct.getToken());
+            } else {
+                ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
+            }
+
         }
 
+    }
+
+    private void uploadImg(String picturePath,String token) {
+        boolean hadShow = showProgressDialog();
+        if (!hadShow) {
+            return;
+        }
+
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("phone", UserInfo.loginInfo.getPhone());
+        Log.d("qiniu", "click upload");
+        isCancelled = false;
+        uploadManager.put(picturePath, null, token,
+                new UpCompletionHandler() {
+                    public void complete(String key,
+                                         ResponseInfo info, JSONObject res) {
+                        LogUtil.i("qiniu", key + ",\r\n " + info
+                                + ",\r\n " + res);
+
+                        if(info.isOK()==true){
+                            //textview.setText(res.toString());
+                            mPerfectInformationAdapter.setUserIcon(BitmapFactory.decodeFile(avatarTempPath));
+                            mPerfectInformationAdapter.notifyDataSetChanged();
+                            LogUtil.d(TAG, "upload success");
+
+                            String keyStr = "";
+                            try {
+                                keyStr = res.getString("key");
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        hideProgressDialog();
+                    }
+                }, new UploadOptions(map, null, false,
+                        new UpProgressHandler() {
+                            public void progress(String key, double percent) {
+                                int progress = (int)(percent * 1000);
+                                if(progress==1000){
+//                                    progressbar.setVisibility(View.GONE);
+                                }
+                                LogUtil.d(TAG,"the progress:" + progress);
+                            }
+
+                        }, new UpCancellationSignal(){
+                    @Override
+                    public boolean isCancelled() {
+
+                        return isCancelled;
+                    }
+                }));
     }
 }

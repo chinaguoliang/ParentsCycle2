@@ -4,8 +4,12 @@ package com.jgkj.parentscycle.global;
  * Created by chen on 16/7/5.
  */
 public class BgGlobal {
-    public static final String BASE_URL = "http://123.206.43.102:8080/support/";
+    public static final String IMG_SERVER_PRE_URL = "http://oalp3wrah.bkt.clouddn.com/";  //七牛服务器地址
+    public static final String BASE_URL = "http://123.206.43.102:8080/support/";  //  自己的服务器地址
     //public static final String BASE_URL = "http://www.mumuq.net:8080/support/";
+
+
+
     public static final String DEVICE_PARAMS = "";
     public static final String REGISTER_URL = "jgkj/regtuser";
     public static final String VERIFY_PHONE_NUMBER_URL = "jgkj/getCode";
@@ -25,4 +29,5 @@ public class BgGlobal {
     public static final String ANNOUNCEMENT_COMMENT_SAVE = "announcementComment/save"; //公告评论保存
     public static final String MODIFY_PASS_BY_OLD_PASS = "jgkj/jgeditOldPass";  //根据旧密码修改新密码
     public static final String MODIFY_PHONE_BY_OLD_PHONE = "jgkj/jgeditOldPhone";//根据旧手机号修改手机号
+    public static final String GET_SEVEN_COW_TOKEN = "jgkj/getQiniuToken"; //获得七牛上传token
 }
