@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -97,12 +98,10 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
     private Dialog mChangePhotoDialog;
     String avatarTempPath;
 
-    Bitmap mPhoto;
-    //Bitmap mModifyedIcon;
-    Bitmap circleBitmap;
     PerfectInformationAdapter mPerfectInformationAdapter;
     UploadManager uploadManager;
     private volatile boolean isCancelled = false;
+    private String uploadImgKeyStr;
 
     public PerfectInformationActivity() {
         //断点上传
@@ -262,7 +261,12 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         requestData.put("fmbg","http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg");
         requestData.put("account",data.get(2));
         requestData.put("sex","1");
-        requestData.put("headportrait","http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg");
+        if (TextUtils.isEmpty(uploadImgKeyStr)) {
+            requestData.put("headportrait","");
+        } else {
+            requestData.put("headportrait",BgGlobal.IMG_SERVER_PRE_URL + uploadImgKeyStr);
+        }
+
         requestData.put("teachername","2");
         requestData.put("teachersex","4");
         requestData.put("nationality","3");
@@ -378,41 +382,8 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
                 return;
             }
             Bundle extras = data.getExtras();
-//			data.get
             if (extras != null) {
-//                Bitmap bitmap = extras.getParcelable("data");
-//                File newfile = new File(avatarTempPath);
-//                String path = newfile.getPath();
-//                int degree = UtilTools.readPictureDegree(path);
-//                mModifyedIcon = UtilTools.rotaingImageView(degree, bitmap);
-//
-////				if (photo != null) {
-////					headIv.setImageBitmap(photo);
-////				}
-//
-//                File file = null;
-//                try {
-//                    file = new File(avatarTempPath);// 创建文件
-//                    if (!file.exists()) {
-//                        file.createNewFile();
-//                    }
-//
-//                    BufferedOutputStream bos = new BufferedOutputStream(
-//                            new FileOutputStream(file));
-//                    mModifyedIcon.compress(Bitmap.CompressFormat.JPEG, 60, bos);
-//
-//                    bos.flush();
-//                    bos.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                if (file != null) {
-////                    uploadAvatar(file);
-//                }
                 hideSelectDialog();
-//                addAImgToActivity(mModifyedIcon);
-
                 requestGetSevenCowToken();
                 mPerfectInformationAdapter.notifyDataSetChanged();
             }
@@ -467,14 +438,18 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
                             //textview.setText(res.toString());
                             mPerfectInformationAdapter.setUserIcon(BitmapFactory.decodeFile(avatarTempPath));
                             mPerfectInformationAdapter.notifyDataSetChanged();
-                            LogUtil.d(TAG, "upload success");
+
 
                             String keyStr = "";
                             try {
                                 keyStr = res.getString("key");
+                                uploadImgKeyStr = keyStr;
+                                LogUtil.d(TAG, "upload success  key:" + keyStr);
                             }catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        } else {
+                            uploadImgKeyStr = "";
                         }
                         hideProgressDialog();
                     }
