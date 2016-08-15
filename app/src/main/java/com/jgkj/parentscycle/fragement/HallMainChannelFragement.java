@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.fragement;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.MainActivity;
+import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
 import com.jgkj.parentscycle.utils.ImageHandler;
 
@@ -20,11 +22,12 @@ import java.util.ArrayList;
 import android.os.Message;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by chen on 16/7/9.
  */
-public class HallMainChannelFragement  extends Fragment {
+public class HallMainChannelFragement  extends Fragment implements View.OnClickListener{
 
     @Bind(R.id.baby_document_activity_title)
     TextView centerTitleTv;
@@ -65,7 +68,10 @@ public class HallMainChannelFragement  extends Fragment {
     }
 
     private void initViews() {
-        rightTitleTv.setVisibility(View.GONE);
+        rightTitleTv.setText("23842038490");
+        rightTitleTv.setPadding(0,20,0,20);
+        rightTitleTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
+
         backIv.setVisibility(View.GONE);
     }
 
@@ -147,5 +153,13 @@ public class HallMainChannelFragement  extends Fragment {
 
     public void setViewPagerCurrentItem(int position) {
         viewPager.setCurrentItem(position);
+    }
+
+    @OnClick({R.id.baby_document_right_title_tv})
+    @Override
+    public void onClick(View v) {
+        if (v == rightTitleTv) {
+            startActivity(new Intent(getContext(), TestNetActivity.class));
+        }
     }
 }

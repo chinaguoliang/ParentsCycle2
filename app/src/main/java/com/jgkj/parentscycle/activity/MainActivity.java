@@ -32,8 +32,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.main_activity_bottom_bar_main_channel_ll)
     LinearLayout mBtmMainChannelLl;
 
-
-
     @Bind(R.id.main_activity_bottom_bar_dynamic_tv)
     TextView mBtmDynamicTv;
 

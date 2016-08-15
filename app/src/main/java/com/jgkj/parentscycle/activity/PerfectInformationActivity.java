@@ -279,13 +279,6 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
 //        requestData.put("region",data.get(3));
 //        requestData.put("account",data.get(2));
 //        requestData.put("sex","1");
-
-
-
-        requestData.put("phone","15810697038");
-
-
-
         PerfectInfoPaser lp = new PerfectInfoPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
     }
