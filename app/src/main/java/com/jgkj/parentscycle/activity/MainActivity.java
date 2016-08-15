@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -63,8 +64,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.main_activity_bottom_bar_publish_iv)
     ImageView mBtmPublishIv;
 
-    @Bind(R.id.main_activity_publish_menu_layout)
-    View publicMenuView;
 
     public ImageHandler handler = new ImageHandler(new WeakReference<MainActivity>(this));
     private  HallDynamicFragement mHallDynamicFragement;
@@ -116,14 +115,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         FragmentTransaction transaction = mFragmentManager
                 .beginTransaction();
-        resetViews(transaction);
+
         if (v == mBtmMainChannelLl) {
-            publicMenuView.setVisibility(View.GONE);
+            resetViews(transaction);
             mBtmMainChannelIv.setImageResource(R.mipmap.main_activity_home_channel_no_selected);
             transaction.show(mHallMainChannelFragement).commitAllowingStateLoss();
             mBtmMainChannelTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         } else if (v == mBtmDynamicLl) {
-            publicMenuView.setVisibility(View.GONE);
+            resetViews(transaction);
             mBtmDynamicIv.setImageResource(R.mipmap.main_activity_btm_dynamic_selected);
             if (mHallDynamicFragement.isAdded()) {
                 transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
@@ -133,7 +132,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
             mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmFindLl) {
-            publicMenuView.setVisibility(View.GONE);
+            resetViews(transaction);
             mBtmFindIv.setImageResource(R.mipmap.main_activity_find_selected);
             if (mHallFindFragement.isAdded()) {
                 transaction.show(mHallFindFragement).commitAllowingStateLoss();
@@ -143,7 +142,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
             mBtmFindTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmMineLl) {
-            publicMenuView.setVisibility(View.GONE);
+            resetViews(transaction);
+
             mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_selected);
             if (mHallMeFragement.isAdded()) {
                 transaction.show(mHallMeFragement).commitAllowingStateLoss();
@@ -153,12 +153,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
             mBtmMineTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmPublishIv) {
-            if (publicMenuView.getVisibility() == View.VISIBLE) {
-                publicMenuView.setVisibility(View.GONE);
-            } else {
-                publicMenuView.setVisibility(View.VISIBLE);
-            }
-
+           startActivity(new Intent(this,CircleMenuActivity.class));
         }
     }
 

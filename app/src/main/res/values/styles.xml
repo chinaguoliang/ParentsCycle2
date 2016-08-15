@@ -40,4 +40,5 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowBackground">@null</item>
     </style>
+
 </resources>
