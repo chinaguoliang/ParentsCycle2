@@ -44,6 +44,7 @@ import butterknife.OnClick;
  * Created by chen on 16/7/18.
  */
 public class AccountInfoActivity extends BaseActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener,NetListener {
+
     private static final String TAG = "AccountInfoActivity";
     @Bind(R.id.account_info_activity_lv)
     ListView mContentLv;
@@ -129,6 +130,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
             showProgressDialog();
             HashMap<String, String> requestData = new HashMap<String, String>();
             requestData.put("tmpinfoid", UserInfo.loginInfo.getId());
+            requestData.put("schoolid", "1");  //暂时传1
             TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
             NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_LIST, requestData, lp);
         }

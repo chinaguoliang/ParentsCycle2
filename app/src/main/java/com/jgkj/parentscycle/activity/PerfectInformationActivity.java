@@ -267,7 +267,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         requestData.put("teachername","哈哈");
         requestData.put("teachersex","0");
         requestData.put("tmpinfoid", UserInfo.loginInfo.getId());
-
+        requestData.put("schoolid", "1");  //暂时传1
 
 //        requestData.put("schoolid","1");
 //        requestData.put("babyname",data.get(6));
@@ -405,6 +405,10 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         NetBeanSuper nbs = (NetBeanSuper)obj;
         hideProgressDialog();
         if (nbs.obj instanceof PerfectInfoInfo) {
+            if (nbs.isSuccess()) {
+                finish();
+            }
+
             ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
         } else if (nbs.obj instanceof GetSevenCowTokenInfo) {
             GetSevenCowTokenInfo gct = (GetSevenCowTokenInfo)nbs.obj;
