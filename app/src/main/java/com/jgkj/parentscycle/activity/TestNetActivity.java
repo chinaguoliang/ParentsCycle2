@@ -39,7 +39,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == testNetBtn) {
-            requestCheckAttendance();
+            requestBabyAskForLeave();
         }
     }
 
@@ -185,7 +185,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     }
 
 
-    // 宝宝列表
+    // 家长版-宝宝请假添加     (此接口教师也可以使用，看具体需求，如果是签到直接改变类型，内容可不传)
     public void requestBabyAskForLeave() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("babyid", "1");
@@ -208,7 +208,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         requestData.put("babyid","12312");
         SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = sdf.format(System.currentTimeMillis());
-        //requestData.put("starttime",date);
+        requestData.put("starttime","2015");
         ResetPasswordPaser lp = new ResetPasswordPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.ASK_FOR_LEAVE_MODIFY_FOR_TEACHER_VERSION, requestData, lp);
