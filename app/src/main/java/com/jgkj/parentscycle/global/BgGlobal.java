@@ -30,4 +30,16 @@ public class BgGlobal {
     public static final String MODIFY_PASS_BY_OLD_PASS = "jgkj/jgeditOldPass";  //根据旧密码修改新密码
     public static final String MODIFY_PHONE_BY_OLD_PHONE = "jgkj/jgeditOldPhone";//根据旧手机号修改手机号
     public static final String GET_SEVEN_COW_TOKEN = "jgkj/getQiniuToken"; //获得七牛上传token
+    public static final String PUBLIC_ARTICLE_DISTRIBUCTION = "commonZfLog/save";  //所有文章公共转发
+    public static final String SET_GOOD = "commonDzLog/save";//所有点赞公共接口
+    public static final String PUBLISH_COURSE = "coursetime/save";//coursetime/save
+    public static final String PUBLISH_FOOD_LIST = "food/save"; // 食谱发布
+    public static final String PARENTS_CYCLE_SEND_ARTICLE = "parentTopic/save"; //父母圈发帖
+    public static final String PERFECT_PARENTS_INFO = "jgkj/ParentinfoSave";//家长完善个人信息
+    public static final String PERFECT_BYBY_INFO = "babyinfo/save";//宝宝信息完善
+    public static final String PUBLISH_BABY_GROW_RECORD = "babyGrowthRecord/save"; //宝宝成长记录发布
+    public static final String BABY_LIST = "babyinfo/babyinfoList"; //宝宝列表
+    public static final String BABY_ASK_LEAVE_ADD = "babyAskforLeave/save"; //家长版-宝宝请假添加     (此接口教师也可以使用，看具体需求，如果是签到直接改变类型，内容可不传)
+    public static final String ASK_FOR_LEAVE_MODIFY_FOR_TEACHER_VERSION = "babyAskforLeave/update"; // 教师版请假修改
+    public static final String CHECK_ATTENDANCE = "babyAskforLeave/babyAskforLeaveList"; //考勤日历 颜色列表  根据类型显示 各种颜色
 }
