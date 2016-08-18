@@ -39,7 +39,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == testNetBtn) {
-            requestBabyAskForLeave();
+            requestAskForLeaveForTeacherVersion();
         }
     }
 
@@ -141,15 +141,19 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("age", "5");
         requestData.put("bgurl","1");
-        requestData.put("birthdate","1");
-        requestData.put("enrollmentdate","1");
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(System.currentTimeMillis());
+        requestData.put("birthdate",date);
+        SimpleDateFormat sdf1 =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date1 = sdf.format(System.currentTimeMillis());
+        requestData.put("bobyenrollmentdate",date1);
         requestData.put("iocurl","1");
         requestData.put("isshool","1");
 
         requestData.put("nickname","1");
-        requestData.put("ostmpid","1");
+        requestData.put("ostmpid","66");
         requestData.put("sex","1");
-        requestData.put("username","1");
+        requestData.put("username","liangliang");
 
         ResetPasswordPaser lp = new ResetPasswordPaser();
         NetRequest.getInstance().request(mQueue, this,
@@ -160,12 +164,15 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     // 宝宝成长记录发布
     public void requestPublishBabyGrowRecord() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("babyid", "1");
-        requestData.put("publisher","1");
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(System.currentTimeMillis());
+        requestData.put("babyid", "80");
+        requestData.put("publisher","123");
         requestData.put("publishername","1");
         requestData.put("publishertext","1");
-        requestData.put("publisherdate","1");
-        requestData.put("publisherimge","1.png");
+        requestData.put("bobypublisherdate",date);
+        requestData.put("publisherimge","321");
+
 
 
         ResetPasswordPaser lp = new ResetPasswordPaser();
@@ -189,7 +196,9 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     public void requestBabyAskForLeave() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("babyid", "1");
-        requestData.put("starttime","20160601");
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(System.currentTimeMillis());
+        requestData.put("techerstarttime",date);
         requestData.put("asktype","1");
         requestData.put("askday","10");
         requestData.put("asktext","345435");
@@ -202,13 +211,15 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     // 教师版请假修改
     public void requestAskForLeaveForTeacherVersion() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("askday", "22");
+        requestData.put("askday", "1");
         requestData.put("asktext","20160601");
         requestData.put("asktype","22");
         requestData.put("babyid","12312");
-        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        requestData.put("schoolid","555");
+        requestData.put("classid","999");
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(System.currentTimeMillis());
-        requestData.put("starttime","2015");
+        requestData.put("dateday",date);
         ResetPasswordPaser lp = new ResetPasswordPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.ASK_FOR_LEAVE_MODIFY_FOR_TEACHER_VERSION, requestData, lp);
