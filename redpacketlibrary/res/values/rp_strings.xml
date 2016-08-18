@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LuckyMoneyUI</string>
+    <string name="app_name">父母圈</string>
 
     <!--红包相关-->
     <string name="money_amount">金额</string>
