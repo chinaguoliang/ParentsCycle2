@@ -1,9 +1,11 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.hyphenate.chatuidemo.ui.*;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
@@ -39,7 +41,8 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == testNetBtn) {
-            requestBabyAskForLeave();
+            //requestBabyAskForLeave();
+            startActivity(new Intent(this, com.hyphenate.chatuidemo.ui.SplashActivity.class));
         }
     }
 
