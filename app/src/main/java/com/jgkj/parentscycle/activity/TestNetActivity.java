@@ -39,7 +39,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if (v == testNetBtn) {
-            requestAskForLeaveForTeacherVersion();
+            requestBabyAskForLeave();
         }
     }
 
@@ -196,7 +196,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     public void requestBabyAskForLeave() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("babyid", "1");
-        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = sdf.format(System.currentTimeMillis());
         requestData.put("techerstarttime",date);
         requestData.put("asktype","1");
