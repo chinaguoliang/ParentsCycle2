@@ -55,6 +55,7 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/circle_menu_activity_chat_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

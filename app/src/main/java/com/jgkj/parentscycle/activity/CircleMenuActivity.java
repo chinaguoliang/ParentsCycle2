@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,6 +34,9 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTv;
 
+    @Bind(R.id.circle_menu_activity_chat_tv)
+    TextView chatTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +59,13 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
         rightTv.setTextColor(Color.BLACK);
     }
 
-    @OnClick({R.id.circle_menu_activity_close_tv})
+    @OnClick({R.id.circle_menu_activity_close_tv,R.id.circle_menu_activity_chat_tv})
     @Override
     public void onClick(View v) {
         if (v == closeTv) {
             finish();
+        } else if (v == chatTv) {
+            UtilTools.toChatModule(CircleMenuActivity.this);
         }
     }
 }
