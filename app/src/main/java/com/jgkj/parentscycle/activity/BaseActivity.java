@@ -332,7 +332,7 @@ public class BaseActivity extends FragmentActivity {
 
 
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put("phone", UserInfo.loginInfo.getPhone());
+        map.put("phone", UserInfo.loginInfo.getRole().getPhone());
         Log.d("qiniu", "click upload");
         isCancelled = false;
         uploadManager.put(picturePath, null, token,

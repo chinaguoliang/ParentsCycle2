@@ -157,12 +157,12 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         requestData.put("nickname",data.get(1));
         requestData.put("onthejob","1"); // 1:在职  0： 离职
         requestData.put("permissions","1");
-        requestData.put("phone",UserInfo.loginInfo.getPhone());
+        requestData.put("phone",UserInfo.loginInfo.getInfo().getPhone());
         requestData.put("schoolname","橙子班");
         requestData.put("teacherid","1");
         requestData.put("teachername","哈哈");
         requestData.put("teachersex","0");
-        requestData.put("tmpinfoid", UserInfo.loginInfo.getId());
+        requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
         requestData.put("schoolid", "1");  //暂时传1
 
 //        requestData.put("schoolid","1");

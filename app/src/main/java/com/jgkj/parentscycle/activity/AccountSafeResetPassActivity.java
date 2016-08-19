@@ -107,7 +107,7 @@ public class AccountSafeResetPassActivity extends BaseActivity implements View.O
     //修改密码
     private void requestModifyPass() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("phone", UserInfo.loginInfo.getPhone());  //登录时ID
+        requestData.put("phone", UserInfo.loginInfo.getInfo().getPhone());  //登录时ID
         requestData.put("newpass", newPassStr);
         requestData.put("oldpass", oldPassStr);
         ModifyPassByOldPassPaser lp = new ModifyPassByOldPassPaser();

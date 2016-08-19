@@ -89,10 +89,10 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     //修改教师权限
     private void requestModifyTeacherPermission() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("ostmpinfoid", UserInfo.loginInfo.getId());  //登录时ID
+        requestData.put("ostmpinfoid", UserInfo.loginInfo.getRole().getId());  //登录时ID
         requestData.put("permissions", UserInfo.LOOK_AFTER_TEACHER_PERMISSION);
         requestData.put("analysis", "laosh11i");
-        requestData.put("teacherid", UserInfo.loginInfo.getId());
+        requestData.put("teacherid", UserInfo.loginInfo.getRole().getId());
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.MODIFY_TEACHER_PERMISSION, requestData, lp);
     }
@@ -141,7 +141,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     //公告列表
     private void requestAnnouncementList() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("id", UserInfo.loginInfo.getId());
+        requestData.put("id", UserInfo.loginInfo.getRole().getId());
         requestData.put("page", "1");
         requestData.put("rows", "10");
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
@@ -152,7 +152,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     //公告评论保存
     private void requestAnnouncementCommentSave() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("id", UserInfo.loginInfo.getId());
+        requestData.put("id", UserInfo.loginInfo.getRole().getId());
         requestData.put("title", "奥巴马");
         requestData.put("bannerimg", "1.jpg");
         requestData.put("announcement", "bullshit");
