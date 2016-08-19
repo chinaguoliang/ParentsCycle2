@@ -15,6 +15,8 @@
 package com.hyphenate.chatuidemo.ui;
 
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.hyphenate.easeui.ui.EaseBaseActivity;
 import com.umeng.analytics.MobclickAgent;
@@ -23,6 +25,11 @@ public class BaseActivity extends EaseBaseActivity {
 
     @Override
     protected void onCreate(Bundle arg0) {
+        //取消标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //取消状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(arg0);
     }
 
