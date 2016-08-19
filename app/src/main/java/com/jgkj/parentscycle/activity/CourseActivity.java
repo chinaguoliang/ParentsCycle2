@@ -101,28 +101,28 @@ public class CourseActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    private void showChangePhotoDialog() {
-        selectClassDialog = new Dialog(this, R.style.DialogTheme);
-        selectClassDialog.getWindow().setWindowAnimations(
-                R.style.dialogWindowAnim);
-
-        View contentView = LayoutInflater.from(this).inflate(
-                R.layout.select_course_activity_sel_course_dialog, null);
-
-        Button confirmBtn = (Button)contentView.findViewById(R.id.select_course_activity_confirm_btn);
-        confirmBtn.setOnClickListener(dialogListener);
-
-        selectClassDialog.setContentView(contentView);
-        selectClassDialog.setCanceledOnTouchOutside(true);
-        selectClassDialog.show();
-
-        WindowManager.LayoutParams params = selectClassDialog.getWindow()
-                .getAttributes();
-        params.gravity = Gravity.CENTER;
-        params.width = UtilTools.SCREEN_WIDTH - UtilTools.SCREEN_WIDTH / 10;
-        selectClassDialog.getWindow().setAttributes(params);
-
-    }
+//    private void showChangePhotoDialog() {
+//        selectClassDialog = new Dialog(this, R.style.DialogTheme);
+//        selectClassDialog.getWindow().setWindowAnimations(
+//                R.style.dialogWindowAnim);
+//
+//        View contentView = LayoutInflater.from(this).inflate(
+//                R.layout.select_course_activity_sel_course_dialog, null);
+//
+//        Button confirmBtn = (Button)contentView.findViewById(R.id.select_course_activity_confirm_btn);
+//        confirmBtn.setOnClickListener(dialogListener);
+//
+//        selectClassDialog.setContentView(contentView);
+//        selectClassDialog.setCanceledOnTouchOutside(true);
+//        selectClassDialog.show();
+//
+//        WindowManager.LayoutParams params = selectClassDialog.getWindow()
+//                .getAttributes();
+//        params.gravity = Gravity.CENTER;
+//        params.width = UtilTools.SCREEN_WIDTH - UtilTools.SCREEN_WIDTH / 10;
+//        selectClassDialog.getWindow().setAttributes(params);
+//
+//    }
 
     private View.OnClickListener dialogListener = new View.OnClickListener() {
         @Override

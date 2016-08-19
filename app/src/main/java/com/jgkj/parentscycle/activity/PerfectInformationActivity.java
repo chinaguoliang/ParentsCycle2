@@ -73,9 +73,6 @@ import butterknife.OnClick;
  */
 public class PerfectInformationActivity extends BaseActivity implements View.OnClickListener,NetListener{
     private static final String TAG = "PerfectInformationActivity";
-    public static final int REQUEST_CODE_CAPTURE_CAMEIA = 20;
-    public static final int REQUEST_CODE_PICK_IMAGE = 21;
-    public static final int PHOTORESOULT = 22;
 
     @Bind(R.id.perfect_information_activity_lv)
     ListView mListView;
@@ -95,81 +92,6 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
     @Bind(R.id.perfect_information_activity_save_btn)
     Button saveBtn;
 
-    private Dialog mChangePhotoDialog;
-    String avatarTempPath;
-
-    PerfectInformationAdapter mPerfectInformationAdapter;
-    UploadManager uploadManager;
-    private volatile boolean isCancelled = false;
-    private String uploadImgKeyStr;
-
-    public PerfectInformationActivity() {
-        //断点上传
-        String dirPath = "/storage/emulated/0/Download";
-        Recorder recorder = null;
-        try{
-            File f = File.createTempFile("qiniu_xxxx", ".tmp");
-            Log.d("qiniu", f.getAbsolutePath().toString());
-            dirPath = f.getParent();
-            recorder = new FileRecorder(dirPath);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        final String dirPath1 = dirPath;
-        //默认使用 key 的url_safe_base64编码字符串作为断点记录文件的文件名。
-        //避免记录文件冲突（特别是key指定为null时），也可自定义文件名(下方为默认实现)：
-        KeyGenerator keyGen = new KeyGenerator(){
-            public String gen(String key, File file){
-                // 不必使用url_safe_base64转换，uploadManager内部会处理
-                // 该返回值可替换为基于key、文件内容、上下文的其它信息生成的文件名
-                String path = key + "_._" + new StringBuffer(file.getAbsolutePath()).reverse();
-                Log.d("qiniu", path);
-                File f = new File(dirPath1, UrlSafeBase64.encodeToString(path));
-                BufferedReader reader = null;
-                try {
-                    reader = new BufferedReader(new FileReader(f));
-                    String tempString = null;
-                    int line = 1;
-                    try {
-                        while ((tempString = reader.readLine()) != null) {
-//							System.out.println("line " + line + ": " + tempString);
-                            Log.d("qiniu", "line " + line + ": " + tempString);
-                            line++;
-                        }
-
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } finally {
-                        try{
-                            reader.close();
-                        } catch(Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-
-
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                return path;
-            }
-        };
-
-        Configuration config = new Configuration.Builder()
-                // recorder 分片上传时，已上传片记录器
-                // keyGen 分片上传时，生成标识符，用于片记录器区分是那个文件的上传记录
-                .recorder(recorder, keyGen)
-                .zone(Zone.zone1)
-                .build();
-
-        // 实例化一个上传的实例
-        uploadManager = new UploadManager(config);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,7 +99,6 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         setContentView(R.layout.perfect_information_activity);
         ButterKnife.bind(this);
         mPerfectInformationAdapter = new PerfectInformationAdapter(this, getContentData());
-        avatarTempPath = Environment.getExternalStorageDirectory().getPath() + "/avatarTemp.jpg";
         mListView.setAdapter(mPerfectInformationAdapter);
         titleTv.setText("完善资料");
         rightTitleTv.setVisibility(View.GONE);
@@ -217,32 +138,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         }
     }
 
-    private View.OnClickListener changePhotoListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Button btn = (Button) v;
-            if (btn.getId() == R.id.change_photo_camera_btn) {
-                QiNiuUploadImgManager.verifyStoragePermissions(PerfectInformationActivity.this);
-                getImageFromCamera();
-            } else if (btn.getId() == R.id.change_photo_album_btn) {
-                QiNiuUploadImgManager.verifyStoragePermissions(PerfectInformationActivity.this);
-                getImageFromAlbum();
-            } else if (btn.getId() == R.id.change_photo_cancel_btn) {
-                mChangePhotoDialog.dismiss();
-            }
-        }
-    };
 
-    protected void getImageFromCamera() {
-        File f = new File(avatarTempPath);
-        if (f.exists()) {
-            f.delete();
-        }
-        Intent intent_camera = new Intent();
-        intent_camera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent_camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(avatarTempPath)));
-        startActivityForResult(intent_camera, REQUEST_CODE_CAPTURE_CAMEIA);
-    }
 
     public void requestSave() {
         HashMap<String, String> requestData = new HashMap<String, String>();
@@ -283,123 +179,6 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
     }
 
-    private void requestGetSevenCowToken() {
-        HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("bucketname", "testjg");
-        GetSevenCowTokenPaser lp = new GetSevenCowTokenPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.GET_SEVEN_COW_TOKEN, requestData, lp);
-    }
-
-    protected void getImageFromAlbum() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");// 相片类型
-
-        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
-    }
-
-    private void showChangePhotoDialog() {
-        mChangePhotoDialog = new Dialog(this, R.style.DialogTheme);
-        mChangePhotoDialog.getWindow().setWindowAnimations(
-                R.style.dialogWindowAnim);
-
-        View contentView = LayoutInflater.from(this).inflate(
-                R.layout.dialog_change_photo, null);
-        Button cameraBtn = (Button) contentView
-                .findViewById(R.id.change_photo_camera_btn);
-        Button albumBtn = (Button) contentView
-                .findViewById(R.id.change_photo_album_btn);
-        Button cancelBtn = (Button) contentView
-                .findViewById(R.id.change_photo_cancel_btn);
-
-        cameraBtn.setOnClickListener(changePhotoListener);
-        albumBtn.setOnClickListener(changePhotoListener);
-        cancelBtn.setOnClickListener(changePhotoListener);
-
-        mChangePhotoDialog.setContentView(contentView);
-        mChangePhotoDialog.setCanceledOnTouchOutside(true);
-        mChangePhotoDialog.show();
-
-        WindowManager.LayoutParams params = mChangePhotoDialog.getWindow()
-                .getAttributes();
-        params.gravity = Gravity.BOTTOM;
-        params.width = UtilTools.SCREEN_WIDTH;
-        mChangePhotoDialog.getWindow().setAttributes(params);
-    }
-
-    File tempFile;
-    public void startPhotoZoom(Uri uri) {
-        // 此处就是调用了android系统给定的切图功能
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 100);
-        intent.putExtra("outputY", 100);
-        intent.putExtra("return-data", true);
-        tempFile=new File(avatarTempPath);
-        if (!tempFile.exists()) {
-            try {
-                tempFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        intent.putExtra("output", Uri.fromFile(tempFile));
-
-        startActivityForResult(intent, PHOTORESOULT);
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_PICK_IMAGE) {
-            if (data == null) {
-                hideSelectDialog();
-                return;
-            }
-            Uri uri = data.getData();
-            if (uri != null) {
-                startPhotoZoom(uri);
-                return;
-            } else {
-                ToastUtil.showToast(getApplicationContext(), "获取图片错误", Toast.LENGTH_LONG);
-
-            }
-        } else if (requestCode == REQUEST_CODE_CAPTURE_CAMEIA) {
-            File f = new File(avatarTempPath);
-            if (!f.exists()) {
-                hideSelectDialog();
-                return;
-            }
-            startPhotoZoom(Uri.fromFile(f));
-            return;
-
-//			ToastUtil.showToast(getApplicationContext(), "获取图片错误", Toast.LENGTH_LONG)
-//					;
-        } else if (requestCode == PHOTORESOULT) {
-            if (data == null) {
-                hideSelectDialog();
-                return;
-            }
-            Bundle extras = data.getExtras();
-            if (extras != null) {
-                hideSelectDialog();
-                requestGetSevenCowToken();
-                mPerfectInformationAdapter.notifyDataSetChanged();
-            }
-        }
-
-    }
-
-    private void hideSelectDialog() {
-        if (mChangePhotoDialog != null) {
-            mChangePhotoDialog.dismiss();
-        }
-    }
-
     @Override
     public void requestResponse(Object obj) {
         NetBeanSuper nbs = (NetBeanSuper)obj;
@@ -410,72 +189,9 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
             }
 
             ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
-        } else if (nbs.obj instanceof GetSevenCowTokenInfo) {
-            GetSevenCowTokenInfo gct = (GetSevenCowTokenInfo)nbs.obj;
-            if (nbs.isSuccess()) {
-                LogUtil.d(TAG,"success get token:" + gct.getToken());
-                uploadImg(avatarTempPath, gct.getToken());
-            } else {
-                ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
-            }
-
         }
 
     }
 
-    private void uploadImg(String picturePath,String token) {
-        boolean hadShow = showProgressDialog();
-        if (!hadShow) {
-            return;
-        }
 
-
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("phone", UserInfo.loginInfo.getPhone());
-        Log.d("qiniu", "click upload");
-        isCancelled = false;
-        uploadManager.put(picturePath, null, token,
-                new UpCompletionHandler() {
-                    public void complete(String key,
-                                         ResponseInfo info, JSONObject res) {
-                        LogUtil.i("qiniu", key + ",\r\n " + info
-                                + ",\r\n " + res);
-
-                        if(info.isOK()==true){
-                            //textview.setText(res.toString());
-                            mPerfectInformationAdapter.setUserIcon(BitmapFactory.decodeFile(avatarTempPath));
-                            mPerfectInformationAdapter.notifyDataSetChanged();
-
-
-                            String keyStr = "";
-                            try {
-                                keyStr = res.getString("key");
-                                uploadImgKeyStr = keyStr;
-                                LogUtil.d(TAG, "upload success  key:" + keyStr);
-                            }catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            uploadImgKeyStr = "";
-                        }
-                        hideProgressDialog();
-                    }
-                }, new UploadOptions(map, null, false,
-                        new UpProgressHandler() {
-                            public void progress(String key, double percent) {
-                                int progress = (int)(percent * 1000);
-                                if(progress==1000){
-//                                    progressbar.setVisibility(View.GONE);
-                                }
-                                LogUtil.d(TAG,"the progress:" + progress);
-                            }
-
-                        }, new UpCancellationSignal(){
-                    @Override
-                    public boolean isCancelled() {
-
-                        return isCancelled;
-                    }
-                }));
-    }
 }
