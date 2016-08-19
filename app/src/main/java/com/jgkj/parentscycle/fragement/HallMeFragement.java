@@ -21,6 +21,7 @@ import com.jgkj.parentscycle.activity.PerfectInformationActivity;
 import com.jgkj.parentscycle.activity.SchoolInfoActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
 
     TextView  userNameTv;
     TextView  phoneNumTv;
+    ImageView userIconIv;
+
     private ListView mMyItemContentLv;
     private ImageView mUserIconIv;
     private View phoneNumberLl;
@@ -68,6 +71,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
 
         userNameTv = (TextView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_user_name_tv);
         phoneNumTv = (TextView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_phone_number_tv);
+        userIconIv = (ImageView)headerView.findViewById(R.id.hall_mine_fragment_lv_header_user_icon_iv);
 
         phoneNumberLl = headerView.findViewById(R.id.hall_mine_fragment_lv_header_layout_phone_number_ll);
 
@@ -105,6 +109,8 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
 
 
 
+
+
         return view;
     }
 
@@ -114,6 +120,12 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                 userNameTv.setText(UserInfo.loginInfo.getRole().getName());
                 phoneNumberLl.setVisibility(View.VISIBLE);
                 phoneNumTv.setText(UserInfo.loginInfo.getInfo().getPhone());
+            }
+
+            if (mUserIconIv != null) {
+                AsyncImageUtil.asyncLoadImage(mUserIconIv,
+                        UserInfo.loginInfo.getInfo().getHeadportrait(),
+                        R.mipmap.user_default_icon, true, false);
             }
         }
     }
