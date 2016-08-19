@@ -42,7 +42,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v == testNetBtn) {
             //requestBabyAskForLeave();
-            startActivity(new Intent(this, com.hyphenate.chatuidemo.ui.SplashActivity.class));
+            startActivity(new Intent(this, PublishFoodListActivity.class));
         }
     }
 
