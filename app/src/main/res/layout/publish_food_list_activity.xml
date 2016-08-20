@@ -168,6 +168,41 @@
 
         </LinearLayout>
 
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="餐次"
+                android:textColor="@color/text_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="食物"
+                android:gravity="center"
+                android:textColor="@color/text_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="删除"
+                android:gravity="center"
+                android:textColor="@color/text_gray" />
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -186,40 +221,7 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <LinearLayout
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="10dp"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="餐次"
-                            android:textColor="@color/text_gray" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="食物"
-                            android:gravity="center"
-                            android:textColor="@color/text_gray" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="删除"
-                            android:gravity="center"
-                            android:textColor="@color/text_gray" />
-                    </LinearLayout>
 
                     <Button
                         android:id="@+id/publish_food_list_activity_publish_btn"
