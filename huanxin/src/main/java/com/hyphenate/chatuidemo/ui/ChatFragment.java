@@ -310,14 +310,14 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             selectFileFromLocal();
             break;
         case ITEM_VOICE_CALL:
-            startVoiceCall();
+//            startVoiceCall();
             break;
         case ITEM_VIDEO_CALL:
-            startVideoCall();
+//            startVideoCall();
             break;
         //red packet code : 进入发红包页面
         case ITEM_RED_PACKET:
-            RedPacketUtil.startRedPacketActivityForResult(this, chatType, toChatUsername, REQUEST_CODE_SEND_RED_PACKET);
+//            RedPacketUtil.startRedPacketActivityForResult(this, chatType, toChatUsername, REQUEST_CODE_SEND_RED_PACKET);
             break;
         //end of red packet code
         default:
