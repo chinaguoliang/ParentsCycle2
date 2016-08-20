@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.hyphenate.chatuidemo.ui.*;
 import com.jgkj.parentscycle.R;
@@ -14,6 +15,7 @@ import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,6 +31,9 @@ import butterknife.OnClick;
 public class TestNetActivity extends BaseActivity implements View.OnClickListener,NetListener {
     @Bind(R.id.test_net_activity_btn)
     Button testNetBtn;
+
+    @Bind(R.id.test_net_activity_iv)
+    ImageView testIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
