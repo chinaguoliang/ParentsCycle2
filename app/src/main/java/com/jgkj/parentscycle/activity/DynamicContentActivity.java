@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -41,5 +42,10 @@ public class DynamicContentActivity extends BaseActivity implements View.OnClick
         if (v == backIv) {
             finish();
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

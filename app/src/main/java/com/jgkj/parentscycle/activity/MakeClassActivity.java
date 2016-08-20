@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -147,5 +148,10 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
             }
             ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

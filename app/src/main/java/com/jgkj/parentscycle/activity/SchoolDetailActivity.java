@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,5 +92,10 @@ public class SchoolDetailActivity extends BaseActivity implements View.OnClickLi
         } else if (v == backIv) {
             finish();
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

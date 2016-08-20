@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -79,5 +80,9 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
         } else if (v == mCheckAttendance) {
 
         }
+    }
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

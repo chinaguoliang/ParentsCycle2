@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -126,5 +127,10 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
                 ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
             }
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

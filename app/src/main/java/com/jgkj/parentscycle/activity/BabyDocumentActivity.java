@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -65,5 +66,10 @@ public class BabyDocumentActivity extends BaseActivity implements View.OnClickLi
         if (v == backIv) {
             finish();
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

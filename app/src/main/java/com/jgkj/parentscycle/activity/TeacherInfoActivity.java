@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -224,5 +225,10 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
             data.add(ma);
         }
         return data;
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -108,5 +109,10 @@ public class MangementClassActivity extends BaseActivity implements View.OnClick
         if (v == backIv) {
             finish();
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

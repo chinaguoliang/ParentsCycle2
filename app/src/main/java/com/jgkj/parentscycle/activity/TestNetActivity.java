@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,7 +43,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v == testNetBtn) {
             //requestBabyAskForLeave();
-            startActivity(new Intent(this, PublishFoodListActivity.class));
+            startActivity(new Intent(this, PublishAnnouncementActivity.class));
         }
     }
 
@@ -248,6 +249,12 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void requestResponse(Object obj) {
+
+    }
+
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
 
     }
 }

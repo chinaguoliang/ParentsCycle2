@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -186,5 +187,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.white));
         mBtmFindTv.setTextColor(this.getResources().getColor(R.color.white));
         mBtmMineTv.setTextColor(this.getResources().getColor(R.color.white));
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

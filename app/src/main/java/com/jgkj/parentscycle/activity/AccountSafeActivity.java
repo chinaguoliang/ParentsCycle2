@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -60,5 +61,10 @@ public class AccountSafeActivity extends BaseActivity implements View.OnClickLis
         } else if (v == modifyPhone) {
             startActivity(new Intent(AccountSafeActivity.this,AccountSafeResetPhoneActivity.class));
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

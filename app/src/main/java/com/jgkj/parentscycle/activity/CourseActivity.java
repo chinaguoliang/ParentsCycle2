@@ -2,6 +2,7 @@ package com.jgkj.parentscycle.activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -132,4 +133,9 @@ public class CourseActivity extends BaseActivity implements View.OnClickListener
             }
         }
     };
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
+    }
 }

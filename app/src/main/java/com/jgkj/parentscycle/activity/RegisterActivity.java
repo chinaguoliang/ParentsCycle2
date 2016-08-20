@@ -2,6 +2,7 @@ package com.jgkj.parentscycle.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -131,5 +132,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         GetVerifyPhoneNumPaser lp = new GetVerifyPhoneNumPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.VERIFY_PHONE_NUMBER_URL, requestData, lp);
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

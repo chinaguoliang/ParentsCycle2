@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -159,5 +160,10 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         newestTopicTv.setTextColor(textGrayColor);
         recmommedTv.setTextColor(textGrayColor);
         myCycleTv.setTextColor(textGrayColor);
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

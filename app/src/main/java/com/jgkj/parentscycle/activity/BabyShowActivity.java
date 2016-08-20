@@ -261,4 +261,8 @@ public class BabyShowActivity extends BaseActivity implements View.OnClickListen
         takePhotoLl.addView(iv,0);
     }
 
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
+    }
 }

@@ -2,6 +2,7 @@ package com.jgkj.parentscycle.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -123,5 +124,10 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
             }
             ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

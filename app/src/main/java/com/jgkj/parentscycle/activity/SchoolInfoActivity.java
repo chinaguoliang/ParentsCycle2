@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -189,5 +190,10 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         } else if (v == classMangementRel) {
             startActivity(new Intent(this,MangementClassActivity.class));
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -65,7 +66,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
-public class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
     private String TAG = "BaseActivity";
 
     public static final int REQUEST_CODE_CAPTURE_CAMEIA = 20;
@@ -85,7 +86,7 @@ public class BaseActivity extends FragmentActivity {
     public volatile boolean isCancelled = false;
     public String uploadImgKeyStr;
 
-
+    public abstract void uploadImgFinished(Bitmap bitmap);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -312,7 +313,6 @@ public class BaseActivity extends FragmentActivity {
             if (extras != null) {
                 hideSelectDialog();
                 requestGetSevenCowToken();
-                mPerfectInformationAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -324,6 +324,7 @@ public class BaseActivity extends FragmentActivity {
     }
 
 
+
     private void uploadImg(String picturePath,String token) {
         boolean hadShow = showProgressDialog();
         if (!hadShow) {
@@ -332,8 +333,10 @@ public class BaseActivity extends FragmentActivity {
 
 
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put("phone", UserInfo.loginInfo.getRole().getPhone());
-        Log.d("qiniu", "click upload");
+        if (UserInfo.isLogined) {
+            map.put("phone", UserInfo.loginInfo.getRole().getPhone());
+        }
+
         isCancelled = false;
         uploadManager.put(picturePath, null, token,
                 new UpCompletionHandler() {
@@ -344,9 +347,7 @@ public class BaseActivity extends FragmentActivity {
 
                         if(info.isOK()==true){
                             //textview.setText(res.toString());
-                            mPerfectInformationAdapter.setUserIcon(BitmapFactory.decodeFile(avatarTempPath));
-                            mPerfectInformationAdapter.notifyDataSetChanged();
-
+                            uploadImgFinished(BitmapFactory.decodeFile(avatarTempPath));
 
                             String keyStr = "";
                             try {

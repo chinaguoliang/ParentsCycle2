@@ -193,5 +193,11 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
 
     }
 
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+        mPerfectInformationAdapter.setUserIcon(bitmap);
+        mPerfectInformationAdapter.notifyDataSetChanged();
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -108,5 +109,10 @@ public class SetPasswordActivity extends BaseActivity implements View.OnClickLis
                 ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
             }
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

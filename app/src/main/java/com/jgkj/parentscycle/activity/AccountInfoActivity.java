@@ -4,6 +4,7 @@ package com.jgkj.parentscycle.activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -159,5 +160,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         } else {
             ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

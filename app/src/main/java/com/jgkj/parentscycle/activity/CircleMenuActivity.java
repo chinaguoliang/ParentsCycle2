@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -67,5 +68,10 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
         } else if (v == chatTv) {
             UtilTools.toChatModule(CircleMenuActivity.this);
         }
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }

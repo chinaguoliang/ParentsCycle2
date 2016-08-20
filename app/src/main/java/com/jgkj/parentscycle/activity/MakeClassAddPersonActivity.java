@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -93,5 +94,10 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
         String idsData = makeClassAddPersonAdapter.getIdsData();
         intent.putExtra("teacher_ids_data",idsData);
         setResult(1, intent);
+    }
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap) {
+
     }
 }
