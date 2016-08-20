@@ -135,7 +135,7 @@ public class CourseActivity extends BaseActivity implements View.OnClickListener
     };
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

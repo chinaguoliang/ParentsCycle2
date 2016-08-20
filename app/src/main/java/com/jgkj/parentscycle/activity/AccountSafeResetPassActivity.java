@@ -129,7 +129,7 @@ public class AccountSafeResetPassActivity extends BaseActivity implements View.O
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

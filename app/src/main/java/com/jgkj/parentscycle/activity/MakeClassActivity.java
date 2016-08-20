@@ -151,7 +151,7 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

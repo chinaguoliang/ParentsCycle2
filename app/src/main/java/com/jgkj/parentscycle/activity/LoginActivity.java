@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

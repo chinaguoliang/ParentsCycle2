@@ -66,7 +66,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

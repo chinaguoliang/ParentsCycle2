@@ -52,8 +52,9 @@ public class PublishAnnouncementActivity extends BaseActivity implements View.On
         }
     }
 
+
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
         addPicTv.setText("");
         addPicTv.setBackgroundDrawable(new BitmapDrawable(bitmap));
     }

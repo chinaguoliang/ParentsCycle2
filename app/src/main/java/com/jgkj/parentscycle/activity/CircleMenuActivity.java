@@ -71,7 +71,7 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

@@ -163,7 +163,7 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

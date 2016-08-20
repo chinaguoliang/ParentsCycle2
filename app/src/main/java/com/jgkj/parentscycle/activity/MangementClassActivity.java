@@ -112,7 +112,7 @@ public class MangementClassActivity extends BaseActivity implements View.OnClick
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

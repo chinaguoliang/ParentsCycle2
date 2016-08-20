@@ -254,7 +254,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

@@ -84,9 +84,8 @@ public abstract class BaseActivity extends FragmentActivity {
     PerfectInformationAdapter mPerfectInformationAdapter;
     UploadManager uploadManager;
     public volatile boolean isCancelled = false;
-    public String uploadImgKeyStr;
 
-    public abstract void uploadImgFinished(Bitmap bitmap);
+    public abstract void uploadImgFinished(Bitmap bitmap,String uploadedKey);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -347,18 +346,18 @@ public abstract class BaseActivity extends FragmentActivity {
 
                         if(info.isOK()==true){
                             //textview.setText(res.toString());
-                            uploadImgFinished(BitmapFactory.decodeFile(avatarTempPath));
 
                             String keyStr = "";
                             try {
                                 keyStr = res.getString("key");
-                                uploadImgKeyStr = keyStr;
                                 LogUtil.d(TAG, "upload success  key:" + keyStr);
                             }catch (Exception e) {
                                 e.printStackTrace();
                             }
+
+                            uploadImgFinished(BitmapFactory.decodeFile(avatarTempPath),keyStr);
+
                         } else {
-                            uploadImgKeyStr = "";
                         }
                         hideProgressDialog();
                     }

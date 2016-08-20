@@ -112,7 +112,7 @@ public class SetPasswordActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

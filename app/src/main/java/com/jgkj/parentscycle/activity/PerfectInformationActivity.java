@@ -111,6 +111,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
                 }
             }
         });
+        saveBtn.setTag("");
     }
 
     private List<String> getContentData() {
@@ -141,15 +142,16 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
 
 
     public void requestSave() {
+        String uploadKey = saveBtn.getTag().toString();
         HashMap<String, String> requestData = new HashMap<String, String>();
         HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
         requestData.put("analysis","1");
         requestData.put("birthdate","1987-11-11");
         requestData.put("classid","1,2,3");
-        if (TextUtils.isEmpty(uploadImgKeyStr)) {
+        if (TextUtils.isEmpty(uploadKey)) {
             requestData.put("headportrait","");
         } else {
-            requestData.put("headportrait",BgGlobal.IMG_SERVER_PRE_URL + uploadImgKeyStr);
+            requestData.put("headportrait",BgGlobal.IMG_SERVER_PRE_URL + uploadKey);
         }
         requestData.put("kbwx","1"); //1: 是  0：否
         requestData.put("kbqq","1");
@@ -193,11 +195,11 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
 
     }
 
+
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
         mPerfectInformationAdapter.setUserIcon(bitmap);
         mPerfectInformationAdapter.notifyDataSetChanged();
+        saveBtn.setTag(uploadedKey);
     }
-
-
 }

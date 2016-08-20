@@ -97,7 +97,7 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }

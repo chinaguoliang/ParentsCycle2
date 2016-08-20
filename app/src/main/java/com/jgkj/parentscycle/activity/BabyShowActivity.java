@@ -262,7 +262,7 @@ public class BabyShowActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap) {
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
     }
 }
