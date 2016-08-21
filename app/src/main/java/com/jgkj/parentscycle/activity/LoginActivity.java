@@ -52,7 +52,8 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     @Bind(R.id.login_activity_forget_pass_tv)
     TextView forgetPassTv;
 
-
+    @Bind(R.id.login_activity_layout_Immediate_experience_btn)
+    Button immediateExperienceBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     }
 
 
-    @OnClick({R.id.login_activity_login_tv,R.id.login_activity_register_tv,R.id.login_activity_forget_pass_tv})
+    @OnClick({R.id.login_activity_login_tv,R.id.login_activity_register_tv,R.id.login_activity_forget_pass_tv,R.id.login_activity_layout_Immediate_experience_btn})
 
     @Override
     public void onClick(View v) {
@@ -103,6 +104,8 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
             startActivity(new Intent(this,RegisterActivity.class));
         } else if (v == forgetPassTv) {
             startActivity(new Intent(this,FindPasswordActivity.class));
+        } else if (v == immediateExperienceBtn) {
+            startActivity(new Intent(this,MainActivity.class));
         }
     }
 
