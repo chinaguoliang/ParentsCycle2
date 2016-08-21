@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.GrowthRecordActivity;
 import com.jgkj.parentscycle.activity.MakeClassAddPersonActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.adapter.HallFindAdapter;
@@ -42,8 +43,7 @@ public class HallFindFragement extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.hall_find_fragment_layout, container,
-                false);
+        View view = inflater.inflate(R.layout.hall_find_fragment_layout, container, false);
         ButterKnife.bind(this,view);
         initView();
         return view;
@@ -69,7 +69,7 @@ public class HallFindFragement extends Fragment {
                 if (position == 0) {
                     startActivity(new Intent(view.getContext(),ParentsCycleActivity.class));
                 } else if (position == 1) {
-
+                    startActivity(new Intent(view.getContext(),GrowthRecordActivity.class));
                 } else if (position == 2) {
                     startActivity(new Intent(view.getContext(),MakeClassAddPersonActivity.class));
                 } else if (position == 3) {
