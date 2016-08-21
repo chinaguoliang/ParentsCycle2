@@ -100,9 +100,6 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                     case 3:
                         startActivity(new Intent(mUserIconIv.getContext(),SchoolInfoActivity.class));
                         break;
-                    case 4:
-                        startActivity(new Intent(mUserIconIv.getContext(),ParentsCycleActivity.class));
-                        break;
                 }
             }
         });
@@ -135,7 +132,6 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         data.add("帐号信息");
         data.add("完善资料");
         data.add("学校信息");
-        data.add("父母圈");
         data.add("设置");
         data.add("家长咨询");
         return data;
