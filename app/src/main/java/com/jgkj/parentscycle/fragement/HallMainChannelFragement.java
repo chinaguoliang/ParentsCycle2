@@ -19,6 +19,7 @@ import com.jgkj.parentscycle.activity.MainActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.PublishFoodListActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
+import com.jgkj.parentscycle.activity.VideoOpenCourseActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
 import com.jgkj.parentscycle.utils.ImageHandler;
 
@@ -200,7 +201,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         if (v == rightTitleTv) {
             startActivity(new Intent(getContext(), TestNetActivity.class));
         } else if (v == publicVideoCourseTv) {
-
+            startActivity(new Intent(getContext(), VideoOpenCourseActivity.class));
         } else if (v == safeSendTv) {
             startActivity(new Intent(getContext(), CheckAttendanceActivity.class));
         } else if (v == foodTv) {
