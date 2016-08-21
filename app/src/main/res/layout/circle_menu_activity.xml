@@ -32,7 +32,8 @@
                 android:drawableTop="@mipmap/baby_show_icon"
                 android:gravity="center_horizontal"
                 android:text="宝宝秀"
-                android:textColor="@color/black" />
+                android:textSize="@dimen/normal_text_size"
+                android:textColor="@color/text_gray_3" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -42,7 +43,9 @@
                 android:drawableTop="@mipmap/parents_cycle"
                 android:gravity="center_horizontal"
                 android:text="父母圈"
-                android:textColor="@color/black" />
+                android:textSize="@dimen/normal_text_size"
+                android:textColor="@color/text_gray_3"
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -52,7 +55,9 @@
                 android:drawableTop="@mipmap/safe_get_send"
                 android:gravity="center_horizontal"
                 android:text="安全接送"
-                android:textColor="@color/black" />
+                android:textSize="@dimen/normal_text_size"
+                android:textColor="@color/text_gray_3"
+                 />
 
             <TextView
                 android:id="@+id/circle_menu_activity_chat_tv"
@@ -63,7 +68,9 @@
                 android:drawableTop="@mipmap/chat_icon"
                 android:gravity="center_horizontal"
                 android:text="聊天"
-                android:textColor="@color/black" />
+                android:textSize="@dimen/normal_text_size"
+                android:textColor="@color/text_gray_3"
+                 />
 
 
         </LinearLayout>

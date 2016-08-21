@@ -19,5 +19,6 @@
     <color name="green">#C2E891</color>
     <color name="line_gray">#E2E2E2</color>
     <color name="text_gray_2">#666666</color>
+    <color name="text_gray_3">#4a4a4a</color>
 
 </resources>
