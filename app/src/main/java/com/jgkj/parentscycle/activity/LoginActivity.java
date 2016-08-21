@@ -106,6 +106,7 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
             startActivity(new Intent(this,FindPasswordActivity.class));
         } else if (v == immediateExperienceBtn) {
             startActivity(new Intent(this,MainActivity.class));
+            finish();
         }
     }
 
