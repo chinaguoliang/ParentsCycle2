@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.adapter.HallFindAdapter;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.ArrayList;
 
@@ -53,12 +54,31 @@ public class HallFindFragement extends Fragment {
         rightTitleTv.setVisibility(View.GONE);
         ArrayList<String> dataList = new ArrayList<String>();
         dataList.add("父母圈");
+        dataList.add("成长纪录");
+        dataList.add("新加入家长");
+        dataList.add("新加入老师");
+        dataList.add("加入学校");
+        dataList.add("咨询");
+
         HallFindAdapter hallFindAdapter = new HallFindAdapter(this.getContext(),dataList);
         contentLv.setAdapter(hallFindAdapter);
         contentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(view.getContext(),ParentsCycleActivity.class));
+                if (position == 0) {
+                    startActivity(new Intent(view.getContext(),ParentsCycleActivity.class));
+                } else if (position == 1) {
+
+                } else if (position == 2) {
+
+                } else if (position == 3) {
+
+                } else if (position == 4) {
+
+                } else if (position == 5) {
+                    UtilTools.toChatModule(getContext());
+                }
+
             }
         });
     }
