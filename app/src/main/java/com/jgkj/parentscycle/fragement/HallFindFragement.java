@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.MakeClassAddPersonActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.adapter.HallFindAdapter;
 import com.jgkj.parentscycle.utils.UtilTools;
@@ -70,9 +71,9 @@ public class HallFindFragement extends Fragment {
                 } else if (position == 1) {
 
                 } else if (position == 2) {
-
+                    startActivity(new Intent(view.getContext(),MakeClassAddPersonActivity.class));
                 } else if (position == 3) {
-
+                    startActivity(new Intent(view.getContext(),MakeClassAddPersonActivity.class));
                 } else if (position == 4) {
 
                 } else if (position == 5) {
