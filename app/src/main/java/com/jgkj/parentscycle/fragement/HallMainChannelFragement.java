@@ -12,7 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.BabyDocumentActivity;
+import com.jgkj.parentscycle.activity.CheckAttendanceActivity;
+import com.jgkj.parentscycle.activity.CourseActivity;
 import com.jgkj.parentscycle.activity.MainActivity;
+import com.jgkj.parentscycle.activity.ParentsCycleActivity;
+import com.jgkj.parentscycle.activity.PublishFoodListActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
 import com.jgkj.parentscycle.utils.ImageHandler;
@@ -49,6 +54,30 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
 
     @Bind(R.id.main_activity_circle_iv_3)
     ImageView circleIv3;
+
+    @Bind(R.id.hall_main_channel_fragment_layout_video_course_tv)
+    TextView publicVideoCourseTv;
+
+    @Bind(R.id.hall_main_channel_fragment_layout_safe_send_tv)
+    TextView safeSendTv;
+
+    @Bind(R.id.hall_main_channel_fragment_layout_food_tv)
+    TextView foodTv;
+
+    @Bind(R.id.hall_main_channel_fragment_course_list_tv)
+    TextView courseListTv;
+
+    @Bind(R.id.hall_main_channel_fragment_parents_cycle_tv)
+    TextView parentsCycleTv;
+
+    @Bind(R.id.hall_main_channel_fragment_baby_doc_tv)
+    TextView babyDocTv;
+
+    @Bind(R.id.hall_main_channel_fragment_course_line_tv)
+    TextView courseLineTv;
+
+    @Bind(R.id.hall_main_channel_fragment_listen_bar_tv)
+    TextView listenBarTv;
 
 
     @Nullable
@@ -155,11 +184,37 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         viewPager.setCurrentItem(position);
     }
 
-    @OnClick({R.id.baby_document_right_title_tv})
+    @OnClick({R.id.baby_document_right_title_tv,
+
+            R.id.hall_main_channel_fragment_layout_video_course_tv,
+            R.id.hall_main_channel_fragment_layout_safe_send_tv,
+            R.id.hall_main_channel_fragment_layout_food_tv,
+            R.id.hall_main_channel_fragment_course_list_tv,
+            R.id.hall_main_channel_fragment_parents_cycle_tv,
+            R.id.hall_main_channel_fragment_baby_doc_tv,
+            R.id.hall_main_channel_fragment_course_line_tv,
+            R.id.hall_main_channel_fragment_listen_bar_tv,
+    })
     @Override
     public void onClick(View v) {
         if (v == rightTitleTv) {
             startActivity(new Intent(getContext(), TestNetActivity.class));
+        } else if (v == publicVideoCourseTv) {
+
+        } else if (v == safeSendTv) {
+            startActivity(new Intent(getContext(), CheckAttendanceActivity.class));
+        } else if (v == foodTv) {
+            startActivity(new Intent(getContext(), PublishFoodListActivity.class));
+        } else if (v == courseListTv) {
+            startActivity(new Intent(getContext(), CourseActivity.class));
+        } else if (v == parentsCycleTv) {
+            startActivity(new Intent(getContext(), ParentsCycleActivity.class));
+        } else if (v == babyDocTv) {
+            startActivity(new Intent(getContext(), BabyDocumentActivity.class));
+        } else if (v == courseLineTv) {
+
+        } else if (v == listenBarTv) {
+
         }
     }
 }

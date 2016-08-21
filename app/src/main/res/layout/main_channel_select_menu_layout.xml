@@ -15,6 +15,7 @@
 
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_layout_video_course_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,6 +28,7 @@
             android:textColor="@color/text_gray_3" />
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_layout_safe_send_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -38,6 +40,7 @@
             android:textColor="@color/text_gray_3" />
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_layout_food_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,6 +52,7 @@
             android:textColor="@color/text_gray_3" />
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_course_list_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -68,6 +72,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_parents_cycle_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,6 +84,7 @@
             android:textColor="@color/text_gray_3" />
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_baby_doc_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -90,6 +96,7 @@
             android:textColor="@color/text_gray_3" />
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_course_line_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -101,6 +108,7 @@
             android:textColor="@color/text_gray_3" />
 
         <TextView
+            android:id="@+id/hall_main_channel_fragment_listen_bar_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
