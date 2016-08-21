@@ -11,12 +11,12 @@
         android:layout_height="50dp"></include>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="238dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/hall_main_channel_fragment_layout_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="238dp">
 
         </android.support.v4.view.ViewPager>
         <LinearLayout
