@@ -110,7 +110,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
 
 
 
-
+        refreshUI();
         return view;
     }
 

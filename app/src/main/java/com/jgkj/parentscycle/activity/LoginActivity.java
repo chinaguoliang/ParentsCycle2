@@ -120,6 +120,7 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
                 Log.d("result",nbs.getMsg());
                 UserInfo.isLogined = true;
                 UserInfo.loginInfo = loginInfo;
+                startActivity(new Intent(this,MainActivity.class));
                 finish();
             }
             ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
