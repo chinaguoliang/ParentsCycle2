@@ -183,10 +183,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         mBtmFindIv.setImageResource(R.mipmap.main_activity_find_no_selected);
         mBtmMineIv.setImageResource(R.mipmap.main_activity_mine_no_selected);
 
-        mBtmMainChannelTv.setTextColor(this.getResources().getColor(R.color.white));
-        mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.white));
-        mBtmFindTv.setTextColor(this.getResources().getColor(R.color.white));
-        mBtmMineTv.setTextColor(this.getResources().getColor(R.color.white));
+        mBtmMainChannelTv.setTextColor(this.getResources().getColor(R.color.text_gray_2));
+        mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.text_gray_2));
+        mBtmFindTv.setTextColor(this.getResources().getColor(R.color.text_gray_2));
+        mBtmMineTv.setTextColor(this.getResources().getColor(R.color.text_gray_2));
     }
 
     @Override
