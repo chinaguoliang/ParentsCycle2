@@ -16,6 +16,7 @@ import com.jgkj.parentscycle.activity.BabyDocumentActivity;
 import com.jgkj.parentscycle.activity.CheckAttendanceActivity;
 import com.jgkj.parentscycle.activity.CourseActivity;
 import com.jgkj.parentscycle.activity.MainActivity;
+import com.jgkj.parentscycle.activity.OnineForumActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.PublishFoodListActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
@@ -213,7 +214,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         } else if (v == babyDocTv) {
             startActivity(new Intent(getContext(), BabyDocumentActivity.class));
         } else if (v == courseLineTv) {
-
+            startActivity(new Intent(getContext(), OnineForumActivity.class));
         } else if (v == listenBarTv) {
 
         }
