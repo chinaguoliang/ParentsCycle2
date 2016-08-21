@@ -17,8 +17,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
         android:orientation="horizontal"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -27,7 +25,7 @@
             android:id="@+id/hall_find_fragment_layout_listview_item_icon_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/parents_cycle"
+            android:src="@mipmap/small_parents_cycle"
             android:layout_marginLeft="10dp"
             />
 

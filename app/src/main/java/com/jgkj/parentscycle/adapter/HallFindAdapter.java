@@ -64,7 +64,7 @@ public class HallFindAdapter extends BaseAdapter {
             holder.heightView.setVisibility(View.VISIBLE);
             holder.iconIv.setImageResource(R.mipmap.new_add_parents);
         } else if (position == 3)  {
-            holder.iconIv.setImageResource(R.mipmap.add_to_school);
+            holder.iconIv.setImageResource(R.mipmap.new_add_teacher);
         } else if (position == 4)  {
             holder.iconIv.setImageResource(R.mipmap.add_to_school);
         } else if (position == 5)  {
