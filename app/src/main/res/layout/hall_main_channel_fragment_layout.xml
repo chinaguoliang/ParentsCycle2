@@ -25,13 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/main_activity_circle_iv_1"
-                android:layout_width="5dp"
-                android:layout_height="5dp"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
                 android:src="@drawable/blue_circle" />
 
             <View
@@ -40,8 +40,8 @@
 
             <ImageView
                 android:id="@+id/main_activity_circle_iv_2"
-                android:layout_width="5dp"
-                android:layout_height="5dp"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
                 android:src="@drawable/white_circle" />
 
             <View
@@ -50,8 +50,8 @@
 
             <ImageView
                 android:id="@+id/main_activity_circle_iv_3"
-                android:layout_width="5dp"
-                android:layout_height="5dp"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
                 android:src="@drawable/white_circle" />
         </LinearLayout>
     </RelativeLayout>
