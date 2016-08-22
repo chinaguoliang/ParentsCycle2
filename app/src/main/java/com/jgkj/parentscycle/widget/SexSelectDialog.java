@@ -19,7 +19,7 @@ public class SexSelectDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setIcon(R.drawable.ic_launcher);
         builder.setTitle("请选择性别");
-        final String[] sex = {"男", "女"};
+        final String[] sex = {"女","男" };
         //    设置一个单项选择下拉框
         /**
          * 第一个参数指定我们要显示的一组下拉单选框的数据集合
@@ -32,7 +32,7 @@ public class SexSelectDialog {
             public void onClick(DialogInterface dialog, int which)
             {
                 Toast.makeText(context, "性别为：" + sex[which], Toast.LENGTH_SHORT).show();
-                ssdf.finishSlecct(which + 1);
+                ssdf.finishSlecct(which);
             }
         });
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener()

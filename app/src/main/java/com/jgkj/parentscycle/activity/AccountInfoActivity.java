@@ -201,9 +201,9 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     public void requestSave() {
         String uploadKey = "";
         HashMap<String, String> requestData = new HashMap<String, String>();
-        HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
+        HashMap<Integer,String> data = mAccountInfoAdapter.getData();
         requestData.put("analysis","1");
-        requestData.put("birthdate","1987-11-11");
+        requestData.put("birthdate",data.get(4));
         requestData.put("classid","1,2,3");
         if (TextUtils.isEmpty(uploadKey)) {
             requestData.put("headportrait","");
@@ -216,11 +216,11 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         requestData.put("nickname",data.get(0));
         requestData.put("onthejob","1"); // 1:在职  0： 离职
         requestData.put("permissions","1");
-        requestData.put("phone",UserInfo.loginInfo.getInfo().getPhone());
-        requestData.put("schoolname","橙子班");
+        requestData.put("phone","");
+        requestData.put("schoolname","");
         requestData.put("teacherid","1");
-        requestData.put("teachername","哈哈");
-        requestData.put("teachersex","0");
+        requestData.put("teachername","");
+        requestData.put("teachersex",data.get(2));
         requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
         requestData.put("schoolid", "1");  //暂时传1
         PerfectInfoPaser lp = new PerfectInfoPaser();
@@ -238,7 +238,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         List<String> dataList = mAccountInfoAdapter.getList();
         if (index == 1) {
             dataList.set(2,"性别_男");
-        } else if (index == 2) {
+        } else if (index == 0) {
             dataList.set(2,"性别_女");
         }
 
