@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,6 +39,17 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.circle_menu_activity_chat_tv)
     TextView chatTv;
 
+    @Bind(R.id.circle_menu_activity_baby_show_tv)
+    TextView babyShowTv;
+
+    @Bind(R.id.circle_menu_activity_baby_parents_cycle_tv)
+    TextView parentsCycleTv;
+
+    @Bind(R.id.circle_menu_activity_baby_safe_send_tv)
+    TextView safeSendTv;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +72,19 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
         rightTv.setTextColor(Color.BLACK);
     }
 
-    @OnClick({R.id.circle_menu_activity_close_tv,R.id.circle_menu_activity_chat_tv})
+    @OnClick({R.id.circle_menu_activity_close_tv,R.id.circle_menu_activity_chat_tv,R.id.circle_menu_activity_baby_show_tv,R.id.circle_menu_activity_baby_parents_cycle_tv,R.id.circle_menu_activity_baby_safe_send_tv})
     @Override
     public void onClick(View v) {
         if (v == closeTv) {
             finish();
         } else if (v == chatTv) {
             UtilTools.toChatModule(CircleMenuActivity.this);
+        } else if (v == safeSendTv) {
+            startActivity(new Intent(this, CheckAttendanceActivity.class));
+        } else if (v == babyShowTv) {
+            startActivity(new Intent(this, BabyShowActivity.class));
+        } else if (v == parentsCycleTv) {
+            startActivity(new Intent(this, ParentsCycleActivity.class));
         }
     }
 

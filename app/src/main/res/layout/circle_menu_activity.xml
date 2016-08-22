@@ -25,6 +25,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/circle_menu_activity_baby_show_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -36,6 +37,7 @@
                 android:textColor="@color/text_gray_3" />
 
             <TextView
+                android:id="@+id/circle_menu_activity_baby_parents_cycle_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,6 +50,7 @@
                 />
 
             <TextView
+                android:id="@+id/circle_menu_activity_baby_safe_send_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
