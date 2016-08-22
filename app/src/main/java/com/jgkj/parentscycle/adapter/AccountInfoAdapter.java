@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,10 +21,23 @@ import java.util.List;
 public class AccountInfoAdapter extends BaseAdapter {
     private List<String> contentData;
     private Context mContext;
+    public HashMap<Integer,String> dataMap = new HashMap<Integer,String>();
 
     public AccountInfoAdapter(Context context, List<String> data) {
         contentData = data;
         mContext = context;
+        //初始化map 内容
+        for(int i = 0 ; i < 15 ; i++) {
+            dataMap.put(i,"");
+        }
+    }
+
+    public HashMap<Integer,String> getData() {
+        return dataMap;
+    }
+
+    public List<String> getList() {
+        return contentData;
     }
 
     @Override
@@ -41,8 +56,8 @@ public class AccountInfoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        MineViewHolder holder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final MineViewHolder holder;
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,22 +65,54 @@ public class AccountInfoAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.account_info_activity_lv_item, null);
             convertView.setTag(holder);
             holder.contentDescTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_tv);
-            holder.conentNameTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_content_tv);
             holder.rightArrowIv = (ImageView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_arrow_iv);
+            holder.contentEt = (EditText)convertView.findViewById(R.id.hall_mine_fragment_lv_item_content_et);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
+
+        holder.contentEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                } else {
+                    dataMap.put(position,holder.contentEt.getText().toString());
+                }
+
+            }
+        });
+
+
+//        convertView.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
         String contentStr = contentData.get(position);
         String names[] = contentStr.split("_");
         holder.contentDescTv.setText(names[0]);
         if (names.length == 1 || TextUtils.equals(names[1], "0")) {
-            holder.rightArrowIv.setVisibility(View.VISIBLE);
-            holder.conentNameTv.setVisibility(View.GONE);
+//            holder.rightArrowIv.setVisibility(View.VISIBLE);
+//            holder.conentNameTv.setVisibility(View.GONE);
         } else {
-            holder.conentNameTv.setVisibility(View.VISIBLE);
-            holder.conentNameTv.setText(names[1]);
-            holder.rightArrowIv.setVisibility(View.GONE);
+//            holder.conentNameTv.setVisibility(View.VISIBLE);
+//            holder.conentNameTv.setText(names[1]);
+//            holder.rightArrowIv.setVisibility(View.GONE);
+            String tempNames = names[1].trim();
+            if (TextUtils.isEmpty(tempNames)) {
+                holder.contentEt.setText(dataMap.get(position));
+            } else {
+                holder.contentEt.setText(names[1]);
+            }
+
+        }
+
+        if (position == 5 || position == 2 || position == 4 || position == 6) {
+            holder.contentEt.setFocusable(false);
+            holder.contentEt.setFocusableInTouchMode(false);
         }
 
         return convertView;
@@ -75,5 +122,6 @@ public class AccountInfoAdapter extends BaseAdapter {
         TextView contentDescTv;    // 消息未读条数
         TextView conentNameTv;
         ImageView rightArrowIv;
+        EditText contentEt;
     }
 }

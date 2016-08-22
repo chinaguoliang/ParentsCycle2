@@ -16,18 +16,18 @@
         android:paddingBottom="10dp"
         />
 
-    <TextView
-        android:id="@+id/hall_mine_fragment_lv_item_name_content_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="小明"
-        android:layout_marginRight="15dp"
-        android:textColor="@color/text_gray"
-        android:paddingTop="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:paddingBottom="10dp"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/hall_mine_fragment_lv_item_name_content_tv"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="小明"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:textColor="@color/text_gray"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--/>-->
 
     <ImageView
         android:id="@+id/hall_mine_fragment_lv_item_right_arrow_iv"
@@ -36,6 +36,19 @@
         android:src="@mipmap/right_arrow"
         android:layout_centerVertical="true"
         android:visibility="gone"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        />
+
+    <EditText
+        android:id="@+id/hall_mine_fragment_lv_item_content_et"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:gravity="right"
+        android:background="@null"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
         />

@@ -8,9 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,9 +22,11 @@ import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.AccountInfoAdapter;
+import com.jgkj.parentscycle.bean.PerfectInfoInfo;
 import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
+import com.jgkj.parentscycle.json.PerfectInfoPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
@@ -30,6 +34,7 @@ import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
+import com.jgkj.parentscycle.widget.SexSelectDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +49,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/7/18.
  */
-public class AccountInfoActivity extends BaseActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener,NetListener {
+public class AccountInfoActivity extends BaseActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener,NetListener ,SexSelectDialog.SexSlectDialogFinish {
 
     private static final String TAG = "AccountInfoActivity";
     @Bind(R.id.account_info_activity_lv)
@@ -61,6 +66,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
     @Bind(R.id.title_bar_layout_rel)
     RelativeLayout mWrapTitleRel;
+
+    @Bind(R.id.account_info_activity_save_btn)
+    Button saveBtn;
+
     AccountInfoAdapter mAccountInfoAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +89,18 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                 } else if (position == 6) {
                     //帐号信息
                     startActivity(new Intent(AccountInfoActivity.this,AccountSafeActivity.class));
+                } else if (position == 2) {
+                    SexSelectDialog.showSexSelectDialog(AccountInfoActivity.this,AccountInfoActivity.this);
                 }
+
+
+//                if (position == 0 || position == 1 || position == 3) {
+//                    View contentEt = view.findViewById(R.id.hall_mine_fragment_lv_item_content_et);
+//                    contentNameTv.setVisibility(View.GONE);
+//                    contentEt.setVisibility(View.VISIBLE);
+////                    holder.contentEt.setVisibility(View.VISIBLE);
+////                    holder.conentNameTv.setVisibility(View.GONE);
+//                }
             }
         });
 
@@ -102,11 +122,13 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         return data;
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.account_info_activity_save_btn})
     @Override
     public void onClick(View v) {
        if (v == backIv) {
            finish();
+       } else if (v == saveBtn) {
+           requestSave();
        }
     }
 
@@ -123,7 +145,12 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        String date = year + "-" + (monthOfYear + 1) + dayOfMonth;
+        List<String> dataList = mAccountInfoAdapter.getList();
+        String date = year + "-" + (monthOfYear + 1) + "-" +dayOfMonth;
+//        dataList.remove(4);
+        dataList.set(4,"出生日期_" + date);
+        mAccountInfoAdapter.getData().put(4,date);
+        mAccountInfoAdapter.notifyDataSetChanged();
     }
 
     private void requestNet() {
@@ -142,30 +169,80 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         hideProgressDialog();
         NetBeanSuper nbs = (NetBeanSuper)obj;
 
-        if (nbs.isSuccess()) {
-            TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
-            ArrayList<String> data = new ArrayList<String>();
-            data.add("昵称_" + tii.getNickname());
-            data.add("姓名_" + tii.getSchoolname());
-            data.add("性别_ ");
-            data.add("民族_ ");
-            data.add("出生日期_ ");
-            data.add("手机号_ " + tii.getPhone() );
-            data.add("账户安全_ ");
-            data.add("捆绑微信_ ");
-            data.add("捆绑QQ_ ");
-            mAccountInfoAdapter = new AccountInfoAdapter(this, data);
-            mContentLv.setAdapter(mAccountInfoAdapter);
-            LogUtil.d(TAG,"success");
+        if (nbs.obj instanceof PerfectInfoInfo) {
+            if (nbs.isSuccess()) {
+                finish();
+            }
+
+            ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
         } else {
-            ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+            if (nbs.isSuccess()) {
+                TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
+                ArrayList<String> data = new ArrayList<String>();
+                data.add("昵称_" + tii.getNickname());
+                data.add("姓名_" + tii.getSchoolname());
+                data.add("性别_ ");
+                data.add("民族_ ");
+                data.add("出生日期_ ");
+                data.add("手机号_ " + tii.getPhone() );
+                data.add("账户安全_ ");
+                data.add("捆绑微信_ ");
+                data.add("捆绑QQ_ ");
+                mAccountInfoAdapter = new AccountInfoAdapter(this, data);
+                mContentLv.setAdapter(mAccountInfoAdapter);
+                LogUtil.d(TAG,"success");
+            } else {
+                ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+            }
         }
     }
 
+
+    public void requestSave() {
+        String uploadKey = "";
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
+        requestData.put("analysis","1");
+        requestData.put("birthdate","1987-11-11");
+        requestData.put("classid","1,2,3");
+        if (TextUtils.isEmpty(uploadKey)) {
+            requestData.put("headportrait","");
+        } else {
+            requestData.put("headportrait",BgGlobal.IMG_SERVER_PRE_URL + uploadKey);
+        }
+        requestData.put("kbwx","1"); //1: 是  0：否
+        requestData.put("kbqq","1");
+        requestData.put("nationality","1");
+        requestData.put("nickname",data.get(0));
+        requestData.put("onthejob","1"); // 1:在职  0： 离职
+        requestData.put("permissions","1");
+        requestData.put("phone",UserInfo.loginInfo.getInfo().getPhone());
+        requestData.put("schoolname","橙子班");
+        requestData.put("teacherid","1");
+        requestData.put("teachername","哈哈");
+        requestData.put("teachersex","0");
+        requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
+        requestData.put("schoolid", "1");  //暂时传1
+        PerfectInfoPaser lp = new PerfectInfoPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
+    }
 
 
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
+    }
+
+    @Override
+    public void finishSlecct(int index) {
+        List<String> dataList = mAccountInfoAdapter.getList();
+        if (index == 1) {
+            dataList.set(2,"性别_男");
+        } else if (index == 2) {
+            dataList.set(2,"性别_女");
+        }
+
+        mAccountInfoAdapter.getData().put(2,index + "");
+        mAccountInfoAdapter.notifyDataSetChanged();
     }
 }
