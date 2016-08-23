@@ -28,6 +28,7 @@ import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
+import com.jgkj.parentscycle.widget.ListViewForScrollView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     TextView rightTv;
 
     @Bind(R.id.teacher_info_activity_lv)
-    ListView contentLv;
+    ListViewForScrollView contentLv;
 
     TeacherInfoAdapter teacherInfoAdapter;
     Dialog mLeaveSchoolDialog;

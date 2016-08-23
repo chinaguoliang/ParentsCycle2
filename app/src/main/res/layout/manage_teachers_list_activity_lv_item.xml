@@ -42,7 +42,12 @@
             android:layout_toLeftOf="@+id/hall_mine_fragment_lv_item_right_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical|right"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
             android:background="@null"
+            android:singleLine="true"
+            android:paddingRight="10dp"
             />
     </RelativeLayout>
     <View
