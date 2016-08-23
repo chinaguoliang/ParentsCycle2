@@ -19,6 +19,7 @@ import com.jgkj.parentscycle.activity.LoginActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.PerfectInformationActivity;
 import com.jgkj.parentscycle.activity.SchoolInfoActivity;
+import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.AsyncImageUtil;
@@ -63,7 +64,8 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
 
         backIv.setVisibility(View.GONE);
         titleTv.setText("个人中心");
-        rightTitleTv.setText("编辑");
+        rightTitleTv.setText("    ");
+        rightTitleTv.setPadding(30,10,30,10);
 
         mMyItemContentLv = (ListView)view.findViewById(R.id.hall_mine_fragment_lv);
         View headerView = inflater.inflate(R.layout.hall_mine_fragment_lv_header_layout,null,false);
@@ -146,7 +148,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == rightTitleTv) {
-            startActivity(new Intent(v.getContext(),PerfectInformationActivity.class));
+            startActivity(new Intent(v.getContext(),TestNetActivity.class));
         } else if (v == mUserIconIv) {
             startActivity(new Intent(v.getContext(),LoginActivity.class));
         } else if (v == userNameTv) {

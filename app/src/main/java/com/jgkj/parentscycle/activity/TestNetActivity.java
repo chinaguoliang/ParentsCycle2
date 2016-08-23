@@ -1,24 +1,19 @@
 package com.jgkj.parentscycle.activity;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.hyphenate.chatuidemo.ui.*;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
-import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.json.TeacherListPaser;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
-import com.jgkj.parentscycle.user.UserInfo;
-import com.jgkj.parentscycle.utils.AsyncImageUtil;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -48,9 +43,12 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v == testNetBtn) {
             //requestBabyAskForLeave();
-            startActivity(new Intent(this, PublishFoodListActivity.class));
+//            startActivity(new Intent(this, PublishFoodListActivity.class));
+            requestTeachersList();
         }
     }
+
+
 
 
     //所有文章公共转发
@@ -251,6 +249,13 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
                 BgGlobal.CHECK_ATTENDANCE, requestData, lp);
     }
 
+
+    //请求教师列表
+    public void requestTeachersList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        TeacherListPaser lp = new TeacherListPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHERS_LIST, requestData, lp);
+    }
 
     @Override
     public void requestResponse(Object obj) {

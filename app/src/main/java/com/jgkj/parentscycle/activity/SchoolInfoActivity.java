@@ -7,13 +7,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.ArrayList;
@@ -60,6 +64,13 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     @Bind(R.id.shool_info_activity_leave_school_rel)
     RelativeLayout leaveSchoolRel;
 
+    @Bind(R.id.school_info_activity_job_tv)
+    TextView jobTv;
+
+    @Bind(R.id.school_info_activity_permission_tv)
+    TextView permissionTv;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +86,8 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         //requestAnnouncementPublish();
         //requestClassListBySchoolId();
         //requestAnnouncementList();
-        requestAnnouncementCommentSave();
+//        requestAnnouncementCommentSave();
+        requestTeacherInfo();
     }
 
     private void initViews() {
@@ -84,7 +96,14 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
     }
 
 
-
+    private void requestTeacherInfo() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
+        requestData.put("schoolid", "1");  //暂时传1
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_LIST, requestData, lp);
+    }
 
 
     //修改教师权限
@@ -175,6 +194,17 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
 
     @Override
     public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof TeacherInfoListInfo) {
+            if (nbs.isSuccess()) {
+                TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
+                jobTv.setText(tii.getAnalysis());
+                permissionTv.setText(UserInfo.getTitleByPermission(tii.getPermissions()));
+            } else {
+                ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+            }
+        }
 
     }
 
@@ -186,7 +216,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         } else if (v == makeClassRel) {
             startActivity(new Intent(SchoolInfoActivity.this,MakeClassActivity.class));
         } else if (v == teacherManagementRel) {
-            startActivity(new Intent(this,TeacherInfoActivity.class));
+            startActivity(new Intent(this,ManageTeachersListActivity.class));
         } else if (v == classMangementRel) {
             startActivity(new Intent(this,MangementClassActivity.class));
         }

@@ -2,14 +2,12 @@ package com.jgkj.parentscycle.activity;
 
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,7 +23,6 @@ import com.jgkj.parentscycle.adapter.AccountInfoAdapter;
 import com.jgkj.parentscycle.bean.PerfectInfoInfo;
 import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
-import com.jgkj.parentscycle.json.GetVerifyPhoneNumPaser;
 import com.jgkj.parentscycle.json.PerfectInfoPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;

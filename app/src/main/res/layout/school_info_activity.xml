@@ -25,6 +25,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/school_info_activity_job_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -56,6 +57,7 @@
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/school_info_activity_permission_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

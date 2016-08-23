@@ -42,4 +42,5 @@ public class BgGlobal {
     public static final String BABY_ASK_LEAVE_ADD = "babyAskforLeave/save"; //家长版-宝宝请假添加     (此接口教师也可以使用，看具体需求，如果是签到直接改变类型，内容可不传)
     public static final String ASK_FOR_LEAVE_MODIFY_FOR_TEACHER_VERSION = "babyAskforLeave/update"; // 教师版请假修改
     public static final String CHECK_ATTENDANCE = "babyAskforLeave/babyAskforLeaveList"; //考勤日历 颜色列表  根据类型显示 各种颜色
+    public static final String TEACHERS_LIST = "teacherinfo/getTeacherinfoList";  //教师列表
 }
