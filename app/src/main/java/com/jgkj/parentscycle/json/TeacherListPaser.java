@@ -3,15 +3,18 @@ package com.jgkj.parentscycle.json;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
 import com.jgkj.parentscycle.bean.TeachersListInfo;
 import com.jgkj.parentscycle.bean.TeachersListItemInfo;
 import com.jgkj.parentscycle.net.JsonUtil;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.PaserJson;
+import com.jgkj.parentscycle.utils.GsonUtil;
 
 import org.json.JSONException;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -22,8 +25,9 @@ public class TeacherListPaser implements PaserJson {
     public Object parseJSonObject(NetBeanSuper response) throws JSONException {
         Log.d("result", "the response code:" + response);
         if (response.obj != null) {
-            List<TeachersListItemInfo> atatol= JsonUtil.getListObject(response.getObj().toString(),TeachersListItemInfo.class);
             TeachersListInfo tli = new TeachersListInfo();
+            Type type = new TypeToken<List<TeachersListItemInfo>>() {}.getType();
+            List<TeachersListItemInfo> atatol = GsonUtil.getListObject(response.getObj().toString(),type);
             tli.setData(atatol);
             response.setObj(tli);
             return response;

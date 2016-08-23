@@ -49,14 +49,12 @@ public class ManageTeachersListActivity extends BaseActivity implements View.OnC
     @Bind(R.id.make_class_add_person_activity_content_lv)
     ListView mContentLv;
 
-    @Bind(R.id.make_class_add_person_activity_submit_btn)
-    Button confirmBtn;
 
     SelectTeacherListAdapter selectTeacherListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.make_class_add_person_activity);
+        setContentView(R.layout.manage_teacher_list_activity);
         ButterKnife.bind(this);
         initViews();
         requestTeachersList();
@@ -66,19 +64,19 @@ public class ManageTeachersListActivity extends BaseActivity implements View.OnC
             showProgressDialog();
             HashMap<String, String> requestData = new HashMap<String, String>();
             TeacherListPaser lp = new TeacherListPaser();
-            NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_LIST, requestData, lp);
+            NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHERS_LIST, requestData, lp);
     }
 
 
     private void initViews() {
         rightTv.setVisibility(View.GONE);
-        titleTv.setText("选择老师");
+        titleTv.setText("老师管理");
         titleTv.setTextColor(Color.BLACK);
         titleBg.setBackgroundColor(Color.WHITE);
 
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv,R.id.make_class_add_person_activity_submit_btn})
+    @OnClick({R.id.baby_document_activity_back_iv})
 
     @Override
     public void onClick(View v) {

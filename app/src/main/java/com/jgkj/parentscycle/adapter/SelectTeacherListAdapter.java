@@ -13,6 +13,7 @@ import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
 import com.jgkj.parentscycle.bean.TeachersListInfo;
 import com.jgkj.parentscycle.bean.TeachersListItemInfo;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -85,7 +86,7 @@ public class SelectTeacherListAdapter extends BaseAdapter {
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             holder = new MineViewHolder();
-            convertView = mInflater.inflate(R.layout.make_class_add_person_avtivity_lv_item, null);
+            convertView = mInflater.inflate(R.layout.manage_teacher_list_avtivity_lv_item, null);
             convertView.setTag(holder);
             holder.nameTv = (TextView)convertView.findViewById(R.id.make_class_add_person_activity_content_lv_item_user_name_tv);
             holder.rightSymbleIv = (ImageView)convertView.findViewById(R.id.make_class_add_person_activity_content_lv_item_right_symble_iv);
@@ -96,16 +97,13 @@ public class SelectTeacherListAdapter extends BaseAdapter {
 
         TeachersListItemInfo makeClassAddPersonInfo = contentData.get(position);
         holder.nameTv.setText(makeClassAddPersonInfo.getTeachername());
-        if (selectedData.get(position) != null) {
-            if (selectedData.get(position) > 0) {
-                holder.rightSymbleIv.setVisibility(View.VISIBLE);
-            } else {
-                holder.rightSymbleIv.setVisibility(View.GONE);
-            }
-        } else {
-            holder.rightSymbleIv.setVisibility(View.GONE);
-        }
 
+        holder.rightSymbleIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilTools.toChatModule(v.getContext());
+            }
+        });
 
         return convertView;
     }

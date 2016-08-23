@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@color/white"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/make_class_add_person_activity_content_lv_item_user_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/user_default_icon" />
+
+        <TextView
+            android:id="@+id/make_class_add_person_activity_content_lv_item_user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/make_class_add_person_activity_content_lv_item_user_icon_iv"
+            android:layout_marginLeft="10dp"
+            android:text="1"
+            />
+
+        <ImageView
+            android:id="@+id/make_class_add_person_activity_content_lv_item_right_symble_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/chat_icon"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
