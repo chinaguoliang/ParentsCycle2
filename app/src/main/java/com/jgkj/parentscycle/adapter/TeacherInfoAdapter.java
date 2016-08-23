@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
@@ -46,15 +47,24 @@ public class TeacherInfoAdapter extends BaseAdapter {
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             holder = new MineViewHolder();
-            convertView = mInflater.inflate(R.layout.hall_mine_fragment_lv_item, null);
+            convertView = mInflater.inflate(R.layout.manage_teachers_list_activity_lv_item, null);
             convertView.setTag(holder);
             holder.contentDescTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_desc_tv);
             holder.btmDivider = convertView.findViewById(R.id.hall_mine_fragment_lv_item_btm_divider);
+            holder.contentEt = (EditText) convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_content_et);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
 
-        holder.contentDescTv.setText(contentData.get(position));
+        String contentStr = contentData.get(position);
+        String names[] =contentStr.split("_");
+        if (names.length > 1) {
+            holder.contentEt.setText(names[1]);
+        } else {
+            holder.contentEt.setVisibility(View.GONE);
+        }
+
+        holder.contentDescTv.setText(names[0]);
         if (position == (contentData.size() - 1)) {
             holder.btmDivider.setVisibility(View.VISIBLE);
         } else {
@@ -67,5 +77,6 @@ public class TeacherInfoAdapter extends BaseAdapter {
     class MineViewHolder {
         TextView contentDescTv;    // 消息未读条数
         View btmDivider;
+        EditText contentEt;
     }
 }

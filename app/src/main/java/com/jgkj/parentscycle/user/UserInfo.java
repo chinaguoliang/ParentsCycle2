@@ -29,6 +29,15 @@ public class UserInfo {
         return result;
     }
 
+    public static String getSexByServerData(String serverData) {
+        if (TextUtils.equals(serverData,"1")) {
+            return "男";
+        } else if (TextUtils.equals(serverData,"0")) {
+            return "女";
+        }
+        return "未知";
+    }
+
 
     public static String phoneNumber;
     public static boolean isLogined;

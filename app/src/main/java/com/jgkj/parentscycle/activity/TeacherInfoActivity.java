@@ -19,10 +19,18 @@ import com.jgkj.parentscycle.adapter.ModifyClassDialogLvAdapter;
 import com.jgkj.parentscycle.adapter.ModifyPermissionDialogLvAdapter;
 import com.jgkj.parentscycle.adapter.TeacherInfoAdapter;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
+import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,7 +40,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/8/3.
  */
-public class TeacherInfoActivity extends BaseActivity implements View.OnClickListener {
+public class TeacherInfoActivity extends BaseActivity implements View.OnClickListener,NetListener {
     @Bind(R.id.title_bar_layout_rel)
     View titleBg;
 
@@ -72,32 +80,44 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         });
+
+        Bundle bundle = getIntent().getExtras();
+        String teacherId = bundle.getString("teacher_id");
+
+        requestTeacherInfo(teacherId);
     }
 
-    private List<String> getContentData() {
+    private void requestTeacherInfo(String teacherId) {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("tmpinfoid", teacherId);
+        requestData.put("schoolid", "1");  //暂时传1
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_LIST, requestData, lp);
+    }
+
+    private List<String> getContentData(TeacherInfoListInfo tii) {
         ArrayList<String> data = new ArrayList<String>();
-        data.add("职务");
-        data.add("权限");
-        data.add("昵称");
-        data.add("姓名");
-        data.add("性别");
-        data.add("民族");
-        data.add("出生日期");
-        data.add("手机号");
-        data.add("负责班级");
-        data.add("建立班级");
-        data.add("管理老师");
-        data.add("班级管理");
-        data.add("离开幼儿园");
+        data.add("职务_" + tii.getAnalysis());
+        data.add("权限_" + UserInfo.getTitleByPermission(tii.getPermissions()));
+        data.add("昵称_" + tii.getNickname());
+        data.add("姓名_" + tii.getTeachername());
+        data.add("性别_" + UserInfo.getSexByServerData(tii.getTeachersex()));
+        data.add("民族_" + tii.getNationality());
+        data.add("出生日期_" + tii.getBirthdate());
+        data.add("手机号_" + tii.getPhone());
+        data.add("负责班级_" + tii.getClassid());
+        data.add("建立班级_");
+        data.add("管理老师_");
+        data.add("班级管理_");
+        data.add("离开幼儿园_");
         return data;
     }
 
     private void initViews() {
         titleBg.setBackgroundColor(0x00000000);
         rightTv.setVisibility(View.GONE);
-        titleTv.setText("李老师");
-        teacherInfoAdapter = new TeacherInfoAdapter(this, getContentData());
-        contentLv.setAdapter(teacherInfoAdapter);
+
     }
 
 
@@ -230,5 +250,21 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof TeacherInfoListInfo) {
+            if (nbs.isSuccess()) {
+                TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
+                titleTv.setText(tii.getTeachername());
+                teacherInfoAdapter = new TeacherInfoAdapter(this, getContentData(tii));
+                contentLv.setAdapter(teacherInfoAdapter);
+            } else {
+                ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+            }
+        }
     }
 }
