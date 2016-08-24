@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.ClassesAndTeachersListItemInfo;
 import com.jgkj.parentscycle.bean.MangementClassChildItem;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.List;
 import java.util.Map;
@@ -58,13 +59,18 @@ public class MangementClassExpanLvAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.mangement_class_activity_elv_child_item, null);
             childHolder = new ChildHolder();
-//            childHolder.childImg = (ImageView) convertView.findViewById(R.id.img_child);
+            childHolder.childImg = (ImageView) convertView.findViewById(R.id.mangement_class_activity_elv_child_item_chat_iv);
             childHolder.childText = (TextView) convertView.findViewById(R.id.mangement_class_activity_elv_child_item_baby_name_tv);
             convertView.setTag(childHolder);
         }else {
             childHolder = (ChildHolder) convertView.getTag();
         }
-        //childHolder.childImg.setBackgroundResource(childMap.get(groupPosition).get(childPosition).getMarkerImgId());
+        childHolder.childImg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                UtilTools.toChatModule(v.getContext());
+            }
+        });
         childHolder.childText.setText(childMap.get(groupPosition).get(childPosition).getClassadviser());
         return convertView;
     }
