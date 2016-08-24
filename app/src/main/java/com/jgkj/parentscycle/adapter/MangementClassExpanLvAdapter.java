@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.ClassesAndTeachersListItemInfo;
 import com.jgkj.parentscycle.bean.MangementClassChildItem;
 
 import java.util.List;
@@ -24,10 +25,10 @@ public class MangementClassExpanLvAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private List<String> groupTitle;
     //子项是一个map，key是group的id，每一个group对应一个ChildItem的list
-    private Map<Integer, List<MangementClassChildItem>> childMap;
+    private Map<Integer, List<ClassesAndTeachersListItemInfo>> childMap;
     private Button groupButton;//group上的按钮
 
-    public MangementClassExpanLvAdapter(Context context, List<String> groupTitle, Map<Integer, List<MangementClassChildItem>> childMap) {
+    public MangementClassExpanLvAdapter(Context context, List<String> groupTitle, Map<Integer, List<ClassesAndTeachersListItemInfo>> childMap) {
         this.mContext = context;
         this.groupTitle = groupTitle;
         this.childMap = childMap;
@@ -38,7 +39,7 @@ public class MangementClassExpanLvAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         //我们这里返回一下每个item的名称，以便单击item时显示
-        return childMap.get(groupPosition).get(childPosition).getTitle();
+        return childMap.get(groupPosition).get(childPosition).getClassadviser();
     }
     /*
      * 取得给定分组中给定子视图的ID. 该组ID必须在组中是唯一的.必须不同于其他所有ID（分组及子项目的ID）
@@ -64,7 +65,7 @@ public class MangementClassExpanLvAdapter extends BaseExpandableListAdapter {
             childHolder = (ChildHolder) convertView.getTag();
         }
         //childHolder.childImg.setBackgroundResource(childMap.get(groupPosition).get(childPosition).getMarkerImgId());
-        childHolder.childText.setText(childMap.get(groupPosition).get(childPosition).getTitle());
+        childHolder.childText.setText(childMap.get(groupPosition).get(childPosition).getClassadviser());
         return convertView;
     }
 

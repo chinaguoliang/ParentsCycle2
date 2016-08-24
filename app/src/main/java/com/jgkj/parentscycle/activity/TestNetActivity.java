@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
@@ -44,7 +45,8 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         if (v == testNetBtn) {
             //requestBabyAskForLeave();
 //            startActivity(new Intent(this, PublishFoodListActivity.class));
-            requestTeachersList();
+            //requestTeachersList();
+            requestClassListBySchoolId();
         }
     }
 
@@ -255,6 +257,14 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         HashMap<String, String> requestData = new HashMap<String, String>();
         TeacherListPaser lp = new TeacherListPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHERS_LIST, requestData, lp);
+    }
+
+    //按学校ID 查询班级列表 （发布选择班级展示）
+    private void requestClassListBySchoolId() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("schoolid", "1");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
     }
 
     @Override
