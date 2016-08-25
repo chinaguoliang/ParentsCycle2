@@ -148,7 +148,7 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
                 }
             }
 
-            LogUtil.d(TAG,teacherIdsDataStr);
+            //LogUtil.d(TAG,teacherIdsDataStr);
         }
 
         super.onActivityResult(requestCode, resultCode, data);
