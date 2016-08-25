@@ -4,12 +4,30 @@ package com.jgkj.parentscycle.bean;
  * Created by chen on 16/8/25.
  */
 public class ClassesAndTeachersListItemInfo {
+    boolean isQuery = false;
     String classadviser;
     String classid;
     String classname;
     String createtime;
     String schoolid;
     String updatetime;
+    String tmpinfoid;
+
+    public boolean isQuery() {
+        return isQuery;
+    }
+
+    public void setQuery(boolean query) {
+        isQuery = query;
+    }
+
+    public String getTmpinfoid() {
+        return tmpinfoid;
+    }
+
+    public void setTmpinfoid(String tmpinfoid) {
+        this.tmpinfoid = tmpinfoid;
+    }
 
     public String getClassadviser() {
         return classadviser;
