@@ -73,7 +73,7 @@ public class MangementClassActivity extends BaseActivity implements View.OnClick
 
     }
 
-    private void initListView(List<ClassesAndTeachersListItemInfo> dataList) {
+    private void initListView(final List<ClassesAndTeachersListItemInfo> dataList) {
         int count = dataList.size();
         ArrayList groupData = new ArrayList<String>();
         HashMap <String,Integer> nameIntMap = new HashMap <String,Integer>();
@@ -96,6 +96,8 @@ public class MangementClassActivity extends BaseActivity implements View.OnClick
         mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                ClassesAndTeachersListItemInfo cali = dataList.get(childPosition);
+
                 return false;
             }
         });

@@ -48,6 +48,7 @@
         android:background="@color/bg_gray"></View>
 
     <RelativeLayout
+        android:id="@+id/make_class_activity_add_adviser_rel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -67,6 +68,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:drawablePadding="5dp"
+            android:visibility="gone"
             android:paddingBottom="10dp"
             android:background="@null"
             android:paddingTop="10dp"
@@ -77,6 +79,17 @@
             android:textColorHint="@color/text_gray"
             android:textColor="@color/black"
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/right_arrow"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textColor="@color/text_gray" />
     </RelativeLayout>
 
     <View

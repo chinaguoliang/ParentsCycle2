@@ -63,6 +63,7 @@ public class ManageTeachersListActivity extends BaseActivity implements View.OnC
     private void requestTeachersList() {
             showProgressDialog();
             HashMap<String, String> requestData = new HashMap<String, String>();
+            requestData.put("schoolid", "1");
             TeacherListPaser lp = new TeacherListPaser();
             NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHERS_LIST, requestData, lp);
     }
@@ -104,7 +105,7 @@ public class ManageTeachersListActivity extends BaseActivity implements View.OnC
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         TeachersListItemInfo tii = (TeachersListItemInfo)selectTeacherListAdapter.getItem(position);
                         Bundle bundle = new Bundle();
-                        bundle.putString("teacher_id",tii.getTeacherid());
+                        bundle.putString("teacher_id",tii.getTmpinfoid());
                         ActivityUtils.jump(ManageTeachersListActivity.this,TeacherInfoActivity.class,-1,bundle);
                     }
                 });

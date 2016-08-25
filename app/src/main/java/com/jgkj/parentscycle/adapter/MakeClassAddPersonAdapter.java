@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
+import com.jgkj.parentscycle.bean.TeachersListItemInfo;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,10 +22,10 @@ import java.util.Map;
  * Created by chen on 16/8/3.
  */
 public class MakeClassAddPersonAdapter extends BaseAdapter {
-    private List<MakeClassAddPersonInfo> contentData;
+    private  List<TeachersListItemInfo>  contentData;
     private HashMap<Integer,Integer> selectedData = new HashMap<Integer,Integer>();
     private Context mContext;
-    public MakeClassAddPersonAdapter(Context context, List<MakeClassAddPersonInfo> data){
+    public MakeClassAddPersonAdapter(Context context,  List<TeachersListItemInfo>  data){
         contentData = data;
         mContext = context;
     }
@@ -51,10 +52,10 @@ public class MakeClassAddPersonAdapter extends BaseAdapter {
     }
 
     public void setSelectPosition(int position) {
-        MakeClassAddPersonInfo makeClassAddPersonInfo= contentData.get(position);
+        TeachersListItemInfo makeClassAddPersonInfo= contentData.get(position);
 
         if (selectedData.get(position) == null || selectedData.get(position) == 0) {
-            selectedData.put(position,Integer.parseInt(makeClassAddPersonInfo.getId()));
+            selectedData.put(position,Integer.parseInt(makeClassAddPersonInfo.getTeacherid()));
         } else {
             selectedData.put(position,0);
         }
@@ -92,8 +93,8 @@ public class MakeClassAddPersonAdapter extends BaseAdapter {
             holder = (MineViewHolder) convertView.getTag();
         }
 
-        MakeClassAddPersonInfo makeClassAddPersonInfo = contentData.get(position);
-        holder.nameTv.setText(makeClassAddPersonInfo.getName());
+        TeachersListItemInfo makeClassAddPersonInfo = contentData.get(position);
+        holder.nameTv.setText(makeClassAddPersonInfo.getTeachername());
         if (selectedData.get(position) != null) {
             if (selectedData.get(position) > 0) {
                 holder.rightSymbleIv.setVisibility(View.VISIBLE);

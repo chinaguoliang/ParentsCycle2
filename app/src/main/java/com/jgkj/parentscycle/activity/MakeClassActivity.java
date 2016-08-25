@@ -36,6 +36,8 @@ import butterknife.OnClick;
  */
 public class MakeClassActivity extends BaseActivity implements NetListener,View.OnClickListener{
     private static final String TAG = "MakeClassActivity";
+    public static final int ADD_TEACHER = 9;
+    public static final int ADD_ADVISER = 10;
 
     @Bind(R.id.title_bar_layout_rel)
     View titleBg;
@@ -55,13 +57,16 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
     @Bind(R.id.make_class_activity_class_name_et)
     EditText classNameEt;
 
-    @Bind(R.id.make_class_activity_class_master_name_et)
-    EditText classMasterEt;
+//    @Bind(R.id.make_class_activity_class_master_name_et)
+//    EditText classMasterEt;
+
+    @Bind(R.id.make_class_activity_add_adviser_rel)
+    RelativeLayout addAdviserRel;
 
 
     private String teacherIdsDataStr;
     private String classNameStr;
-    private String classMasterStr;
+    private String classAdviserStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,25 +84,27 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
         titleBg.setBackgroundColor(Color.WHITE);
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv,R.id.make_class_activity_add_teacher_rel,R.id.baby_document_right_title_tv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.make_class_activity_add_teacher_rel,R.id.baby_document_right_title_tv,R.id.make_class_activity_add_adviser_rel})
     @Override
     public void onClick(View v) {
        if (v == backIv) {
             finish();
         } else if (v == addTeacherRel) {
-           startActivityForResult(new Intent(this, MakeClassAddPersonActivity.class), 1);
+           startActivityForResult(new Intent(this, MakeClassAddPersonActivity.class), ADD_TEACHER);
+       } else if (v == addAdviserRel) {
+           startActivityForResult(new Intent(this, MakeClassAddPersonActivity.class), ADD_ADVISER);
        } else if (v == submitTv) {
            classNameStr = classNameEt.getText().toString();
-           classMasterStr = classMasterEt.getText().toString();
+//           classMasterStr = classMasterEt.getText().toString();
            if (TextUtils.isEmpty(classNameStr)) {
                ToastUtil.showToast(this,"请输入班级名称",Toast.LENGTH_SHORT);
                return;
            }
 
-           if (TextUtils.isEmpty(classMasterStr)) {
-               ToastUtil.showToast(this,"请输入班主任名字",Toast.LENGTH_SHORT);
-               return;
-           }
+//           if (TextUtils.isEmpty(classMasterStr)) {
+//               ToastUtil.showToast(this,"请输入班主任名字",Toast.LENGTH_SHORT);
+//               return;
+//           }
 
            boolean hadShow = showProgressDialog();
            if (!hadShow) {
@@ -114,7 +121,7 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("schoolid", "1"); //暂时传1
         requestData.put("classname", classNameStr);
-        requestData.put("classadviser", classMasterStr);
+        requestData.put("classadviser", classAdviserStr);
         ArrayList<String> ids = new ArrayList<String>();
         requestData.put("teacherid", teacherIdsDataStr);
         MakeClassPaser lp = new MakeClassPaser();
@@ -127,10 +134,20 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
-            teacherIdsDataStr = data.getStringExtra("teacher_ids_data");
-            if (TextUtils.isEmpty(teacherIdsDataStr)) {
-                teacherIdsDataStr = "";
+
+            if (requestCode == ADD_TEACHER) {
+                teacherIdsDataStr = data.getStringExtra("teacher_ids_data");
+                if (TextUtils.isEmpty(teacherIdsDataStr)) {
+                    teacherIdsDataStr = "";
+                }
+            } else if (requestCode == ADD_ADVISER) {
+
+                classAdviserStr = data.getStringExtra("teacher_ids_data");
+                if (TextUtils.isEmpty(classAdviserStr)) {
+                    classAdviserStr = "";
+                }
             }
+
             LogUtil.d(TAG,teacherIdsDataStr);
         }
 
