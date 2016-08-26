@@ -17,7 +17,7 @@ public class SexSelectDialog {
 
     public static  void showSexSelectDialog(final Context context,final  SexSlectDialogFinish ssdf) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setIcon(R.drawable.ic_launcher);
+        builder.setIcon(R.mipmap.ic_launcher);
         builder.setTitle("请选择性别");
         final String[] sex = {"女","男" };
         //    设置一个单项选择下拉框
