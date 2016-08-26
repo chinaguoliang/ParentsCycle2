@@ -116,12 +116,16 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     public void refreshUI() {
         if (UserInfo.isLogined) {
             if (userNameTv != null) {
+                if (UserInfo.loginInfo.getRole() != null)
                 userNameTv.setText(UserInfo.loginInfo.getRole().getName());
                 phoneNumberLl.setVisibility(View.VISIBLE);
-                phoneNumTv.setText(UserInfo.loginInfo.getInfo().getPhone());
+
+                if (UserInfo.loginInfo.getRole() != null)
+                phoneNumTv.setText(UserInfo.loginInfo.getRole().getPhone());
             }
 
             if (mUserIconIv != null) {
+                if (UserInfo.loginInfo.getInfo() != null)
                 AsyncImageUtil.asyncLoadImage(mUserIconIv,
                         UserInfo.loginInfo.getInfo().getHeadportrait(),
                         R.mipmap.user_default_icon, true, false);

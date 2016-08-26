@@ -10,7 +10,7 @@ public class LoginRoleObj {
     String name;
     String openId;
     String page;
-    String phone;
+    String phone = "";
     String position;
     String qq;
     String role;
