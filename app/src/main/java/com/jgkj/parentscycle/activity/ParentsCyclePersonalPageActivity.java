@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,12 +19,12 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
- * Created by chen on 16/7/24.
+ * Created by chen on 16/8/27.
  */
-public class ParentsCycleActivity extends BaseActivity implements View.OnClickListener{
+public class ParentsCyclePersonalPageActivity extends BaseActivity implements View.OnClickListener {
+
     @Bind(R.id.title_bar_layout_rel)
     RelativeLayout mWrapTitleRel;
 
@@ -39,49 +37,31 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTitleTv;
 
-    @Bind(R.id.parents_cycle_activity_lv)
+    @Bind(R.id.parents_cycle_personalpage_activity_lv)
     HeaderGridView mContentLv;
 
-    TextView newestTopicTv;
-    TextView recmommedTv;
-    TextView myCycleTv;
-    ImageView userIconIv;
-
-    int textGrayColor;
-    int blackColor;
     ParentsCycleAdapter mParentsCycleAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.parents_cycle_activity);
+        setContentView(R.layout.parents_cycle_personalpage_activity);
         ButterKnife.bind(this);
-        initView();
+        initViews();
     }
 
-    private void initView() {
+
+    private void initViews() {
         mWrapTitleRel.setBackgroundColor(this.getResources().getColor(R.color.white));
         rightTitleTv.setVisibility(View.GONE);
-        titleTv.setText("父母圈");
+        titleTv.setText("");
         titleTv.setTextColor(this.getResources().getColor(R.color.black));
+
         LayoutInflater inflater = LayoutInflater.from(this);
-        View headerView = inflater.inflate(R.layout.parents_cycle_activity_listview_header_view,null);
+        View headerView = inflater.inflate(R.layout.parents_cycle_personalpage_activity_listview_header_view,null);
         mContentLv.addHeaderView(headerView);
 
-        newestTopicTv = (TextView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_view_newest_topic_tv);
-        recmommedTv = (TextView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_view_recommend_tv);
-        myCycleTv = (TextView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_my_cycle_tv);
-        userIconIv = (ImageView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_view_user_icon_iv);
-
-        newestTopicTv.setOnClickListener(this);
-        recmommedTv.setOnClickListener(this);
-        myCycleTv.setOnClickListener(this);
-        userIconIv.setOnClickListener(this);
-
-        textGrayColor = this.getResources().getColor(R.color.text_gray);
-        blackColor = this.getResources().getColor(R.color.black);
-
         ArrayList<ParentsCycleInfo> dataList = getTestData(0);
-
         mParentsCycleAdapter = new ParentsCycleAdapter(this,dataList);
         mContentLv.setAdapter(mParentsCycleAdapter);
         mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,7 +72,7 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
-    private  ArrayList<ParentsCycleInfo> getTestData(int flag) {
+    private ArrayList<ParentsCycleInfo> getTestData(int flag) {
         ArrayList<ParentsCycleInfo> dataList = new ArrayList<ParentsCycleInfo>();
         for(int i = 0 ; i < 30 ; i++) {
             if (i % 2 == 0) {
@@ -127,48 +107,13 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-    @OnClick({R.id.baby_document_activity_back_iv})
-
     @Override
     public void onClick(View v) {
-        if (backIv == v) {
-            finish();
-        } else if (newestTopicTv == v) {
-            resetColor();
-            newestTopicTv.setTextColor(blackColor);
-            ArrayList<ParentsCycleInfo> dataList = getTestData(0);
 
-            mParentsCycleAdapter.setDataList(dataList);
-            mParentsCycleAdapter.notifyDataSetChanged();
-        } else if (recmommedTv == v) {
-            resetColor();
-            recmommedTv.setTextColor(blackColor);
-            ArrayList<ParentsCycleInfo> dataList = getTestData(1);
-
-
-            mParentsCycleAdapter.setDataList(dataList);
-            mParentsCycleAdapter.notifyDataSetChanged();
-        } else if (myCycleTv == v) {
-            resetColor();
-            myCycleTv.setTextColor(blackColor);
-            ArrayList<ParentsCycleInfo> dataList = getTestData(2);
-
-
-            mParentsCycleAdapter.setDataList(dataList);
-            mParentsCycleAdapter.notifyDataSetChanged();
-        } else if (userIconIv == v) {
-            startActivity(new Intent(v.getContext(),ParentsCyclePersonalPageActivity.class));
-        }
-    }
-
-    private void resetColor() {
-        newestTopicTv.setTextColor(textGrayColor);
-        recmommedTv.setTextColor(textGrayColor);
-        myCycleTv.setTextColor(textGrayColor);
     }
 
     @Override
-    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
+    public void uploadImgFinished(Bitmap bitmap, String uploadedKey) {
 
     }
 }
