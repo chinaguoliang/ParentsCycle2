@@ -2,6 +2,7 @@ package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by chen on 16/8/27.
@@ -41,6 +43,8 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
     HeaderGridView mContentLv;
 
     ParentsCycleAdapter mParentsCycleAdapter;
+
+    ImageView perfectInfoIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,9 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
                 startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
             }
         });
+
+        perfectInfoIv = (ImageView)headerView.findViewById(R.id.parents_cycle_personalpage_activity_perfect_info_iv);
+        perfectInfoIv.setOnClickListener(this);
     }
 
     private ArrayList<ParentsCycleInfo> getTestData(int flag) {
@@ -106,10 +113,14 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
         return dataList;
     }
 
-
+    @OnClick({R.id.baby_document_activity_back_iv})
     @Override
     public void onClick(View v) {
-
+        if (v == backIv) {
+            finish();
+        } else if (v == perfectInfoIv) {
+            startActivity(new Intent(v.getContext(),PerfectInformationActivity.class));
+        }
     }
 
     @Override
