@@ -67,6 +67,7 @@ public class AccountInfoAdapter extends BaseAdapter {
             holder.contentDescTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_name_tv);
             holder.rightArrowIv = (ImageView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_arrow_iv);
             holder.contentEt = (EditText)convertView.findViewById(R.id.hall_mine_fragment_lv_item_content_et);
+            holder.contentTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_content_tv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -104,15 +105,20 @@ public class AccountInfoAdapter extends BaseAdapter {
             String tempNames = names[1].trim();
             if (TextUtils.isEmpty(tempNames)) {
                 holder.contentEt.setText(dataMap.get(position));
+                holder.contentTv.setText(dataMap.get(position));
             } else {
+                holder.contentTv.setText(names[1]);
                 holder.contentEt.setText(names[1]);
             }
 
         }
 
-        if (position == 5 || position == 2 || position == 4 || position == 6) {
-            holder.contentEt.setFocusable(false);
-            holder.contentEt.setFocusableInTouchMode(false);
+        if (position == 2 || position == 4 || position == 6) {
+            holder.contentEt.setVisibility(View.GONE);
+            holder.contentTv.setVisibility(View.VISIBLE);
+        } else {
+            holder.contentEt.setVisibility(View.VISIBLE);
+            holder.contentTv.setVisibility(View.GONE);
         }
 
         return convertView;
@@ -123,5 +129,6 @@ public class AccountInfoAdapter extends BaseAdapter {
         TextView conentNameTv;
         ImageView rightArrowIv;
         EditText contentEt;
+        TextView contentTv;
     }
 }
