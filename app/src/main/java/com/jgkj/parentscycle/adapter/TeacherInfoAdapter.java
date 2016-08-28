@@ -52,6 +52,7 @@ public class TeacherInfoAdapter extends BaseAdapter {
             holder.contentDescTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_desc_tv);
             holder.btmDivider = convertView.findViewById(R.id.hall_mine_fragment_lv_item_btm_divider);
             holder.contentEt = (EditText) convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_content_et);
+            holder.contentTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_content_tv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -60,8 +61,7 @@ public class TeacherInfoAdapter extends BaseAdapter {
         String names[] =contentStr.split("_");
         if (names.length > 1) {
             holder.contentEt.setText(names[1]);
-        } else {
-            holder.contentEt.setVisibility(View.GONE);
+            holder.contentTv.setText(names[1]);
         }
 
         holder.contentDescTv.setText(names[0]);
@@ -71,6 +71,20 @@ public class TeacherInfoAdapter extends BaseAdapter {
             holder.btmDivider.setVisibility(View.GONE);
         }
 
+
+        if (position == 9 || position == 10 || position == 11 || position == 12) {
+            holder.contentEt.setVisibility(View.GONE);
+        } else {
+            holder.contentEt.setVisibility(View.VISIBLE);
+        }
+
+        if (position == 1) {
+            holder.contentEt.setVisibility(View.GONE);
+            holder.contentTv.setVisibility(View.VISIBLE);
+        } else {
+            holder.contentTv.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
@@ -78,5 +92,6 @@ public class TeacherInfoAdapter extends BaseAdapter {
         TextView contentDescTv;    // 消息未读条数
         View btmDivider;
         EditText contentEt;
+        TextView contentTv;
     }
 }
