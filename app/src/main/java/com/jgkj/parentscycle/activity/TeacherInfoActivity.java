@@ -61,6 +61,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     Dialog mLeaveSchoolDialog;
     Dialog mModifyClassDialog;
     Dialog mModifyPermissionDialog;
+    TeacherInfoListInfo mTeacherInfoListInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,6 +181,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mcda.setSelectPosition(position);
+
             }
         });
 
@@ -213,6 +215,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         classLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                requestModifyTeacherPermission("" + position);
             }
         });
 
@@ -259,6 +262,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         if (nbs.obj instanceof TeacherInfoListInfo) {
             if (nbs.isSuccess()) {
                 TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
+                mTeacherInfoListInfo = tii;
                 titleTv.setText(tii.getTeachername());
                 teacherInfoAdapter = new TeacherInfoAdapter(this, getContentData(tii));
                 contentLv.setAdapter(teacherInfoAdapter);
@@ -267,4 +271,17 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
             }
         }
     }
+
+    //修改教师权限
+    private void requestModifyTeacherPermission(String permission) {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("ostmpinfoid", mTeacherInfoListInfo.getTmpinfoid());  //登录时ID
+        requestData.put("permissions", permission);
+        requestData.put("analysis", mTeacherInfoListInfo.getAnalysis());
+        requestData.put("teacherid", mTeacherInfoListInfo.getTeacherid());
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.MODIFY_TEACHER_PERMISSION, requestData, lp);
+    }
+
 }
