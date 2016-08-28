@@ -6,6 +6,8 @@ allprojects {
     }
 }
 
+
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -25,6 +27,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dexOptions { javaMaxHeapSize "4g" }
 }
 
 repositories {
