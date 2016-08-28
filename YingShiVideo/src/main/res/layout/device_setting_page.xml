@@ -263,6 +263,7 @@
                     android:id="@+id/current_version_layout"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/device_set_layout_height"
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/device_set_padding"
@@ -287,6 +288,7 @@
                 
                 <LinearLayout
                     android:id="@+id/version_layout"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"

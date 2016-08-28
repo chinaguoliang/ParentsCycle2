@@ -393,26 +393,26 @@ public class EZDeviceSettingActivity extends RootActivity {
 
             // 版本部分
             if (mEZCameraInfo.getOnlineStatus() == 1 && mDeviceVersion != null) {
-                boolean bHasUpgrade = (mDeviceVersion.getIsNeedUpgrade() != 0);
-                mCurrentVersionTextView.setText(mDeviceVersion.getCurrentVersion());
-                mVersionView.setText(mDeviceVersion.getNewestVersion());
-                if (bHasUpgrade){
-                    mVersionNewestView.setVisibility(View.VISIBLE);
-                } else {
-                    mVersionNewestView.setVisibility(View.GONE);
-                }
+//                boolean bHasUpgrade = (mDeviceVersion.getIsNeedUpgrade() != 0);
+//                mCurrentVersionTextView.setText(mDeviceVersion.getCurrentVersion());
+//                mVersionView.setText(mDeviceVersion.getNewestVersion());
+//                if (bHasUpgrade){
+//                    mVersionNewestView.setVisibility(View.VISIBLE);
+//                } else {
+//                    mVersionNewestView.setVisibility(View.GONE);
+//                }
 
 //                bHasUpgrade = true;// TODO stub
-                if(bHasUpgrade) {
-                    mVersionNoticeView.setVisibility(View.VISIBLE);
-                    mVersionArrowView.setVisibility(View.VISIBLE);
-                    mVersionLayout.setOnClickListener(mOnClickListener);
-                } else {
-                    mVersionNoticeView.setVisibility(View.GONE);
-                    mVersionArrowView.setVisibility(View.GONE);
-                    mVersionLayout.setOnClickListener(null);
-                }
-                mVersionLayout.setVisibility(View.VISIBLE);
+//                if(bHasUpgrade) {
+//                    mVersionNoticeView.setVisibility(View.VISIBLE);
+//                    mVersionArrowView.setVisibility(View.VISIBLE);
+//                    mVersionLayout.setOnClickListener(mOnClickListener);
+//                } else {
+//                    mVersionNoticeView.setVisibility(View.GONE);
+//                    mVersionArrowView.setVisibility(View.GONE);
+//                    mVersionLayout.setOnClickListener(null);
+//                }
+//                mVersionLayout.setVisibility(View.VISIBLE);
             } else {
                 mVersionLayout.setVisibility(View.GONE);
             }
