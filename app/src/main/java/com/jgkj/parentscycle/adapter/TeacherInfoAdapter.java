@@ -72,7 +72,7 @@ public class TeacherInfoAdapter extends BaseAdapter {
         }
 
 
-        if (position == 9 || position == 10 || position == 11 || position == 12) {
+        if (position == 9 || position == 10 || position == 11) {
             holder.contentEt.setVisibility(View.GONE);
         } else {
             holder.contentEt.setVisibility(View.VISIBLE);

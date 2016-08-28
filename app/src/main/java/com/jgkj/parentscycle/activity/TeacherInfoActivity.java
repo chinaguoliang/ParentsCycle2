@@ -70,13 +70,13 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         contentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 12) {
+                if (position == 11) {
                     //离开幼儿园
                     showLeaveSchoolDialog();
-                } else if (position == 11) {
+                } else if (position == 10) {
                     //班级管理
                     showModifyClassDialog();
-                } else if (position == 1) {
+                } else if (position == 9) {
                     showModifyPermissionDialog();
                 }
             }
@@ -108,9 +108,8 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         data.add("出生日期_" + tii.getBirthdate());
         data.add("手机号_" + tii.getPhone());
         data.add("负责班级_" + tii.getClassid());
-        data.add("建立班级_");
-        data.add("管理老师_");
-        data.add("班级管理_");
+        data.add("更改职位与权限_");
+        data.add("更改班级_");
         data.add("离开幼儿园_");
         return data;
     }
