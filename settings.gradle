@@ -1,1 +1,1 @@
-include ':app', ':redpacketlibrary', ':EaseUI', ':huanxin'
+include ':app', ':redpacketlibrary', ':EaseUI', ':huanxin', ':YingShiVideo'

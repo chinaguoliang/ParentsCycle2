@@ -23,6 +23,8 @@ import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.activity.VideoOpenCourseActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
 import com.jgkj.parentscycle.utils.ImageHandler;
+import com.videogo.LoginSelectActivity;
+import com.videogo.openapi.EZOpenSDK;
 
 import java.util.ArrayList;
 
@@ -214,7 +216,9 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         } else if (v == babyDocTv) {
             startActivity(new Intent(getContext(), BabyDocumentActivity.class));
         } else if (v == courseLineTv) {
-            startActivity(new Intent(getContext(), OnineForumActivity.class));
+//            startActivity(new Intent(getContext(), OnineForumActivity.class));
+//            startActivity(new Intent(getContext(), LoginSelectActivity.class));
+            EZOpenSDK.getInstance().openLoginPage();
         } else if (v == listenBarTv) {
 
         }

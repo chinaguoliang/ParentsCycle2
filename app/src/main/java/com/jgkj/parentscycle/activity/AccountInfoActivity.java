@@ -31,6 +31,7 @@ import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
+import com.jgkj.parentscycle.widget.ListViewForScrollView;
 import com.jgkj.parentscycle.widget.SexSelectDialog;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
     private static final String TAG = "AccountInfoActivity";
     @Bind(R.id.account_info_activity_lv)
-    ListView mContentLv;
+    ListViewForScrollView mContentLv;
 
     @Bind(R.id.baby_document_activity_back_iv)
     ImageView backIv;

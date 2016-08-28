@@ -50,6 +50,19 @@
         android:gravity="right"
         android:background="@null"
         android:layout_marginRight="15dp"
+        android:textSize="@dimen/normal_text_size"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:id="@+id/hall_mine_fragment_lv_item_content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/normal_text_size"
+        android:textColor="@color/black"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
         />
 

@@ -45,6 +45,7 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
     TextView newestTopicTv;
     TextView recmommedTv;
     TextView myCycleTv;
+    ImageView userIconIv;
 
     int textGrayColor;
     int blackColor;
@@ -69,10 +70,12 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         newestTopicTv = (TextView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_view_newest_topic_tv);
         recmommedTv = (TextView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_view_recommend_tv);
         myCycleTv = (TextView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_my_cycle_tv);
+        userIconIv = (ImageView)headerView.findViewById(R.id.parents_cycle_activity_listview_header_view_user_icon_iv);
 
         newestTopicTv.setOnClickListener(this);
         recmommedTv.setOnClickListener(this);
         myCycleTv.setOnClickListener(this);
+        userIconIv.setOnClickListener(this);
 
         textGrayColor = this.getResources().getColor(R.color.text_gray);
         blackColor = this.getResources().getColor(R.color.black);
@@ -153,6 +156,8 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
 
             mParentsCycleAdapter.setDataList(dataList);
             mParentsCycleAdapter.notifyDataSetChanged();
+        } else if (userIconIv == v) {
+            startActivity(new Intent(v.getContext(),ParentsCyclePersonalPageActivity.class));
         }
     }
 

@@ -14,10 +14,16 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.videogo.constant.Config;
+import com.videogo.openapi.EZOpenSDK;
+
 /**
  * Created by chen on 16/7/5.
  */
 public class MyApplication extends Application {
+    // 开放平台申请的APP key & secret key
+    // open
+    public static String YING_SHI_APP_KEY = "8ff0d3e7aab5485195fd7ddcb0a33934"; //荧石appkey
 
     private static MyApplication instance;
     public static MyApplication getInstance() {
@@ -33,9 +39,14 @@ public class MyApplication extends Application {
         //red packet code : 初始化红包上下文，开启日志输出开关
         RedPacket.getInstance().initContext(this);
         RedPacket.getInstance().setDebugMode(true);
-
+        initYingShiVideo();
         instance = this;
         initImageLoader();
+    }
+
+    private void initYingShiVideo() {
+        Config.LOGGING = true;
+        EZOpenSDK.initLib(this, YING_SHI_APP_KEY, "");
     }
 
     private void initImageLoader() {
