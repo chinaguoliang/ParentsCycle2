@@ -572,7 +572,7 @@ public class EZRealPlayActivity extends Activity implements OnClickListener, Sur
                 getResources().getDrawable(com.videogo.open.R.drawable.message_back_selector));
         mLandscapeTitleBar.setOnTouchListener(this);
         mFullScreenTitleBarBackBtn = new CheckTextButton(this);
-        mFullScreenTitleBarBackBtn.setBackground(getResources().getDrawable(com.videogo.open.R.drawable.common_title_back_selector));
+//        mFullScreenTitleBarBackBtn.setBackground(getResources().getDrawable(com.videogo.open.R.drawable.common_title_back_selector));
         mLandscapeTitleBar.addLeftView(mFullScreenTitleBarBackBtn);
 
         //        mLandscapeTitleBar.addBackButton(new OnClickListener() {
