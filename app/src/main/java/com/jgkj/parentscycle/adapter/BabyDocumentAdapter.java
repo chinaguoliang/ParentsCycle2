@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.ModifyAttendanceActivity;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class BabyDocumentAdapter extends BaseAdapter {
             holder.babyNameTv = (TextView)convertView.findViewById(R.id.baby_document_lv_item_baby_name_tv);
             holder.secondMenu = (LinearLayout)convertView.findViewById(R.id.baby_document_lv_item_second_menu_ll);
             holder.askForLeaveTv = (TextView)convertView.findViewById(R.id.baby_document_activity_ask_for_leave_tv);
+            holder.chatTv = (TextView)convertView.findViewById(R.id.baby_document_activity_itme_chat_tv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -76,6 +78,13 @@ public class BabyDocumentAdapter extends BaseAdapter {
             }
         });
 
+        holder.chatTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilTools.toChatModule(v.getContext());
+            }
+        });
+
 
         return convertView;
     }
@@ -84,5 +93,6 @@ public class BabyDocumentAdapter extends BaseAdapter {
         TextView babyNameTv;	// 消息未读条数
         LinearLayout secondMenu;
         TextView askForLeaveTv;
+        TextView chatTv;
     }
 }
