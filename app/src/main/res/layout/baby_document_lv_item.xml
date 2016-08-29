@@ -75,6 +75,7 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/baby_document_activity_growth_record_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"

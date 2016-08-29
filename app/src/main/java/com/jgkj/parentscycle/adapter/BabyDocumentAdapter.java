@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.GrowthRecordActivity;
 import com.jgkj.parentscycle.activity.ModifyAttendanceActivity;
 import com.jgkj.parentscycle.utils.UtilTools;
 
@@ -59,6 +60,7 @@ public class BabyDocumentAdapter extends BaseAdapter {
             holder.secondMenu = (LinearLayout)convertView.findViewById(R.id.baby_document_lv_item_second_menu_ll);
             holder.askForLeaveTv = (TextView)convertView.findViewById(R.id.baby_document_activity_ask_for_leave_tv);
             holder.chatTv = (TextView)convertView.findViewById(R.id.baby_document_activity_itme_chat_tv);
+            holder.growthRecordTv = (TextView)convertView.findViewById(R.id.baby_document_activity_growth_record_tv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -85,6 +87,13 @@ public class BabyDocumentAdapter extends BaseAdapter {
             }
         });
 
+        holder.growthRecordTv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                context.startActivity(new Intent(context, GrowthRecordActivity.class));
+            }
+        });
 
         return convertView;
     }
@@ -94,5 +103,6 @@ public class BabyDocumentAdapter extends BaseAdapter {
         LinearLayout secondMenu;
         TextView askForLeaveTv;
         TextView chatTv;
+        TextView growthRecordTv;
     }
 }
