@@ -44,6 +44,7 @@
     <LinearLayout
         android:id="@+id/baby_document_lv_item_second_menu_ll"
         android:layout_width="match_parent"
+        android:paddingTop="10dp"
         android:visibility="gone"
         android:layout_height="50dp"
         android:orientation="horizontal">
@@ -56,8 +57,9 @@
             >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
                 android:layout_centerInParent="true"
                 android:drawableTop="@mipmap/baby_doc_chat"
                 android:drawablePadding="5dp"
@@ -72,8 +74,9 @@
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
                 android:layout_centerInParent="true"
                 android:drawableTop="@mipmap/baby_doc_grow_doc"
                 android:drawablePadding="5dp"
@@ -87,8 +90,9 @@
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
                 android:layout_centerInParent="true"
                 android:drawableTop="@mipmap/baby_doc_detail"
                 android:drawablePadding="5dp"
@@ -102,9 +106,11 @@
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/baby_document_activity_ask_for_leave_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
                 android:drawableTop="@mipmap/baby_doc_holiday"
                 android:drawablePadding="5dp"
                 android:textColor="@color/black"
