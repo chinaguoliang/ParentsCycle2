@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,10 +20,15 @@ public class TeacherInfoAdapter extends BaseAdapter {
 
     private List<String> contentData;
     private Context mContext;
+    public HashMap<Integer,String> dataMap = new HashMap<Integer,String>();
 
     public TeacherInfoAdapter(Context context, List<String> data) {
         contentData = data;
         mContext = context;
+        //初始化map 内容
+        for(int i = 0 ; i < 15 ; i++) {
+            dataMap.put(i,"");
+        }
     }
 
     @Override
@@ -41,8 +47,8 @@ public class TeacherInfoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        MineViewHolder holder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final MineViewHolder holder;
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,7 +68,19 @@ public class TeacherInfoAdapter extends BaseAdapter {
         if (names.length > 1) {
             holder.contentEt.setText(names[1]);
             holder.contentTv.setText(names[1]);
+            dataMap.put(position,names[1]);
         }
+
+        holder.contentEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                } else {
+                    dataMap.put(position,holder.contentEt.getText().toString());
+                }
+            }
+        });
 
         holder.contentDescTv.setText(names[0]);
         if (position == (contentData.size() - 1)) {
