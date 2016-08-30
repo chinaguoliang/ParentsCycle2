@@ -31,6 +31,11 @@ public class TeacherInfoAdapter extends BaseAdapter {
         }
     }
 
+    public void setPositionData(int position,String data) {
+        contentData.set(position,data);
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return contentData.size();
@@ -96,7 +101,7 @@ public class TeacherInfoAdapter extends BaseAdapter {
             holder.contentEt.setVisibility(View.VISIBLE);
         }
 
-        if (position == 1) {
+        if (position == 1 || position == 6 || position == 4) {
             holder.contentEt.setVisibility(View.GONE);
             holder.contentTv.setVisibility(View.VISIBLE);
         } else {

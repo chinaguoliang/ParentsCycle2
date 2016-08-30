@@ -1,7 +1,9 @@
 package com.jgkj.parentscycle.activity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,10 +40,13 @@ import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 import com.jgkj.parentscycle.widget.ListViewForScrollView;
+import com.jgkj.parentscycle.widget.SexSelectDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -49,7 +55,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/8/3.
  */
-public class TeacherInfoActivity extends BaseActivity implements View.OnClickListener,NetListener {
+public class TeacherInfoActivity extends BaseActivity implements View.OnClickListener,NetListener,DatePickerDialog.OnDateSetListener,SexSelectDialog.SexSlectDialogFinish {
     @Bind(R.id.title_bar_layout_rel)
     View titleBg;
 
@@ -97,6 +103,10 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
                     requestClassListBySchoolId();
                 } else if (position == 9) {
                     showModifyPermissionDialog();
+                } else if (position == 6) {
+                    showDateDialog();
+                } else if (position == 4) {
+                    SexSelectDialog.showSexSelectDialog(TeacherInfoActivity.this,TeacherInfoActivity.this);
                 }
             }
         });
@@ -114,6 +124,17 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         requestData.put("schoolid", "1");  //暂时传1
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_LIST, requestData, lp);
+    }
+
+    private void showDateDialog() {
+        Calendar d = Calendar.getInstance(Locale.CHINA);
+        int year=d.get(Calendar.YEAR);
+        int month=d.get(Calendar.MONTH);
+        int day=d.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dpd = new DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog,this,year,month,day);
+        dpd.getWindow().setBackgroundDrawable(new BitmapDrawable()); //设置为透明
+        dpd.show();
     }
 
     private List<String> getContentData(TeacherInfoListInfo tii) {
@@ -172,8 +193,19 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         View contentView = LayoutInflater.from(this).inflate(R.layout.leave_school_dialog, null);
         TextView confirmLeave = (TextView) contentView.findViewById(R.id.leave_school_dialog_confirm_leave_tv);
         TextView cancelBtn = (TextView) contentView.findViewById(R.id.leave_school_dialog_cancel_tv);
-        confirmLeave.setOnClickListener(changePhotoListener);
-        cancelBtn.setOnClickListener(changePhotoListener);
+        confirmLeave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTeacherInfoListInfo.setOnthejob("0");
+                requestSaveTeacherInfo();
+            }
+        });
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLeaveSchoolDialog.dismiss();
+            }
+        });
 
         mLeaveSchoolDialog.setContentView(contentView);
         mLeaveSchoolDialog.setCanceledOnTouchOutside(true);
@@ -186,6 +218,12 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         mLeaveSchoolDialog.getWindow().setAttributes(params);
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        String date = year + "-" + (monthOfYear + 1) + "-" +dayOfMonth;
+        String dateStr = "出生日期_" + date;
+        teacherInfoAdapter.setPositionData(6,dateStr);
+    }
 
     private void showModifyClassDialog(ArrayList< MakeClassAddPersonInfo > sourceData) {
         mModifyClassDialog = new Dialog(this, R.style.DialogTheme);
@@ -405,4 +443,14 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
     }
 
+    @Override
+    public void finishSlecct(int index) {
+        String sexResult = "";
+        if (index == 1) {
+            sexResult = "性别_男";
+        } else if (index == 0) {
+            sexResult = "性别_女";
+        }
+        teacherInfoAdapter.setPositionData(4,sexResult);
+    }
 }

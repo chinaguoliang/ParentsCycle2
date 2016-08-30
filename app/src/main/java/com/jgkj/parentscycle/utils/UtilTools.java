@@ -72,6 +72,7 @@ import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.ui.LoginActivity;
 import com.hyphenate.chatuidemo.ui.MainActivity;
 import com.jgkj.parentscycle.application.MyApplication;
+import com.videogo.openapi.EZOpenSDK;
 
 
 public class UtilTools {
@@ -94,6 +95,10 @@ public class UtilTools {
 				}
 			}
 		}).start();
+	}
+
+	public static void toVideoModule() {
+		EZOpenSDK.getInstance().openLoginPage();
 	}
 
 	public static String getRequestParams(ArrayList<String> data) {
