@@ -26,6 +26,7 @@ import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.bean.ClassesAndTeachersListItemInfo;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
 import com.jgkj.parentscycle.bean.ModifyPermissionInfo;
+import com.jgkj.parentscycle.bean.PerfectInfoInfo;
 import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
@@ -348,6 +349,11 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
                 finish();
             }
             ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+        } else if (nbs.obj instanceof PerfectInfoInfo) {
+            if (nbs.isSuccess()) {
+                finish();
+            }
+            ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
         }
     }
 
