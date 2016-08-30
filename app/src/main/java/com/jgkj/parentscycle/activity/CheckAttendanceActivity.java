@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -72,13 +73,13 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
         });
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.check_attendance_activity_modify_attendance_btn})
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             finish();
         } else if (v == mCheckAttendance) {
-
+            startActivity(new Intent(v.getContext(),ModifyAttendanceActivity.class));
         }
     }
     @Override
