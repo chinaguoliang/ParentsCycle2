@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,10 +20,20 @@ public class TeacherInfoAdapter extends BaseAdapter {
 
     private List<String> contentData;
     private Context mContext;
+    public HashMap<Integer,String> dataMap = new HashMap<Integer,String>();
 
     public TeacherInfoAdapter(Context context, List<String> data) {
         contentData = data;
         mContext = context;
+        //初始化map 内容
+        for(int i = 0 ; i < 15 ; i++) {
+            dataMap.put(i,"");
+        }
+    }
+
+    public void setPositionData(int position,String data) {
+        contentData.set(position,data);
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -41,8 +52,8 @@ public class TeacherInfoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        MineViewHolder holder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final MineViewHolder holder;
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,6 +63,7 @@ public class TeacherInfoAdapter extends BaseAdapter {
             holder.contentDescTv = (TextView) convertView.findViewById(R.id.hall_mine_fragment_lv_item_desc_tv);
             holder.btmDivider = convertView.findViewById(R.id.hall_mine_fragment_lv_item_btm_divider);
             holder.contentEt = (EditText) convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_content_et);
+            holder.contentTv = (TextView)convertView.findViewById(R.id.hall_mine_fragment_lv_item_right_content_tv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -60,15 +72,40 @@ public class TeacherInfoAdapter extends BaseAdapter {
         String names[] =contentStr.split("_");
         if (names.length > 1) {
             holder.contentEt.setText(names[1]);
-        } else {
-            holder.contentEt.setVisibility(View.GONE);
+            holder.contentTv.setText(names[1]);
+            dataMap.put(position,names[1]);
         }
+
+        holder.contentEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+
+                } else {
+                    dataMap.put(position,holder.contentEt.getText().toString());
+                }
+            }
+        });
 
         holder.contentDescTv.setText(names[0]);
         if (position == (contentData.size() - 1)) {
             holder.btmDivider.setVisibility(View.VISIBLE);
         } else {
             holder.btmDivider.setVisibility(View.GONE);
+        }
+
+
+        if (position == 9 || position == 10 || position == 11) {
+            holder.contentEt.setVisibility(View.GONE);
+        } else {
+            holder.contentEt.setVisibility(View.VISIBLE);
+        }
+
+        if (position == 1 || position == 6 || position == 4) {
+            holder.contentEt.setVisibility(View.GONE);
+            holder.contentTv.setVisibility(View.VISIBLE);
+        } else {
+            holder.contentTv.setVisibility(View.GONE);
         }
 
         return convertView;
@@ -78,5 +115,6 @@ public class TeacherInfoAdapter extends BaseAdapter {
         TextView contentDescTv;    // 消息未读条数
         View btmDivider;
         EditText contentEt;
+        TextView contentTv;
     }
 }

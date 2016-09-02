@@ -71,7 +71,9 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
         mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
+                if (position != 0) {
+                    startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
+                }
             }
         });
 

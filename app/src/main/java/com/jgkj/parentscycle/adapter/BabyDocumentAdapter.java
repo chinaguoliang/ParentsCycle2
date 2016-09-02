@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.GrowthRecordActivity;
+import com.jgkj.parentscycle.activity.ModifyAttendanceActivity;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.List;
 
@@ -54,6 +58,9 @@ public class BabyDocumentAdapter extends BaseAdapter {
             convertView.setTag(holder);
             holder.babyNameTv = (TextView)convertView.findViewById(R.id.baby_document_lv_item_baby_name_tv);
             holder.secondMenu = (LinearLayout)convertView.findViewById(R.id.baby_document_lv_item_second_menu_ll);
+            holder.askForLeaveTv = (TextView)convertView.findViewById(R.id.baby_document_activity_ask_for_leave_tv);
+            holder.chatTv = (TextView)convertView.findViewById(R.id.baby_document_activity_itme_chat_tv);
+            holder.growthRecordTv = (TextView)convertView.findViewById(R.id.baby_document_activity_growth_record_tv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -65,7 +72,28 @@ public class BabyDocumentAdapter extends BaseAdapter {
             holder.secondMenu.setVisibility(View.GONE);
         }
 
+        holder.askForLeaveTv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                context.startActivity(new Intent(context, ModifyAttendanceActivity.class));
+            }
+        });
 
+        holder.chatTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilTools.toChatModule(v.getContext());
+            }
+        });
+
+        holder.growthRecordTv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                context.startActivity(new Intent(context, GrowthRecordActivity.class));
+            }
+        });
 
         return convertView;
     }
@@ -73,5 +101,8 @@ public class BabyDocumentAdapter extends BaseAdapter {
     class MineViewHolder {
         TextView babyNameTv;	// 消息未读条数
         LinearLayout secondMenu;
+        TextView askForLeaveTv;
+        TextView chatTv;
+        TextView growthRecordTv;
     }
 }

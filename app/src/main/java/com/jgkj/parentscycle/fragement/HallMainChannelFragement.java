@@ -23,6 +23,7 @@ import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.activity.VideoOpenCourseActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
 import com.jgkj.parentscycle.utils.ImageHandler;
+import com.jgkj.parentscycle.utils.UtilTools;
 import com.videogo.LoginSelectActivity;
 import com.videogo.openapi.EZOpenSDK;
 
@@ -204,7 +205,8 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         if (v == rightTitleTv) {
             startActivity(new Intent(getContext(), TestNetActivity.class));
         } else if (v == publicVideoCourseTv) {
-            startActivity(new Intent(getContext(), VideoOpenCourseActivity.class));
+            //startActivity(new Intent(getContext(), VideoOpenCourseActivity.class));
+            UtilTools.toVideoModule();
         } else if (v == safeSendTv) {
             startActivity(new Intent(getContext(), CheckAttendanceActivity.class));
         } else if (v == foodTv) {
@@ -218,7 +220,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         } else if (v == courseLineTv) {
 //            startActivity(new Intent(getContext(), OnineForumActivity.class));
 //            startActivity(new Intent(getContext(), LoginSelectActivity.class));
-            EZOpenSDK.getInstance().openLoginPage();
+            UtilTools.toVideoModule();
         } else if (v == listenBarTv) {
 
         }

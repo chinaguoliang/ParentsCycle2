@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"></include>
+
+    <RelativeLayout
+        android:id="@+id/modify_attendance_activity_date_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/attendance_time"
+            android:drawablePadding="10dp"
+            android:text="考勤时间"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normal_text_size" />
+
+
+        <TextView
+            android:id="@+id/modify_attendance_activity_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="2016-6-8"
+            android:layout_marginRight="30dp"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/normal_text_size" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/right_arrow" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_gray"></View>
+
+    <RelativeLayout
+        android:id="@+id/modify_attendance_activity_type_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/modify_attendance_type"
+            android:drawablePadding="10dp"
+            android:text="修改类型"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normal_text_size" />
+
+        <TextView
+            android:id="@+id/modify_attendance_activity_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:text="未到园"
+            android:layout_marginRight="30dp"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/normal_text_size" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/right_arrow" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_gray"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/text_gray"
+            android:text="一句话描述"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="10"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/text_gray"
+            android:hint="例如:李明泽未打卡改为到园"
+            android:background="@null"
+            android:gravity="top"
+            android:textColorHint="@color/text_gray"
+            android:layout_marginTop="10dp"
+            android:minHeight="150dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/text_gray"
+            android:layout_marginTop="10dp"
+            android:text="0/60"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/modify_attendance_activity_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/main_blue_color"
+            android:layout_alignParentBottom="true"
+            android:text="保存"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

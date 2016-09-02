@@ -24,6 +24,7 @@ import com.jgkj.parentscycle.adapter.HallMineAdapter;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.AsyncImageUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,10 +98,13 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                         startActivity(new Intent(mUserIconIv.getContext(), AccountInfoActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(mUserIconIv.getContext(), PerfectInformationActivity.class));
+                        startActivity(new Intent(mUserIconIv.getContext(), SchoolInfoActivity.class));
                         break;
                     case 3:
-                        startActivity(new Intent(mUserIconIv.getContext(),SchoolInfoActivity.class));
+                        startActivity(new Intent(mUserIconIv.getContext(),ParentsCycleActivity.class));
+                        break;
+                    case 5:
+                        UtilTools.toChatModule(view.getContext());
                         break;
                 }
             }
@@ -136,8 +140,8 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     private List<String> getContentData() {
         ArrayList <String> data = new ArrayList<String>();
         data.add("帐号信息");
-        data.add("完善资料");
         data.add("学校信息");
+        data.add("父母圈");
         data.add("设置");
         data.add("家长咨询");
         return data;

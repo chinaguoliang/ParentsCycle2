@@ -147,7 +147,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         HashMap<Integer,String> data = mPerfectInformationAdapter.getData();
         requestData.put("analysis","1");
         requestData.put("birthdate","1987-11-11");
-        requestData.put("classid","1,2,3");
+        requestData.put("classid","61");
         if (TextUtils.isEmpty(uploadKey)) {
             requestData.put("headportrait","");
         } else {
@@ -159,7 +159,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
         requestData.put("nickname",data.get(1));
         requestData.put("onthejob","1"); // 1:在职  0： 离职
         requestData.put("permissions","1");
-        requestData.put("phone",UserInfo.loginInfo.getInfo().getPhone());
+        requestData.put("phone",UserInfo.loginInfo.getRole().getPhone());
         requestData.put("schoolname","橙子班");
         requestData.put("teacherid","1");
         requestData.put("teachername","哈哈");

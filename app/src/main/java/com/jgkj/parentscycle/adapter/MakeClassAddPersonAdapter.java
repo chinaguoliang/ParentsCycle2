@@ -55,7 +55,7 @@ public class MakeClassAddPersonAdapter extends BaseAdapter {
         TeachersListItemInfo makeClassAddPersonInfo= contentData.get(position);
 
         if (selectedData.get(position) == null || selectedData.get(position) == 0) {
-            selectedData.put(position,Integer.parseInt(makeClassAddPersonInfo.getTeacherid()));
+            selectedData.put(position,Integer.parseInt(makeClassAddPersonInfo.getTmpinfoid()));
         } else {
             selectedData.put(position,0);
         }
