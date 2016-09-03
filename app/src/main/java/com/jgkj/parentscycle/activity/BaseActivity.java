@@ -325,10 +325,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 
     private void uploadImg(String picturePath,String token) {
-        boolean hadShow = showProgressDialog();
-        if (!hadShow) {
-            return;
-        }
+        showProgressDialog();
 
 
         HashMap<String, String> map = new HashMap<String, String>();
@@ -343,7 +340,7 @@ public abstract class BaseActivity extends FragmentActivity {
                                          ResponseInfo info, JSONObject res) {
                         LogUtil.i("qiniu", key + ",\r\n " + info
                                 + ",\r\n " + res);
-
+                        hideProgressDialog();
                         if(info.isOK()==true){
                             //textview.setText(res.toString());
 
@@ -382,6 +379,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
 
     private void requestGetSevenCowToken() {
+        showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("bucketname", "testjg");
         GetSevenCowTokenPaser lp = new GetSevenCowTokenPaser();

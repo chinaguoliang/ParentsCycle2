@@ -10,6 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
+import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
+
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,7 +32,7 @@ import sun.bob.mcalendarview.vo.DateData;
  * 1宝宝档案-教师版-修改考勤
  * Created by chen on 16/7/30.
  */
-public class CheckAttendanceActivity extends BaseActivity implements View.OnClickListener{
+public class CheckAttendanceActivity extends BaseActivity implements View.OnClickListener,NetListener{
     public static final int YELLOW = 0xFFF3BB48;
     public static final int BLUE = 0xFF528DE6;
     public static final int GREEN = 0xFFC2E891;
@@ -50,6 +58,7 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
         setContentView(R.layout.check_attendance_activity);
         ButterKnife.bind(this);
         initViews();
+        requestCheckAttendance();
     }
 
     private void initViews() {
@@ -84,6 +93,29 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
     }
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
+
+    }
+
+    //考勤日历 颜色列表  根据类型显示 各种颜色
+    public void requestCheckAttendance() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("page", "1");
+        requestData.put("rows","2");
+        requestData.put("createdatetimeStart","2015");
+        requestData.put("createdatetimeEnd","2016");
+        requestData.put("classid","1");
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = sdf.format(System.currentTimeMillis());
+        //requestData.put("starttime",date);
+        ResetPasswordPaser lp = new ResetPasswordPaser();
+        NetRequest.getInstance().request(mQueue, this,
+                BgGlobal.CHECK_ATTENDANCE, requestData, lp);
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
 
     }
 }
