@@ -24,8 +24,7 @@ import com.jgkj.parentscycle.activity.VideoOpenCourseActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
 import com.jgkj.parentscycle.utils.ImageHandler;
 import com.jgkj.parentscycle.utils.UtilTools;
-import com.videogo.LoginSelectActivity;
-import com.videogo.openapi.EZOpenSDK;
+
 
 import java.util.ArrayList;
 
@@ -38,7 +37,7 @@ import butterknife.OnClick;
  * Created by chen on 16/7/9.
  */
 public class HallMainChannelFragement  extends Fragment implements View.OnClickListener{
-
+    private String flag = "remove the no use";
     @Bind(R.id.baby_document_activity_title)
     TextView centerTitleTv;
 
