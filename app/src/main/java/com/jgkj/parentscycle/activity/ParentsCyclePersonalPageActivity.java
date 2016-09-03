@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +42,9 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
 
     @Bind(R.id.parents_cycle_personalpage_activity_lv)
     HeaderGridView mContentLv;
+
+    @Bind(R.id.parents_cycle_personalpage_activity_send_msg_btn)
+    Button sendMsgBtn;
 
     ParentsCycleAdapter mParentsCycleAdapter;
 
@@ -115,13 +119,15 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
         return dataList;
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.parents_cycle_personalpage_activity_send_msg_btn})
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             finish();
         } else if (v == perfectInfoIv) {
             startActivity(new Intent(v.getContext(),PerfectInformationActivity.class));
+        } else if (v == sendMsgBtn) {
+            startActivity(new Intent(v.getContext(),PublishParentsCycleActivity.class));
         }
     }
 
