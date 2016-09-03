@@ -21,6 +21,15 @@ public class TeacherInfoListInfo {
     String teachername = "";
     String teachersex = "";
     String tmpinfoid = "";
+    Object classname = "";
+
+    public Object getClassname() {
+        return classname;
+    }
+
+    public void setClassname(Object classname) {
+        this.classname = classname;
+    }
 
     public String getAnalysis() {
         return analysis;

@@ -148,7 +148,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         data.add("民族_" + tii.getNationality());
         data.add("出生日期_" + tii.getBirthdate());
         data.add("手机号_" + tii.getPhone());
-        data.add("负责班级_" + tii.getClassid());
+        data.add("负责班级_" + tii.getClassname().toString());
         data.add("更改职位与权限_");
         data.add("更改班级_");
         data.add("离开幼儿园_");
@@ -297,26 +297,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         mModifyPermissionDialog.getWindow().setAttributes(params);
     }
 
-    private ArrayList<MakeClassAddPersonInfo> getTestData() {
-        ArrayList<MakeClassAddPersonInfo> data = new ArrayList<MakeClassAddPersonInfo>();
-        for (int i = 0 ; i < 3; i ++) {
-            MakeClassAddPersonInfo ma = new MakeClassAddPersonInfo();
-            if (i == 0) {
-                ma.setName("柠檬班");
-            }
 
-            if (i == 1) {
-                ma.setName("橘子班");
-            }
-
-            if (i == 2) {
-                ma.setName("苹果班");
-            }
-            ma.setId(String.valueOf(i + 1));
-            data.add(ma);
-        }
-        return data;
-    }
 
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
