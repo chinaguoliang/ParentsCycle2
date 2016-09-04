@@ -96,11 +96,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     Dialog mModifyClassDialog;
     String classesIds = ""; //classid 的组合
     String selBirthday = "";
-
+    int selSex = -1;
     TeacherInfoListInfo mTeacherInfoListInfo;
 
     private String headUrl = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,14 +111,14 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 3) {
+                if (position == 4) {
                     showDateDialog();
-                } else if (position == 5) {
+                } else if (position == 6) {
                     //帐号信息
                     startActivity(new Intent(AccountInfoActivity.this,AccountSafeActivity.class));
                 } else if (position == 2) {
                     SexSelectDialog.showSexSelectDialog(AccountInfoActivity.this,AccountInfoActivity.this);
-                } else if (position == 8) {
+                } else if (position == 9) {
                     //选择班级
                     requestClassListBySchoolId();
                 }
@@ -180,7 +179,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         List<String> dataList = mAccountInfoAdapter.getList();
         String date = year + "-" + (monthOfYear + 1) + "-" +dayOfMonth;
 //        dataList.remove(4);
-        dataList.set(3,"出生日期_" + date);
+        dataList.set(4,"出生日期_" + date);
         selBirthday = date;
         mAccountInfoAdapter.getData().put(4,date);
         mAccountInfoAdapter.notifyDataSetChanged();
@@ -242,7 +241,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                 data.add("账户安全_ ");
                 data.add("捆绑微信_ ");
                 data.add("捆绑QQ_ ");
-                data.add("选择班级_0");
+                data.add("选择班级_");
                 mAccountInfoAdapter = new AccountInfoAdapter(this, data);
                 mContentLv.setAdapter(mAccountInfoAdapter);
                 LogUtil.d(TAG,"success");
@@ -343,10 +342,12 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         }
         requestData.put("kbwx",mTeacherInfoListInfo.getKbwx()); //1: 是  0：否
         requestData.put("kbqq",mTeacherInfoListInfo.getKbqq());
-        if (TextUtils.isEmpty(data.get(2))) {
+
+        String nationality = data.get(3);
+        if (TextUtils.isEmpty(nationality)) {
             requestData.put("nationality",mTeacherInfoListInfo.getNationality());
         } else {
-            requestData.put("nationality",data.get(2));
+            requestData.put("nationality",nationality);
         }
 
         if (TextUtils.isEmpty(data.get(0))) {
@@ -357,10 +358,11 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         requestData.put("onthejob",mTeacherInfoListInfo.getOnthejob()); // 1:在职  0： 离职
         requestData.put("permissions",mTeacherInfoListInfo.getPermissions());
-        if (TextUtils.isEmpty(data.get(4))) {
+        String phone = data.get(5);
+        if (TextUtils.isEmpty(phone)) {
             requestData.put("phone",mTeacherInfoListInfo.getPhone());
         } else {
-            requestData.put("phone",data.get(4));
+            requestData.put("phone",phone);
         }
 
 
@@ -372,7 +374,13 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
             requestData.put("teachername",data.get(1));
         }
 
-        requestData.put("teachersex",mTeacherInfoListInfo.getTeachersex());
+        if (selSex == -1) {
+            requestData.put("teachersex",mTeacherInfoListInfo.getTeachersex());
+        } else {
+            requestData.put("teachersex",selSex + "");
+        }
+
+
         requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
         requestData.put("schoolid", ConfigPara.SCHOOL_ID);  //暂时传1
         PerfectInfoPaser lp = new PerfectInfoPaser();
@@ -393,11 +401,13 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         List<String> dataList = mAccountInfoAdapter.getList();
         if (index == 1) {
             dataList.set(2,"性别_男");
+            selSex = 1;
         } else if (index == 0) {
             dataList.set(2,"性别_女");
+            selSex = 0;
         }
 
-        mAccountInfoAdapter.getData().put(3,index + "");
+        mAccountInfoAdapter.getData().put(2,index + "");
         mAccountInfoAdapter.notifyDataSetChanged();
     }
 }
