@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"></View>
         <Button
+            android:id="@+id/course_activity_publish_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="发布"
@@ -75,96 +76,103 @@
             android:padding="3dp">
 
             <TextView
+                android:id="@+id/corse_activity_week_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周一"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
 
             <TextView
+                android:id="@+id/corse_activity_week_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周二"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/corse_activity_week_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周三"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/corse_activity_week_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周四"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/corse_activity_week_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周五"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/corse_activity_week_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周六"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/corse_activity_week_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周日"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
         </LinearLayout>
 
@@ -199,17 +207,25 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:text="上午"
+                            android:text="节次"
                             android:textColor="@color/text_gray" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:paddingLeft="10dp"
                             android:text="课程"
+                            android:gravity="center"
+                            android:textColor="@color/text_gray" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="删除"
+                            android:gravity="center"
                             android:textColor="@color/text_gray" />
                     </LinearLayout>
 
@@ -232,6 +248,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <LinearLayout
