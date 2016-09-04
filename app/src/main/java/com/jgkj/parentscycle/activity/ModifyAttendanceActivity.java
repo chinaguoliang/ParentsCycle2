@@ -16,9 +16,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.utils.UtilTools;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -158,4 +163,19 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
         params.width = UtilTools.SCREEN_WIDTH;
         mModifyAttendance.getWindow().setAttributes(params);
     }
+
+//    // 家长版-宝宝请假添加     (此接口教师也可以使用，看具体需求，如果是签到直接改变类型，内容可不传)
+//    public void requestBabyAskForLeave() {
+//        HashMap<String, String> requestData = new HashMap<String, String>();
+//        requestData.put("babyid", "1");
+//        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String date = sdf.format(System.currentTimeMillis());
+//        requestData.put("techerstarttime",date);
+//        requestData.put("asktype","1");
+//        requestData.put("askday","10");
+//        requestData.put("asktext","345435");
+//        ResetPasswordPaser lp = new ResetPasswordPaser();
+//        NetRequest.getInstance().request(mQueue, this,
+//                BgGlobal.BABY_ASK_LEAVE_ADD, requestData, lp);
+//    }
 }

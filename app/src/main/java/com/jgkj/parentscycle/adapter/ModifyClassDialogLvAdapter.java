@@ -61,6 +61,17 @@ public class ModifyClassDialogLvAdapter extends BaseAdapter {
       this.notifyDataSetChanged();
     }
 
+    public void setCurrentPosition(int position) {
+        selectedData.clear();
+        MakeClassAddPersonInfo makeClassAddPersonInfo= contentData.get(position);
+        if (selectedData.get(position) == null || selectedData.get(position) == 0) {
+            selectedData.put(position,Integer.parseInt(makeClassAddPersonInfo.getId()));
+        } else {
+            selectedData.put(position,0);
+        }
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return contentData.size();
