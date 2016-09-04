@@ -47,7 +47,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 //            startActivity(new Intent(this, PublishFoodListActivity.class));
             //requestTeachersList();
 //            requestClassListBySchoolId();
-            requestCheckAttendance();
+//            requestCheckAttendance();
         }
     }
 
