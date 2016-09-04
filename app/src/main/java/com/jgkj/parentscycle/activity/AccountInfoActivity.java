@@ -216,39 +216,46 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         } else {
             if (nbs.isSuccess()) {
                 TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
-                mTeacherInfoListInfo = tii;
-                classesIds = tii.getClassid();
-
-                nameTv.setText(tii.getTeachername());
-                phoneTv.setText(tii.getPhone());
-                AsyncImageUtil.asyncLoadImage(mIconIv,
-                        tii.getHeadportrait(),
-                        R.mipmap.user_default_icon, true, false);
-                ArrayList<String> data = new ArrayList<String>();
-                data.add("昵称_" + tii.getNickname());
-                data.add("姓名_" + tii.getTeachername());
-                if (TextUtils.equals(tii.getTeachersex(),"0")) {
-                    data.add("性别_女");
-                } else if (TextUtils.equals(tii.getTeachersex(),"1")) {
-                    data.add("性别_男");
-                }
-
-                data.add("民族_" + tii.getNationality());
-                data.add("出生日期_" + tii.getBirthdate());
-
-
-                data.add("手机号_" + tii.getPhone());
-                data.add("账户安全_ ");
-                data.add("捆绑微信_ ");
-                data.add("捆绑QQ_ ");
-                data.add("选择班级_");
-                mAccountInfoAdapter = new AccountInfoAdapter(this, data);
-                mContentLv.setAdapter(mAccountInfoAdapter);
+                initListView(tii);
                 LogUtil.d(TAG,"success");
             } else {
+                initListView(new TeacherInfoListInfo());
                 ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
             }
         }
+    }
+
+    private void initListView(TeacherInfoListInfo tii) {
+        mTeacherInfoListInfo = tii;
+        classesIds = tii.getClassid();
+
+        nameTv.setText(tii.getTeachername());
+        phoneTv.setText(tii.getPhone());
+        AsyncImageUtil.asyncLoadImage(mIconIv,
+                tii.getHeadportrait(),
+                R.mipmap.user_default_icon, true, false);
+        ArrayList<String> data = new ArrayList<String>();
+        data.add("昵称_" + tii.getNickname());
+        data.add("姓名_" + tii.getTeachername());
+        if (TextUtils.equals(tii.getTeachersex(),"0")) {
+            data.add("性别_女");
+        } else if (TextUtils.equals(tii.getTeachersex(),"1")) {
+            data.add("性别_男");
+        } else {
+            data.add("性别_ ");
+        }
+
+        data.add("民族_" + tii.getNationality());
+        data.add("出生日期_" + tii.getBirthdate());
+
+
+        data.add("手机号_" + tii.getPhone());
+        data.add("账户安全_ ");
+        data.add("捆绑微信_ ");
+        data.add("捆绑QQ_ ");
+        data.add("选择班级_");
+        mAccountInfoAdapter = new AccountInfoAdapter(this, data);
+        mContentLv.setAdapter(mAccountInfoAdapter);
     }
 
     private void initListView(final List<ClassesAndTeachersListItemInfo> dataList) {
