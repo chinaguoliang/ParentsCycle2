@@ -87,7 +87,7 @@ public class SchoolInfoActivity extends BaseActivity implements NetListener,View
         //requestClassListBySchoolId();
         //requestAnnouncementList();
 //        requestAnnouncementCommentSave();
-        requestTeacherInfo();
+        //requestTeacherInfo();
     }
 
     private void initViews() {
