@@ -7,11 +7,20 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.BabyDocumentAdapter;
+import com.jgkj.parentscycle.bean.ParentsPerfectInfo;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -21,7 +30,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/7/14.
  */
-public class BabyDocumentActivity extends BaseActivity implements View.OnClickListener{
+public class BabyDocumentActivity extends BaseActivity implements View.OnClickListener,NetListener{
     @Bind(R.id.baby_document_activity_lv)
     ListView mListView;
 
@@ -49,6 +58,7 @@ public class BabyDocumentActivity extends BaseActivity implements View.OnClickLi
         });
 
         title.setText("宝宝档案");
+        requestBabyList();
     }
 
     private List<String> getData(){
@@ -71,5 +81,28 @@ public class BabyDocumentActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
+    }
+
+    // 宝宝列表
+    public void requestBabyList() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows", "0");
+        requestData.put("page","10");
+        ResetPasswordPaser lp = new ResetPasswordPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.BABY_LIST, requestData, lp);
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        hideProgressDialog();
+//        if (nbs.obj instanceof ParentsPerfectInfo) {
+//            if (nbs.isSuccess()) {
+//                finish();
+//            }
+//
+//            ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
+//        }
     }
 }
