@@ -47,12 +47,14 @@
 
         <EditText
             android:id="@+id/perfect_information_activity_lv_item_et"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:visibility="gone"
             android:background="@null"
+            android:gravity="right"
+            android:textSize="@dimen/normal_text_size"
             android:layout_toLeftOf="@+id/perfect_information_activity_lv_item_right_arrow_iv"
             android:minWidth="100dp"
             />
@@ -67,7 +69,8 @@
             android:layout_marginRight="10dp"
             android:paddingTop="10dp"
             android:text="小明"
-            android:textColor="@color/text_gray" />
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/black" />
 
 
     </RelativeLayout>

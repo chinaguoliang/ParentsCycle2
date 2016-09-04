@@ -25,17 +25,23 @@
             android:textColor="@color/white"
             />
 
-
-        <ListView
-            android:id="@+id/perfect_information_activity_lv"
-            android:layout_above="@+id/perfect_information_activity_save_btn"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:listSelector="@drawable/listview_selector"
-            android:dividerHeight="1dp"
-            android:divider="@color/text_gray"
+            android:layout_above="@+id/perfect_information_activity_save_btn"
             >
-        </ListView>
+            <com.jgkj.parentscycle.widget.ListViewForScrollView
+                android:id="@+id/perfect_information_activity_lv"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:listSelector="@drawable/listview_selector"
+                android:dividerHeight="1dp"
+                android:divider="@color/text_gray"
+                >
+            </com.jgkj.parentscycle.widget.ListViewForScrollView>
+        </ScrollView>
+
     </RelativeLayout>
 
 
