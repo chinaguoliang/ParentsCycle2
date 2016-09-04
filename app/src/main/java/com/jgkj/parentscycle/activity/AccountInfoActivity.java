@@ -41,6 +41,8 @@ import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
+import com.jgkj.parentscycle.utils.CircularImage;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
@@ -81,12 +83,23 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.account_info_activity_save_btn)
     Button saveBtn;
 
+    @Bind(R.id.account_info_activity_name_tv)
+    TextView nameTv;
+
+    @Bind(R.id.account_info_activity_phone_tv)
+    TextView phoneTv;
+
+    @Bind(R.id.hall_mine_fragment_lv_header_user_icon_iv)
+    CircularImage mIconIv;
+
     AccountInfoAdapter mAccountInfoAdapter;
     Dialog mModifyClassDialog;
     String classesIds = ""; //classid 的组合
     String selBirthday = "";
 
     TeacherInfoListInfo mTeacherInfoListInfo;
+
+    private String headUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +148,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-    @OnClick({R.id.baby_document_activity_back_iv,R.id.account_info_activity_save_btn})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.account_info_activity_save_btn,R.id.hall_mine_fragment_lv_header_user_icon_iv})
     @Override
     public void onClick(View v) {
        if (v == backIv) {
@@ -146,6 +159,8 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                return;
            }
            requestSave();
+       } else if (v == mIconIv) {
+           showChangePhotoDialog();
        }
     }
 
@@ -204,6 +219,12 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                 TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
                 mTeacherInfoListInfo = tii;
                 classesIds = tii.getClassid();
+
+                nameTv.setText(tii.getTeachername());
+                phoneTv.setText(tii.getPhone());
+                AsyncImageUtil.asyncLoadImage(mIconIv,
+                        tii.getHeadportrait(),
+                        R.mipmap.user_default_icon, true, false);
                 ArrayList<String> data = new ArrayList<String>();
                 data.add("昵称_" + tii.getNickname());
                 data.add("姓名_" + tii.getTeachername());
@@ -298,7 +319,6 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
 
     public void requestSave() {
-        String uploadKey = "";
         HashMap<String, String> requestData = new HashMap<String, String>();
         HashMap<Integer,String> data = mAccountInfoAdapter.getData();
         requestData.put("analysis",mTeacherInfoListInfo.getAnalysis());
@@ -316,10 +336,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
             requestData.put("classid",classesIds);
         }
 
-        if (TextUtils.isEmpty(uploadKey)) {
+        if (TextUtils.isEmpty(headUrl)) {
             requestData.put("headportrait",mTeacherInfoListInfo.getHeadportrait());
         } else {
-            requestData.put("headportrait",BgGlobal.IMG_SERVER_PRE_URL + uploadKey);
+            requestData.put("headportrait",headUrl);
         }
         requestData.put("kbwx",mTeacherInfoListInfo.getKbwx()); //1: 是  0：否
         requestData.put("kbqq",mTeacherInfoListInfo.getKbqq());
@@ -362,7 +382,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
-
+        headUrl = BgGlobal.IMG_SERVER_PRE_URL + uploadedKey;
+        AsyncImageUtil.asyncLoadImage(mIconIv,
+                headUrl,
+                R.mipmap.user_default_icon, true, false);
     }
 
     @Override
