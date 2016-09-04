@@ -21,6 +21,7 @@ import com.jgkj.parentscycle.activity.PerfectInformationActivity;
 import com.jgkj.parentscycle.activity.SchoolInfoActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
+import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.AsyncImageUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
@@ -124,6 +125,9 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                 if (UserInfo.loginInfo.getRole() != null)
                 userNameTv.setText(UserInfo.loginInfo.getRole().getName());
                 phoneNumberLl.setVisibility(View.VISIBLE);
+                if (UserInfo.loginInfo.getInfo() != null) {
+                    userNameTv.setText(UserInfo.loginInfo.getInfo().getNickname());
+                }
 
                 if (UserInfo.loginInfo.getRole() != null)
                 phoneNumTv.setText(UserInfo.loginInfo.getRole().getPhone());
