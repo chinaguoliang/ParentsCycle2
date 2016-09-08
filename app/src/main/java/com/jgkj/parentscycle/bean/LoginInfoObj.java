@@ -4,24 +4,24 @@ package com.jgkj.parentscycle.bean;
  * Created by chen on 16/8/20.
  */
 public class LoginInfoObj {
-    String analysis;
-    String birthdate;
-    String classid;
-    String createtime;
-    String headportrait;
-    String kbqq;
-    String kbwx;
-    String nationality;
-    String nickname;
-    String onthejob;
-    String permissions;
-    String phone;
-    String schoolname;
-    String teacherid;
-    String teachername;
-    String teachersex;
-    String tmpinfoid;
-    String updatetime;
+    String analysis = "";
+    String birthdate = "";
+    String classid = "";
+    String createtime = "";
+    String headportrait = "";
+    String kbqq = "";
+    String kbwx = "";
+    String nationality = "";
+    String nickname = "";
+    String onthejob = "";
+    String permissions = "";
+    String phone = "";
+    String schoolname = "";
+    String teacherid = "";
+    String teachername = "";
+    String teachersex = "";
+    String tmpinfoid = "";
+    String updatetime = "";
 
     public String getAnalysis() {
         return analysis;

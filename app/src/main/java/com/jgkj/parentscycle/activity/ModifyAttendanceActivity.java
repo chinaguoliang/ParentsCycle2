@@ -5,20 +5,29 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.ModifyAttendanceTeacherInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.ModifyAttendanceTeacherPaser;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.text.SimpleDateFormat;
@@ -33,7 +42,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/8/29.
  */
-public class ModifyAttendanceActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener,View.OnClickListener {
+public class ModifyAttendanceActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener,View.OnClickListener,NetListener {
     @Bind(R.id.baby_document_activity_back_iv)
     ImageView backIv;
 
@@ -61,7 +70,10 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
     @Bind(R.id.modify_attendance_activity_date_tv)
     TextView dateTv;
 
+    @Bind(R.id.modify_attendance_activity_content_text_et)
+    EditText contentEt;
 
+    int attendanceType = 0;
     Dialog mModifyAttendance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +110,12 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
         if (v == backIv) {
             finish();
         } else if (v == saveBtn) {
-
+            String contentStr = contentEt.getText().toString();
+            if (TextUtils.isEmpty(contentStr)) {
+                ToastUtil.showToast(this,"请填写内容",Toast.LENGTH_SHORT);
+                return;
+            }
+            requestBabyAskForLeave();
         } else if (v == dateRel) {
             showDateDialog();
         } else if (v == typeRel) {
@@ -121,6 +138,7 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
         hadGoSchoolTv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                attendanceType = 0;
                 mModifyAttendance.dismiss();
                 typeTv.setText(hadGoSchoolTv.getText());
             }
@@ -130,6 +148,7 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
         askForLeaveTv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                attendanceType = 1;
                 mModifyAttendance.dismiss();
                 typeTv.setText(askForLeaveTv.getText());
             }
@@ -139,6 +158,7 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
         notToSchoolTv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                attendanceType = 2;
                 mModifyAttendance.dismiss();
                 typeTv.setText(notToSchoolTv.getText());
             }
@@ -164,18 +184,52 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
         mModifyAttendance.getWindow().setAttributes(params);
     }
 
-//    // 家长版-宝宝请假添加     (此接口教师也可以使用，看具体需求，如果是签到直接改变类型，内容可不传)
-//    public void requestBabyAskForLeave() {
+    // 家长版-宝宝请假添加     (此接口教师也可以使用，看具体需求，如果是签到直接改变类型，内容可不传)
+    public void requestBabyAskForLeave() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("babyid", UserInfo.loginInfo.getInfo().getTmpinfoid());
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = sdf.format(System.currentTimeMillis());
+        requestData.put("techerstarttime",dateTv.getText().toString() + " 00:00:00");
+        requestData.put("asktype",attendanceType + "");
+        requestData.put("askday","1");
+        requestData.put("asktext",contentEt.getText().toString());
+        ModifyAttendanceTeacherPaser lp = new ModifyAttendanceTeacherPaser();
+        NetRequest.getInstance().request(mQueue, this,
+                BgGlobal.BABY_ASK_LEAVE_ADD, requestData, lp);
+    }
+
+
+//    // 教师版请假修改
+//    public void requestAskForLeaveForTeacherVersion() {
+//        showProgressDialog();
 //        HashMap<String, String> requestData = new HashMap<String, String>();
-//        requestData.put("babyid", "1");
-//        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        requestData.put("askday", "1");
+//        requestData.put("asktext","20160601");
+//        requestData.put("asktype","22");
+//        requestData.put("babyid","12312");
+//        requestData.put("schoolid","555");
+//        requestData.put("classid","999");
+//        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
 //        String date = sdf.format(System.currentTimeMillis());
-//        requestData.put("techerstarttime",date);
-//        requestData.put("asktype","1");
-//        requestData.put("askday","10");
-//        requestData.put("asktext","345435");
-//        ResetPasswordPaser lp = new ResetPasswordPaser();
+//        requestData.put("dateday",date);
+//        ModifyAttendanceTeacherPaser lp = new ModifyAttendanceTeacherPaser();
 //        NetRequest.getInstance().request(mQueue, this,
-//                BgGlobal.BABY_ASK_LEAVE_ADD, requestData, lp);
+//                BgGlobal.ASK_FOR_LEAVE_MODIFY_FOR_TEACHER_VERSION, requestData, lp);
 //    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof ModifyAttendanceTeacherInfo) {
+            if (nbs.isSuccess()) {
+                finish();
+            } else {
+
+            }
+            ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+        }
+    }
 }

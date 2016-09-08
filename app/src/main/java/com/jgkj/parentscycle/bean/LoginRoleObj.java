@@ -4,19 +4,19 @@ package com.jgkj.parentscycle.bean;
  * Created by chen on 16/8/20.
  */
 public class LoginRoleObj {
-    String company;
-    String id;
-    String iocimg;
-    String name;
-    String openId;
-    String page;
+    String company = "";
+    String id = "";
+    String iocimg = "";
+    String name = "";
+    String openId = "";
+    String page = "";
     String phone = "";
-    String position;
-    String qq;
-    String role;
-    String rows;
-    String url;
-    String username;
+    String position = "";
+    String qq = "";
+    String role = "";
+    String rows = "";
+    String url = "";
+    String username = "";
 
     public String getPage() {
         return page;
