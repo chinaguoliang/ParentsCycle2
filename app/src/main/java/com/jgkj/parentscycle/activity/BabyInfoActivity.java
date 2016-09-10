@@ -13,7 +13,10 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
+import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
+import com.jgkj.parentscycle.utils.CircularImage;
 import com.jgkj.parentscycle.widget.ListViewForScrollView;
 import com.jgkj.parentscycle.widget.SexSelectDialog;
 
@@ -41,6 +44,12 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
 
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTv;
+
+    @Bind(R.id.baby_info_activity_user_icon_iv)
+    CircularImage iconIv;
+
+    @Bind(R.id.baby_info_activity_top_name_tv)
+    TextView topNameTv;
 
 
     @Bind(R.id.baby_info_activity_name_rel)
@@ -121,6 +130,8 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.baby_info_activity_leave_school_rel)
     RelativeLayout leaveSchoolRel;
 
+    String headUrl = "";
+
     int selSex = -1;
 
     @Override
@@ -137,18 +148,14 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         titleTv.setText("宝宝详情");
     }
 
-    @Override
-    public void uploadImgFinished(Bitmap bitmap, String uploadedKey) {
-
-    }
-
     @OnClick({R.id.baby_document_activity_back_iv,
               R.id.baby_info_activity_join_class_rel,
               R.id.baby_info_activity_sex_rel,
             R.id.baby_info_activity_birthday_rel,
             R.id.baby_info_activity_transfer_class_rel,
             R.id.baby_info_activity_leave_school_rel,
-            R.id.baby_info_activity_to_school_time_rel
+            R.id.baby_info_activity_to_school_time_rel,
+            R.id.baby_info_activity_user_icon_iv
 
 
     })
@@ -168,6 +175,8 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
 
         } else if (v == toSchoolTimeRel) {
             showDateDialog(2);
+        } else if (v == iconIv) {
+            showChangePhotoDialog();
         }
     }
 
@@ -204,5 +213,14 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         } else if (flag == 2) {
             toSchoolTimeTv.setText(date);
         }
+    }
+
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
+        headUrl = BgGlobal.IMG_SERVER_PRE_URL + uploadedKey;
+        AsyncImageUtil.asyncLoadImage(iconIv,
+                headUrl,
+                R.mipmap.user_default_icon, true, false);
     }
 }

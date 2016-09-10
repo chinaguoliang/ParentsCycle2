@@ -43,13 +43,14 @@
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
-                        <ImageView
+                        <com.jgkj.parentscycle.utils.CircularImage
                             android:id="@+id/baby_info_activity_user_icon_iv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/user_default_icon" />
 
                         <TextView
+                            android:id="@+id/baby_info_activity_top_name_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
