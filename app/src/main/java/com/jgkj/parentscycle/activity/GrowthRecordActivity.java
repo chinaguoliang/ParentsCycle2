@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,9 @@ public class GrowthRecordActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTitleTv;
 
+    @Bind(R.id.growth_record_activity_send_record_iv)
+    ImageView sendRecordIv;
+
     @Override
     public void uploadImgFinished(Bitmap bitmap, String uploadedKey) {
 
@@ -58,11 +62,13 @@ public class GrowthRecordActivity extends BaseActivity implements View.OnClickLi
         return temp;
     }
 
-    @OnClick({R.id.baby_document_activity_back_iv})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.growth_record_activity_send_record_iv})
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             finish();
+        } else if (v == sendRecordIv) {
+            startActivity(new Intent(GrowthRecordActivity.this,PublishGrowthRecordActivity.class));
         }
     }
 }

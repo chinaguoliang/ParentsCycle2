@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
@@ -48,6 +49,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestTeachersList();
 //            requestClassListBySchoolId();
 //            requestCheckAttendance();
+            requestCourseList();
         }
     }
 
@@ -268,6 +270,25 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
     }
 
+    //查询食谱列表
+    private void requestFoodList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("classid", "3");
+        requestData.put("weeknum", "周一");
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_FOOD_LIST, requestData, lp);
+    }
+
+
+    //查询课程列表
+    private void requestCourseList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("clssids", "3");
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_COURSE_LIST, requestData, lp);
+    }
     @Override
     public void requestResponse(Object obj) {
 

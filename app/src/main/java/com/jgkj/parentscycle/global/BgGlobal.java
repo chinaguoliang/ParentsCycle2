@@ -43,4 +43,8 @@ public class BgGlobal {
     public static final String ASK_FOR_LEAVE_MODIFY_FOR_TEACHER_VERSION = "babyAskforLeave/update"; // 教师版请假修改
     public static final String CHECK_ATTENDANCE = "babyAskforLeave/babyAskforLeaveList"; //考勤日历 颜色列表  根据类型显示 各种颜色
     public static final String TEACHERS_LIST = "teacherinfo/getTeacherinfoList";  //教师列表
+
+    public static final String QUERY_FOOD_LIST = "food/foodList";  // 查询食谱列表
+    public static final String QUERY_COURSE_LIST = "coursetime/coursetimeList"; // 查询课程列表
+
 }
