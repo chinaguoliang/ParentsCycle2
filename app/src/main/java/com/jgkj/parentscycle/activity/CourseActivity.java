@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,7 +97,7 @@ public class CourseActivity extends BaseActivity implements View.OnClickListener
     private LayoutInflater mInflater;
     Dialog selectClassDialog;
 
-    private MakeClassAddPersonInfo makeClassAddPersonInfo;
+    private MakeClassAddPersonInfo makeClassAddPersonInfo = new MakeClassAddPersonInfo();
     Dialog mModifyClassDialog;
 
     private String weekNum = "";
@@ -264,8 +265,13 @@ public class CourseActivity extends BaseActivity implements View.OnClickListener
 
     //课程表发布   (不管有多少节数，必须有多少课数)
     public void requestPublishCourse() {
-        showProgressDialog();
         getRequestIds();
+        if (!checkInput()) {
+            return;
+        }
+
+        showProgressDialog();
+
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("weeknum", weekNum);
         requestData.put("festivals",corseIds);
@@ -275,6 +281,20 @@ public class CourseActivity extends BaseActivity implements View.OnClickListener
         PublishCourseInfoPaser lp = new PublishCourseInfoPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.PUBLISH_COURSE, requestData, lp);
+    }
+
+    private boolean checkInput() {
+        if (TextUtils.isEmpty(weekNum)) {
+            ToastUtil.showToast(this,"请选择星期",Toast.LENGTH_SHORT);
+            return false;
+        } else if (TextUtils.isEmpty(makeClassAddPersonInfo.getId())) {
+            ToastUtil.showToast(this,"请选择班级",Toast.LENGTH_SHORT);
+            return false;
+        } else if (TextUtils.isEmpty(corseNames)) {
+            ToastUtil.showToast(this,"请输入课程名称",Toast.LENGTH_SHORT);
+            return false;
+        }
+        return true;
     }
 
     @Override

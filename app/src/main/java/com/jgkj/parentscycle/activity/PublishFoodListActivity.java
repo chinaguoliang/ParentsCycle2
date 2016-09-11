@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,7 +88,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
     @Bind(R.id.baby_document_activity_title)
     TextView titleTv;
 
-    private String weekNumStr = "1";
+    private String weekNumStr = "";
 
     LayoutInflater mInflater;
 
@@ -97,7 +98,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
 
     private String foodImgs = "";
     private String foodDesc = "";
-    private MakeClassAddPersonInfo makeClassAddPersonInfo;
+    private MakeClassAddPersonInfo makeClassAddPersonInfo = new MakeClassAddPersonInfo();
     Dialog mModifyClassDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,8 +226,13 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
 
     //食谱发布
     public void requestPublishFoodList() {
-        showProgressDialog();
         getImgsList();
+        if (!checkInput()) {
+            return;
+        }
+
+        showProgressDialog();
+
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("weeknum", weekNumStr);
         requestData.put("meal","早餐");
@@ -239,6 +245,24 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
         ResetPasswordPaser lp = new ResetPasswordPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.PUBLISH_FOOD_LIST, requestData, lp);
+    }
+
+
+    private boolean checkInput() {
+        if (TextUtils.isEmpty(weekNumStr)) {
+            ToastUtil.showToast(this,"请选择星期",Toast.LENGTH_SHORT);
+            return false;
+        } else if (TextUtils.isEmpty(foodImgs)) {
+            ToastUtil.showToast(this,"请添加照片",Toast.LENGTH_SHORT);
+            return false;
+        } else if (TextUtils.isEmpty(foodDesc)) {
+            ToastUtil.showToast(this,"请添加食谱描述",Toast.LENGTH_SHORT);
+            return false;
+        } else if (TextUtils.isEmpty(makeClassAddPersonInfo.getId())) {
+            ToastUtil.showToast(this,"请选择班级",Toast.LENGTH_SHORT);
+            return false;
+        }
+        return true;
     }
 
     @Override
