@@ -219,24 +219,25 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
         final LinearLayout addPicLl = (LinearLayout) courseItem.findViewById(R.id.publish_food_list_item_add_pic_ll);
         TextView mealTv = (TextView)courseItem.findViewById(R.id.publish_food_list_item_food_period_tv);
         EditText descTv = (EditText)courseItem.findViewById(R.id.publish_food_list_item_desc_et);
+        View wrapPublishImgView = courseItem.findViewById(R.id.publish_food_list_item_add_pic_rel);
         mealTv.setText(sflii.getMeal());
         descTv.setText(sflii.getFooddescription());
-
+        descTv.setEnabled(false);
         ViewTreeObserver companyTreeObserver = publishPicTv.getViewTreeObserver();
         companyTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 publishPicTv.getViewTreeObserver().removeOnPreDrawListener(this);
                 int width = publishPicTv.getWidth();
-                String urlArray[] = sflii.getFoodimgs().split(",");
+                String urlArray[] = sflii.getFoodimgs().split("_");
                 for (int i = 0 ; i < urlArray.length ; i++) {
                     addOneImageView(urlArray[i],addPicLl,width);
                 }
-
                 return true;
             }
         });
-        publishPicTv.setVisibility(View.INVISIBLE);
+        wrapPublishImgView.setVisibility(View.INVISIBLE);
+        publishPicTv.setBackgroundColor(Color.WHITE);
     }
 
     private void addOneImageView(String url,LinearLayout picLl,int width) {
@@ -244,7 +245,7 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width,width);
         iv.setPadding(10,10,10,10);
         iv.setLayoutParams(params);
-        AsyncImageUtil.asyncLoadImage(iv,url,R.mipmap.user_default_icon, false, false);
+        AsyncImageUtil.asyncLoadImage(iv,url,R.mipmap.ic_launcher, false, false);
         picLl.addView(iv,0);
     }
 

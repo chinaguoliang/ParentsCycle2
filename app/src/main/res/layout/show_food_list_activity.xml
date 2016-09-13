@@ -12,20 +12,6 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         >
-        <View
-            android:background="@color/text_gray"
-            android:layout_width="match_parent"
-            android:layout_height="1px"></View>
-        <Button
-            android:id="@+id/publish_food_list_activity_publish_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="发布"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            />
     </LinearLayout>
 
     <LinearLayout
