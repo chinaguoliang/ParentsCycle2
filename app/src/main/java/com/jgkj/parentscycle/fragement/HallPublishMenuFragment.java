@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
@@ -16,13 +15,8 @@ import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.BabyDocumentActivity;
 import com.jgkj.parentscycle.activity.BabyShowActivity;
 import com.jgkj.parentscycle.activity.CheckAttendanceActivity;
-import com.jgkj.parentscycle.activity.CourseActivity;
-import com.jgkj.parentscycle.utils.LogUtil;
+import com.jgkj.parentscycle.activity.PublishCourseActivity;
 import com.jgkj.parentscycle.utils.UtilTools;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by chen on 16/7/9.
@@ -83,7 +77,7 @@ public class HallPublishMenuFragment extends Fragment implements View.OnClickLis
         } else if (v == babyShowView) {
             startActivity(new Intent(v.getContext(), BabyShowActivity.class));
         } else if (v == courseView) {
-            startActivity(new Intent(v.getContext(), CourseActivity.class));
+            startActivity(new Intent(v.getContext(), PublishCourseActivity.class));
         } else if (v == questionAnswerView) {
             startActivity(new Intent(v.getContext(), CheckAttendanceActivity.class));
         }

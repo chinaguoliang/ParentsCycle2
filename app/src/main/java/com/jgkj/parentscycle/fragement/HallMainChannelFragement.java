@@ -14,13 +14,11 @@ import android.widget.TextView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.BabyDocumentActivity;
 import com.jgkj.parentscycle.activity.CheckAttendanceActivity;
-import com.jgkj.parentscycle.activity.CourseActivity;
+import com.jgkj.parentscycle.activity.PublishCourseActivity;
 import com.jgkj.parentscycle.activity.MainActivity;
-import com.jgkj.parentscycle.activity.OnineForumActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.PublishFoodListActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
-import com.jgkj.parentscycle.activity.VideoOpenCourseActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ImageHandler;
@@ -231,7 +229,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
             }
         } else if (v == courseListTv) {
             if (UserInfo.isLogined) {
-                startActivity(new Intent(getContext(), CourseActivity.class));
+                startActivity(new Intent(getContext(), PublishCourseActivity.class));
             } else {
                 ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
             }

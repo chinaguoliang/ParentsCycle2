@@ -26,9 +26,11 @@ import com.jgkj.parentscycle.adapter.ModifyClassDialogLvAdapter;
 import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.bean.ClassesAndTeachersListItemInfo;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
+import com.jgkj.parentscycle.bean.PublishFoodLishInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.ClassedAndTeachersPaser;
+import com.jgkj.parentscycle.json.PublishFoodListInfoPaser;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
@@ -242,7 +244,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
         requestData.put("shoolid", ConfigPara.SCHOOL_ID);
         requestData.put("osperion",UserInfo.loginInfo.getInfo().getNickname());
 
-        ResetPasswordPaser lp = new ResetPasswordPaser();
+        PublishFoodListInfoPaser lp = new PublishFoodListInfoPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.PUBLISH_FOOD_LIST, requestData, lp);
     }
@@ -276,6 +278,12 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
             } else {
                 ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
             }
+        } else if (nbs.obj instanceof PublishFoodLishInfo) {
+            if (nbs.isSuccess()) {
+                finish();
+            } else {
+            }
+            ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
         }
     }
 

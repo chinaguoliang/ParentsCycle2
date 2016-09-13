@@ -48,7 +48,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/7/23.
  */
-public class CourseActivity extends BaseActivity implements View.OnClickListener,NetListener{
+public class PublishCourseActivity extends BaseActivity implements View.OnClickListener,NetListener{
     @Bind(R.id.course_activity_morning_add_course_btn)
     Button addCourseMorningBtn;
 
