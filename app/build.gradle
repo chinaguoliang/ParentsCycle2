@@ -51,6 +51,6 @@ dependencies {
     compile files('libs/okio-1.6.0.jar')
     compile files('libs/qiniu-android-sdk-7.1.2.jar')
     //compile 'com.android.support:multidex:'
-    compile project(path: ':huanxin')
-    compile project(path: ':YingShiVideo')
+//    compile project(path: ':huanxin')
+//    compile project(path: ':YingShiVideo')
 }

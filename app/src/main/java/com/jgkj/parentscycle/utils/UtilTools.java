@@ -67,12 +67,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chatuidemo.DemoHelper;
-import com.hyphenate.chatuidemo.ui.LoginActivity;
-import com.hyphenate.chatuidemo.ui.MainActivity;
+//import com.hyphenate.chat.EMClient;
+//import com.hyphenate.chatuidemo.DemoHelper;
+//import com.hyphenate.chatuidemo.ui.LoginActivity;
+//import com.hyphenate.chatuidemo.ui.MainActivity;
 import com.jgkj.parentscycle.application.MyApplication;
-import com.videogo.openapi.EZOpenSDK;
+//import com.videogo.openapi.EZOpenSDK;
 
 
 public class UtilTools {
@@ -80,25 +80,25 @@ public class UtilTools {
 	public static int SCREEN_HEIGHT = 0;
 
 	public static void toChatModule(final Context context) {
-		new Thread(new Runnable() {
-			public void run() {
-				if (DemoHelper.getInstance().isLoggedIn()) {
-					// auto login mode, make sure all group and conversation is loaed before enter the main screen
-
-					EMClient.getInstance().groupManager().loadAllGroups();
-					EMClient.getInstance().chatManager().loadAllConversations();
-
-					context.startActivity(new Intent(context, MainActivity.class));
-
-				}else {
-					context.startActivity(new Intent(context, LoginActivity.class));
-				}
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//			public void run() {
+//				if (DemoHelper.getInstance().isLoggedIn()) {
+//					// auto login mode, make sure all group and conversation is loaed before enter the main screen
+//
+//					EMClient.getInstance().groupManager().loadAllGroups();
+//					EMClient.getInstance().chatManager().loadAllConversations();
+//
+//					context.startActivity(new Intent(context, MainActivity.class));
+//
+//				}else {
+//					context.startActivity(new Intent(context, LoginActivity.class));
+//				}
+//			}
+//		}).start();
 	}
 
 	public static void toVideoModule() {
-		EZOpenSDK.getInstance().openLoginPage();
+//		EZOpenSDK.getInstance().openLoginPage();
 	}
 
 	public static String getRequestParams(ArrayList<String> data) {

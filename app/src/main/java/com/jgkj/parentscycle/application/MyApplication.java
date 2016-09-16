@@ -1,12 +1,12 @@
 package com.jgkj.parentscycle.application;
 
 import android.app.Application;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
-
-import com.easemob.redpacketsdk.RedPacket;
-import com.hyphenate.chatuidemo.DemoApplication;
-import com.hyphenate.chatuidemo.DemoHelper;
+//import android.support.multidex.MultiDex;
+//import android.support.multidex.MultiDexApplication;
+//
+//import com.easemob.redpacketsdk.RedPacket;
+//import com.hyphenate.chatuidemo.DemoApplication;
+//import com.hyphenate.chatuidemo.DemoHelper;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -14,8 +14,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.videogo.constant.Config;
-import com.videogo.openapi.EZOpenSDK;
+//import com.videogo.constant.Config;
+//import com.videogo.openapi.EZOpenSDK;
 
 /**
  * Created by chen on 16/7/5.
@@ -31,23 +31,23 @@ public class MyApplication extends Application {
     }
     @Override
     public void onCreate() {
-        MultiDex.install(this);
+//        MultiDex.install(this);
         super.onCreate();
 
-        DemoApplication.applicationContext = this;
-        DemoHelper.getInstance().init(this);
-        //red packet code : 初始化红包上下文，开启日志输出开关
-        RedPacket.getInstance().initContext(this);
-        RedPacket.getInstance().setDebugMode(true);
-        initYingShiVideo();
+//        DemoApplication.applicationContext = this;
+//        DemoHelper.getInstance().init(this);
+//        //red packet code : 初始化红包上下文，开启日志输出开关
+//        RedPacket.getInstance().initContext(this);
+//        RedPacket.getInstance().setDebugMode(true);
+//        initYingShiVideo();
         instance = this;
         initImageLoader();
     }
 
-    private void initYingShiVideo() {
-        Config.LOGGING = true;
-        EZOpenSDK.initLib(this, YING_SHI_APP_KEY, "");
-    }
+//    private void initYingShiVideo() {
+//        Config.LOGGING = true;
+//        EZOpenSDK.initLib(this, YING_SHI_APP_KEY, "");
+//    }
 
     private void initImageLoader() {
 
