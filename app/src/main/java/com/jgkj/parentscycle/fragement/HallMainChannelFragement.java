@@ -14,21 +14,24 @@ import android.widget.TextView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.BabyDocumentActivity;
 import com.jgkj.parentscycle.activity.CheckAttendanceActivity;
-import com.jgkj.parentscycle.activity.CourseActivity;
+import com.jgkj.parentscycle.activity.PublishCourseActivity;
 import com.jgkj.parentscycle.activity.MainActivity;
-import com.jgkj.parentscycle.activity.OnineForumActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.PublishFoodListActivity;
+import com.jgkj.parentscycle.activity.ShowFoodListActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
-import com.jgkj.parentscycle.activity.VideoOpenCourseActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
+import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ImageHandler;
+import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 
 import java.util.ArrayList;
 
 import android.os.Message;
+import android.widget.Toast;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -204,22 +207,54 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         if (v == rightTitleTv) {
             startActivity(new Intent(getContext(), TestNetActivity.class));
         } else if (v == publicVideoCourseTv) {
+            if (UserInfo.isLogined) {
+                UtilTools.toVideoModule();
+            } else {
+                ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
+            }
             //startActivity(new Intent(getContext(), VideoOpenCourseActivity.class));
-            UtilTools.toVideoModule();
+
         } else if (v == safeSendTv) {
-            startActivity(new Intent(getContext(), CheckAttendanceActivity.class));
+
+            if (UserInfo.isLogined) {
+                startActivity(new Intent(getContext(), CheckAttendanceActivity.class));
+            } else {
+                ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
+            }
         } else if (v == foodTv) {
-            startActivity(new Intent(getContext(), PublishFoodListActivity.class));
+
+            if (UserInfo.isLogined) {
+                startActivity(new Intent(getContext(), ShowFoodListActivity.class));
+            } else {
+                ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
+            }
         } else if (v == courseListTv) {
-            startActivity(new Intent(getContext(), CourseActivity.class));
+            if (UserInfo.isLogined) {
+                startActivity(new Intent(getContext(), PublishCourseActivity.class));
+            } else {
+                ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
+            }
         } else if (v == parentsCycleTv) {
-            startActivity(new Intent(getContext(), ParentsCycleActivity.class));
+
+            if (UserInfo.isLogined) {
+                startActivity(new Intent(getContext(), ParentsCycleActivity.class));
+            } else {
+                ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
+            }
         } else if (v == babyDocTv) {
-            startActivity(new Intent(getContext(), BabyDocumentActivity.class));
+
+            if (UserInfo.isLogined) {
+                startActivity(new Intent(getContext(), BabyDocumentActivity.class));
+            } else {
+                ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
+            }
         } else if (v == courseLineTv) {
-//            startActivity(new Intent(getContext(), OnineForumActivity.class));
-//            startActivity(new Intent(getContext(), LoginSelectActivity.class));
-            UtilTools.toVideoModule();
+
+            if (UserInfo.isLogined) {
+                UtilTools.toVideoModule();
+            } else {
+                ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
+            }
         } else if (v == listenBarTv) {
 
         }

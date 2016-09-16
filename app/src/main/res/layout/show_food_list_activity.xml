@@ -12,20 +12,6 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
         >
-        <View
-            android:background="@color/text_gray"
-            android:layout_width="match_parent"
-            android:layout_height="1px"></View>
-        <Button
-            android:id="@+id/course_activity_publish_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="发布"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            />
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="课程"
+                android:text="大一班食谱"
                 android:textColor="@color/white" />
 
             <ImageView
@@ -76,7 +62,7 @@
             android:padding="3dp">
 
             <TextView
-                android:id="@+id/corse_activity_week_1"
+                android:id="@+id/publish_food_list_activity_week_1_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -91,7 +77,7 @@
 
 
             <TextView
-                android:id="@+id/corse_activity_week_2"
+                android:id="@+id/publish_food_list_activity_week_2_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -105,7 +91,7 @@
                 android:textColor="@color/text_gray" />
 
             <TextView
-                android:id="@+id/corse_activity_week_3"
+                android:id="@+id/publish_food_list_activity_week_3_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -119,7 +105,7 @@
                 android:textColor="@color/text_gray" />
 
             <TextView
-                android:id="@+id/corse_activity_week_4"
+                android:id="@+id/publish_food_list_activity_week_4_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -133,7 +119,7 @@
                 android:textColor="@color/text_gray" />
 
             <TextView
-                android:id="@+id/corse_activity_week_5"
+                android:id="@+id/publish_food_list_activity_week_5_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -147,7 +133,7 @@
                 android:textColor="@color/text_gray" />
 
             <TextView
-                android:id="@+id/corse_activity_week_6"
+                android:id="@+id/publish_food_list_activity_week_6_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -161,7 +147,8 @@
                 android:textColor="@color/text_gray" />
 
             <TextView
-                android:id="@+id/corse_activity_week_7"
+
+                android:id="@+id/publish_food_list_activity_week_7_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -176,6 +163,41 @@
 
         </LinearLayout>
 
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="餐次"
+                android:textColor="@color/text_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="食物"
+                android:gravity="center"
+                android:textColor="@color/text_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="删除"
+                android:gravity="center"
+                android:textColor="@color/text_gray" />
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -188,112 +210,17 @@
 
 
                 <LinearLayout
-                    android:id="@+id/course_activity_morning_course_ll"
+                    android:id="@+id/publish_food_list_activity_sv_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <LinearLayout
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="10dp"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="节次"
-                            android:textColor="@color/text_gray" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="课程"
-                            android:gravity="center"
-                            android:textColor="@color/text_gray" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="删除"
-                            android:gravity="center"
-                            android:textColor="@color/text_gray" />
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/course_activity_morning_add_course_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:paddingTop="10dp"
-                        android:text="添加课程"
-                        android:textColor="@color/black" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/course_activity_afternoon_course_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:paddingTop="10dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:gravity="center"
-                            android:text="下午"
-                            android:textColor="@color/text_gray" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="10dp"
-                            android:text="课程"
-                            android:textColor="@color/text_gray" />
-                    </LinearLayout>
-
-
-
-                    <Button
-                        android:id="@+id/course_activity_afternoon_add_course_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:paddingTop="10dp"
-                        android:text="添加课程"
-                        android:textColor="@color/black" />
-                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

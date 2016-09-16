@@ -66,6 +66,7 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
+                        android:id="@+id/publish_food_list_item_add_pic_rel"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:background="@color/bg_gray">
@@ -88,6 +89,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/publish_food_list_item_desc_et"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"

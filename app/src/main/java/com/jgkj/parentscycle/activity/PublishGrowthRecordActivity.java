@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
-import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.bean.PublishParentsCycleInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
@@ -26,6 +25,7 @@ import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -33,10 +33,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by chen on 16/9/1.
+ * Created by chen on 16/9/11.
  */
-public class PublishParentsCycleActivity extends BaseActivity implements View.OnClickListener,NetListener{
-
+public class PublishGrowthRecordActivity extends BaseActivity implements View.OnClickListener,NetListener {
     @Bind(R.id.baby_document_activity_back_iv)
     ImageView backIv;
 
@@ -63,7 +62,7 @@ public class PublishParentsCycleActivity extends BaseActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.publish_parents_cycle_activity);
+        setContentView(R.layout.publish_growth_record_activity);
         ButterKnife.bind(this);
         mInflater = (LayoutInflater)getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
@@ -71,7 +70,7 @@ public class PublishParentsCycleActivity extends BaseActivity implements View.On
     }
 
     private void initView() {
-        titleTv.setText("父母圈");
+        titleTv.setText("成长日记");
         sendTv.setText("发送");
         ViewTreeObserver companyTreeObserver = addImgTv.getViewTreeObserver();
         companyTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -93,11 +92,11 @@ public class PublishParentsCycleActivity extends BaseActivity implements View.On
             getImgAndContent();
 
             if (TextUtils.isEmpty(sendContentStr)) {
-                ToastUtil.showToast(this,"请输入发布内容",Toast.LENGTH_SHORT);
+                ToastUtil.showToast(this,"请输入发布内容", Toast.LENGTH_SHORT);
                 return;
             }
 
-            requestParentsCycleSendArticle();
+            requestPublishBabyGrowRecord();
         } else if (v == addImgTv) {
             showChangePhotoDialog();
         }
@@ -117,20 +116,23 @@ public class PublishParentsCycleActivity extends BaseActivity implements View.On
         publishImgLl.addView(iv,0);
     }
 
-    // 父母圈发帖
-    public void requestParentsCycleSendArticle() {
-        showProgressDialog();
+    // 宝宝成长记录发布
+    public void requestPublishBabyGrowRecord() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
-        requestData.put("address","空");
-        requestData.put("topic","空");
-        requestData.put("topictext",sendContentStr);
-        requestData.put("topicimg",imgUrls);
-        requestData.put("topictype","1");
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(System.currentTimeMillis());
+        requestData.put("babyid", "80");
+        requestData.put("publisher","123");
+        requestData.put("publishername","1");
+        requestData.put("publishertext","1");
+        requestData.put("bobypublisherdate",date);
+        requestData.put("publisherimge","321");
 
-        ParentsParentsCycleInfoPaser lp = new ParentsParentsCycleInfoPaser();
+
+
+        ResetPasswordPaser lp = new ResetPasswordPaser();
         NetRequest.getInstance().request(mQueue, this,
-                BgGlobal.PARENTS_CYCLE_SEND_ARTICLE, requestData, lp);
+                BgGlobal.PUBLISH_BABY_GROW_RECORD, requestData, lp);
     }
 
     private void getImgAndContent() {

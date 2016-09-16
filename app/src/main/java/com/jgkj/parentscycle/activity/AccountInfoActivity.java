@@ -41,6 +41,8 @@ import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
+import com.jgkj.parentscycle.utils.CircularImage;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
@@ -81,17 +83,28 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.account_info_activity_save_btn)
     Button saveBtn;
 
+    @Bind(R.id.account_info_activity_name_tv)
+    TextView nameTv;
+
+    @Bind(R.id.account_info_activity_phone_tv)
+    TextView phoneTv;
+
+    @Bind(R.id.hall_mine_fragment_lv_header_user_icon_iv)
+    CircularImage mIconIv;
+
     AccountInfoAdapter mAccountInfoAdapter;
     Dialog mModifyClassDialog;
     String classesIds = ""; //classid 的组合
+    String selBirthday = "";
+    int selSex = -1;
+    TeacherInfoListInfo mTeacherInfoListInfo;
 
+    private String headUrl = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_info_activity_layout);
         ButterKnife.bind(this);
-        mAccountInfoAdapter = new AccountInfoAdapter(this, getContentData());
-        mContentLv.setAdapter(mAccountInfoAdapter);
         titleTv.setText("帐号信息");
         rightTitleTv.setVisibility(View.GONE);
         mWrapTitleRel.setBackgroundColor(Color.parseColor("#00000000"));
@@ -133,23 +146,8 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
     }
 
-    private List<String> getContentData() {
-        ArrayList<String> data = new ArrayList<String>();
-        data.add("昵称_ ");
-        data.add("姓名_ ");
-        data.add("性别_ ");
-        data.add("民族_ ");
-        data.add("出生日期_ ");
-        data.add("手机号_ ");
-        data.add("账户安全_0");
-        data.add("捆绑微信_ ");
-        data.add("捆绑QQ_0");
-        data.add("选择班级_0");
 
-        return data;
-    }
-
-    @OnClick({R.id.baby_document_activity_back_iv,R.id.account_info_activity_save_btn})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.account_info_activity_save_btn,R.id.hall_mine_fragment_lv_header_user_icon_iv})
     @Override
     public void onClick(View v) {
        if (v == backIv) {
@@ -160,6 +158,8 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                return;
            }
            requestSave();
+       } else if (v == mIconIv) {
+           showChangePhotoDialog();
        }
     }
 
@@ -180,6 +180,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         String date = year + "-" + (monthOfYear + 1) + "-" +dayOfMonth;
 //        dataList.remove(4);
         dataList.set(4,"出生日期_" + date);
+        selBirthday = date;
         mAccountInfoAdapter.getData().put(4,date);
         mAccountInfoAdapter.notifyDataSetChanged();
     }
@@ -189,7 +190,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
             showProgressDialog();
             HashMap<String, String> requestData = new HashMap<String, String>();
             requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
-            requestData.put("schoolid", "1");  //暂时传1
+            requestData.put("schoolid", ConfigPara.SCHOOL_ID);  //暂时传1
             TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
             NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_LIST, requestData, lp);
         }
@@ -215,24 +216,46 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         } else {
             if (nbs.isSuccess()) {
                 TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
-                ArrayList<String> data = new ArrayList<String>();
-                data.add("昵称_" + tii.getNickname());
-                data.add("姓名_" + tii.getSchoolname());
-                data.add("性别_ ");
-                data.add("民族_ ");
-                data.add("出生日期_ ");
-                data.add("手机号_ " + tii.getPhone() );
-                data.add("账户安全_ ");
-                data.add("捆绑微信_ ");
-                data.add("捆绑QQ_ ");
-                data.add("选择班级_0");
-                mAccountInfoAdapter = new AccountInfoAdapter(this, data);
-                mContentLv.setAdapter(mAccountInfoAdapter);
+                initListView(tii);
                 LogUtil.d(TAG,"success");
             } else {
+                initListView(new TeacherInfoListInfo());
                 ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
             }
         }
+    }
+
+    private void initListView(TeacherInfoListInfo tii) {
+        mTeacherInfoListInfo = tii;
+        classesIds = tii.getClassid();
+
+        nameTv.setText(tii.getTeachername());
+        phoneTv.setText(tii.getPhone());
+        AsyncImageUtil.asyncLoadImage(mIconIv,
+                tii.getHeadportrait(),
+                R.mipmap.user_default_icon, true, false);
+        ArrayList<String> data = new ArrayList<String>();
+        data.add("昵称_" + tii.getNickname());
+        data.add("姓名_" + tii.getTeachername());
+        if (TextUtils.equals(tii.getTeachersex(),"0")) {
+            data.add("性别_女");
+        } else if (TextUtils.equals(tii.getTeachersex(),"1")) {
+            data.add("性别_男");
+        } else {
+            data.add("性别_ ");
+        }
+
+        data.add("民族_" + tii.getNationality());
+        data.add("出生日期_" + tii.getBirthdate());
+
+
+        data.add("手机号_" + tii.getPhone());
+        data.add("账户安全_ ");
+        data.add("捆绑微信_ ");
+        data.add("捆绑QQ_ ");
+        data.add("选择班级_");
+        mAccountInfoAdapter = new AccountInfoAdapter(this, data);
+        mContentLv.setAdapter(mAccountInfoAdapter);
     }
 
     private void initListView(final List<ClassesAndTeachersListItemInfo> dataList) {
@@ -267,6 +290,13 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         final ModifyClassDialogLvAdapter mcda = new ModifyClassDialogLvAdapter(this,sourceData);
         classLv.setAdapter(mcda);
+        String classIds = mTeacherInfoListInfo.getClassid();
+        String idArray[] = classIds.split(",");
+        for (int i = 0 ; i < idArray.length ; i++) {
+            mcda.setClassidShowSelected(idArray[i]);
+        }
+
+
         classLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -295,30 +325,71 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
 
     public void requestSave() {
-        String uploadKey = "";
         HashMap<String, String> requestData = new HashMap<String, String>();
         HashMap<Integer,String> data = mAccountInfoAdapter.getData();
-        requestData.put("analysis","1");
-        requestData.put("birthdate",data.get(4));
-        requestData.put("classid",classesIds);
-        if (TextUtils.isEmpty(uploadKey)) {
-            requestData.put("headportrait","");
+        requestData.put("analysis",mTeacherInfoListInfo.getAnalysis());
+
+
+        if (TextUtils.isEmpty(selBirthday)) {
+            requestData.put("birthdate",mTeacherInfoListInfo.getBirthdate());
         } else {
-            requestData.put("headportrait",BgGlobal.IMG_SERVER_PRE_URL + uploadKey);
+            requestData.put("birthdate",selBirthday);
         }
-        requestData.put("kbwx","1"); //1: 是  0：否
-        requestData.put("kbqq","1");
-        requestData.put("nationality","1");
-        requestData.put("nickname",data.get(0));
-        requestData.put("onthejob","1"); // 1:在职  0： 离职
-        requestData.put("permissions","1");
-        requestData.put("phone","");
-        requestData.put("schoolname","");
-        requestData.put("teacherid","1");
-        requestData.put("teachername","");
-        requestData.put("teachersex",data.get(2));
+
+        if (TextUtils.isEmpty(classesIds)) {
+            requestData.put("classid",mTeacherInfoListInfo.getClassid());
+        } else {
+            requestData.put("classid",classesIds);
+        }
+
+        if (TextUtils.isEmpty(headUrl)) {
+            requestData.put("headportrait",mTeacherInfoListInfo.getHeadportrait());
+        } else {
+            requestData.put("headportrait",headUrl);
+        }
+        requestData.put("kbwx",mTeacherInfoListInfo.getKbwx()); //1: 是  0：否
+        requestData.put("kbqq",mTeacherInfoListInfo.getKbqq());
+
+        String nationality = data.get(3);
+        if (TextUtils.isEmpty(nationality)) {
+            requestData.put("nationality",mTeacherInfoListInfo.getNationality());
+        } else {
+            requestData.put("nationality",nationality);
+        }
+
+        if (TextUtils.isEmpty(data.get(0))) {
+            requestData.put("nickname",mTeacherInfoListInfo.getNickname());
+        } else {
+            requestData.put("nickname",data.get(0));
+        }
+
+        requestData.put("onthejob",mTeacherInfoListInfo.getOnthejob()); // 1:在职  0： 离职
+        requestData.put("permissions",mTeacherInfoListInfo.getPermissions());
+        String phone = data.get(5);
+        if (TextUtils.isEmpty(phone)) {
+            requestData.put("phone",mTeacherInfoListInfo.getPhone());
+        } else {
+            requestData.put("phone",phone);
+        }
+
+
+        requestData.put("schoolname",mTeacherInfoListInfo.getSchoolname());
+        requestData.put("teacherid",mTeacherInfoListInfo.getTeacherid());
+        if (TextUtils.isEmpty(data.get(1))) {
+            requestData.put("teachername",mTeacherInfoListInfo.getTeachername());
+        } else {
+            requestData.put("teachername",data.get(1));
+        }
+
+        if (selSex == -1) {
+            requestData.put("teachersex",mTeacherInfoListInfo.getTeachersex());
+        } else {
+            requestData.put("teachersex",selSex + "");
+        }
+
+
         requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
-        requestData.put("schoolid", "1");  //暂时传1
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);  //暂时传1
         PerfectInfoPaser lp = new PerfectInfoPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
     }
@@ -326,7 +397,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
-
+        headUrl = BgGlobal.IMG_SERVER_PRE_URL + uploadedKey;
+        AsyncImageUtil.asyncLoadImage(mIconIv,
+                headUrl,
+                R.mipmap.user_default_icon, true, false);
     }
 
     @Override
@@ -334,8 +408,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         List<String> dataList = mAccountInfoAdapter.getList();
         if (index == 1) {
             dataList.set(2,"性别_男");
+            selSex = 1;
         } else if (index == 0) {
             dataList.set(2,"性别_女");
+            selSex = 0;
         }
 
         mAccountInfoAdapter.getData().put(2,index + "");

@@ -29,6 +29,19 @@ public class ModifyClassDialogLvAdapter extends BaseAdapter {
         mContext = context;
     }
 
+    public void setClassidShowSelected(String classId) {
+        int count = contentData.size();
+        int tempPosition = 0;
+        for (int i = 0 ; i < count ; i++) {
+            MakeClassAddPersonInfo mcpi = contentData.get(i);
+            if (TextUtils.equals(mcpi.getId(),classId)) {
+                tempPosition = i;
+                break;
+            }
+        }
+        setSelectPosition(tempPosition);
+    }
+
     public String getIdsData() {
         String result = "";
         Iterator iter = selectedData.entrySet().iterator();
@@ -59,6 +72,17 @@ public class ModifyClassDialogLvAdapter extends BaseAdapter {
             selectedData.put(position,0);
         }
       this.notifyDataSetChanged();
+    }
+
+    public void setCurrentPosition(int position) {
+        selectedData.clear();
+        MakeClassAddPersonInfo makeClassAddPersonInfo= contentData.get(position);
+        if (selectedData.get(position) == null || selectedData.get(position) == 0) {
+            selectedData.put(position,Integer.parseInt(makeClassAddPersonInfo.getId()));
+        } else {
+            selectedData.put(position,0);
+        }
+        this.notifyDataSetChanged();
     }
 
     @Override

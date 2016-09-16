@@ -85,23 +85,11 @@ public class AccountInfoAdapter extends BaseAdapter {
         });
 
 
-//        convertView.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
         String contentStr = contentData.get(position);
         String names[] = contentStr.split("_");
         holder.contentDescTv.setText(names[0]);
-        if (names.length == 1 || TextUtils.equals(names[1], "0")) {
-//            holder.rightArrowIv.setVisibility(View.VISIBLE);
-//            holder.conentNameTv.setVisibility(View.GONE);
-        } else {
-//            holder.conentNameTv.setVisibility(View.VISIBLE);
-//            holder.conentNameTv.setText(names[1]);
-//            holder.rightArrowIv.setVisibility(View.GONE);
+
+        if (names.length > 1) {
             String tempNames = names[1].trim();
             if (TextUtils.isEmpty(tempNames)) {
                 holder.contentEt.setText(dataMap.get(position));
@@ -110,10 +98,11 @@ public class AccountInfoAdapter extends BaseAdapter {
                 holder.contentTv.setText(names[1]);
                 holder.contentEt.setText(names[1]);
             }
-
         }
 
-        if (position == 2 || position == 4 || position == 6 || position == 9) {
+
+
+        if (position == 2 || position == 4 || position == 6 || position == 7 || position == 8 || position == 9) {
             holder.contentEt.setVisibility(View.GONE);
             holder.contentTv.setVisibility(View.VISIBLE);
         } else {

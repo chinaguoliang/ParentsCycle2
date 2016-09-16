@@ -2,6 +2,7 @@ package com.jgkj.parentscycle.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.widget.CircularImage;
 
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import java.util.List;
  * Created by chen on 16/7/24.
  */
 public class PerfectInformationAdapter extends BaseAdapter {
+    private static final String TAG = "PerfectInformationAdapter";
     private List<String> contentData;
     private Context mContext;
     private Bitmap userIcon;
@@ -33,6 +36,11 @@ public class PerfectInformationAdapter extends BaseAdapter {
         for(int i = 0 ; i < 15 ; i++) {
             dataMap.put(i,"");
         }
+    }
+
+    public void setPositionData(int position,String data) {
+        contentData.set(position,data);
+        this.notifyDataSetChanged();
     }
 
     public HashMap<Integer,String> getData() {
@@ -60,7 +68,6 @@ public class PerfectInformationAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        dataMap.put(position,"");
         final MineViewHolder holder;
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext
@@ -85,6 +92,7 @@ public class PerfectInformationAdapter extends BaseAdapter {
 
                 } else {
                     dataMap.put(position,holder.mContentEt.getText().toString());
+                    LogUtil.d(TAG,"get data:" + dataMap.get(position));
                 }
 
             }
@@ -92,8 +100,13 @@ public class PerfectInformationAdapter extends BaseAdapter {
 
         String contentStr = contentData.get(position);
         String names[] =contentStr.split("_");
-        holder.contentDescTv.setText(names[0]);
-        holder.conentNameTv.setText(names[1]);
+        if (names.length > 1) {
+            holder.contentDescTv.setText(names[0]);
+            holder.conentNameTv.setText(names[1]);
+            //dataMap.put(position,names[1]);
+        }
+
+
         if (position == 0 || position == 5) {
             holder.grayLine.setVisibility(View.VISIBLE);
         } else {
@@ -104,12 +117,23 @@ public class PerfectInformationAdapter extends BaseAdapter {
             if (userIcon != null) {
                 holder.userIconIv.setVisibility(View.VISIBLE);
                 holder.userIconIv.setImageBitmap(userIcon);
-                holder.mContentEt.setVisibility(View.GONE);
             }
+            holder.mContentEt.setVisibility(View.GONE);
         } else {
+
             holder.userIconIv.setVisibility(View.GONE);
-            holder.mContentEt.setVisibility(View.VISIBLE);
+            if (position == 4 || position == 7) {
+
+            } else {
+                holder.mContentEt.setVisibility(View.VISIBLE);
+            }
+
         }
+
+        if (position == 8) {
+            holder.mContentEt.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+        }
+
 
         return convertView;
     }

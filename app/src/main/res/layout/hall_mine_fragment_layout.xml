@@ -12,7 +12,7 @@
 
     </include>
 
-    <ListView
+    <com.jgkj.parentscycle.widget.ListViewForScrollView
         android:id="@+id/hall_mine_fragment_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:listSelector="@drawable/listview_selector"
         >
 
-    </ListView>
+    </com.jgkj.parentscycle.widget.ListViewForScrollView>
 
 
 </LinearLayout>

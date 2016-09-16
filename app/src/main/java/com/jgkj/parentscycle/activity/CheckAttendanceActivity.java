@@ -8,13 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.CheckAttendanceInfo;
+import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
+import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
+import com.jgkj.parentscycle.json.CheckAttendancePaser;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.TimeUtils;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -63,11 +72,11 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
 
     private void initViews() {
         rightTv.setVisibility(View.GONE);
-        titleTv.setText("2016.3");
+        titleTv.setText(TimeUtils.getCurrentTime());
 
-        expCalendarView.markDate(new DateData(2016, 7, 30).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, GREEN)));
-        expCalendarView.markDate(new DateData(2016, 7, 18).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, YELLOW)));
-        expCalendarView.markDate(new DateData(2016, 7, 22).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, BLUE)));
+        expCalendarView.markDate(new DateData(2016, 9, 5).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, GREEN)));
+        expCalendarView.markDate(new DateData(2016, 9, 1).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, YELLOW)));
+        expCalendarView.markDate(new DateData(2016, 9, 2).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, BLUE)));
 
         expCalendarView.setOnDateClickListener(new OnExpDateClickListener()).setOnMonthScrollListener(new OnMonthScrollListener() {
             @Override
@@ -101,21 +110,29 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("page", "1");
-        requestData.put("rows","2");
+        requestData.put("rows","10");
         requestData.put("createdatetimeStart","2015");
         requestData.put("createdatetimeEnd","2016");
-        requestData.put("classid","1");
+        requestData.put("classid", UserInfo.loginInfo.getInfo().getClassid());
         requestData.put("schoolid", ConfigPara.SCHOOL_ID);
         SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = sdf.format(System.currentTimeMillis());
         //requestData.put("starttime",date);
-        ResetPasswordPaser lp = new ResetPasswordPaser();
+        CheckAttendancePaser lp = new CheckAttendancePaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.CHECK_ATTENDANCE, requestData, lp);
     }
 
     @Override
     public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof CheckAttendanceInfo) {
+            if (nbs.isSuccess()) {
 
+            } else {
+            }
+            ToastUtil.showToast(this,nbs.getMsg(),Toast.LENGTH_SHORT);
+        }
     }
 }

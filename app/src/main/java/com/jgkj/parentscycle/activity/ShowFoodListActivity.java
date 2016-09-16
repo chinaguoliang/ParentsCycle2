@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,16 +25,17 @@ import com.jgkj.parentscycle.adapter.ModifyClassDialogLvAdapter;
 import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.bean.ClassesAndTeachersListItemInfo;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
-import com.jgkj.parentscycle.bean.PublishFoodLishInfo;
+import com.jgkj.parentscycle.bean.ShowFoodListInfo;
+import com.jgkj.parentscycle.bean.ShowFoodListInfoItem;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.ClassedAndTeachersPaser;
-import com.jgkj.parentscycle.json.PublishFoodListInfoPaser;
-import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.json.ShowFoodListInfoPaser;
+import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
-import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
@@ -48,20 +48,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by chen on 16/8/20.
+ * Created by chen on 16/9/13.
  */
-public class PublishFoodListActivity extends BaseActivity implements View.OnClickListener,NetListener{
+public class ShowFoodListActivity extends BaseActivity implements View.OnClickListener,NetListener{
+
     @Bind(R.id.back_iv)
     ImageView backIv;
 
     @Bind(R.id.publish_food_list_activity_sv_ll)
     LinearLayout contentSvLl;
 
-    @Bind(R.id.publish_food_list_activity_publish_btn)
-    Button publishBtn;
 
-    @Bind(R.id.publish_food_list_activity_add_food_btn)
-    Button addFoodBtn;
 
     @Bind(R.id.publish_food_list_activity_week_1_tv)
     TextView mWeek1;
@@ -90,29 +87,35 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
     @Bind(R.id.baby_document_activity_title)
     TextView titleTv;
 
+
     private String weekNumStr = "";
 
     LayoutInflater mInflater;
 
-    private LinearLayout currAddPicLl;
 
     private int blueColor;
 
-    private String foodImgs = "";
-    private String foodDesc = "";
     private MakeClassAddPersonInfo makeClassAddPersonInfo = new MakeClassAddPersonInfo();
     Dialog mModifyClassDialog;
+
+    @Override
+    public void uploadImgFinished(Bitmap bitmap, String uploadedKey) {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.publish_food_list_activity);
+        setContentView(R.layout.show_food_list_activity);
         ButterKnife.bind(this);
         mInflater = (LayoutInflater)getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
         blueColor = this.getResources().getColor(R.color.main_blue_color);
+        //mWeek1.performClick();
     }
 
-    @OnClick({R.id.back_iv,R.id.publish_food_list_activity_publish_btn,
+
+    @OnClick({R.id.back_iv,
             R.id.publish_food_list_activity_week_1_tv,
             R.id.publish_food_list_activity_week_2_tv,
             R.id.publish_food_list_activity_week_3_tv,
@@ -120,49 +123,71 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
             R.id.publish_food_list_activity_week_5_tv,
             R.id.publish_food_list_activity_week_6_tv,
             R.id.publish_food_list_activity_week_7_tv,
-            R.id.publish_food_list_activity_add_food_btn,
             R.id.course_activity_filter_iv
     })
-
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             finish();
-        } else if (v == addFoodBtn) {
-            addFoodList(contentSvLl);
         } else if (v == mWeek1) {
             resetBg();
             mWeek1.setBackgroundColor(blueColor);
             weekNumStr = "1";
+            requestFoodList();
         } else if (v == mWeek2) {
             resetBg();
             mWeek2.setBackgroundColor(blueColor);
             weekNumStr = "2";
+            requestFoodList();
         } else if (v == mWeek3) {
             resetBg();
             mWeek3.setBackgroundColor(blueColor);
             weekNumStr = "3";
+            requestFoodList();
         } else if (v == mWeek4) {
             resetBg();
             mWeek4.setBackgroundColor(blueColor);
             weekNumStr = "4";
+            requestFoodList();
         } else if (v == mWeek5) {
             resetBg();
             mWeek5.setBackgroundColor(blueColor);
             weekNumStr = "5";
+            requestFoodList();
         } else if (v == mWeek6) {
             resetBg();
             mWeek6.setBackgroundColor(blueColor);
             weekNumStr = "6";
+            requestFoodList();
         } else if (v == mWeek7) {
             resetBg();
             mWeek7.setBackgroundColor(blueColor);
             weekNumStr = "7";
-        } else if (v == publishBtn) {
-            requestPublishFoodList();
+            requestFoodList();
         } else if (v == selClassIv) {
-            requestClassListBySchoolId();
+           requestClassListBySchoolId();
         }
+    }
+
+    //查询食谱列表
+    private void requestFoodList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+        requestData.put("classid", makeClassAddPersonInfo.getId());
+        requestData.put("weeknum", weekNumStr);
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
+        ShowFoodListInfoPaser lp = new ShowFoodListInfoPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_FOOD_LIST, requestData, lp);
+    }
+
+    //按学校ID 查询班级列表 （发布选择班级展示）
+    private void requestClassListBySchoolId() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
+        ClassedAndTeachersPaser lp = new ClassedAndTeachersPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
     }
 
     private void resetBg() {
@@ -175,96 +200,53 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
         mWeek7.setBackgroundColor(Color.WHITE);
     }
 
-    private void addFoodList(final LinearLayout viewLl) {
+    private void addFoodList(final LinearLayout viewLl,final ShowFoodListInfoItem sflii ) {
         final LinearLayout courseItem = (LinearLayout)mInflater.inflate(R.layout.publish_food_list_item,null);
         courseItem.setTag("courseItem");
         int childCount = courseItem.getChildCount();
         viewLl.addView(courseItem,childCount - 1);
 
         ImageView deleteIv = (ImageView) courseItem.findViewById(R.id.publish_food_list_item_del_iv);
-        deleteIv.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                viewLl.removeView(courseItem);
-            }
-        });
+//        deleteIv.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                viewLl.removeView(courseItem);
+//            }
+//        });
+        deleteIv.setVisibility(View.INVISIBLE);
 
         final TextView publishPicTv = (TextView) courseItem.findViewById(R.id.publish_food_list_item_add_pic_tv);
         final LinearLayout addPicLl = (LinearLayout) courseItem.findViewById(R.id.publish_food_list_item_add_pic_ll);
-
-
+        TextView mealTv = (TextView)courseItem.findViewById(R.id.publish_food_list_item_food_period_tv);
+        EditText descTv = (EditText)courseItem.findViewById(R.id.publish_food_list_item_desc_et);
+        View wrapPublishImgView = courseItem.findViewById(R.id.publish_food_list_item_add_pic_rel);
+        mealTv.setText(sflii.getMeal());
+        descTv.setText(sflii.getFooddescription());
+        descTv.setEnabled(false);
         ViewTreeObserver companyTreeObserver = publishPicTv.getViewTreeObserver();
         companyTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
                 publishPicTv.getViewTreeObserver().removeOnPreDrawListener(this);
-                addPicLl.setTag(publishPicTv.getWidth());
+                int width = publishPicTv.getWidth();
+                String urlArray[] = sflii.getFoodimgs().split("_");
+                for (int i = 0 ; i < urlArray.length ; i++) {
+                    addOneImageView(urlArray[i],addPicLl,width);
+                }
                 return true;
             }
         });
-
-        publishPicTv.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                showChangePhotoDialog();
-                currAddPicLl = addPicLl;
-            }
-        });
+        wrapPublishImgView.setVisibility(View.INVISIBLE);
+        publishPicTv.setBackgroundColor(Color.WHITE);
     }
 
-    @Override
-    public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
+    private void addOneImageView(String url,LinearLayout picLl,int width) {
         ImageView iv = new ImageView(this);
-        int width = Integer.parseInt(currAddPicLl.getTag().toString());
-        iv.setImageBitmap(bitmap);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width,width);
         iv.setPadding(10,10,10,10);
-        String imgUrl = BgGlobal.IMG_SERVER_PRE_URL + uploadedKey;
         iv.setLayoutParams(params);
-        iv.setTag(imgUrl);
-        currAddPicLl.addView(iv,0);
-    }
-
-
-    //食谱发布
-    public void requestPublishFoodList() {
-        getImgsList();
-        if (!checkInput()) {
-            return;
-        }
-
-        showProgressDialog();
-
-        HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("weeknum", weekNumStr);
-        requestData.put("meal","早餐");
-        requestData.put("foodimgs",foodImgs);
-        requestData.put("fooddescription",foodDesc);
-        requestData.put("classid", makeClassAddPersonInfo.getId());
-        requestData.put("shoolid", ConfigPara.SCHOOL_ID);
-        requestData.put("osperion",UserInfo.loginInfo.getInfo().getNickname());
-
-        PublishFoodListInfoPaser lp = new PublishFoodListInfoPaser();
-        NetRequest.getInstance().request(mQueue, this,
-                BgGlobal.PUBLISH_FOOD_LIST, requestData, lp);
-    }
-
-
-    private boolean checkInput() {
-        if (TextUtils.isEmpty(weekNumStr)) {
-            ToastUtil.showToast(this,"请选择星期",Toast.LENGTH_SHORT);
-            return false;
-        } else if (TextUtils.isEmpty(foodImgs)) {
-            ToastUtil.showToast(this,"请添加照片",Toast.LENGTH_SHORT);
-            return false;
-        } else if (TextUtils.isEmpty(foodDesc)) {
-            ToastUtil.showToast(this,"请添加食谱描述",Toast.LENGTH_SHORT);
-            return false;
-        } else if (TextUtils.isEmpty(makeClassAddPersonInfo.getId())) {
-            ToastUtil.showToast(this,"请选择班级",Toast.LENGTH_SHORT);
-            return false;
-        }
-        return true;
+        AsyncImageUtil.asyncLoadImage(iv,url,R.mipmap.ic_launcher, false, false);
+        picLl.addView(iv,0);
     }
 
     @Override
@@ -278,68 +260,19 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
             } else {
                 ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
             }
-        } else if (nbs.obj instanceof PublishFoodLishInfo) {
+        } else if (nbs.obj instanceof ShowFoodListInfo) {
             if (nbs.isSuccess()) {
-                finish();
-            } else {
-            }
-            ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
-        }
-    }
-
-    private void getImgsList() {
-        foodDesc = "";
-        foodImgs = "";
-
-        int count = contentSvLl.getChildCount();
-        for (int i = 0 ; i < count ; i++) {
-            View tempWrapView = contentSvLl.getChildAt(i);
-            if (tempWrapView instanceof Button) {
-                continue;
-            }
-
-            EditText tempView = (EditText) tempWrapView.findViewById(R.id.publish_food_list_item_desc_et);
-            foodDesc = foodDesc + tempView.getText().toString() + ",";
-            LinearLayout addPicLl = (LinearLayout) tempWrapView.findViewById(R.id.publish_food_list_item_add_pic_ll);
-            int childCount = addPicLl.getChildCount();
-            String tempPics = "";
-            for (int j = 0 ; j < childCount; j++) {
-                Object obj = addPicLl.getChildAt(j);
-                if (obj instanceof ImageView) {
-                    ImageView tempIc = (ImageView) obj;
-                    String url = "";
-                    if (tempIc.getTag() != null) {
-                        url = tempIc.getTag().toString() + "_";
-                    }
-                    tempPics = tempPics + url;
+                ShowFoodListInfo tii = (ShowFoodListInfo)nbs.obj;
+                List <ShowFoodListInfoItem> data = tii.getDataList();
+                int count = data.size();
+                for (int i = 0 ; i < count ; i++) {
+                    ShowFoodListInfoItem sflii = data.get(i);
+                    addFoodList(contentSvLl,sflii);
                 }
+            } else {
+                ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
             }
-
-            if (tempPics.contains("_")) {
-                tempPics = tempPics.substring(0,tempPics.length()-1);
-            }
-
-            foodImgs = foodImgs + tempPics + ",";
         }
-
-        if (foodImgs.contains(",")) {
-            foodImgs = foodImgs.substring(0,foodImgs.length()-1);
-        }
-
-        if (foodDesc.contains(",")) {
-            foodDesc = foodDesc.substring(0,foodDesc.length()-1);
-        }
-    }
-
-
-
-    //按学校ID 查询班级列表 （发布选择班级展示）
-    private void requestClassListBySchoolId() {
-        showProgressDialog();
-        HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
-        ClassedAndTeachersPaser lp = new ClassedAndTeachersPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
     }
 
     private void initListView(final List<ClassesAndTeachersListItemInfo> dataList) {
@@ -386,6 +319,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
             public void onClick(View v) {
                 titleTv.setText(makeClassAddPersonInfo.getName());
                 mModifyClassDialog.dismiss();
+                requestFoodList();
             }
         });
 

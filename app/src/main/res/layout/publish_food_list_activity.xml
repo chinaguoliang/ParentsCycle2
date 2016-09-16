@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"></View>
         <Button
+            android:id="@+id/publish_food_list_activity_publish_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="发布"
@@ -75,96 +76,104 @@
             android:padding="3dp">
 
             <TextView
+                android:id="@+id/publish_food_list_activity_week_1_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周一"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
 
             <TextView
+                android:id="@+id/publish_food_list_activity_week_2_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周二"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/publish_food_list_activity_week_3_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周三"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/publish_food_list_activity_week_4_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周四"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/publish_food_list_activity_week_5_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周五"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+                android:id="@+id/publish_food_list_activity_week_6_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周六"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
             <TextView
+
+                android:id="@+id/publish_food_list_activity_week_7_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:background="@color/main_blue_color"
+                android:background="@color/white"
                 android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingTop="3dp"
                 android:text="周日"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_gray" />
 
         </LinearLayout>
 
@@ -224,7 +233,7 @@
 
 
                     <Button
-                        android:id="@+id/publish_food_list_activity_publish_btn"
+                        android:id="@+id/publish_food_list_activity_add_food_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"

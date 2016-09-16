@@ -38,6 +38,8 @@ import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
+import com.jgkj.parentscycle.utils.CircularImage;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 import com.jgkj.parentscycle.widget.ListViewForScrollView;
@@ -75,6 +77,15 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.teacher_info_activity_save_btn)
     Button saveBtn;
 
+    @Bind(R.id.hall_mine_fragment_lv_header_user_icon_iv)
+    CircularImage mIconIv;
+
+    @Bind(R.id.teacher_info_activity_name_tv)
+    TextView nameTv;
+
+    @Bind(R.id.teacher_info_activity_phone_tv)
+    TextView phoneTv;
+
     TeacherInfoAdapter teacherInfoAdapter;
     Dialog mLeaveSchoolDialog;
     Dialog mModifyClassDialog;
@@ -85,7 +96,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     String headIconUrl = "";
     String sex = "";
     String permission = "";
-
+    String selectedDate = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +133,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("tmpinfoid", teacherId);
-        requestData.put("schoolid", "1");  //暂时传1
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);  //暂时传1
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_LIST, requestData, lp);
     }
@@ -162,13 +173,15 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     }
 
 
-    @OnClick({R.id.baby_document_activity_back_iv,R.id.teacher_info_activity_save_btn})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.teacher_info_activity_save_btn,R.id.hall_mine_fragment_lv_header_user_icon_iv})
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             finish();
         } else if (v == saveBtn) {
             requestSaveTeacherInfo();
+        } else if (v == mIconIv) {
+            showChangePhotoDialog();
         }
     }
 
@@ -222,6 +235,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         String date = year + "-" + (monthOfYear + 1) + "-" +dayOfMonth;
+        selectedDate = date;
         String dateStr = "出生日期_" + date;
         teacherInfoAdapter.setPositionData(6,dateStr);
     }
@@ -301,7 +315,10 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
-
+        headIconUrl = BgGlobal.IMG_SERVER_PRE_URL + uploadedKey;
+        AsyncImageUtil.asyncLoadImage(mIconIv,
+                headIconUrl,
+                R.mipmap.user_default_icon, true, false);
     }
 
     @Override
@@ -313,6 +330,11 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
                 TeacherInfoListInfo tii = (TeacherInfoListInfo)nbs.obj;
                 mTeacherInfoListInfo = tii;
                 titleTv.setText(tii.getTeachername());
+                nameTv.setText(tii.getTeachername());
+                phoneTv.setText(tii.getPhone());
+                AsyncImageUtil.asyncLoadImage(mIconIv,
+                        tii.getHeadportrait(),
+                        R.mipmap.user_default_icon, true, false);
                 teacherInfoAdapter = new TeacherInfoAdapter(this, getContentData(tii));
                 contentLv.setAdapter(teacherInfoAdapter);
             } else {
@@ -376,8 +398,19 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         HashMap<Integer,String> dataMap = teacherInfoAdapter.dataMap;
 
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("analysis",dataMap.get(0));
-        requestData.put("birthdate",dataMap.get(6));
+        String ayalysis = dataMap.get(0);
+        if (TextUtils.isEmpty(ayalysis)) {
+            requestData.put("analysis",mTeacherInfoListInfo.getAnalysis());
+        } else {
+            requestData.put("analysis",ayalysis);
+        }
+
+        if (TextUtils.isEmpty(selectedDate)) {
+            requestData.put("birthdate",mTeacherInfoListInfo.getBirthdate());
+        } else {
+            requestData.put("birthdate",selectedDate);
+        }
+
 
         if (TextUtils.isEmpty(classIds)) {
             requestData.put("classid",mTeacherInfoListInfo.getClassid());
@@ -394,7 +427,14 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
         requestData.put("kbwx",mTeacherInfoListInfo.getKbwx()); //1: 是  0：否
         requestData.put("kbqq",mTeacherInfoListInfo.getKbqq());
         requestData.put("nationality",mTeacherInfoListInfo.getNationality());
-        requestData.put("nickname",dataMap.get(2));
+
+        String nickName = dataMap.get(2);
+        if (TextUtils.isEmpty(nickName)) {
+            requestData.put("nickname",mTeacherInfoListInfo.getNickname());
+        } else {
+            requestData.put("nickname",nickName);
+        }
+
         requestData.put("onthejob",mTeacherInfoListInfo.getOnthejob()); // 1:在职  0： 离职
 
         if (TextUtils.isEmpty(permission)) {
@@ -403,10 +443,23 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
             requestData.put("permissions",permission);
         }
 
-        requestData.put("phone",dataMap.get(7));
+        String phone = dataMap.get(7);
+        if (TextUtils.isEmpty(phone)) {
+            requestData.put("phone",mTeacherInfoListInfo.getPhone());
+        } else {
+            requestData.put("phone",phone);
+        }
+
         requestData.put("schoolname",mTeacherInfoListInfo.getSchoolname());
         requestData.put("teacherid",mTeacherInfoListInfo.getTeacherid());
-        requestData.put("teachername",mTeacherInfoListInfo.getTeacherid());
+
+        String teacherName = dataMap.get(3);
+        if (TextUtils.isEmpty(teacherName)) {
+            requestData.put("teachername",mTeacherInfoListInfo.getTeachername());
+        } else {
+            requestData.put("teachername",teacherName);
+        }
+
 
         if (TextUtils.isEmpty(sex)) {
             requestData.put("teachersex",mTeacherInfoListInfo.getTeachersex());
@@ -434,9 +487,11 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     public void finishSlecct(int index) {
         String sexResult = "";
         if (index == 1) {
+            sex = "1";
             sexResult = "性别_男";
         } else if (index == 0) {
             sexResult = "性别_女";
+            sex = "0";
         }
         teacherInfoAdapter.setPositionData(4,sexResult);
     }

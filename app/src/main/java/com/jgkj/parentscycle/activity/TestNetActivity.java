@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
@@ -46,7 +47,15 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestBabyAskForLeave();
 //            startActivity(new Intent(this, PublishFoodListActivity.class));
             //requestTeachersList();
-            requestClassListBySchoolId();
+//            requestClassListBySchoolId();
+//            requestCheckAttendance();
+//            requestCourseList();
+            //requestPublishFoodList();
+            //requestCourseList();
+//            requestFoodList();
+            //requestCourseList();
+            requestFoodList();
+//            requestPublishFoodList();
         }
     }
 
@@ -97,7 +106,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("weeknum", "1");
         requestData.put("meal","晚餐");
-        requestData.put("foodimgs","1.png");
+        requestData.put("foodimgs","http://www.1.png");
         requestData.put("fooddescription","黄色");
         requestData.put("classid","1");
         requestData.put("shoolid","1");
@@ -267,6 +276,30 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         NetRequest.getInstance().request(mQueue, this, BgGlobal.SEARCH_CLASS_LIST_BY_SCHOOL_ID, requestData, lp);
     }
 
+    //查询食谱列表
+    private void requestFoodList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+        requestData.put("classid", "62");
+        requestData.put("weeknum", "1");
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_FOOD_LIST, requestData, lp);
+    }
+
+
+    //查询课程列表
+    private void requestCourseList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+        requestData.put("weeknum","1");
+        requestData.put("clssids", "62");
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_COURSE_LIST, requestData, lp);
+    }
     @Override
     public void requestResponse(Object obj) {
 

@@ -48,6 +48,11 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.circle_menu_activity_baby_safe_send_tv)
     TextView safeSendTv;
 
+    @Bind(R.id.circle_menu_activity_food_tv)
+    TextView foodTv;
+
+    @Bind(R.id.circle_menu_activity_course_tv)
+    TextView courseTv;
 
 
     @Override
@@ -72,7 +77,9 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
         rightTv.setTextColor(Color.BLACK);
     }
 
-    @OnClick({R.id.circle_menu_activity_close_tv,R.id.circle_menu_activity_chat_tv,R.id.circle_menu_activity_baby_show_tv,R.id.circle_menu_activity_baby_parents_cycle_tv,R.id.circle_menu_activity_baby_safe_send_tv})
+    @OnClick({R.id.circle_menu_activity_close_tv,R.id.circle_menu_activity_chat_tv,R.id.circle_menu_activity_baby_show_tv,R.id.circle_menu_activity_baby_parents_cycle_tv,R.id.circle_menu_activity_baby_safe_send_tv,
+    R.id.circle_menu_activity_food_tv,
+    R.id.circle_menu_activity_course_tv})
     @Override
     public void onClick(View v) {
         if (v == closeTv) {
@@ -85,6 +92,10 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
             startActivity(new Intent(this, BabyShowActivity.class));
         } else if (v == parentsCycleTv) {
             startActivity(new Intent(this, ParentsCycleActivity.class));
+        } else if (v == foodTv) {
+            startActivity(new Intent(this, PublishFoodListActivity.class));
+        } else if (v == courseTv) {
+            startActivity(new Intent(this, PublishCourseActivity.class));
         }
     }
 

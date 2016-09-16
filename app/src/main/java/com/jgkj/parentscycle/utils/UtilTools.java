@@ -116,6 +116,18 @@ public class UtilTools {
 		}
 		return result;
 	}
+
+	//去除最后的,号
+	public static String removeLastDot(String str) {
+		if (TextUtils.isEmpty(str)) {
+			return "";
+		}
+
+		if (str.contains(",")) {
+			str = str.substring(0,str.length()-1);
+		}
+		return str;
+	}
 //
 //	public static Bitmap getBitmap(String url) {
 //

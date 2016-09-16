@@ -64,9 +64,9 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
     RelativeLayout addAdviserRel;
 
 
-    private String teacherIdsDataStr;
-    private String classNameStr;
-    private String classAdviserStr;
+    private String teacherIdsDataStr = "";
+    private String classNameStr = "";
+    private String classAdviserStr = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

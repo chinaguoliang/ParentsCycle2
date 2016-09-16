@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 import android.os.Handler;
@@ -21,6 +22,7 @@ public class SplashActivity extends Activity{
         WindowManager wm = this.getWindowManager();
         UtilTools.SCREEN_WIDTH = wm.getDefaultDisplay().getWidth();
         UtilTools.SCREEN_HEIGHT = wm.getDefaultDisplay().getHeight();
+        UserInfo.isLogined = false;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -38,7 +38,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <com.jgkj.parentscycle.utils.CircularImage
                         android:id="@+id/hall_mine_fragment_lv_header_user_icon_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -52,6 +52,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/teacher_info_activity_name_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="小明" />
@@ -67,6 +68,7 @@
                                 android:text="手机号:" />
 
                             <TextView
+                                android:id="@+id/teacher_info_activity_phone_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="111111" />
