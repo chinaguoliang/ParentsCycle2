@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -171,6 +172,19 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
 
     //查询食谱列表
     private void requestFoodList() {
+        if (TextUtils.isEmpty(makeClassAddPersonInfo.getId())) {
+            ToastUtil.showToast(this,"请选择班级",Toast.LENGTH_SHORT);
+            return;
+        }
+
+        if (TextUtils.isEmpty(weekNumStr)) {
+            ToastUtil.showToast(this,"请选择星期",Toast.LENGTH_SHORT);
+            return;
+        }
+
+        contentSvLl.removeAllViews();
+
+        showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("rows","10");
         requestData.put("page","1");
