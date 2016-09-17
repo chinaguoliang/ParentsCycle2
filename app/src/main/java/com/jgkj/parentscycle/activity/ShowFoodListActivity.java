@@ -243,10 +243,23 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
             public boolean onPreDraw() {
                 publishPicTv.getViewTreeObserver().removeOnPreDrawListener(this);
                 int width = publishPicTv.getWidth();
-                String urlArray[] = sflii.getFoodimgs().split("_");
+                String urlArray[] = sflii.getFoodimgs().split("http:");
                 for (int i = 0 ; i < urlArray.length ; i++) {
-                    addOneImageView(urlArray[i],addPicLl,width);
+                    if (urlArray[i].endsWith("_")) {
+                        urlArray[i] =(urlArray[i].substring(0,urlArray[i].length()-1));
+                    }
+                    if (!TextUtils.isEmpty(urlArray[i])) {
+                        urlArray[i] = "http:" + urlArray[i];
+                    }
+
                 }
+
+                for (int i = 0 ; i < urlArray.length ; i++) {
+                    if (!TextUtils.isEmpty(urlArray[i])) {
+                        addOneImageView(urlArray[i],addPicLl,width);
+                    }
+                }
+
                 return true;
             }
         });
