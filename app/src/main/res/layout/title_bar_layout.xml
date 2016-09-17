@@ -40,6 +40,17 @@
             android:textSize="@dimen/normal_text_size"
             android:text="1"
             />
+
+        <ImageView
+            android:id="@+id/course_activity_filter_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/course_had_filter"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            />
     </RelativeLayout>
 
 

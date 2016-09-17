@@ -54,8 +54,9 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestCourseList();
 //            requestFoodList();
             //requestCourseList();
-            requestFoodList();
+            //requestFoodList();
 //            requestPublishFoodList();
+            requestCourseList();
         }
     }
 
