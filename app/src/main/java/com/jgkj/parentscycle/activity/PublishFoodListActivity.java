@@ -4,10 +4,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,6 +101,8 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
 
     private int blueColor;
 
+    private String foodNumStr = "早餐";
+
     private String foodImgs = "";
     private String foodDesc = "";
     private MakeClassAddPersonInfo makeClassAddPersonInfo = new MakeClassAddPersonInfo();
@@ -110,6 +115,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
         mInflater = (LayoutInflater)getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
         blueColor = this.getResources().getColor(R.color.main_blue_color);
+
     }
 
     @OnClick({R.id.back_iv,R.id.publish_food_list_activity_publish_btn,
@@ -180,7 +186,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
         courseItem.setTag("courseItem");
         int childCount = courseItem.getChildCount();
         viewLl.addView(courseItem,childCount - 1);
-
+        TextView foodNum = (TextView)courseItem.findViewById(R.id.publish_food_list_item_food_period_tv);
         ImageView deleteIv = (ImageView) courseItem.findViewById(R.id.publish_food_list_item_del_iv);
         deleteIv.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -208,6 +214,13 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
             public void onClick(View v) {
                 showChangePhotoDialog();
                 currAddPicLl = addPicLl;
+            }
+        });
+
+        foodNum.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showPopupWindow(v);
             }
         });
     }
@@ -290,6 +303,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
     private void getImgsList() {
         foodDesc = "";
         foodImgs = "";
+        foodNumStr = "";
 
         int count = contentSvLl.getChildCount();
         for (int i = 0 ; i < count ; i++) {
@@ -297,6 +311,13 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
             if (tempWrapView instanceof Button) {
                 continue;
             }
+
+            View foodPeriod = tempWrapView.findViewById(R.id.publish_food_list_item_food_period_tv);
+            if (foodPeriod != null) {
+                String foodPeriodStr = ((TextView)foodPeriod).getText().toString() + "@";
+                foodNumStr = foodNumStr + foodPeriodStr;
+            }
+
 
             EditText tempView = (EditText) tempWrapView.findViewById(R.id.publish_food_list_item_desc_et);
             foodDesc = foodDesc + tempView.getText().toString() + ",";
@@ -328,6 +349,10 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
 
         if (foodDesc.contains(",")) {
             foodDesc = foodDesc.substring(0,foodDesc.length()-1);
+        }
+
+        if (foodNumStr.contains("@")) {
+            foodNumStr = foodNumStr.substring(0,foodNumStr.length()-1);
         }
     }
 
@@ -398,4 +423,74 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
         params.width = UtilTools.SCREEN_WIDTH;
         mModifyClassDialog.getWindow().setAttributes(params);
     }
+
+
+    private void showPopupWindow(View view) {
+        final TextView foodNumTv = (TextView)view;
+
+        // 一个自定义的布局，作为显示的内容
+        View contentView = LayoutInflater.from(view.getContext()).inflate(
+                R.layout.food_num_select_pop_window, null);
+        final PopupWindow popupWindow = new PopupWindow(contentView,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
+        // 设置按钮的点击事件
+        final TextView breakfastTv = (TextView)contentView.findViewById(R.id.food_num_select_pop_window_1);
+        final TextView lunchTv = (TextView)contentView.findViewById(R.id.food_num_select_pop_window_2);
+        final TextView dinnerTv = (TextView)contentView.findViewById(R.id.food_num_select_pop_window_3);
+
+        breakfastTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = breakfastTv.getText().toString();
+                foodNumTv.setText(str);
+                popupWindow.dismiss();
+
+            }
+        });
+
+        lunchTv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String str = lunchTv.getText().toString();
+                foodNumTv.setText(str);
+                popupWindow.dismiss();
+
+            }
+        });
+
+        dinnerTv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String str = dinnerTv.getText().toString();
+                foodNumTv.setText(str);
+                popupWindow.dismiss();
+
+            }
+        });
+
+        popupWindow.setTouchable(true);
+
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
+
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        // 我觉得这里是API的一个bug
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+        // 设置好参数之后再show
+        popupWindow.showAsDropDown(view);
+
+    }
+
 }

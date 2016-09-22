@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/food_num_select_pop_window_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="早餐"
+        android:textColor="@color/black"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="@dimen/normal_text_size"
+        />
+
+
+
+    <TextView
+        android:id="@+id/food_num_select_pop_window_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中餐"
+        android:textColor="@color/black"
+        android:textSize="@dimen/normal_text_size"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/food_num_select_pop_window_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="晚餐"
+        android:textColor="@color/black"
+        android:textSize="@dimen/normal_text_size"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        />
+
+</LinearLayout>
