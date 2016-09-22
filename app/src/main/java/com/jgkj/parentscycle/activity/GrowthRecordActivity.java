@@ -2,6 +2,7 @@ package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,6 +38,8 @@ public class GrowthRecordActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.growth_record_activity_send_record_iv)
     ImageView sendRecordIv;
 
+    @Bind(R.id.title_bar_layout_rel)
+    View titleBg;
     @Override
     public void uploadImgFinished(Bitmap bitmap, String uploadedKey) {
 
@@ -47,9 +50,14 @@ public class GrowthRecordActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.growth_record_activity);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    private void initView() {
         mContentLv.setAdapter(new GrowthRecordActivityLvAdapter(this,initTestData()));
         rightTitleTv.setVisibility(View.GONE);
         titleTv.setText("成长记录");
+        titleBg.setBackgroundColor(Color.TRANSPARENT);
     }
 
     private ArrayList<String> initTestData() {
