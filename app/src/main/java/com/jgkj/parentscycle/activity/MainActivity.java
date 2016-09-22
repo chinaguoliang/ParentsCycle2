@@ -16,6 +16,7 @@ import com.jgkj.parentscycle.fragement.HallDynamicFragement;
 import com.jgkj.parentscycle.fragement.HallFindFragement;
 import com.jgkj.parentscycle.fragement.HallMainChannelFragement;
 import com.jgkj.parentscycle.fragement.HallMeFragement;
+import com.jgkj.parentscycle.global.ActivityResultCode;
 import com.jgkj.parentscycle.utils.ImageHandler;
 
 import java.lang.ref.WeakReference;
@@ -154,7 +155,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
             mBtmMineTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
         }  else if (v == mBtmPublishIv) {
-           startActivity(new Intent(this,CircleMenuActivity.class));
+           startActivityForResult(new Intent(this,CircleMenuActivity.class),10);
         }
     }
 
@@ -192,5 +193,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == ActivityResultCode.MY_PUBLISH_CODE) {
+            mBtmFindLl.performClick();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.global.ActivityResultCode;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 import butterknife.Bind;
@@ -21,6 +22,8 @@ import butterknife.OnClick;
  * Created by chen on 16/8/16.
  */
 public class CircleMenuActivity extends BaseActivity implements View.OnClickListener{
+
+
     @Bind(R.id.circle_menu_activity_close_tv)
     TextView closeTv;
 
@@ -79,7 +82,8 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
 
     @OnClick({R.id.circle_menu_activity_close_tv,R.id.circle_menu_activity_chat_tv,R.id.circle_menu_activity_baby_show_tv,R.id.circle_menu_activity_baby_parents_cycle_tv,R.id.circle_menu_activity_baby_safe_send_tv,
     R.id.circle_menu_activity_food_tv,
-    R.id.circle_menu_activity_course_tv})
+    R.id.circle_menu_activity_course_tv,
+    R.id.baby_document_right_title_tv})
     @Override
     public void onClick(View v) {
         if (v == closeTv) {
@@ -96,6 +100,9 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
             startActivity(new Intent(this, PublishFoodListActivity.class));
         } else if (v == courseTv) {
             startActivity(new Intent(this, PublishCourseActivity.class));
+        } else if (v == rightTv) {
+            setResult(ActivityResultCode.MY_PUBLISH_CODE);
+            finish();
         }
     }
 
