@@ -54,8 +54,10 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestCourseList();
 //            requestFoodList();
             //requestCourseList();
-            requestFoodList();
+            //requestFoodList();
 //            requestPublishFoodList();
+//            requestCourseList();
+            requestAnnounceMentList();
         }
     }
 
@@ -299,6 +301,17 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         requestData.put("schoolid", ConfigPara.SCHOOL_ID);
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_COURSE_LIST, requestData, lp);
+    }
+
+
+    //查询课程列表
+    private void requestAnnounceMentList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+        requestData.put("announid","9");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_DETAIL, requestData, lp);
     }
     @Override
     public void requestResponse(Object obj) {

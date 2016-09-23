@@ -5,19 +5,17 @@
     android:background="@color/bg_gray"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/title_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_height="50dp"></include>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:id="@+id/growth_record_activity_top_info_rel"
+
             android:layout_width="match_parent"
             android:background="@mipmap/landscape_icon"
-            android:layout_height="150dp">
+            android:layout_height="241dp">
 
             <ImageView
                 android:id="@+id/growth_record_activity_user_icon_iv"
@@ -115,6 +113,13 @@
             android:layout_marginBottom="30dp"
             android:layout_marginRight="20dp"
             />
+
+        <include
+            android:id="@+id/top_title_layout"
+            layout="@layout/title_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_height="50dp"></include>
     </RelativeLayout>
 
 

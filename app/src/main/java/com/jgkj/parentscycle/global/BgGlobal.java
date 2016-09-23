@@ -47,4 +47,6 @@ public class BgGlobal {
     public static final String QUERY_FOOD_LIST = "food/foodList";  // 查询食谱列表
     public static final String QUERY_COURSE_LIST = "coursetime/coursetimeList"; // 查询课程列表
 
+    public static final String ANNOUNCEMENT_DETAIL = "announcementComment/announcementCommentList"; //公告评论列表
+
 }

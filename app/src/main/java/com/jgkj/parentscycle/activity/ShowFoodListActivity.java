@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -171,6 +172,19 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
 
     //查询食谱列表
     private void requestFoodList() {
+        if (TextUtils.isEmpty(makeClassAddPersonInfo.getId())) {
+            ToastUtil.showToast(this,"请选择班级",Toast.LENGTH_SHORT);
+            return;
+        }
+
+        if (TextUtils.isEmpty(weekNumStr)) {
+            ToastUtil.showToast(this,"请选择星期",Toast.LENGTH_SHORT);
+            return;
+        }
+
+        contentSvLl.removeAllViews();
+
+        showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("rows","10");
         requestData.put("page","1");
@@ -229,10 +243,23 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
             public boolean onPreDraw() {
                 publishPicTv.getViewTreeObserver().removeOnPreDrawListener(this);
                 int width = publishPicTv.getWidth();
-                String urlArray[] = sflii.getFoodimgs().split("_");
+                String urlArray[] = sflii.getFoodimgs().split("http:");
                 for (int i = 0 ; i < urlArray.length ; i++) {
-                    addOneImageView(urlArray[i],addPicLl,width);
+                    if (urlArray[i].endsWith("_")) {
+                        urlArray[i] =(urlArray[i].substring(0,urlArray[i].length()-1));
+                    }
+                    if (!TextUtils.isEmpty(urlArray[i])) {
+                        urlArray[i] = "http:" + urlArray[i];
+                    }
+
                 }
+
+                for (int i = 0 ; i < urlArray.length ; i++) {
+                    if (!TextUtils.isEmpty(urlArray[i])) {
+                        addOneImageView(urlArray[i],addPicLl,width);
+                    }
+                }
+
                 return true;
             }
         });

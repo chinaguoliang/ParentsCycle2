@@ -18,6 +18,7 @@ import com.jgkj.parentscycle.activity.PublishCourseActivity;
 import com.jgkj.parentscycle.activity.MainActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.PublishFoodListActivity;
+import com.jgkj.parentscycle.activity.ShowCourseListActivity;
 import com.jgkj.parentscycle.activity.ShowFoodListActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
@@ -230,7 +231,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
             }
         } else if (v == courseListTv) {
             if (UserInfo.isLogined) {
-                startActivity(new Intent(getContext(), PublishCourseActivity.class));
+                startActivity(new Intent(getContext(), ShowCourseListActivity.class));
             } else {
                 ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
             }

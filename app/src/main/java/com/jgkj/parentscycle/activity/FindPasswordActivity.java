@@ -2,9 +2,11 @@ package com.jgkj.parentscycle.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ import butterknife.OnClick;
  */
 public class FindPasswordActivity extends BaseActivity implements View.OnClickListener,NetListener {
     private static final String TAG = "FindPasswordActivity";
+    @Bind(R.id.title_bar_layout_rel)
+    View titleBg;
 
     @Bind(R.id.find_password_activity_phone_num_et)
     EditText phoneNumEt;
@@ -45,7 +49,14 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.find_password_activity_request_verify_num_tv)
     TextView requestVerifyNumTv;
 
+    @Bind(R.id.baby_document_activity_back_iv)
+    ImageView backIv;
 
+    @Bind(R.id.baby_document_activity_title)
+    TextView titleTv;
+
+    @Bind(R.id.baby_document_right_title_tv)
+    TextView rightTv;
 
     ButtonTimeCount mTimeCount;
     @Override
@@ -56,9 +67,13 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
         ButterKnife.bind(this);
         mTimeCount = new ButtonTimeCount(60000, 1000);
         mTimeCount.setSendButton(requestVerifyNumTv);
+        rightTv.setVisibility(View.GONE);
+        titleTv.setText("找回密码");
+        titleBg.setBackgroundColor(Color.parseColor("#43373533"));
     }
 
-    @OnClick({R.id.find_password_activity_phone_num_et,R.id.find_password_activity_phone_verify_num_et,R.id.find_password_activity_next_step_tv,R.id.find_password_activity_request_verify_num_tv})
+    @OnClick({R.id.find_password_activity_phone_num_et,R.id.find_password_activity_phone_verify_num_et,R.id.find_password_activity_next_step_tv,R.id.find_password_activity_request_verify_num_tv
+    ,R.id.baby_document_activity_back_iv})
 
     @Override
     public void onClick(View v) {
@@ -75,6 +90,8 @@ public class FindPasswordActivity extends BaseActivity implements View.OnClickLi
           }
           mTimeCount.start();
           requestVerifyNum();
+      } else if (v == backIv) {
+          finish();
       }
     }
 
