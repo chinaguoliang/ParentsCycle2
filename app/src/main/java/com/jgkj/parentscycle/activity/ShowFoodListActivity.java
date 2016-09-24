@@ -245,7 +245,7 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
                 int width = publishPicTv.getWidth();
                 String urlArray[] = sflii.getFoodimgs().split("http:");
                 for (int i = 0 ; i < urlArray.length ; i++) {
-                    if (urlArray[i].endsWith("_")) {
+                    if (urlArray[i].endsWith(",")) {
                         urlArray[i] =(urlArray[i].substring(0,urlArray[i].length()-1));
                     }
                     if (!TextUtils.isEmpty(urlArray[i])) {
