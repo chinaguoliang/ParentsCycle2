@@ -250,7 +250,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
 
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("weeknum", weekNumStr);
-        requestData.put("meal","早餐");
+        requestData.put("meal",foodNumStr);
         requestData.put("foodimgs",foodImgs);
         requestData.put("fooddescription",foodDesc);
         requestData.put("classid", makeClassAddPersonInfo.getId());
@@ -293,7 +293,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
             }
         } else if (nbs.obj instanceof PublishFoodLishInfo) {
             if (nbs.isSuccess()) {
-                finish();
+                //finish();
             } else {
             }
             ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
@@ -320,7 +320,7 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
 
 
             EditText tempView = (EditText) tempWrapView.findViewById(R.id.publish_food_list_item_desc_et);
-            foodDesc = foodDesc + tempView.getText().toString() + ",";
+            foodDesc = foodDesc + tempView.getText().toString() + "@";
             LinearLayout addPicLl = (LinearLayout) tempWrapView.findViewById(R.id.publish_food_list_item_add_pic_ll);
             int childCount = addPicLl.getChildCount();
             String tempPics = "";
@@ -330,24 +330,24 @@ public class PublishFoodListActivity extends BaseActivity implements View.OnClic
                     ImageView tempIc = (ImageView) obj;
                     String url = "";
                     if (tempIc.getTag() != null) {
-                        url = tempIc.getTag().toString() + "_";
+                        url = tempIc.getTag().toString() + ",";
                     }
                     tempPics = tempPics + url;
                 }
             }
 
-            if (tempPics.contains("_")) {
+            if (tempPics.contains(",")) {
                 tempPics = tempPics.substring(0,tempPics.length()-1);
             }
 
-            foodImgs = foodImgs + tempPics + ",";
+            foodImgs = foodImgs + tempPics + "@";
         }
 
-        if (foodImgs.contains(",")) {
+        if (foodImgs.contains("@")) {
             foodImgs = foodImgs.substring(0,foodImgs.length()-1);
         }
 
-        if (foodDesc.contains(",")) {
+        if (foodDesc.contains("@")) {
             foodDesc = foodDesc.substring(0,foodDesc.length()-1);
         }
 
