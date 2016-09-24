@@ -2,6 +2,7 @@ package com.jgkj.parentscycle.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class BabyDocumentAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         MineViewHolder holder;
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) mContext
@@ -102,8 +103,13 @@ public class BabyDocumentAdapter extends BaseAdapter {
         holder.babyDetailTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
-                context.startActivity(new Intent(context,BabyInfoActivity.class));
+
+                BabyDocumentListInfoItem bdlItem = (BabyDocumentListInfoItem)contentData.get(position);
+                Intent intent = new Intent(v.getContext(),BabyInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("baby_info",bdlItem);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
             }
         });
 

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.BabyDocumentListInfoItem;
 import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.user.UserInfo;
@@ -134,6 +136,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
 
     int selSex = -1;
 
+    BabyDocumentListInfoItem  mBabyDocumentListInfoItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,9 +146,18 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initViews() {
+        Bundle bundle = this.getIntent().getExtras();
+        mBabyDocumentListInfoItem = (BabyDocumentListInfoItem)bundle.get("baby_info");
         titleBg.setBackgroundColor(0x00000000);
         rightTv.setVisibility(View.GONE);
         titleTv.setText("宝宝详情");
+        nameet.setText(mBabyDocumentListInfoItem.getUsername());
+        String sex = mBabyDocumentListInfoItem.getSex();
+        if (TextUtils.equals(sex,"0")) {
+            sexTv.setText("女");
+        } else {
+            sexTv.setText("男");
+        }
     }
 
     @OnClick({R.id.baby_document_activity_back_iv,

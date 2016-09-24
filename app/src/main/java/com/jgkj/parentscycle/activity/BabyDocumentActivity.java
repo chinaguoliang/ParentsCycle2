@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,8 @@ public class BabyDocumentActivity extends BaseActivity implements View.OnClickLi
 
         title.setText("宝宝档案");
         requestBabyList();
+
+
     }
 
 

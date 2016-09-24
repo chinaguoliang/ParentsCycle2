@@ -1,9 +1,11 @@
 package com.jgkj.parentscycle.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/9/24.
  */
-public class BabyDocumentListInfoItem {
+public class BabyDocumentListInfoItem implements Serializable{
     String age = "";
     String babyid = "";
     String bgurl = "";
