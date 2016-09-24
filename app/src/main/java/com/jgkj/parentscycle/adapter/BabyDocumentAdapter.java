@@ -13,6 +13,7 @@ import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.BabyInfoActivity;
 import com.jgkj.parentscycle.activity.GrowthRecordActivity;
 import com.jgkj.parentscycle.activity.ModifyAttendanceActivity;
+import com.jgkj.parentscycle.bean.BabyDocumentListInfoItem;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.List;
@@ -21,10 +22,10 @@ import java.util.List;
  * Created by chen on 16/7/18.
  */
 public class BabyDocumentAdapter extends BaseAdapter {
-    private List<String> contentData;
+    private List<BabyDocumentListInfoItem> contentData;
     private Context mContext;
     private int showSecondPosition = -1;
-    public BabyDocumentAdapter(Context context, List<String> data){
+    public BabyDocumentAdapter(Context context, List<BabyDocumentListInfoItem> data){
         contentData = data;
         mContext = context;
     }
@@ -67,7 +68,8 @@ public class BabyDocumentAdapter extends BaseAdapter {
             holder = (MineViewHolder) convertView.getTag();
         }
 
-        holder.babyNameTv.setText(contentData.get(position));
+        BabyDocumentListInfoItem bdlii = contentData.get(position);
+        holder.babyNameTv.setText(bdlii.getUsername());
         if (showSecondPosition == position) {
             holder.secondMenu.setVisibility(View.VISIBLE);
         } else {
