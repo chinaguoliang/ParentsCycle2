@@ -20,28 +20,37 @@
         android:background="@color/bg_gray">
 
     </View>
-
-    <ListView
-        android:id="@+id/modify_class_dialog_lv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:cacheColorHint="#00000000"
-        android:dividerHeight="1dp"
-        android:divider="@color/bg_gray"
+        android:layout_height="300dp"
         >
 
-    </ListView>
 
-    <Button
-        android:id="@+id/modify_class_dialog_confirm_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/main_blue_color"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
-        android:text="确定"
-        android:textColor="@color/white" />
+        <Button
+            android:id="@+id/modify_class_dialog_confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/main_blue_color"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="确定"
+            android:textColor="@color/white" />
+
+
+        <ListView
+            android:id="@+id/modify_class_dialog_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/modify_class_dialog_confirm_btn"
+            android:cacheColorHint="#00000000"
+            android:dividerHeight="1dp"
+            android:divider="@color/bg_gray"
+            >
+
+        </ListView>
+    </RelativeLayout>
+
 
 
 </LinearLayout>
