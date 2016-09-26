@@ -14,6 +14,7 @@ import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -57,7 +58,8 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestFoodList();
 //            requestPublishFoodList();
 //            requestCourseList();
-            requestAnnounceMentList();
+//            requestAnnounceMentList();
+            requestAnnouncementList();
         }
     }
 
@@ -101,6 +103,16 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         ResetPasswordPaser lp = new ResetPasswordPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.PUBLISH_COURSE, requestData, lp);
+    }
+
+    //公告列表
+    private void requestAnnouncementList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("id", UserInfo.loginInfo.getRole().getId());
+        requestData.put("page", "1");
+        requestData.put("rows", "10");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_LIST, requestData, lp);
     }
 
     //食谱发布

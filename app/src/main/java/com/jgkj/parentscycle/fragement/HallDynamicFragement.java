@@ -11,12 +11,19 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.DynamicContentActivity;
 import com.jgkj.parentscycle.adapter.HallDynamicAdapter;
+import com.jgkj.parentscycle.bean.AnnouncementListItem;
 import com.jgkj.parentscycle.bean.HallDynamicInfo;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
+import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -55,7 +62,7 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
     @Bind(R.id.hall_main_channel_fragment_layout_menu_2_rel)
     View menuView2;
 
-    private List<HallDynamicInfo> dataList;
+    private List<AnnouncementListItem> dataList;
 
     private int blueColor;
     private int gryaColor;
@@ -67,8 +74,8 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.hall_dynamic_fragement_layout, container,
                 false);
         ButterKnife.bind(this,view);
-        dataList = new ArrayList<HallDynamicInfo>();
-        initTestData();
+        dataList = new ArrayList<AnnouncementListItem>();
+
         HallDynamicAdapter hallDynamicAdapter = new HallDynamicAdapter(view.getContext(),dataList);
         mListView.setAdapter(hallDynamicAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,23 +91,6 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
         return view;
     }
 
-    private void initTestData() {
-        for (int i = 0 ; i < 20 ; i++) {
-            if (i % 2 == 0) {
-                HallDynamicInfo hd = new HallDynamicInfo();
-                hd.setContent("幼儿园不错");
-                hd.setName("李方");
-                hd.setTime("10分钟前");
-                dataList.add(hd);
-            } else {
-                HallDynamicInfo hd = new HallDynamicInfo();
-                hd.setContent("市内的幼儿园");
-                hd.setName("赵段");
-                hd.setTime("60分钟前");
-                dataList.add(hd);
-            }
-        }
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -142,4 +132,10 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
         classTv.setTextColor(gryaColor);
         tipTv.setTextColor(gryaColor);
     }
+
+    public void setDataList(List<AnnouncementListItem> sourceData) {
+        HallDynamicAdapter hallDynamicAdapter = new HallDynamicAdapter(this.getContext(),sourceData);
+        mListView.setAdapter(hallDynamicAdapter);
+    }
+
 }

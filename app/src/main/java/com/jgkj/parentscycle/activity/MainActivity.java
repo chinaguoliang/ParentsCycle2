@@ -9,23 +9,37 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.AnnouncementListInfo;
+import com.jgkj.parentscycle.bean.AnnouncementListItem;
+import com.jgkj.parentscycle.bean.BabyDocumentListInfo;
 import com.jgkj.parentscycle.fragement.HallPublishMenuFragment;
 import com.jgkj.parentscycle.fragement.HallDynamicFragement;
 import com.jgkj.parentscycle.fragement.HallFindFragement;
 import com.jgkj.parentscycle.fragement.HallMainChannelFragement;
 import com.jgkj.parentscycle.fragement.HallMeFragement;
 import com.jgkj.parentscycle.global.ActivityResultCode;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.AnnouncementListPaser;
+import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ImageHandler;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener,NetListener{
     @Bind(R.id.main_activity_bottom_bar_main_channel_tv)
     TextView mBtmMainChannelTv;
 
@@ -133,6 +147,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 transaction.show(mHallDynamicFragement).commitAllowingStateLoss();
             }
             mBtmDynamicTv.setTextColor(this.getResources().getColor(R.color.main_blue_color));
+            requestAnnouncementList();
         }  else if (v == mBtmFindLl) {
             resetViews(transaction);
             mBtmFindIv.setImageResource(R.mipmap.main_activity_find_selected);
@@ -201,5 +216,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             mBtmFindLl.performClick();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof AnnouncementListInfo) {
+            if (nbs.isSuccess()) {
+                AnnouncementListInfo bdlii = (AnnouncementListInfo)nbs.obj;
+                mHallDynamicFragement.setDataList(bdlii.getDataList());
+            } else {
+
+            }
+
+            ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
+        }
+    }
+
+    //公告列表
+    private void requestAnnouncementList() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("id", UserInfo.loginInfo.getRole().getId());
+        requestData.put("page", "1");
+        requestData.put("rows", "10");
+        AnnouncementListPaser lp = new AnnouncementListPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_LIST, requestData, lp);
     }
 }
