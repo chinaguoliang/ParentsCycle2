@@ -41,7 +41,35 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.title_bar_layout_rel)
     RelativeLayout mWrapTitleRel;
 
+    @Bind(R.id.setting_activity_layout_download_pic_tv)
+    TextView downloadPicTv;
 
+    @Bind(R.id.setting_activity_layout_download_video_tv)
+    TextView downloadVideoTv;
+
+    @Bind(R.id.setting_activity_layout_upload_data_tv)
+    TextView uploadDataTv;
+
+    @Bind(R.id.setting_activity_layout_auto_clear_cache_tv)
+    TextView clearCacheDataTv;
+
+    @Bind(R.id.setting_activity_layout_auto_clear_temp_data_tv)
+    TextView clearTempDataTv;
+
+    @Bind(R.id.setting_activity_layout_parents_chat_notification_tv)
+    TextView parentsChatNotiTv;
+
+    @Bind(R.id.setting_activity_layout_teacher_chat_notification_tv)
+    TextView teacherChatNotiTv;
+
+    @Bind(R.id.setting_activity_layout_parents_set_goods_notification_tv)
+    TextView parentsSetGoodsTv;
+
+    @Bind(R.id.setting_activity_layout_parents_focus_notification_tv)
+    TextView parentsFocusNotiTv;
+
+    @Bind(R.id.setting_activity_layout_check_update_tv)
+    TextView checkUpdateTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +83,17 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     }
 
 
-    @OnClick({R.id.baby_document_activity_back_iv,R.id.setting_activity_logout_btn})
+    @OnClick({R.id.baby_document_activity_back_iv,R.id.setting_activity_logout_btn,
+            R.id.setting_activity_layout_download_pic_tv,
+            R.id.setting_activity_layout_download_video_tv,
+            R.id.setting_activity_layout_auto_clear_cache_tv,
+            R.id.setting_activity_layout_auto_clear_temp_data_tv,
+            R.id.setting_activity_layout_parents_chat_notification_tv,
+            R.id.setting_activity_layout_teacher_chat_notification_tv,
+            R.id.setting_activity_layout_parents_set_goods_notification_tv,
+            R.id.setting_activity_layout_parents_focus_notification_tv,
+            R.id.setting_activity_layout_check_update_tv,
+            R.id.setting_activity_layout_upload_data_tv})
 
     @Override
     public void onClick(View v) {
@@ -64,6 +102,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         } else if (v == loginOutBtn) {
             UserInfo.isLogined = false;
             finish();
+        } else {
+            TextView tv = (TextView)v;
+            Object tagObj = tv.getTag();
+            if (tagObj == null) {
+                tv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.my_switch_normal,0);
+                tv.setTag("normal");
+            } else {
+                tv.setTag(null);
+                tv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.my_switch_clicked,0);
+            }
         }
     }
 }
