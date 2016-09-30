@@ -58,8 +58,10 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestFoodList();
 //            requestPublishFoodList();
 //            requestCourseList();
-//            requestAnnounceMentList();
-            requestAnnouncementList();
+//            requestAnnouncementDetailList();
+            //requestAnnouncementList();
+            requestAnnouncementDetailList();
+
         }
     }
 
@@ -317,7 +319,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 
 
     //查询课程列表
-    private void requestAnnounceMentList() {
+    private void requestAnnouncementDetailList() {
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("rows","10");
         requestData.put("page","1");

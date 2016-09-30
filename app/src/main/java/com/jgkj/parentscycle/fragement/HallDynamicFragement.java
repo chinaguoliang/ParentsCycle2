@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.activity.AnnouncementDetailActivity;
 import com.jgkj.parentscycle.activity.DynamicContentActivity;
 import com.jgkj.parentscycle.adapter.HallDynamicAdapter;
 import com.jgkj.parentscycle.bean.AnnouncementListItem;
@@ -81,7 +82,10 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(view.getContext(),DynamicContentActivity.class));
+                Intent intent = new Intent(view.getContext(),AnnouncementDetailActivity.class);
+                AnnouncementListItem ali = (AnnouncementListItem)parent.getAdapter().getItem(position);
+                intent.putExtra("ann_id",ali.getAnnounid());
+                startActivity(intent);
             }
         });
         blueColor = this.getResources().getColor(R.color.main_blue_color);

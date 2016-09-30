@@ -236,6 +236,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
 
     //公告列表
     private void requestAnnouncementList() {
+        if (!UserInfo.isLogined) {
+            ToastUtil.showToast(this,"未登录",Toast.LENGTH_SHORT);
+            return;
+        }
+
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("id", UserInfo.loginInfo.getRole().getId());
