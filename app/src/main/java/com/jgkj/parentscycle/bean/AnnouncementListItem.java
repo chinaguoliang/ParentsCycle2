@@ -1,11 +1,12 @@
 package com.jgkj.parentscycle.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by chen on 16/9/27.
  */
-public class AnnouncementListItem {
+public class AnnouncementListItem implements Serializable{
    String announcement = "";
    String announid = "";
    String bannerimg = "";

@@ -134,12 +134,14 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/announcement_detail_activity_top_name_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="艾米莉"
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/announcement_detail_activity_top_time_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2016"
@@ -194,6 +196,7 @@
                         android:textSize="@dimen/very_big_view_size" />
 
                     <TextView
+                        android:id="@+id/announcement_detail_activity_set_goods_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -209,6 +212,7 @@
                         android:src="@mipmap/baby_school_inside" />
 
                     <TextView
+                        android:id="@+id/announcement_detail_activity_comment_content_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="sdfsdfsdfsdfsdf"
@@ -220,6 +224,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/announcement_detail_activity_comment_count_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="全部评论(30)"

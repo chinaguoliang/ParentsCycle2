@@ -11,6 +11,7 @@ import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.AnnouncementCommentAdapter;
 import com.jgkj.parentscycle.bean.AnnouncementCommentListInfo;
 import com.jgkj.parentscycle.bean.AnnouncementCommentListItemInfo;
+import com.jgkj.parentscycle.bean.AnnouncementListItem;
 import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.AnnouncementCommentListInfoPaser;
@@ -45,6 +46,25 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
     @Bind(R.id.announcement_detail_activity_comment_lv)
     ListViewForScrollView commentListLv;
 
+    @Bind(R.id.announcement_detail_activity_comment_count_tv)
+    TextView commentCountTv;
+
+    @Bind(R.id.announcement_detail_activity_title_tv)
+    TextView titleContentTv;
+
+    @Bind(R.id.announcement_detail_activity_set_goods_num_tv)
+    TextView setGoodsNumTv;
+
+    @Bind(R.id.announcement_detail_activity_comment_content_tv)
+    TextView commentContentTv;
+
+    @Bind(R.id.announcement_detail_activity_top_name_tv)
+    TextView topNameTv;
+
+    @Bind(R.id.announcement_detail_activity_top_time_tv)
+    TextView topTimeTv;
+
+    AnnouncementListItem alii;
     private String annId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +73,12 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
         ButterKnife.bind(this);
         initView();
         String id = this.getIntent().getStringExtra("ann_id");
+        alii = (AnnouncementListItem)this.getIntent().getExtras().getSerializable("ann_data");
+        titleContentTv.setText(alii.getTitle());
+        setGoodsNumTv.setText(alii.getDznum() + "");
+        commentContentTv.setText(alii.getAnnouncement());
+        topNameTv.setText(alii.getOspersion());
+        topTimeTv.setText(alii.getCreatetime());
         requestAnnounceMentList(id);
     }
 
@@ -90,7 +116,7 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
     public void requestResponse(Object obj) {
         hideProgressDialog();
         NetBeanSuper nbs = (NetBeanSuper)obj;
-        if (nbs.obj instanceof ClassedAndTeachersListInfo) {
+        if (nbs.obj instanceof AnnouncementCommentListInfo) {
             if (nbs.isSuccess()) {
                 AnnouncementCommentListInfo tii = (AnnouncementCommentListInfo)nbs.obj;
                 initListView(tii.getDataList());
@@ -108,6 +134,7 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
     private void initListView(List<AnnouncementCommentListItemInfo> dataList) {
         AnnouncementCommentAdapter adapter = new AnnouncementCommentAdapter(this,dataList);
         commentListLv.setAdapter(adapter);
+        commentCountTv.setText("全部评论(" + dataList.size() + ")");
     }
 
 }

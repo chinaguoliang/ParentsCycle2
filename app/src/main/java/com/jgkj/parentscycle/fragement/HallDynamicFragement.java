@@ -83,8 +83,11 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(),AnnouncementDetailActivity.class);
+                Bundle bundle = new Bundle();
                 AnnouncementListItem ali = (AnnouncementListItem)parent.getAdapter().getItem(position);
+                bundle.putSerializable("ann_data",ali);
                 intent.putExtra("ann_id",ali.getAnnounid());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
