@@ -1,7 +1,12 @@
 package com.jgkj.parentscycle.activity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -30,7 +35,11 @@ import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ImageHandler;
+import com.jgkj.parentscycle.utils.LogUtil;
+import com.jgkj.parentscycle.utils.PreferenceUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
+
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -39,7 +48,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener,NetListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener,NetListener,LocationListener{
+    public static final String TAG = "MainActivity";
+
     @Bind(R.id.main_activity_bottom_bar_main_channel_tv)
     TextView mBtmMainChannelTv;
 
@@ -88,7 +99,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
     private  HallMeFragement mHallMeFragement;
     private  FragmentManager mFragmentManager;
 
-
+    private static final int REQUEST_PERMISSION_LOCATION = 255; // int should be between 0 and 255
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +109,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
         setContentView(R.layout.main_activity_layout);
         ButterKnife.bind(this);
         initFragment();
+        requestLocation();
+    }
+
+    private void requestLocation() {
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
+        }
     }
 
     public void setViewPagerCurrentItem(int position) {
@@ -248,5 +272,37 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
         requestData.put("rows", "10");
         AnnouncementListPaser lp = new AnnouncementListPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_LIST, requestData, lp);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        String latitude = location.getLatitude() + "";
+        String longitude = location.getLongitude() + "";
+        String time = System.currentTimeMillis() + "";
+
+        try {
+            JSONObject jobj = new JSONObject();
+            jobj.put("latitude",latitude);
+            jobj.put("longitude",longitude);
+            jobj.put("time",time);
+            PreferenceUtil.setStringKey(this,PreferenceUtil.LOCATION_INFO,jobj.toString());
+            LogUtil.d(TAG,"locationinfo:" + jobj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
     }
 }
