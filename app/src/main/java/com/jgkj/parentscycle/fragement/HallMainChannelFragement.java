@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.Volley;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.activity.BabyDocumentActivity;
 import com.jgkj.parentscycle.activity.CheckAttendanceActivity;
@@ -209,7 +210,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
             startActivity(new Intent(getContext(), TestNetActivity.class));
         } else if (v == publicVideoCourseTv) {
             if (UserInfo.isLogined) {
-                UtilTools.toVideoModule();
+                UtilTools.toVideoModule(v.getContext(), Volley.newRequestQueue(v.getContext()));
             } else {
                 ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
             }
@@ -252,7 +253,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         } else if (v == courseLineTv) {
 
             if (UserInfo.isLogined) {
-                UtilTools.toVideoModule();
+                UtilTools.toVideoModule(v.getContext(), Volley.newRequestQueue(v.getContext()));
             } else {
                 ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
             }

@@ -1,5 +1,8 @@
 package com.jgkj.parentscycle.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -22,6 +25,7 @@ import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.TimeUtils;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
@@ -32,6 +36,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sun.bob.mcalendarview.MarkStyle;
+import sun.bob.mcalendarview.listeners.OnDateClickListener;
 import sun.bob.mcalendarview.listeners.OnExpDateClickListener;
 import sun.bob.mcalendarview.listeners.OnMonthScrollListener;
 import sun.bob.mcalendarview.views.ExpCalendarView;
@@ -61,6 +66,8 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
 
     @Bind(R.id.check_attendance_activity_calendar_view)
     ExpCalendarView expCalendarView;
+
+    Dialog currDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,15 +85,49 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
         expCalendarView.markDate(new DateData(2016, 9, 1).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, YELLOW)));
         expCalendarView.markDate(new DateData(2016, 9, 2).setMarkStyle(new MarkStyle(MarkStyle.BACKGROUND, BLUE)));
 
-        expCalendarView.setOnDateClickListener(new OnExpDateClickListener()).setOnMonthScrollListener(new OnMonthScrollListener() {
-            @Override
-            public void onMonthChange(int year, int month) {
-//                YearMonthTv.setText(String.format("%d年%d月", year, month));
-            }
+//        expCalendarView.setOnDateClickListener(new OnExpDateClickListener()).setOnMonthScrollListener(new OnMonthScrollListener() {
+//            @Override
+//            public void onMonthChange(int year, int month) {
+////                YearMonthTv.setText(String.format("%d年%d月", year, month));
+//            }
+//
+//            @Override
+//            public void onMonthScroll(float positionOffset) {
+////                Log.i("listener", "onMonthScroll:" + positionOffset);
+//            }
+//
+//        });
 
+        expCalendarView.setOnDateClickListener(new OnDateClickListener() {
             @Override
-            public void onMonthScroll(float positionOffset) {
-//                Log.i("listener", "onMonthScroll:" + positionOffset);
+            public void onDateClick(View view, DateData dateData) {
+                int year = dateData.getYear();
+                int month = dateData.getMonth();
+                int day = dateData.getDay();
+                LogUtil.d("result","the time:" + year + "-" + month + "-" + day);
+
+                if (currDialog != null && currDialog.isShowing()) {
+                    return;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(CheckAttendanceActivity.this);
+                builder.setMessage(year + "-" + month + "-" + day);
+                builder.setTitle("确认要签到吗?");
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                currDialog = builder.create();
+                currDialog.show();
+
             }
         });
     }

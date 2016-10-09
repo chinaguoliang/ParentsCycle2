@@ -2,22 +2,33 @@ package com.jgkj.parentscycle.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
+import com.jgkj.parentscycle.net.JsonUtil;
+import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.LogUtil;
+import com.videogo.RequestAccessToken;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,12 +71,36 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 //            requestCourseList();
 //            requestAnnouncementDetailList();
             //requestAnnouncementList();
-            requestAnnouncementDetailList();
+//            requestAnnouncementDetailList();
 
+//             RequestAccessToken.getAccessToken();
+            testGetAccessToken();
         }
     }
 
-
+    private void testGetAccessToken() {
+        StringRequest request = new StringRequest(Request.Method.POST, "https://open.ys7.com/api/lapp/token/get",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("result","request success:" + response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("result","request fail");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap <String, String> map = new HashMap <String, String>();
+                map.put("appKey","8ff0d3e7aab5485195fd7ddcb0a33934");
+                map.put("appSecret","6741c50a996dd8a185a2ceaf06f28be2");
+                return map;
+            }
+        };
+        mQueue.add(request);
+    }
 
 
     //所有文章公共转发
