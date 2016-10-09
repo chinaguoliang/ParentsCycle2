@@ -1,16 +1,24 @@
 package com.jgkj.parentscycle.activity;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.AddSchoolExpanLvAdapter;
+import com.jgkj.parentscycle.adapter.ModifyPermissionDialogLvAdapter;
 import com.jgkj.parentscycle.adapter.SchoolDetailListviewAdapter;
 import com.jgkj.parentscycle.bean.ClassesAndTeachersListItemInfo;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +37,8 @@ public class SearchSchoolActivity extends BaseActivity implements View.OnClickLi
 
     @Bind(R.id.search_school_activity_ep_lv)
     ExpandableListView expandLv;
+
+    Dialog addSchoolDialog;
 
     @Override
     public void uploadImgFinished(Bitmap bitmap, String uploadedKey) {
@@ -80,6 +90,7 @@ public class SearchSchoolActivity extends BaseActivity implements View.OnClickLi
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 ClassesAndTeachersListItemInfo cali = childDataString.get(groupPosition).get(childPosition);
+                showWhetherAddSchoolDialog();
                 return false;
             }
         });
@@ -92,5 +103,64 @@ public class SearchSchoolActivity extends BaseActivity implements View.OnClickLi
         if (v == cancelBtn) {
             finish();
         }
+    }
+
+
+    private void showWhetherAddSchoolDialog() {
+        addSchoolDialog = new Dialog(this, R.style.DialogTheme);
+        addSchoolDialog.getWindow().setWindowAnimations(R.style.dialogWindowAnim);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.add_school_dialog, null);
+        Button cancel = (Button) contentView.findViewById(R.id.add_school_dialog_no_btn);
+        Button yes = (Button) contentView.findViewById(R.id.add_school_dialog_yes_btn);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addSchoolDialog.dismiss();
+            }
+        });
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addSchoolDialog.dismiss();
+                showTipDialog();
+            }
+        });
+
+
+        addSchoolDialog.setContentView(contentView);
+        addSchoolDialog.setCanceledOnTouchOutside(true);
+        addSchoolDialog.show();
+
+        WindowManager.LayoutParams params = addSchoolDialog.getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.width = UtilTools.SCREEN_WIDTH - UtilTools.SCREEN_WIDTH / 5;
+        addSchoolDialog.getWindow().setAttributes(params);
+    }
+
+
+    private void showTipDialog() {
+        addSchoolDialog = new Dialog(this, R.style.DialogTheme);
+        addSchoolDialog.getWindow().setWindowAnimations(R.style.dialogWindowAnim);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.add_school_verify_dialog, null);
+        Button yes = (Button) contentView.findViewById(R.id.add_school_verify_dialog_yes_btn);
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addSchoolDialog.dismiss();
+                finish();
+            }
+        });
+
+
+        addSchoolDialog.setContentView(contentView);
+        addSchoolDialog.setCanceledOnTouchOutside(true);
+        addSchoolDialog.show();
+
+        WindowManager.LayoutParams params = addSchoolDialog.getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.width = UtilTools.SCREEN_WIDTH - UtilTools.SCREEN_WIDTH / 5;
+        addSchoolDialog.getWindow().setAttributes(params);
     }
 }
