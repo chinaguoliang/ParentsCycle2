@@ -60,7 +60,7 @@
                 android:visibility="gone" />
         </RelativeLayout>
 
-        <include layout="@layout/realplay_full_operate_layout" />
+        <include layout="@layout/realplay_full_operate_layout"  android:visibility="invisible"/>
         
 		<ImageView
 		    android:id="@+id/realplay_ptz_direction_iv"
@@ -81,5 +81,5 @@
     </RelativeLayout>
     
 	<include layout="@layout/ezopen_realplay_operate_bar" android:visibility="gone"/>
-	<include layout="@layout/ezopen_realplay_operate_bar2" android:visibility="gone"/>				  		
+	<include layout="@layout/ezopen_realplay_operate_bar2" android:visibility="gone"/>
 </LinearLayout>

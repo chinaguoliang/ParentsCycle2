@@ -129,7 +129,7 @@ public class EZCameraListActivity extends Activity implements OnClickListener  {
 				popLogoutDialog();
 			}
 		});
-		mTitleBar.addLeftView(iv);
+//		mTitleBar.addLeftView(iv);
 
         mNoMoreView = getLayoutInflater().inflate(com.videogo.open.R.layout.no_device_more_footer, null);
 

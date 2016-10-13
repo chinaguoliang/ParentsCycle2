@@ -744,7 +744,7 @@ public class EZRealPlayActivity extends Activity implements OnClickListener, Sur
             //                    LayoutParams.WRAP_CONTENT);
             //            realPlayPlayRlLp.gravity = Gravity.CENTER;
             //            mRealPlayPlayRl.setLayoutParams(realPlayPlayRlLp);
-            mRealPlayOperateBar.setVisibility(View.VISIBLE);
+            //mRealPlayOperateBar.setVisibility(View.VISIBLE);
         } else {
             //mRealPlayPageLy.setBackgroundColor(getResources().getColor(R.color.black_bg));
             LinearLayout.LayoutParams realPlayPlayRlLp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
@@ -1001,7 +1001,7 @@ public class EZRealPlayActivity extends Activity implements OnClickListener, Sur
             mRealPlayRecordStartBtn = (ImageButton) findViewById(com.videogo.open.R.id.realplay_video_start_btn);
             mRealPlayPtzBtn = (ImageButton) findViewById(com.videogo.open.R.id.realplay_ptz_btn);
         }
-        mRealPlayOperateBar.setVisibility(View.VISIBLE);
+        mRealPlayOperateBar.setVisibility(View.INVISIBLE);
     }
 
     private void setBigScreenOperateBtnLayout() {
