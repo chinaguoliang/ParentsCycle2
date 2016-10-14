@@ -35,6 +35,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="公告栏"
+                    android:textSize="18dp"
                     android:textColor="@color/white" />
             </RelativeLayout>
 
@@ -56,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:textSize="18dp"
                     android:text="宝宝秀"
                     android:textColor="@color/title_gray" />
             </RelativeLayout>
@@ -83,6 +85,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="30dp"
+            android:textSize="15dp"
+            android:textColor="#7974e4"
             />
 
         <TextView
@@ -92,6 +96,8 @@
             android:text="班级"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:textSize="15dp"
+            android:textColor="#9a98c1"
             />
 
         <TextView
@@ -100,7 +106,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:textSize="15dp"
             android:text="小贴士"
+            android:textColor="#9a98c1"
             android:layout_marginRight="30dp"
             />
 

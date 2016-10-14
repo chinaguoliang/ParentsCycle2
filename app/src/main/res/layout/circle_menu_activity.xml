@@ -152,8 +152,9 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/white_circle"
             android:gravity="center"
-            android:text="X"
-            android:textColor="@color/black" />
+            android:text="×"
+            android:textSize="30dp"
+            android:textColor="@color/text_gray_3" />
     </RelativeLayout>
 
 </LinearLayout>

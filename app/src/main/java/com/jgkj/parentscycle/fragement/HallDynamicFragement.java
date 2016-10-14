@@ -92,7 +92,7 @@ public class HallDynamicFragement extends Fragment implements View.OnClickListen
             }
         });
         blueColor = this.getResources().getColor(R.color.main_blue_color);
-        gryaColor = this.getResources().getColor(R.color.text_gray);
+        gryaColor = this.getResources().getColor(R.color.text_gray_4);
         whiteColor = this.getResources().getColor(R.color.white);
         titleGrayColor = this.getResources().getColor(R.color.title_gray);
         return view;
