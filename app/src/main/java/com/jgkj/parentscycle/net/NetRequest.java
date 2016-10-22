@@ -39,6 +39,57 @@ public class NetRequest {
 		return instance;
 	}
 
+	public void requestTest(RequestQueue mQueue, final NetListener netListener,
+						final String requestUrl,
+						final HashMap<String, String> requestParams, final PaserJson pj) {
+		String url = BgGlobal.CHEN_BASE_URL + requestUrl + BgGlobal.DEVICE_PARAMS;
+		LogUtil.d(TAG, "request params:" + requestParams.toString());
+		LogUtil.d(TAG, "request url api:" + url);
+		final boolean isNetConnected = UtilTools.isNetworkConnected();
+
+
+		StringRequest request = new StringRequest(Method.POST, url,
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+						try {
+							LogUtil.bigLog(TAG, "response:" + response);
+							NetBeanSuper nbs = (NetBeanSuper)JsonUtil.getTopObject(response, NetBeanSuper.class);
+							Object obj = pj.parseJSonObject(nbs);
+
+							if (obj == null) {
+								responseError(pj,isNetConnected,netListener,response);
+							} else {
+								netListener.requestResponse(obj);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							LogUtil.d(TAG, "net request 2");
+							responseError(pj,isNetConnected,netListener,null);
+						}
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				responseError(pj,isNetConnected,netListener,null);
+			}
+		}) {
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				return requestParams;
+			}
+		};
+
+		if (requestParams.containsKey(NET_RETRY_TIMES_KEY)) {
+			int retryTime = Integer.parseInt(requestParams.get(NET_RETRY_TIMES_KEY).toString());
+			request.setRetryPolicy(new DefaultRetryPolicy(60 * 1000, retryTime, 1.0f));
+		} else {
+			// 设定超时后不重试
+			request.setRetryPolicy(new DefaultRetryPolicy(60 * 1000, 0, 1.0f));
+		}
+		mQueue.add(request);
+	}
+
 	public void request(RequestQueue mQueue, final NetListener netListener,
 			final String requestUrl,
 			final HashMap<String, String> requestParams, final PaserJson pj) {

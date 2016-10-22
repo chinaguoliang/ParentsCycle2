@@ -287,7 +287,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
             jobj.put("longitude",longitude);
             jobj.put("time",time);
             PreferenceUtil.setStringKey(this,PreferenceUtil.LOCATION_INFO,jobj.toString());
-            LogUtil.d(TAG,"locationinfo:" + jobj.toString());
+            //LogUtil.d(TAG,"locationinfo:" + jobj.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }

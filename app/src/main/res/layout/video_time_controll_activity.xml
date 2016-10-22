@@ -84,5 +84,19 @@
 
         </LinearLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/video_time_controll_activity_confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/main_blue_color"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="确定"
+            android:textColor="@color/white" />
 
+    </RelativeLayout>
 </LinearLayout>

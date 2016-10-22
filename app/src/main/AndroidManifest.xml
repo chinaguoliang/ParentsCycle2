@@ -267,7 +267,11 @@
             android:label="@string/app_name"
             >
         </activity>
-
+        <activity
+            android:name=".activity.SelectClassActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
 
 
 
