@@ -262,7 +262,11 @@
             android:label="@string/app_name"
             >
         </activity>
-
+        <activity
+            android:name=".activity.VideoTImeControllActivity"
+            android:label="@string/app_name"
+            >
+        </activity>
 
 
 

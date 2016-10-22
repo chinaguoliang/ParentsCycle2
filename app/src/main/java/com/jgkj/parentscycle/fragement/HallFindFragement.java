@@ -17,6 +17,7 @@ import com.jgkj.parentscycle.activity.GrowthRecordActivity;
 import com.jgkj.parentscycle.activity.MakeClassAddPersonActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.SearchSchoolActivity;
+import com.jgkj.parentscycle.activity.VideoTImeControllActivity;
 import com.jgkj.parentscycle.adapter.HallFindAdapter;
 import com.jgkj.parentscycle.utils.UtilTools;
 
@@ -61,6 +62,7 @@ public class HallFindFragement extends Fragment {
         dataList.add("新加入老师");
         dataList.add("加入学校");
         dataList.add("咨询");
+        dataList.add("视频时段控制");
 
         HallFindAdapter hallFindAdapter = new HallFindAdapter(this.getContext(),dataList);
         contentLv.setAdapter(hallFindAdapter);
@@ -79,6 +81,8 @@ public class HallFindFragement extends Fragment {
                     startActivity(new Intent(view.getContext(),SearchSchoolActivity.class));
                 } else if (position == 5) {
                     UtilTools.toChatModule(getContext());
+                } else if (position == 6) {
+                    startActivity(new Intent(view.getContext(),VideoTImeControllActivity.class));
                 }
 
             }
