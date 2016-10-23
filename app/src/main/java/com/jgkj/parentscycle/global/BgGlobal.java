@@ -6,7 +6,7 @@ package com.jgkj.parentscycle.global;
 public class BgGlobal {
     public static final String IMG_SERVER_PRE_URL = "http://oalp3wrah.bkt.clouddn.com/";  //七牛服务器地址
     public static final String BASE_URL = "http://123.206.43.102:8080/support/";  //  自己的服务器地址
-    public static final String CHEN_BASE_URL = "http://192.168.1.102:8080/";
+    public static final String CHEN_BASE_URL = "http://123.206.43.102:9999/";
 
 
 
