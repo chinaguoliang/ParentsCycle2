@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -77,6 +78,9 @@ public class VideoTImeControllActivity extends BaseActivity implements View.OnCl
 
     @Bind(R.id.video_time_controll_activity_confirm_btn)
     Button confirmBtn;
+
+    @Bind(R.id.video_time_controll_activity_serial_number_et)
+    EditText serialNumberEt;
 
     MakeClassAddPersonInfo mMakeClassAddPersonInfo;
 
@@ -166,12 +170,19 @@ public class VideoTImeControllActivity extends BaseActivity implements View.OnCl
 
 
     private void requestSaveVideoControllTime() {
+        String serialNumber = serialNumberEt.getText().toString();
+        if (TextUtils.isEmpty(serialNumber)) {
+            ToastUtil.showToast(this,"请输入摄像头序列号",Toast.LENGTH_SHORT);
+            return;
+        }
+
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("schoolid", ConfigPara.SCHOOL_ID);
         requestData.put("classid", mMakeClassAddPersonInfo.getId());
         requestData.put("start_time", startTimetv.getText().toString().trim());
         requestData.put("end_time", endTimeTv.getText().toString().trim());
+        requestData.put("serial_number", serialNumber.trim());
         if (timeSwitchCb.isChecked()) {
             requestData.put("is_allow_play", "0");
         } else {
@@ -198,6 +209,9 @@ public class VideoTImeControllActivity extends BaseActivity implements View.OnCl
                 } else {
                     timeSwitchCb.setChecked(false);
                 }
+
+                if (!TextUtils.equals(tii.getSerial_number(),"0"))
+                    serialNumberEt.setText(tii.getSerial_number());
             } else {
 
             }

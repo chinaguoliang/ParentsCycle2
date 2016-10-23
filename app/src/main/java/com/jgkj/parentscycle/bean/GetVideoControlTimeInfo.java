@@ -10,6 +10,15 @@ public class GetVideoControlTimeInfo {
     String start_time = "";
     String end_time = "";
     String is_allow_play = "";
+    String serial_number = "";
+
+    public String getSerial_number() {
+        return serial_number;
+    }
+
+    public void setSerial_number(String serial_number) {
+        this.serial_number = serial_number;
+    }
 
     public String getStart_time() {
         return start_time;
