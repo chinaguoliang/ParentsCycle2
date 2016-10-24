@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.videogo.CustomVideoData;
 import com.videogo.openapi.bean.EZCameraInfo;
 import com.videogo.universalimageloader.core.DisplayImageOptions;
 import com.videogo.universalimageloader.core.ImageLoader;
@@ -33,6 +34,7 @@ import com.videogo.universalimageloader.core.assist.FailReason;
 import com.videogo.universalimageloader.core.listener.ImageLoadingListener;
 import com.videogo.util.LogUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +56,7 @@ public class EZCameraListAdapter extends BaseAdapter {
     private ImageLoader mImageLoader;
     private ExecutorService mExecutorService = null;// 线程池
     public Map<String, EZCameraInfo> mExecuteItemMap = null;
-    
+    SimpleDateFormat reFormat = new SimpleDateFormat("HH:mm:ss");
     /**
      * 自定义控件集合
      * 
@@ -227,6 +229,37 @@ public class EZCameraListAdapter extends BaseAdapter {
 
 
         final EZCameraInfo cameraInfo = getItem(position);
+        Object tempData = CustomVideoData.videoData.get(cameraInfo.getDeviceSerial());
+        if (tempData != null) {
+            String filter = tempData.toString();
+            String filterArray[] = filter.split("_");
+            String startTime = filterArray[0];
+            String endTime = filterArray[1];
+            String isAllowPlay = filterArray[2];
+
+            if (TextUtils.equals(isAllowPlay,"0")) {
+                String startArray[] =startTime.split(":");
+                String endArray[] = endTime.split(":");
+                String currTimeArray[] = reFormat.format(System.currentTimeMillis()).split(":");
+                if (Integer.parseInt(startArray[0]) == Integer.parseInt(endArray[0]) && Integer.parseInt(endArray[0]) == Integer.parseInt(currTimeArray[0]) ) {
+                    if (Integer.parseInt(currTimeArray[1]) >= Integer.parseInt(startArray[1]) && Integer.parseInt(currTimeArray[1]) <= Integer.parseInt(endArray[1])) {
+
+                    } else {
+                        cameraInfo.setOnlineStatus(0);
+                    }
+                } else {
+                    if (Integer.parseInt(currTimeArray[0]) >= Integer.parseInt(startArray[0]) && Integer.parseInt(currTimeArray[0]) <= Integer.parseInt(endArray[0])) {
+
+                    } else {
+                        cameraInfo.setOnlineStatus(0);
+                    }
+                }
+            } else {
+                cameraInfo.setOnlineStatus(0);
+            }
+        }
+
+
         if(cameraInfo != null) {
             if (cameraInfo.getOnlineStatus() == 0) {
                 viewHolder.offlineBtn.setVisibility(View.VISIBLE);

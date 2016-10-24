@@ -23,6 +23,10 @@ import com.jgkj.parentscycle.activity.ShowCourseListActivity;
 import com.jgkj.parentscycle.activity.ShowFoodListActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.adapter.ImageAdapter;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
+import com.jgkj.parentscycle.json.ModifyPassByOldPassPaser;
+import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ImageHandler;
 import com.jgkj.parentscycle.utils.ToastUtil;
@@ -30,6 +34,7 @@ import com.jgkj.parentscycle.utils.UtilTools;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.os.Message;
 import android.widget.Toast;
@@ -210,7 +215,8 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
             startActivity(new Intent(getContext(), TestNetActivity.class));
         } else if (v == publicVideoCourseTv) {
             if (UserInfo.isLogined) {
-                UtilTools.toVideoModule(v.getContext(), Volley.newRequestQueue(v.getContext()));
+//                UtilTools.toVideoModule(v.getContext(), Volley.newRequestQueue(v.getContext()));
+                ((MainActivity)this.getActivity()).requestVideoData();
             } else {
                 ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
             }
@@ -253,7 +259,7 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         } else if (v == courseLineTv) {
 
             if (UserInfo.isLogined) {
-                UtilTools.toVideoModule(v.getContext(), Volley.newRequestQueue(v.getContext()));
+                ((MainActivity)this.getActivity()).requestVideoData();
             } else {
                 ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
             }
@@ -261,4 +267,5 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
 
         }
     }
+
 }

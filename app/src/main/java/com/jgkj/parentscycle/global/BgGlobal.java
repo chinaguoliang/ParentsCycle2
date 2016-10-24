@@ -6,8 +6,8 @@ package com.jgkj.parentscycle.global;
 public class BgGlobal {
     public static final String IMG_SERVER_PRE_URL = "http://oalp3wrah.bkt.clouddn.com/";  //七牛服务器地址
     public static final String BASE_URL = "http://123.206.43.102:8080/support/";  //  自己的服务器地址
-//    public static final String CHEN_BASE_URL = "http://123.206.43.102:9999/";  //远端服务器地址
-    public static final String CHEN_BASE_URL = "http://192.168.1.102:8080/";  //本地服务器地址
+    public static final String CHEN_BASE_URL = "http://123.206.43.102:9999/";  //远端服务器地址
+//    public static final String CHEN_BASE_URL = "http://192.168.1.102:8080/";  //本地服务器地址
 
 
 
@@ -59,5 +59,6 @@ public class BgGlobal {
     public static final String ANNOUNCEMENT_DETAIL = "announcementComment/announcementCommentList"; //公告评论列表
 
     public static final String GET_VIDEO_CONTROL_DATA = "videoTime/getVideoControlTime";
-    public static final String SAVE_VIDEO_CONTROL_DATA = "videoTime/saveVideoControlTime";
+    public static final String SAVE_VIDEO_CONTROL_DATA = "videoTime/saveVideoControlTime"; //保存视频控制时间
+    public static final String GET_VIDEO_CONTROL_DATA_BY_SCHOOL_ID = "videoTime/getVideoControlTimeBySchoolId";//根据SchoolId获取视频控制时间
 }

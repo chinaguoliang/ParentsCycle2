@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,10 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.AnnouncementListInfo;
 import com.jgkj.parentscycle.bean.AnnouncementListItem;
 import com.jgkj.parentscycle.bean.BabyDocumentListInfo;
+import com.jgkj.parentscycle.bean.VideoControlTImeItem;
+import com.jgkj.parentscycle.bean.VideoControlTimeInfo;
 import com.jgkj.parentscycle.fragement.HallPublishMenuFragment;
 import com.jgkj.parentscycle.fragement.HallDynamicFragement;
 import com.jgkj.parentscycle.fragement.HallFindFragement;
@@ -28,7 +32,10 @@ import com.jgkj.parentscycle.fragement.HallMainChannelFragement;
 import com.jgkj.parentscycle.fragement.HallMeFragement;
 import com.jgkj.parentscycle.global.ActivityResultCode;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.AnnouncementListPaser;
+import com.jgkj.parentscycle.json.GetVideoControlTimeBySchoolIdPaser;
+import com.jgkj.parentscycle.json.ModifyPassByOldPassPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
@@ -38,11 +45,14 @@ import com.jgkj.parentscycle.utils.ImageHandler;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.PreferenceUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
+import com.jgkj.parentscycle.utils.UtilTools;
+import com.videogo.CustomVideoData;
 
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -255,6 +265,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
             }
 
             ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
+        } else if (nbs.obj instanceof VideoControlTimeInfo) {
+            if (nbs.isSuccess()) {
+                VideoControlTimeInfo bdlii = (VideoControlTimeInfo)nbs.obj;
+                List<VideoControlTImeItem> listData =  bdlii.getObj();
+                int count = listData.size();
+                HashMap<String,String> dataMap = new HashMap<String,String>();
+                for (int i = 0 ; i < count ; i++) {
+                    VideoControlTImeItem vcti = listData.get(i);
+                    if (TextUtils.equals(vcti.getSerial_number(),"0")) {
+
+                    } else {
+                        dataMap.put(vcti.getSerial_number(),vcti.getStart_time() + "_" + vcti.getEnd_time() + "_" + vcti.getIs_allow_play());
+                    }
+
+                }
+                CustomVideoData.videoData = dataMap;
+                UtilTools.toVideoModule(this, Volley.newRequestQueue(this));
+            } else {
+                ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
+            }
         }
     }
 
@@ -304,5 +334,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
 
     @Override
     public void onProviderDisabled(String provider) {
+    }
+
+    public void requestVideoData() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("schoolid", ConfigPara.SCHOOL_ID);  //登录时ID
+        GetVideoControlTimeBySchoolIdPaser lp = new GetVideoControlTimeBySchoolIdPaser();
+        NetRequest.getInstance().requestTest(mQueue, this, BgGlobal.GET_VIDEO_CONTROL_DATA_BY_SCHOOL_ID, requestData, lp);
     }
 }
