@@ -18,6 +18,7 @@ import butterknife.OnClick;
  * Created by chen on 16/8/2.
  */
 public class AccountSafeActivity extends BaseActivity implements View.OnClickListener{
+    private static final String TAG = "AccountSafeActivity";
     @Bind(R.id.title_bar_layout_rel)
     View titleBg;
 

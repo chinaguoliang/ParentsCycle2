@@ -32,6 +32,8 @@ import butterknife.OnClick;
  * Created by chen on 16/8/2.
  */
 public class AccountSafeResetPassActivity extends BaseActivity implements View.OnClickListener,NetListener{
+    private static final String TAG = "AccountSafeResetPassActivity";
+
     @Bind(R.id.title_bar_layout_rel)
     View titleBg;
 

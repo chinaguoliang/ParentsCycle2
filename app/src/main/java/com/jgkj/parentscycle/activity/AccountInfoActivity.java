@@ -63,7 +63,6 @@ import butterknife.OnClick;
  * Created by chen on 16/7/18.
  */
 public class AccountInfoActivity extends BaseActivity implements View.OnClickListener,DatePickerDialog.OnDateSetListener,NetListener ,SexSelectDialog.SexSlectDialogFinish {
-    String name = "test";
     private static final String TAG = "AccountInfoActivity";
     @Bind(R.id.account_info_activity_lv)
     ListViewForScrollView mContentLv;
