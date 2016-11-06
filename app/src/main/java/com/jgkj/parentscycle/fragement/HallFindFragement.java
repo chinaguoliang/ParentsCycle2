@@ -63,7 +63,7 @@ public class HallFindFragement extends Fragment {
         dataList.add("新加入老师");
         dataList.add("加入学校");
         dataList.add("咨询");
-        dataList.add("视频时段控制");
+        //dataList.add("视频时段控制");
 
         HallFindAdapter hallFindAdapter = new HallFindAdapter(this.getContext(),dataList);
         contentLv.setAdapter(hallFindAdapter);
