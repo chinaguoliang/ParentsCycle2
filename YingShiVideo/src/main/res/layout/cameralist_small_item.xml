@@ -167,6 +167,7 @@
                 android:orientation="vertical" >
 
                 <ImageButton
+                    android:id="@+id/tab_set_videocontrol_iv"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_centerHorizontal="true"

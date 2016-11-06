@@ -24,10 +24,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.videogo.CustomVideoData;
+import com.videogo.open.R;
 import com.videogo.openapi.bean.EZCameraInfo;
 import com.videogo.universalimageloader.core.DisplayImageOptions;
 import com.videogo.universalimageloader.core.ImageLoader;
@@ -94,7 +94,7 @@ public class EZCameraListAdapter extends BaseAdapter {
         public View deviceDefenceRl;
         public ImageButton deviceDefenceBtn;
 
-        public RelativeLayout videoControlRel;
+        public ImageButton videoControlIvBtn;
     }
     
     public EZCameraListAdapter(Context context) {
@@ -190,7 +190,7 @@ public class EZCameraListAdapter extends BaseAdapter {
             viewHolder.deviceVideoBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_devicevideo_btn);
             viewHolder.deviceDefenceRl = convertView.findViewById(com.videogo.open.R.id.tab_devicedefence_rl);
             viewHolder.deviceDefenceBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_devicedefence_btn);
-            viewHolder.videoControlRel = (RelativeLayout)convertView.findViewById(com.videogo.open.R.id.tab_set_videocontrol_rel);
+            viewHolder.videoControlIvBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_set_videocontrol_iv);
             // 设置点击图标的监听响应函数
             viewHolder.playBtn.setOnClickListener(mOnClickListener);
 
@@ -213,7 +213,7 @@ public class EZCameraListAdapter extends BaseAdapter {
             viewHolder.deviceVideoBtn.setOnClickListener(mOnClickListener);
             
             viewHolder.deviceDefenceBtn.setOnClickListener(mOnClickListener);
-            viewHolder.videoControlRel.setOnClickListener(mOnClickListener);
+            viewHolder.videoControlIvBtn.setOnClickListener(mOnClickListener);
             // 设置控件集到convertView
             convertView.setTag(viewHolder);
         } else {
@@ -229,7 +229,7 @@ public class EZCameraListAdapter extends BaseAdapter {
         viewHolder.devicePicBtn.setTag(position);
         viewHolder.deviceVideoBtn.setTag(position);
         viewHolder.deviceDefenceBtn.setTag(position);
-
+        viewHolder.videoControlIvBtn.setTag(position);
 
         final EZCameraInfo cameraInfo = getItem(position);
         Object tempData = CustomVideoData.videoData.get(cameraInfo.getDeviceSerial());
@@ -372,7 +372,7 @@ public class EZCameraListAdapter extends BaseAdapter {
                 } else if (i == com.videogo.open.R.id.tab_devicedefence_btn) {
                     mListener.onDeviceDefenceClick(EZCameraListAdapter.this, v, position);
 
-                } else if (i == com.videogo.open.R.id.tab_set_videocontrol_rel) {
+                } else if (i == R.id.tab_set_videocontrol_iv) {
                     mListener.onVideoControlSetting(EZCameraListAdapter.this, v, position);
                 }
             }

@@ -143,6 +143,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name="com.videogo.VideoTImeControllActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
             android:name="com.videogo.ui.androidpn.NotifierActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
