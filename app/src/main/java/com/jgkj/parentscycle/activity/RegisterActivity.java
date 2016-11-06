@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -156,11 +157,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     private void registerChatAndLogin(final String userName,final String userNamePwd) {
         showProgressDialog();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
+                final String userNameMd5Str = UtilTools.getMD5(userName);
                 try {
-                    final String userNameMd5Str = UtilTools.getMD5(userName);
+
                     EMClient.getInstance().createAccount(userNameMd5Str, userNamePwd);
                     runOnUiThread(new Runnable() {
                         public void run() {
@@ -170,7 +173,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         }
                     });
                 } catch (Exception e) {
-                    hideProgressDialog();
+                    final String msg = e.getMessage();
+                    if (msg.contains("already exist")) {
+                        DemoHelper.getInstance().setCurrentUserName(userNameMd5Str);
+                        loginChat(userName,userNamePwd);
+                    } else {
+                        hideProgressDialog();
+
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                ToastUtil.showToast(RegisterActivity.this,msg,Toast.LENGTH_SHORT);
+                            }
+                        });
+                    }
+
                 }
             }
         }).start();
