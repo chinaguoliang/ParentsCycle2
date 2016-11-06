@@ -50,7 +50,6 @@ public class VideoTImeControllActivity extends Activity implements View.OnClickL
     TextView startTimetv;
     TextView endTimeTv;
     Button confirmBtn;
-    EditText serialNumberEt;
     Dialog mProgressDialog;
     RequestQueue mQueue;
     String servialNumber;
@@ -108,7 +107,6 @@ public class VideoTImeControllActivity extends Activity implements View.OnClickL
 
         confirmBtn = (Button) this.findViewById(com.videogo.open.R.id.video_time_controll_activity_confirm_btn);
 
-        serialNumberEt = (EditText) this.findViewById(com.videogo.open.R.id.video_time_controll_activity_serial_number_et);
 
         backIv.setOnClickListener(this);
         startTimeLl.setOnClickListener(this);
@@ -171,11 +169,11 @@ public class VideoTImeControllActivity extends Activity implements View.OnClickL
 
 
     private void requestSaveVideoControllTime() {
-        String serialNumber = serialNumberEt.getText().toString();
-        if (TextUtils.isEmpty(serialNumber)) {
-            Toast.makeText(this,"请输入摄像头序列号",Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        String serialNumber = serialNumberEt.getText().toString();
+//        if (TextUtils.isEmpty(serialNumber)) {
+//            Toast.makeText(this,"请输入摄像头序列号",Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
@@ -183,7 +181,7 @@ public class VideoTImeControllActivity extends Activity implements View.OnClickL
         requestData.put("classid", servialNumber);
         requestData.put("start_time", startTimetv.getText().toString().trim());
         requestData.put("end_time", endTimeTv.getText().toString().trim());
-        requestData.put("serial_number", serialNumber.trim());
+        requestData.put("serial_number", servialNumber.trim());
         if (timeSwitchCb.isChecked()) {
             requestData.put("is_allow_play", "0");
         } else {
@@ -211,8 +209,8 @@ public class VideoTImeControllActivity extends Activity implements View.OnClickL
                     timeSwitchCb.setChecked(false);
                 }
 
-                if (!TextUtils.equals(tii.getSerial_number(),"0"))
-                    serialNumberEt.setText(tii.getSerial_number());
+//                if (!TextUtils.equals(tii.getSerial_number(),"0"))
+//                    serialNumberEt.setText(tii.getSerial_number());
             } else {
 
             }

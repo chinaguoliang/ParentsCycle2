@@ -100,6 +100,7 @@
             android:layout_marginLeft="10dp"
             android:inputType="number"
             android:background="@null"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:hint="请输入摄像头序列号"
             />

@@ -125,6 +125,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:gravity="center_vertical"
         >
         <EditText
@@ -133,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:inputType="number"
+            android:visibility="gone"
             android:background="@null"
             android:textColor="@color/black"
             android:hint="请输入摄像头序列号"
