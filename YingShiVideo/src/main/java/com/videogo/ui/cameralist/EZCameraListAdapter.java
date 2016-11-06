@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.videogo.CustomVideoData;
@@ -92,6 +93,8 @@ public class EZCameraListAdapter extends BaseAdapter {
         
         public View deviceDefenceRl;
         public ImageButton deviceDefenceBtn;
+
+        public RelativeLayout videoControlRel;
     }
     
     public EZCameraListAdapter(Context context) {
@@ -187,7 +190,7 @@ public class EZCameraListAdapter extends BaseAdapter {
             viewHolder.deviceVideoBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_devicevideo_btn);
             viewHolder.deviceDefenceRl = convertView.findViewById(com.videogo.open.R.id.tab_devicedefence_rl);
             viewHolder.deviceDefenceBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_devicedefence_btn);
-            
+            viewHolder.videoControlRel = (RelativeLayout)convertView.findViewById(com.videogo.open.R.id.tab_set_videocontrol_rel);
             // 设置点击图标的监听响应函数
             viewHolder.playBtn.setOnClickListener(mOnClickListener);
 
@@ -210,7 +213,7 @@ public class EZCameraListAdapter extends BaseAdapter {
             viewHolder.deviceVideoBtn.setOnClickListener(mOnClickListener);
             
             viewHolder.deviceDefenceBtn.setOnClickListener(mOnClickListener);
-            
+            viewHolder.videoControlRel.setOnClickListener(mOnClickListener);
             // 设置控件集到convertView
             convertView.setTag(viewHolder);
         } else {
@@ -369,6 +372,8 @@ public class EZCameraListAdapter extends BaseAdapter {
                 } else if (i == com.videogo.open.R.id.tab_devicedefence_btn) {
                     mListener.onDeviceDefenceClick(EZCameraListAdapter.this, v, position);
 
+                } else if (i == com.videogo.open.R.id.tab_set_videocontrol_rel) {
+                    mListener.onVideoControlSetting(EZCameraListAdapter.this, v, position);
                 }
             }
         }
@@ -391,5 +396,7 @@ public class EZCameraListAdapter extends BaseAdapter {
         public void onDeviceVideoClick(BaseAdapter adapter, View view, int position);
         
         public void onDeviceDefenceClick(BaseAdapter adapter, View view, int position);
+
+        public void onVideoControlSetting(BaseAdapter adapter, View view, int position);
     }
 }

@@ -55,6 +55,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -81,8 +82,12 @@ import com.hyphenate.chatuidemo.DemoHelper;
 import com.hyphenate.chatuidemo.ui.LoginActivity;
 import com.hyphenate.chatuidemo.ui.MainActivity;
 import com.jgkj.parentscycle.application.MyApplication;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
 import com.videogo.openapi.EZOpenSDK;
 import com.videogo.ui.cameralist.EZCameraListActivity;
+
+import net.NetUrls;
 
 
 public class UtilTools {
@@ -109,6 +114,9 @@ public class UtilTools {
 
 	public static void toVideoModule(final Context context,RequestQueue mQueue) {
 		final Dialog dialog =  ProgressDialog.show(context, "", "请稍后", true, false);
+		NetUrls.SCHOOL_ID = ConfigPara.SCHOOL_ID;
+		NetUrls.BASE_URL = BgGlobal.BASE_URL;
+		NetUrls.CHEN_BASE_URL = BgGlobal.CHEN_BASE_URL;
 		StringRequest request = new StringRequest(Request.Method.POST, "https://open.ys7.com/api/lapp/token/get",
 				new Response.Listener<String>() {
 					@Override
