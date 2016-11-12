@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="288dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="60dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         >
@@ -16,13 +16,13 @@
             android:id="@+id/hall_mine_fragment_lv_header_user_icon_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="18dp"
             android:src="@mipmap/user_default_icon" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="12dp"
             android:orientation="vertical">
 
             <TextView
@@ -36,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <TextView

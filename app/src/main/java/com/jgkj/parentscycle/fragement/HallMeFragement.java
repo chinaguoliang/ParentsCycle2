@@ -19,6 +19,7 @@ import com.jgkj.parentscycle.activity.LoginActivity;
 import com.jgkj.parentscycle.activity.ParentsCycleActivity;
 import com.jgkj.parentscycle.activity.PerfectInformationActivity;
 import com.jgkj.parentscycle.activity.SchoolInfoActivity;
+import com.jgkj.parentscycle.activity.SettingActivity;
 import com.jgkj.parentscycle.activity.TestNetActivity;
 import com.jgkj.parentscycle.adapter.HallMineAdapter;
 import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
@@ -105,6 +106,9 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                     case 3:
                         startActivity(new Intent(mUserIconIv.getContext(),ParentsCycleActivity.class));
                         break;
+                    case 4:
+                        startActivity(new Intent(mUserIconIv.getContext(),SettingActivity.class));
+                        break;
                     case 5:
                         UtilTools.toChatModule(view.getContext());
                         break;
@@ -139,6 +143,15 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
                         UserInfo.loginInfo.getInfo().getHeadportrait(),
                         R.mipmap.user_default_icon, true, false);
             }
+        } else {
+            if (mUserIconIv != null)
+            AsyncImageUtil.asyncLoadImage(mUserIconIv, "", R.mipmap.user_default_icon, true, false);
+
+            if (userNameTv != null)
+            userNameTv.setText("未登录");
+
+            if (phoneNumTv != null)
+                phoneNumberLl.setVisibility(View.GONE);
         }
     }
 

@@ -112,15 +112,14 @@
                 android:textColor="@color/text_gray_3" />
 
             <TextView
-                android:id="@+id/hall_main_channel_fragment_layout_video_course_tv"
+                android:id="@+id/hall_main_channel_fragment_layout_send_announcement_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="10dp"
                 android:drawableTop="@mipmap/video_course"
                 android:gravity="center_horizontal"
-                android:text="视频公开课"
-                android:visibility="invisible"
+                android:text="发布公告"
                 android:textSize="@dimen/normal_text_size"
                 android:textColor="@color/text_gray_3" />
 
@@ -153,8 +152,9 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/white_circle"
             android:gravity="center"
-            android:text="X"
-            android:textColor="@color/black" />
+            android:text="×"
+            android:textSize="30dp"
+            android:textColor="@color/text_gray_3" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -26,6 +26,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.videogo.CustomVideoData;
+import com.videogo.open.R;
 import com.videogo.openapi.bean.EZCameraInfo;
 import com.videogo.universalimageloader.core.DisplayImageOptions;
 import com.videogo.universalimageloader.core.ImageLoader;
@@ -33,6 +35,7 @@ import com.videogo.universalimageloader.core.assist.FailReason;
 import com.videogo.universalimageloader.core.listener.ImageLoadingListener;
 import com.videogo.util.LogUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +57,7 @@ public class EZCameraListAdapter extends BaseAdapter {
     private ImageLoader mImageLoader;
     private ExecutorService mExecutorService = null;// 线程池
     public Map<String, EZCameraInfo> mExecuteItemMap = null;
-    
+    SimpleDateFormat reFormat = new SimpleDateFormat("HH:mm:ss");
     /**
      * 自定义控件集合
      * 
@@ -90,6 +93,8 @@ public class EZCameraListAdapter extends BaseAdapter {
         
         public View deviceDefenceRl;
         public ImageButton deviceDefenceBtn;
+
+        public ImageButton videoControlIvBtn;
     }
     
     public EZCameraListAdapter(Context context) {
@@ -185,7 +190,7 @@ public class EZCameraListAdapter extends BaseAdapter {
             viewHolder.deviceVideoBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_devicevideo_btn);
             viewHolder.deviceDefenceRl = convertView.findViewById(com.videogo.open.R.id.tab_devicedefence_rl);
             viewHolder.deviceDefenceBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_devicedefence_btn);
-            
+            viewHolder.videoControlIvBtn = (ImageButton) convertView.findViewById(com.videogo.open.R.id.tab_set_videocontrol_iv);
             // 设置点击图标的监听响应函数
             viewHolder.playBtn.setOnClickListener(mOnClickListener);
 
@@ -208,7 +213,7 @@ public class EZCameraListAdapter extends BaseAdapter {
             viewHolder.deviceVideoBtn.setOnClickListener(mOnClickListener);
             
             viewHolder.deviceDefenceBtn.setOnClickListener(mOnClickListener);
-            
+            viewHolder.videoControlIvBtn.setOnClickListener(mOnClickListener);
             // 设置控件集到convertView
             convertView.setTag(viewHolder);
         } else {
@@ -224,9 +229,40 @@ public class EZCameraListAdapter extends BaseAdapter {
         viewHolder.devicePicBtn.setTag(position);
         viewHolder.deviceVideoBtn.setTag(position);
         viewHolder.deviceDefenceBtn.setTag(position);
-
+        viewHolder.videoControlIvBtn.setTag(position);
 
         final EZCameraInfo cameraInfo = getItem(position);
+        Object tempData = CustomVideoData.videoData.get(cameraInfo.getDeviceSerial());
+        if (tempData != null) {
+            String filter = tempData.toString();
+            String filterArray[] = filter.split("_");
+            String startTime = filterArray[0];
+            String endTime = filterArray[1];
+            String isAllowPlay = filterArray[2];
+
+            if (TextUtils.equals(isAllowPlay,"0")) {
+                String startArray[] =startTime.split(":");
+                String endArray[] = endTime.split(":");
+                String currTimeArray[] = reFormat.format(System.currentTimeMillis()).split(":");
+                if (Integer.parseInt(startArray[0]) == Integer.parseInt(endArray[0]) && Integer.parseInt(endArray[0]) == Integer.parseInt(currTimeArray[0]) ) {
+                    if (Integer.parseInt(currTimeArray[1]) >= Integer.parseInt(startArray[1]) && Integer.parseInt(currTimeArray[1]) <= Integer.parseInt(endArray[1])) {
+
+                    } else {
+                        cameraInfo.setOnlineStatus(0);
+                    }
+                } else {
+                    if (Integer.parseInt(currTimeArray[0]) >= Integer.parseInt(startArray[0]) && Integer.parseInt(currTimeArray[0]) <= Integer.parseInt(endArray[0])) {
+
+                    } else {
+                        cameraInfo.setOnlineStatus(0);
+                    }
+                }
+            } else {
+                cameraInfo.setOnlineStatus(0);
+            }
+        }
+
+
         if(cameraInfo != null) {
             if (cameraInfo.getOnlineStatus() == 0) {
                 viewHolder.offlineBtn.setVisibility(View.VISIBLE);
@@ -336,6 +372,8 @@ public class EZCameraListAdapter extends BaseAdapter {
                 } else if (i == com.videogo.open.R.id.tab_devicedefence_btn) {
                     mListener.onDeviceDefenceClick(EZCameraListAdapter.this, v, position);
 
+                } else if (i == R.id.tab_set_videocontrol_iv) {
+                    mListener.onVideoControlSetting(EZCameraListAdapter.this, v, position);
                 }
             }
         }
@@ -358,5 +396,7 @@ public class EZCameraListAdapter extends BaseAdapter {
         public void onDeviceVideoClick(BaseAdapter adapter, View view, int position);
         
         public void onDeviceDefenceClick(BaseAdapter adapter, View view, int position);
+
+        public void onVideoControlSetting(BaseAdapter adapter, View view, int position);
     }
 }

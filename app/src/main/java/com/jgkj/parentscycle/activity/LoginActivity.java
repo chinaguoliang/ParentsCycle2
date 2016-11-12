@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chatuidemo.DemoApplication;
+import com.hyphenate.chatuidemo.DemoHelper;
+import com.hyphenate.chatuidemo.db.DemoDBManager;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
@@ -22,6 +27,7 @@ import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
+import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.HashMap;
 
@@ -62,29 +68,7 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
         ButterKnife.bind(this);
     }
 
-    public void requestLogin() {
-
-
-        String phone = userNameEt.getText().toString();
-        String password = passwordEt.getText().toString();
-
-        if (TextUtils.isEmpty(phone)) {
-            ToastUtil.showToast(this,"手机号不能为空",Toast.LENGTH_SHORT);
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            ToastUtil.showToast(this,"密码不能为空",Toast.LENGTH_SHORT);
-            return;
-        }
-
-
-        boolean hadShow = showProgressDialog();
-        if (!hadShow) {
-            return;
-        }
-
-
+    public void requestLogin(String phone,String password) {
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("phone", phone);
         requestData.put("passwd", password);
@@ -99,7 +83,28 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     @Override
     public void onClick(View v) {
         if (v == loginTv) {
-            requestLogin();
+
+            String phone = userNameEt.getText().toString();
+            String password = passwordEt.getText().toString();
+
+            if (TextUtils.isEmpty(phone)) {
+                ToastUtil.showToast(this,"手机号不能为空",Toast.LENGTH_SHORT);
+                return;
+            }
+
+            if (TextUtils.isEmpty(password)) {
+                ToastUtil.showToast(this,"密码不能为空",Toast.LENGTH_SHORT);
+                return;
+            }
+
+
+            boolean hadShow = showProgressDialog();
+            if (!hadShow) {
+                return;
+            }
+
+            loginChat(phone,password);
+
         } else if (v == registerTv) {
             startActivity(new Intent(this,RegisterActivity.class));
         } else if (v == forgetPassTv) {
@@ -134,5 +139,57 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
+    }
+
+    private void loginChat(final String userName,final String userPwd) {
+        showProgressDialog();
+        final String userNameMd5Str = UtilTools.getMD5(userName);
+        DemoDBManager.getInstance().closeDB();
+
+        // reset current user name before login
+        DemoHelper.getInstance().setCurrentUserName(userNameMd5Str);
+
+        final long start = System.currentTimeMillis();
+        // call login method
+        Log.d(TAG, "EMClient.getInstance().login");
+        EMClient.getInstance().login(userNameMd5Str, userPwd, new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+
+                // ** manually load all local groups and conversation
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+
+                // update current user's display name for APNs
+                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
+                        DemoApplication.currentUserNick.trim());
+                if (!updatenick) {
+                    Log.e("LoginActivity", "update current user nick fail");
+                }
+
+                // get user's info (this should be get from App's server or 3rd party service)
+                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+                hideProgressDialog();
+                requestLogin(userName,userPwd);
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+                Log.d(TAG, "login: onProgress");
+            }
+
+            @Override
+            public void onError(final int code, final String message) {
+                Log.d(TAG, "login: onError: " + code);
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        hideProgressDialog();
+                        Toast.makeText(getApplicationContext(), getString(com.hyphenate.chatuidemo.R.string.Login_failed) + message,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }

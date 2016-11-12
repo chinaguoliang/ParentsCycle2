@@ -38,6 +38,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.videogo.VideoTImeControllActivity;
 import com.videogo.constant.Constant;
 import com.videogo.constant.IntentConsts;
 import com.videogo.devicemgt.EZDeviceSettingActivity;
@@ -129,7 +130,7 @@ public class EZCameraListActivity extends Activity implements OnClickListener  {
 				popLogoutDialog();
 			}
 		});
-		mTitleBar.addLeftView(iv);
+//		mTitleBar.addLeftView(iv);
 
         mNoMoreView = getLayoutInflater().inflate(com.videogo.open.R.layout.no_device_more_footer, null);
 
@@ -205,6 +206,13 @@ public class EZCameraListActivity extends Activity implements OnClickListener  {
 			public void onDeviceDefenceClick(BaseAdapter adapter, View view,
 					int position) {}
 
+            @Override
+            public void onVideoControlSetting(BaseAdapter adapter, View view, int position) {
+                EZCameraInfo eZCameraInfo = (EZCameraInfo)((EZCameraListAdapter)adapter).getItem(position);
+                Intent intent = new Intent(view.getContext(),VideoTImeControllActivity.class);
+                intent.putExtra("serial_num",eZCameraInfo.getDeviceSerial());
+                view.getContext().startActivity(intent);
+            }
         });
         mListView = (PullToRefreshListView) findViewById(com.videogo.open.R.id.camera_listview);
         mListView.setLoadingLayoutCreator(new LoadingLayoutCreator() {

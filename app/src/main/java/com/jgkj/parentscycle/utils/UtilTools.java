@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,10 +15,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +58,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -66,13 +72,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-//import com.hyphenate.chat.EMClient;
-//import com.hyphenate.chatuidemo.DemoHelper;
-//import com.hyphenate.chatuidemo.ui.LoginActivity;
-//import com.hyphenate.chatuidemo.ui.MainActivity;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chatuidemo.DemoHelper;
+import com.hyphenate.chatuidemo.ui.LoginActivity;
+import com.hyphenate.chatuidemo.ui.MainActivity;
 import com.jgkj.parentscycle.application.MyApplication;
-//import com.videogo.openapi.EZOpenSDK;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
+import com.videogo.openapi.EZOpenSDK;
+import com.videogo.ui.cameralist.EZCameraListActivity;
+
+import net.NetUrls;
 
 
 public class UtilTools {
@@ -80,25 +98,65 @@ public class UtilTools {
 	public static int SCREEN_HEIGHT = 0;
 
 	public static void toChatModule(final Context context) {
-//		new Thread(new Runnable() {
-//			public void run() {
-//				if (DemoHelper.getInstance().isLoggedIn()) {
-//					// auto login mode, make sure all group and conversation is loaed before enter the main screen
-//
-//					EMClient.getInstance().groupManager().loadAllGroups();
-//					EMClient.getInstance().chatManager().loadAllConversations();
-//
-//					context.startActivity(new Intent(context, MainActivity.class));
-//
-//				}else {
-//					context.startActivity(new Intent(context, LoginActivity.class));
-//				}
-//			}
-//		}).start();
+		new Thread(new Runnable() {
+			public void run() {
+				if (DemoHelper.getInstance().isLoggedIn()) {
+					// auto login mode, make sure all group and conversation is loaed before enter the main screen
+
+					EMClient.getInstance().groupManager().loadAllGroups();
+					EMClient.getInstance().chatManager().loadAllConversations();
+
+					context.startActivity(new Intent(context, MainActivity.class));
+
+				}else {
+					context.startActivity(new Intent(context, LoginActivity.class));
+				}
+			}
+		}).start();
 	}
 
-	public static void toVideoModule() {
-//		EZOpenSDK.getInstance().openLoginPage();
+	public static void toVideoModule(final Context context,RequestQueue mQueue) {
+		final Dialog dialog =  ProgressDialog.show(context, "", "请稍后", true, false);
+		NetUrls.SCHOOL_ID = ConfigPara.SCHOOL_ID;
+		NetUrls.BASE_URL = BgGlobal.BASE_URL;
+		NetUrls.CHEN_BASE_URL = BgGlobal.CHEN_BASE_URL;
+		StringRequest request = new StringRequest(Request.Method.POST, "https://open.ys7.com/api/lapp/token/get",
+				new Response.Listener<String>() {
+					@Override
+					public void onResponse(String response) {
+						//EZOpenSDK.getInstance().openLoginPage();
+						dialog.dismiss();
+						try {
+							JSONObject jobj = new JSONObject(response);
+							String accessToken = jobj.getJSONObject("data").getString("accessToken");
+							EZOpenSDK.getInstance().setAccessToken(accessToken);
+							Intent toIntent = new Intent(context, EZCameraListActivity.class);
+							toIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+							context.startActivity(toIntent);
+							//PreferenceUtil.setStringKey(context,"accessToken",accessToken);
+						} catch (Exception e) {
+							e.printStackTrace();
+							ToastUtil.showToast(context,"网络异常,请稍后再试！", Toast.LENGTH_SHORT);
+
+						}
+
+					}
+				}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				dialog.dismiss();
+				ToastUtil.showToast(context,"网络异常,请稍后再试！", Toast.LENGTH_SHORT);
+			}
+		}) {
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				HashMap<String, String> map = new HashMap <String, String>();
+				map.put("appKey","8ff0d3e7aab5485195fd7ddcb0a33934");
+				map.put("appSecret","6741c50a996dd8a185a2ceaf06f28be2");
+				return map;
+			}
+		};
+		mQueue.add(request);
 	}
 
 	public static String getRequestParams(ArrayList<String> data) {
@@ -715,18 +773,6 @@ public class UtilTools {
         return statusBarHeight;
     }
 	
-	public static boolean checkApkInstalled(Context context, String packageName) {
-		if (TextUtils.isEmpty(packageName))
-			return false;
-		try {
-			ApplicationInfo info = context.getPackageManager()
-					.getApplicationInfo(packageName,
-							PackageManager.GET_UNINSTALLED_PACKAGES);
-			return true;
-		} catch (PackageManager.NameNotFoundException e) {
-			return false;
-		}
-	}
 
 	public static String formatMoney(int data) {
 		DecimalFormat df = new DecimalFormat("#,###");
@@ -905,4 +951,39 @@ public class UtilTools {
 //
 //		return badgeCount;
 //	}
+
+
+	//获得MD5码
+	public static String getMD5(String info)
+	{
+		try
+		{
+			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			md5.update(info.getBytes("UTF-8"));
+			byte[] encryption = md5.digest();
+
+			StringBuffer strBuf = new StringBuffer();
+			for (int i = 0; i < encryption.length; i++)
+			{
+				if (Integer.toHexString(0xff & encryption[i]).length() == 1)
+				{
+					strBuf.append("0").append(Integer.toHexString(0xff & encryption[i]));
+				}
+				else
+				{
+					strBuf.append(Integer.toHexString(0xff & encryption[i]));
+				}
+			}
+
+			return strBuf.toString();
+		}
+		catch (NoSuchAlgorithmException e)
+		{
+			return "";
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			return "";
+		}
+	}
 }

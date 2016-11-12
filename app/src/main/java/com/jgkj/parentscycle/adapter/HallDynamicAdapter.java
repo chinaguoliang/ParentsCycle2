@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.AnnouncementListItem;
 import com.jgkj.parentscycle.bean.HallDynamicInfo;
 import com.jgkj.parentscycle.bean.HallMainChannelLvInfo;
 
@@ -20,9 +21,9 @@ import java.util.List;
 public class HallDynamicAdapter extends BaseAdapter{
 
 
-    private List<HallDynamicInfo> contentData;
+    private List<AnnouncementListItem> contentData;
     private Context mContext;
-    public HallDynamicAdapter(Context context, List<HallDynamicInfo> data){
+    public HallDynamicAdapter(Context context, List<AnnouncementListItem> data){
         contentData = data;
         mContext = context;
     }
@@ -61,10 +62,10 @@ public class HallDynamicAdapter extends BaseAdapter{
         }
 
 
-        HallDynamicInfo hallDynamicInfo = contentData.get(position);
-        holder.nameTv.setText(hallDynamicInfo.getName());
-        holder.timeTv.setText(hallDynamicInfo.getTime());
-        holder.contentTv.setText(hallDynamicInfo.getContent());
+        AnnouncementListItem hallDynamicInfo = contentData.get(position);
+        holder.nameTv.setText(hallDynamicInfo.getTitle());
+        holder.timeTv.setText(hallDynamicInfo.getCreatetime());
+        holder.contentTv.setText(hallDynamicInfo.getAnnouncement());
         return convertView;
     }
 

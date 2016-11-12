@@ -57,6 +57,8 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.circle_menu_activity_course_tv)
     TextView courseTv;
 
+    @Bind(R.id.hall_main_channel_fragment_layout_send_announcement_tv)
+    TextView publishAnnouncementTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +85,8 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
     @OnClick({R.id.circle_menu_activity_close_tv,R.id.circle_menu_activity_chat_tv,R.id.circle_menu_activity_baby_show_tv,R.id.circle_menu_activity_baby_parents_cycle_tv,R.id.circle_menu_activity_baby_safe_send_tv,
     R.id.circle_menu_activity_food_tv,
     R.id.circle_menu_activity_course_tv,
-    R.id.baby_document_right_title_tv})
+    R.id.baby_document_right_title_tv,
+    R.id.hall_main_channel_fragment_layout_send_announcement_tv})
     @Override
     public void onClick(View v) {
         if (v == closeTv) {
@@ -103,6 +106,8 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
         } else if (v == rightTv) {
             setResult(ActivityResultCode.MY_PUBLISH_CODE);
             finish();
+        } else if (v == publishAnnouncementTv) {
+            startActivity(new Intent(this, PublishAnnouncementActivity.class));
         }
     }
 
