@@ -26,6 +26,7 @@ import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.LogUtil;
+import com.jgkj.parentscycle.utils.PreferenceUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
 
@@ -61,6 +62,8 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
     @Bind(R.id.login_activity_layout_Immediate_experience_btn)
     Button immediateExperienceBtn;
 
+    private String userName;
+    private String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +89,9 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
 
             String phone = userNameEt.getText().toString();
             String password = passwordEt.getText().toString();
+
+            userName = phone;
+            this.password = password;
 
             if (TextUtils.isEmpty(phone)) {
                 ToastUtil.showToast(this,"手机号不能为空",Toast.LENGTH_SHORT);
@@ -118,6 +124,7 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
 
     @Override
     public void requestResponse(Object obj) {
+        hideProgressDialog();
         NetBeanSuper nbs = (NetBeanSuper)obj;
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
@@ -125,6 +132,8 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
 
         if (nbs.obj instanceof  LoginInfo) {
             if (nbs.isSuccess()) {
+                PreferenceUtil.setStringKey(LoginActivity.this,"jgkj_user_name",userName);
+                PreferenceUtil.setStringKey(LoginActivity.this,"jgkjpassword",password);
                 LoginInfo loginInfo = (LoginInfo)nbs.obj;
                 Log.d("result",nbs.getMsg());
                 UserInfo.isLogined = true;
@@ -170,7 +179,7 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
 
                 // get user's info (this should be get from App's server or 3rd party service)
                 DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-                hideProgressDialog();
+
                 requestLogin(userName,userPwd);
             }
 

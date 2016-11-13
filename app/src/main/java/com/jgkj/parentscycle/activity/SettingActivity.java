@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.PreferenceUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -101,6 +102,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             finish();
         } else if (v == loginOutBtn) {
             UserInfo.isLogined = false;
+            PreferenceUtil.setStringKey(SettingActivity.this,"jgkj_user_name","");
+            PreferenceUtil.setStringKey(SettingActivity.this,"jgkjpassword","");
             finish();
         } else {
             TextView tv = (TextView)v;
