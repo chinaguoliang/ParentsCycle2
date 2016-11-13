@@ -1,5 +1,7 @@
 package com.jgkj.parentscycle.bean;
 
+import android.text.TextUtils;
+
 /**
  * Created by chen on 16/8/20.
  */
@@ -88,7 +90,11 @@ public class LoginInfoObj {
     }
 
     public String getNickname() {
-        return nickname;
+        if (TextUtils.isEmpty(nickname)) {
+            return "";
+        } else {
+            return nickname;
+        }
     }
 
     public void setNickname(String nickname) {

@@ -309,10 +309,10 @@ public abstract class BaseActivity extends FragmentActivity {
                 return;
             }
             Bundle extras = data.getExtras();
-            if (extras != null) {
+            //if (extras != null) {
                 hideSelectDialog();
                 requestGetSevenCowToken();
-            }
+            //}
         }
     }
 

@@ -12,7 +12,11 @@ public class LoginInfo {
     LoginRoleObj role;
 
     public LoginInfoObj getInfo() {
-        return info;
+        if (info == null) {
+            return new LoginInfoObj();
+        } else {
+            return info;
+        }
     }
 
     public void setInfo(LoginInfoObj info) {
@@ -20,7 +24,11 @@ public class LoginInfo {
     }
 
     public LoginRoleObj getRole() {
-        return role;
+        if (role == null) {
+            return new LoginRoleObj();
+        } else {
+            return role;
+        }
     }
 
     public void setRole(LoginRoleObj role) {
