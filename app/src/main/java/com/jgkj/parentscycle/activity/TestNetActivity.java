@@ -18,13 +18,10 @@ import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
-import com.jgkj.parentscycle.net.JsonUtil;
-import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
-import com.jgkj.parentscycle.utils.LogUtil;
-import com.videogo.RequestAccessToken;
+//import com.videogo.RequestAccessToken;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -74,7 +71,10 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 //            requestAnnouncementDetailList();
 
 //             RequestAccessToken.getAccessToken();
-            testGetAccessToken();
+           // testGetAccessToken();
+            //requestAnouncementCommentList();
+           // requestParentsCyclePostsList();
+            requestCommentsList();
         }
     }
 
@@ -312,12 +312,14 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     }
 
 
-    //请求教师列表
-    public void requestTeachersList() {
-        HashMap<String, String> requestData = new HashMap<String, String>();
-        TeacherListPaser lp = new TeacherListPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHERS_LIST, requestData, lp);
-    }
+//    //公告评论列表
+//    public void requestAnouncementCommentList() {
+//        HashMap<String, String> requestData = new HashMap<String, String>();
+//        TeacherListPaser lp = new TeacherListPaser();
+//        requestData.put("rows","100");
+//        requestData.put("page","1");
+//        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_COMMENT_LIST, requestData, lp);
+//    }
 
     //按学校ID 查询班级列表 （发布选择班级展示）
     private void requestClassListBySchoolId() {
@@ -361,6 +363,46 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         requestData.put("announid","9");
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_DETAIL, requestData, lp);
+    }
+
+//
+//    //教师列表
+//    private void requestTeachersList() {
+//        HashMap<String, String> requestData = new HashMap<String, String>();
+//        requestData.put("rows","10");
+//        requestData.put("page","1");
+//        requestData.put("announid","9");
+//        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+//        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_LIST, requestData, lp);
+//    }
+
+    //公告评论列表
+    public void requestAnouncementCommentList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        TeacherListPaser lp = new TeacherListPaser();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_COMMENT_LIST, requestData, lp);
+    }
+
+
+    //父母圈帖子列表查询
+    public void requestParentsCyclePostsList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        TeacherListPaser lp = new TeacherListPaser();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_CYCLE_POSTS_LIST, requestData, lp);
+    }
+
+    //帖子評論列表
+    public void requestCommentsList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        TeacherListPaser lp = new TeacherListPaser();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+//        requestData.put("tocipid","7");
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_CYCLE_POSTS_LIST, requestData, lp);
     }
     @Override
     public void requestResponse(Object obj) {

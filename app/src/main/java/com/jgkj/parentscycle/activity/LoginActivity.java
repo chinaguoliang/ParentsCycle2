@@ -12,11 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chatuidemo.DemoApplication;
-import com.hyphenate.chatuidemo.DemoHelper;
-import com.hyphenate.chatuidemo.db.DemoDBManager;
+//import com.hyphenate.EMCallBack;
+//import com.hyphenate.chat.EMClient;
+//import com.hyphenate.chatuidemo.DemoApplication;
+//import com.hyphenate.chatuidemo.DemoHelper;
+//import com.hyphenate.chatuidemo.db.DemoDBManager;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
@@ -103,7 +103,8 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
                 return;
             }
 
-            loginChat(phone,password);
+            requestLogin(phone,password);
+            //loginChat(phone,password);
 
         } else if (v == registerTv) {
             startActivity(new Intent(this,RegisterActivity.class));
@@ -141,55 +142,55 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
 
     }
 
-    private void loginChat(final String userName,final String userPwd) {
-        showProgressDialog();
-        final String userNameMd5Str = UtilTools.getMD5(userName);
-        DemoDBManager.getInstance().closeDB();
-
-        // reset current user name before login
-        DemoHelper.getInstance().setCurrentUserName(userNameMd5Str);
-
-        final long start = System.currentTimeMillis();
-        // call login method
-        Log.d(TAG, "EMClient.getInstance().login");
-        EMClient.getInstance().login(userNameMd5Str, userPwd, new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-
-                // ** manually load all local groups and conversation
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-
-                // update current user's display name for APNs
-                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
-                        DemoApplication.currentUserNick.trim());
-                if (!updatenick) {
-                    Log.e("LoginActivity", "update current user nick fail");
-                }
-
-                // get user's info (this should be get from App's server or 3rd party service)
-                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-                hideProgressDialog();
-                requestLogin(userName,userPwd);
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                Log.d(TAG, "login: onProgress");
-            }
-
-            @Override
-            public void onError(final int code, final String message) {
-                Log.d(TAG, "login: onError: " + code);
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        hideProgressDialog();
-                        Toast.makeText(getApplicationContext(), getString(com.hyphenate.chatuidemo.R.string.Login_failed) + message,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
+//    private void loginChat(final String userName,final String userPwd) {
+//        showProgressDialog();
+//        final String userNameMd5Str = UtilTools.getMD5(userName);
+//        DemoDBManager.getInstance().closeDB();
+//
+//        // reset current user name before login
+//        DemoHelper.getInstance().setCurrentUserName(userNameMd5Str);
+//
+//        final long start = System.currentTimeMillis();
+//        // call login method
+//        Log.d(TAG, "EMClient.getInstance().login");
+//        EMClient.getInstance().login(userNameMd5Str, userPwd, new EMCallBack() {
+//
+//            @Override
+//            public void onSuccess() {
+//
+//                // ** manually load all local groups and conversation
+//                EMClient.getInstance().groupManager().loadAllGroups();
+//                EMClient.getInstance().chatManager().loadAllConversations();
+//
+//                // update current user's display name for APNs
+//                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
+//                        DemoApplication.currentUserNick.trim());
+//                if (!updatenick) {
+//                    Log.e("LoginActivity", "update current user nick fail");
+//                }
+//
+//                // get user's info (this should be get from App's server or 3rd party service)
+//                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+//                hideProgressDialog();
+//                requestLogin(userName,userPwd);
+//            }
+//
+//            @Override
+//            public void onProgress(int progress, String status) {
+//                Log.d(TAG, "login: onProgress");
+//            }
+//
+//            @Override
+//            public void onError(final int code, final String message) {
+//                Log.d(TAG, "login: onError: " + code);
+//                runOnUiThread(new Runnable() {
+//                    public void run() {
+//                        hideProgressDialog();
+//                        Toast.makeText(getApplicationContext(), getString(com.hyphenate.chatuidemo.R.string.Login_failed) + message,
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
+//    }
 }

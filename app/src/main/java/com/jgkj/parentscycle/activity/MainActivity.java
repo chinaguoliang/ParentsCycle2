@@ -46,7 +46,7 @@ import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.PreferenceUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
-import com.videogo.CustomVideoData;
+//import com.videogo.CustomVideoData;
 
 import org.json.JSONObject;
 
@@ -280,8 +280,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
                     }
 
                 }
-                CustomVideoData.videoData = dataMap;
-                UtilTools.toVideoModule(this, Volley.newRequestQueue(this));
+//                CustomVideoData.videoData = dataMap;
+//                UtilTools.toVideoModule(this, Volley.newRequestQueue(this));
             } else {
                 ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
             }
