@@ -250,9 +250,9 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         data.add("手机号_" + tii.getPhone());
         data.add("账户安全_ ");
-        data.add("捆绑微信_ ");
-        data.add("捆绑QQ_ ");
-        data.add("选择班级_");
+//        data.add("捆绑微信_ ");
+//        data.add("捆绑QQ_ ");
+//        data.add("选择班级_");
         mAccountInfoAdapter = new AccountInfoAdapter(this, data);
         mContentLv.setAdapter(mAccountInfoAdapter);
     }
