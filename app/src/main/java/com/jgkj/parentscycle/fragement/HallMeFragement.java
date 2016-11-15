@@ -127,7 +127,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         if (UserInfo.isLogined) {
             if (userNameTv != null) {
                 if (UserInfo.loginInfo.getRole() != null)
-                userNameTv.setText(UserInfo.loginInfo.getRole().getName());
+                //userNameTv.setText(UserInfo.loginInfo.getRole().getName());
                 phoneNumberLl.setVisibility(View.VISIBLE);
                 if (UserInfo.loginInfo.getInfo() != null) {
                     userNameTv.setText(UserInfo.loginInfo.getInfo().getNickname());

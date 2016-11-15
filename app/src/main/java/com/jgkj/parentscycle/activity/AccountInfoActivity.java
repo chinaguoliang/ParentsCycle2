@@ -152,10 +152,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
        if (v == backIv) {
            finish();
        } else if (v == saveBtn) {
-           if (TextUtils.isEmpty(classesIds)) {
-               ToastUtil.showToast(v.getContext(),"请选择班级",Toast.LENGTH_SHORT);
-               return;
-           }
+//           if (TextUtils.isEmpty(classesIds)) {
+//               ToastUtil.showToast(v.getContext(),"请选择班级",Toast.LENGTH_SHORT);
+//               return;
+//           }
            requestSave();
        } else if (v == mIconIv) {
            showChangePhotoDialog();
@@ -228,7 +228,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         mTeacherInfoListInfo = tii;
         classesIds = tii.getClassid();
 
-        nameTv.setText(tii.getTeachername());
+        nameTv.setText(tii.getNickname());
         phoneTv.setText(tii.getPhone());
         AsyncImageUtil.asyncLoadImage(mIconIv,
                 tii.getHeadportrait(),
