@@ -54,7 +54,7 @@ public class MyApplication extends Application {
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
                 this)
-                .memoryCacheExtraOptions(800, 480)
+                .memoryCacheExtraOptions(2000, 2000)
                         // max width, max height，即保存的每个缓存文件的最大长宽
                 .threadPoolSize(1)
                         // 线程池内加载的数量

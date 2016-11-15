@@ -4,10 +4,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,6 +91,8 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.baby_document_activity_title)
     TextView titleTv;
 
+    @Bind(R.id.show_food_list_activity_select_week_ll)
+    LinearLayout selectWeekLl;
 
     private String weekNumStr = "";
 
@@ -267,13 +272,19 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
         publishPicTv.setBackgroundColor(Color.WHITE);
     }
 
-    private void addOneImageView(String url,LinearLayout picLl,int width) {
+    private void addOneImageView(final String url,LinearLayout picLl,int width) {
         ImageView iv = new ImageView(this);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(width,width);
         iv.setPadding(10,10,10,10);
         iv.setLayoutParams(params);
         AsyncImageUtil.asyncLoadImage(iv,url,R.mipmap.ic_launcher, false, false);
         picLl.addView(iv,0);
+        iv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showPopupWindow(selectWeekLl,url);
+            }
+        });
     }
 
     @Override
@@ -358,5 +369,48 @@ public class ShowFoodListActivity extends BaseActivity implements View.OnClickLi
         params.gravity = Gravity.BOTTOM;
         params.width = UtilTools.SCREEN_WIDTH;
         mModifyClassDialog.getWindow().setAttributes(params);
+    }
+
+
+    private void showPopupWindow(View view,String url) {
+
+        // 一个自定义的布局，作为显示的内容
+        View contentView = LayoutInflater.from(view.getContext()).inflate(
+                R.layout.big_img_popwindow_layout, null);
+        final PopupWindow popupWindow = new PopupWindow(contentView,
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+        ImageView bigImgIv = (ImageView) contentView.findViewById(R.id.big_img_popwindw_layout_iv);
+        AsyncImageUtil.asyncLoadImage(bigImgIv,
+                url,
+                0, false, false);
+        contentView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+        popupWindow.setTouchable(true);
+
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+
+
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
+
+        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
+        // 我觉得这里是API的一个bug
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+        // 设置好参数之后再show
+        popupWindow.showAsDropDown(view);
+
     }
 }
