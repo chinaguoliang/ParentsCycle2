@@ -98,7 +98,7 @@ public class CircleMenuActivity extends BaseActivity implements View.OnClickList
         } else if (v == babyShowTv) {
             startActivity(new Intent(this, BabyShowActivity.class));
         } else if (v == parentsCycleTv) {
-            startActivity(new Intent(this, ParentsCycleActivity.class));
+            startActivity(new Intent(v.getContext(),PublishParentsCycleActivity.class));
         } else if (v == foodTv) {
             startActivity(new Intent(this, PublishFoodListActivity.class));
         } else if (v == courseTv) {
