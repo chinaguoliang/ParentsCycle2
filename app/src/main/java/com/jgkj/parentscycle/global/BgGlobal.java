@@ -61,4 +61,9 @@ public class BgGlobal {
     public static final String GET_VIDEO_CONTROL_DATA = "videoTime/getVideoControlTime";
     public static final String SAVE_VIDEO_CONTROL_DATA = "videoTime/saveVideoControlTime"; //保存视频控制时间
     public static final String GET_VIDEO_CONTROL_DATA_BY_SCHOOL_ID = "videoTime/getVideoControlTimeBySchoolId";//根据SchoolId获取视频控制时间
+
+    public static final String ANNOUNCEMENT_COMMENT_LIST = "announcementComment/announcementCommentList"; //公告评论列表
+    public static final String PARENTS_CYCLE_POSTS_LIST = "parentTopic/parentTopicList"; //父母圈帖子列表查询
+    public static final String COMMENTS_LIST = "tocipComment/tocipCommentList";//帖子評論列表
+
 }

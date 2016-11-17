@@ -4,290 +4,280 @@
     android:layout_height="match_parent"
     android:background="@color/gray_bg"
     android:orientation="vertical">
+
     <include
         layout="@layout/title_bar_layout"
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_height="50dp"></include>
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"></include>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
             android:id="@+id/setting_activity_logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:background="@color/main_blue_color"
-            android:textSize="@dimen/big_text_size"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
             android:text="退出登录"
-            android:layout_height="50dp" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/big_text_size" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/setting_activity_logout_btn"
-            >
+            android:layout_above="@+id/setting_activity_logout_btn">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_gray"
-                    android:background="@color/bg_gray"
-                    android:textSize="@dimen/normal_text_size"
-                    android:text="网络设置"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    />
-
-                <TextView
-                    android:id="@+id/setting_activity_layout_download_pic_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:text="允许移动网络下载图片"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/text_gray"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    ></View>
-
-                <TextView
-                    android:id="@+id/setting_activity_layout_download_video_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:text="允许移动网络下载视频"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/text_gray"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    ></View>
-
-                <TextView
-                    android:id="@+id/setting_activity_layout_upload_data_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:text="允许移动网络上传数据"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_gray"
-                    android:background="@color/bg_gray"
-                    android:textSize="@dimen/normal_text_size"
-                    android:text="数据管理"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    />
                 <TextView
                     android:id="@+id/setting_activity_layout_auto_clear_cache_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
                     android:background="@color/white"
                     android:drawableRight="@mipmap/my_switch_clicked"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
                     android:paddingRight="10dp"
+                    android:paddingTop="10dp"
                     android:text="自动清除缓存"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/text_gray"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    ></View>
-
-                <TextView
-                    android:id="@+id/setting_activity_layout_auto_clear_temp_data_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
                     android:textColor="@color/black"
-                    android:paddingLeft="10dp"
+                    android:textSize="@dimen/big_text_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@color/white"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:text="清除临时数据"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_gray"
-                    android:background="@color/bg_gray"
-                    android:textSize="@dimen/normal_text_size"
-                    android:text="学校提醒设置"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    />
-                <TextView
-                    android:id="@+id/setting_activity_layout_parents_chat_notification_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:text="家长聊天提醒"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/text_gray"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    ></View>
-
-                <TextView
-                    android:id="@+id/setting_activity_layout_teacher_chat_notification_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:text="老师聊天提醒"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_gray"
-                    android:background="@color/bg_gray"
-                    android:textSize="@dimen/normal_text_size"
-                    android:text="父母圈提醒设置"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    />
-                <TextView
-                    android:id="@+id/setting_activity_layout_parents_set_goods_notification_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:background="@color/white"
-                    android:text="父母圈评论点赞提醒"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/text_gray"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    ></View>
-
-                <TextView
-                    android:id="@+id/setting_activity_layout_parents_focus_notification_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:text="父母圈关注提醒"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/text_gray"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    ></View>
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
 
-                <TextView
-                    android:id="@+id/setting_activity_layout_check_update_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/big_text_size"
-                    android:textColor="@color/black"
-                    android:paddingLeft="10dp"
-                    android:background="@color/white"
-                    android:drawableRight="@mipmap/my_switch_clicked"
-                    android:paddingRight="10dp"
-                    android:text="检查更新"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/bg_gray"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="网络设置"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/normal_text_size" />
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_download_pic_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="允许移动网络下载图片"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
 
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/text_gray"></View>
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_download_video_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="允许移动网络下载视频"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/text_gray"></View>
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_upload_data_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="允许移动网络上传数据"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/bg_gray"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="数据管理"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/normal_text_size" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/text_gray"></View>
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_auto_clear_temp_data_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="清除临时数据"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/bg_gray"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="学校提醒设置"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/normal_text_size" />
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_parents_chat_notification_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="家长聊天提醒"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/text_gray"></View>
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_teacher_chat_notification_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="老师聊天提醒"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/bg_gray"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="父母圈提醒设置"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/normal_text_size" />
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_parents_set_goods_notification_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="父母圈评论点赞提醒"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/text_gray"></View>
+
+                    <TextView
+                        android:id="@+id/setting_activity_layout_parents_focus_notification_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="父母圈关注提醒"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/text_gray"></View>
 
 
+                    <TextView
+                        android:id="@+id/setting_activity_layout_check_update_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableRight="@mipmap/my_switch_clicked"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:text="检查更新"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/big_text_size" />
 
+
+                </LinearLayout>
             </LinearLayout>
 
+
         </ScrollView>
-
-
 
 
     </RelativeLayout>

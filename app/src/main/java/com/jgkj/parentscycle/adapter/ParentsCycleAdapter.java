@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.ParentsCycleInfo;
+import com.jgkj.parentscycle.bean.ParentsCyclePostsListItem;
 
 import java.util.List;
 
@@ -17,14 +18,14 @@ import java.util.List;
  * Created by chen on 16/7/24.
  */
 public class ParentsCycleAdapter extends BaseAdapter{
-    private List<ParentsCycleInfo> contentData;
+    private List<ParentsCyclePostsListItem> contentData;
     private Context mContext;
-    public ParentsCycleAdapter(Context context, List<ParentsCycleInfo> data){
+    public ParentsCycleAdapter(Context context, List<ParentsCyclePostsListItem> data){
         contentData = data;
         mContext = context;
     }
 
-    public void setDataList(List<ParentsCycleInfo> data){
+    public void setDataList(List<ParentsCyclePostsListItem> data){
         contentData = data;
     }
 
@@ -61,11 +62,11 @@ public class ParentsCycleAdapter extends BaseAdapter{
             holder = (MineViewHolder) convertView.getTag();
         }
 
-        ParentsCycleInfo pci = contentData.get(position);
-        holder.nameTv.setText(pci.getName());
-        holder.timeTv.setText(pci.getTime());
-        holder.conentTv.setText(pci.getContent());
-        holder.schoolIv.setImageResource(pci.getImgRes());
+        ParentsCyclePostsListItem pci = contentData.get(position);
+        holder.nameTv.setText(pci.getTopic());
+        holder.timeTv.setText(pci.getCreatetime());
+        holder.conentTv.setText(pci.getTopictext());
+        holder.schoolIv.setImageResource(R.mipmap.school2);
         return convertView;
     }
 

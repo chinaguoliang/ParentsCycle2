@@ -8,10 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.PreferenceUtil;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -106,12 +108,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             PreferenceUtil.setStringKey(SettingActivity.this,"jgkjpassword","");
             finish();
         } else {
+
             TextView tv = (TextView)v;
             Object tagObj = tv.getTag();
             if (tagObj == null) {
+
                 tv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.my_switch_normal,0);
                 tv.setTag("normal");
             } else {
+                ToastUtil.showToast(this,"清除缓存成功", Toast.LENGTH_SHORT);
                 tv.setTag(null);
                 tv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.mipmap.my_switch_clicked,0);
             }

@@ -86,6 +86,7 @@ public class ModifyAttendanceActivity extends BaseActivity implements DatePicker
     private void initViews() {
         rightTitleTv.setVisibility(View.GONE);
         titleTv.setText("修改考勤");
+        titleTv.setVisibility(View.GONE);
     }
 
     @Override

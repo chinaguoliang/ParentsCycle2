@@ -69,20 +69,20 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
         View headerView = inflater.inflate(R.layout.parents_cycle_personalpage_activity_listview_header_view,null);
         mContentLv.addHeaderView(headerView);
 
-        ArrayList<ParentsCycleInfo> dataList = getTestData(0);
-        mParentsCycleAdapter = new ParentsCycleAdapter(this,dataList);
-        mContentLv.setAdapter(mParentsCycleAdapter);
-        mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
-                }
-            }
-        });
-
-        perfectInfoIv = (ImageView)headerView.findViewById(R.id.parents_cycle_personalpage_activity_perfect_info_iv);
-        perfectInfoIv.setOnClickListener(this);
+//        ArrayList<ParentsCycleInfo> dataList = getTestData(0);
+//        mParentsCycleAdapter = new ParentsCycleAdapter(this,dataList);
+//        mContentLv.setAdapter(mParentsCycleAdapter);
+//        mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if (position != 0) {
+//                    startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
+//                }
+//            }
+//        });
+//
+//        perfectInfoIv = (ImageView)headerView.findViewById(R.id.parents_cycle_personalpage_activity_perfect_info_iv);
+//        perfectInfoIv.setOnClickListener(this);
     }
 
     private ArrayList<ParentsCycleInfo> getTestData(int flag) {

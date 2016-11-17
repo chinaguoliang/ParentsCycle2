@@ -11,13 +11,26 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.ParentsCycleAdapter;
+import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.bean.ParentsCycleInfo;
+import com.jgkj.parentscycle.bean.ParentsCycleListInfo;
+import com.jgkj.parentscycle.bean.ParentsCyclePostsListItem;
 import com.jgkj.parentscycle.customview.HeaderGridView;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.ParentsCyclePostsListItemPaser;
+import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,7 +39,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/7/24.
  */
-public class ParentsCycleActivity extends BaseActivity implements View.OnClickListener{
+public class ParentsCycleActivity extends BaseActivity implements View.OnClickListener,NetListener{
     @Bind(R.id.title_bar_layout_rel)
     RelativeLayout mWrapTitleRel;
 
@@ -56,6 +69,7 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.parents_cycle_activity);
         ButterKnife.bind(this);
         initView();
+        requestParentsCycleList();
     }
 
     private void initView() {
@@ -79,17 +93,6 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
 
         textGrayColor = this.getResources().getColor(R.color.text_gray);
         blackColor = this.getResources().getColor(R.color.black);
-
-        ArrayList<ParentsCycleInfo> dataList = getTestData(0);
-
-        mParentsCycleAdapter = new ParentsCycleAdapter(this,dataList);
-        mContentLv.setAdapter(mParentsCycleAdapter);
-        mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
-            }
-        });
     }
 
     private  ArrayList<ParentsCycleInfo> getTestData(int flag) {
@@ -136,26 +139,26 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         } else if (newestTopicTv == v) {
             resetColor();
             newestTopicTv.setTextColor(blackColor);
-            ArrayList<ParentsCycleInfo> dataList = getTestData(0);
-
-            mParentsCycleAdapter.setDataList(dataList);
-            mParentsCycleAdapter.notifyDataSetChanged();
+//            ArrayList<ParentsCycleInfo> dataList = getTestData(0);
+//
+//            mParentsCycleAdapter.setDataList(dataList);
+//            mParentsCycleAdapter.notifyDataSetChanged();
         } else if (recmommedTv == v) {
             resetColor();
             recmommedTv.setTextColor(blackColor);
-            ArrayList<ParentsCycleInfo> dataList = getTestData(1);
-
-
-            mParentsCycleAdapter.setDataList(dataList);
-            mParentsCycleAdapter.notifyDataSetChanged();
+//            ArrayList<ParentsCycleInfo> dataList = getTestData(1);
+//
+//
+//            mParentsCycleAdapter.setDataList(dataList);
+//            mParentsCycleAdapter.notifyDataSetChanged();
         } else if (myCycleTv == v) {
             resetColor();
             myCycleTv.setTextColor(blackColor);
-            ArrayList<ParentsCycleInfo> dataList = getTestData(2);
-
-
-            mParentsCycleAdapter.setDataList(dataList);
-            mParentsCycleAdapter.notifyDataSetChanged();
+//            ArrayList<ParentsCycleInfo> dataList = getTestData(2);
+//
+//
+//            mParentsCycleAdapter.setDataList(dataList);
+//            mParentsCycleAdapter.notifyDataSetChanged();
         } else if (userIconIv == v) {
             startActivity(new Intent(v.getContext(),ParentsCyclePersonalPageActivity.class));
         }
@@ -170,5 +173,42 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
+    }
+
+
+    //食谱发布
+    public void requestParentsCycleList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows", "10");
+        requestData.put("page","1");
+        ParentsCyclePostsListItemPaser lp = new ParentsCyclePostsListItemPaser();
+        NetRequest.getInstance().request(mQueue, this,
+                BgGlobal.PARENTS_CYCLE_POSTS_LIST, requestData, lp);
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof ParentsCycleListInfo) {
+            if (nbs.isSuccess()) {
+                ParentsCycleListInfo tii = (ParentsCycleListInfo)nbs.obj;
+                initList(tii.getObj());
+            } else {
+                ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+            }
+        }
+    }
+
+    private void initList(List<ParentsCyclePostsListItem> data) {
+
+        mParentsCycleAdapter = new ParentsCycleAdapter(this,data);
+        mContentLv.setAdapter(mParentsCycleAdapter);
+        mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
+            }
+        });
     }
 }
