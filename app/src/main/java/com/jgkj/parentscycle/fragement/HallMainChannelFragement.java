@@ -225,7 +225,9 @@ public class HallMainChannelFragement  extends Fragment implements View.OnClickL
         } else if (v == safeSendTv) {
 
             if (UserInfo.isLogined) {
-                startActivity(new Intent(getContext(), CheckAttendanceActivity.class));
+                Intent intent = new Intent(getContext(),CheckAttendanceActivity.class);
+                intent.putExtra("direction","hall");
+                startActivity(intent);
             } else {
                 ToastUtil.showToast(v.getContext(),"请先登录", Toast.LENGTH_SHORT);
             }

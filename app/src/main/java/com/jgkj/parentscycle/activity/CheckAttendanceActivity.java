@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,12 +77,13 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
     Dialog currDialog;
     int attendanceType = 0;
     Dialog mModifyAttendance;
-
+    private String directionStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.check_attendance_activity);
         ButterKnife.bind(this);
+        directionStr = this.getIntent().getStringExtra("direction");
         initViews();
         requestCheckAttendance();
     }
@@ -107,39 +109,46 @@ public class CheckAttendanceActivity extends BaseActivity implements View.OnClic
 //
 //        });
 
-        expCalendarView.setOnDateClickListener(new OnDateClickListener() {
-            @Override
-            public void onDateClick(View view, DateData dateData) {
-                int year = dateData.getYear();
-                int month = dateData.getMonth();
-                int day = dateData.getDay();
-                LogUtil.d("result","the time:" + year + "-" + month + "-" + day);
 
-                if (currDialog != null && currDialog.isShowing()) {
-                    return;
+
+        if (TextUtils.equals("hall",directionStr)) {
+            mCheckAttendance.setVisibility(View.GONE);
+
+        } else {
+            expCalendarView.setOnDateClickListener(new OnDateClickListener() {
+                @Override
+                public void onDateClick(View view, DateData dateData) {
+                    int year = dateData.getYear();
+                    int month = dateData.getMonth();
+                    int day = dateData.getDay();
+                    LogUtil.d("result","the time:" + year + "-" + month + "-" + day);
+
+                    if (currDialog != null && currDialog.isShowing()) {
+                        return;
+                    }
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CheckAttendanceActivity.this);
+                    builder.setMessage(year + "-" + month + "-" + day);
+                    builder.setTitle("确认要签到吗?");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            requestBabyAskForLeave();
+                        }
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    currDialog = builder.create();
+                    currDialog.show();
+
                 }
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(CheckAttendanceActivity.this);
-                builder.setMessage(year + "-" + month + "-" + day);
-                builder.setTitle("确认要签到吗?");
-                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        requestBabyAskForLeave();
-                    }
-                });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                currDialog = builder.create();
-                currDialog.show();
-
-            }
-        });
+            });
+        }
     }
 
     @OnClick({R.id.baby_document_activity_back_iv,R.id.check_attendance_activity_modify_attendance_btn})
