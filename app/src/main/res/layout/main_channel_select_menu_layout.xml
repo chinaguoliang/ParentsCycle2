@@ -113,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="10dp"
+            android:visibility="invisible"
             android:drawableTop="@mipmap/listen_place"
             android:gravity="center_horizontal"
             android:textSize="@dimen/normal_text_size"
