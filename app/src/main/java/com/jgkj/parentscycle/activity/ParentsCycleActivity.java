@@ -6,29 +6,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.ParentsCycleAdapter;
-import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
-import com.jgkj.parentscycle.bean.ParentsCycleInfo;
 import com.jgkj.parentscycle.bean.ParentsCycleListInfo;
 import com.jgkj.parentscycle.bean.ParentsCyclePostsListItem;
 import com.jgkj.parentscycle.customview.HeaderGridView;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.ParentsCyclePostsListItemPaser;
-import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -95,39 +89,6 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         blackColor = this.getResources().getColor(R.color.black);
     }
 
-    private  ArrayList<ParentsCycleInfo> getTestData(int flag) {
-        ArrayList<ParentsCycleInfo> dataList = new ArrayList<ParentsCycleInfo>();
-        for(int i = 0 ; i < 30 ; i++) {
-            if (i % 2 == 0) {
-                ParentsCycleInfo pci = new ParentsCycleInfo();
-                pci.setName("小明");
-                pci.setTime("1小时前");
-                pci.setContent("这个幼儿园很好");
-                if (flag == 0) {
-                    pci.setImgRes(R.mipmap.baby_school_inside);
-                } else if (flag == 1) {
-                    pci.setImgRes(R.mipmap.school2);
-                } else if (flag == 2) {
-                    pci.setImgRes(R.mipmap.school3);
-                }
-                dataList.add(pci);
-            } else {
-                ParentsCycleInfo pci = new ParentsCycleInfo();
-                pci.setName("小惠");
-                pci.setTime("2小时前");
-                pci.setContent("市内最好的幼儿园");
-                dataList.add(pci);
-                if (flag == 0) {
-                    pci.setImgRes(R.mipmap.baby_school_inside);
-                } else if (flag == 1) {
-                    pci.setImgRes(R.mipmap.school2);
-                } else if (flag == 2) {
-                    pci.setImgRes(R.mipmap.school3);
-                }
-            }
-        }
-        return dataList;
-    }
 
 
     @OnClick({R.id.baby_document_activity_back_iv})
@@ -207,7 +168,7 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
+                startActivity(new Intent(view.getContext(),ParentsCycleDetailActivity.class));
             }
         });
     }

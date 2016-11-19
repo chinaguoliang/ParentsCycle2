@@ -76,7 +76,7 @@ public class ParentsCyclePersonalPageActivity extends BaseActivity implements Vi
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                if (position != 0) {
-//                    startActivity(new Intent(view.getContext(),SchoolDetailActivity.class));
+//                    startActivity(new Intent(view.getContext(),ParentsCycleDetailActivity.class));
 //                }
 //            }
 //        });

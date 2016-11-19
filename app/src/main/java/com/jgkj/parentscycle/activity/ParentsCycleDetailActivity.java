@@ -8,11 +8,22 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.SchoolDetailListviewAdapter;
+import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
+import com.jgkj.parentscycle.bean.CommonListInfo;
+import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.CommonListInfoPaser;
+import com.jgkj.parentscycle.json.ParentsCyclePostsListItemPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -22,7 +33,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/7/24.
  */
-public class SchoolDetailActivity extends BaseActivity implements View.OnClickListener{
+public class ParentsCycleDetailActivity extends BaseActivity implements View.OnClickListener,NetListener{
     @Bind(R.id.title_bar_layout_rel)
     RelativeLayout mWrapTitleRel;
 
@@ -38,8 +49,10 @@ public class SchoolDetailActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.school_detail_activity_lv)
     ListView mListView;
 
-    TextView focusTv;
+    TextView commentCountTv;
 
+    TextView focusTv;
+    int commentCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +67,11 @@ public class SchoolDetailActivity extends BaseActivity implements View.OnClickLi
         LayoutInflater inflater = LayoutInflater.from(this);
         View headerView = inflater.inflate(R.layout.school_detail_activity_listview_headerview,null);
         focusTv = (TextView)headerView.findViewById(R.id.school_detail_activity_listview_header_view_focus_tv);
+        commentCountTv = (TextView)headerView.findViewById(R.id.school_detail_activity_listview_header_view_comment_count_tv);
         focusTv.setOnClickListener(this);
         mListView.addHeaderView(headerView);
-        SchoolDetailListviewAdapter sla = new  SchoolDetailListviewAdapter(this,getTestData());
-        mListView.setAdapter(sla);
+
+        requestCommonList();
     }
 
     private List<String> getTestData() {
@@ -97,5 +111,31 @@ public class SchoolDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void uploadImgFinished(Bitmap bitmap,String uploadedKey) {
 
+    }
+
+    public void requestCommonList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows", "10");
+        requestData.put("page","1");
+        CommonListInfoPaser lp = new CommonListInfoPaser();
+        NetRequest.getInstance().request(mQueue, this,
+                BgGlobal.COMMENTS_LIST, requestData, lp);
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof CommonListInfo) {
+            if (nbs.isSuccess()) {
+                CommonListInfo tii = (CommonListInfo)nbs.obj;
+                commentCount = commentCount + tii.getObj().size();
+                SchoolDetailListviewAdapter sla = new  SchoolDetailListviewAdapter(this,tii.getObj());
+                mListView.setAdapter(sla);
+                commentCountTv.setText("评论" + commentCount + "条");
+            } else {
+                ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+            }
+        }
     }
 }
