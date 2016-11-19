@@ -168,7 +168,12 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(view.getContext(),ParentsCycleDetailActivity.class));
+                ParentsCyclePostsListItem pcpli = (ParentsCyclePostsListItem)mParentsCycleAdapter.getItem(position);
+                Intent intent = new Intent(ParentsCycleActivity.this,ParentsCycleDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("parentsinfo",pcpli);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }

@@ -1,9 +1,11 @@
 package com.jgkj.parentscycle.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by chen on 16/11/17.
  */
-public class ParentsCyclePostsListItem {
+public class ParentsCyclePostsListItem implements Serializable{
     String address = "";
     String createtime = "";
     String dznum = "";

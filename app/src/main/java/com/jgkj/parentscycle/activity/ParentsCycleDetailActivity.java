@@ -14,6 +14,7 @@ import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.SchoolDetailListviewAdapter;
 import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.bean.CommonListInfo;
+import com.jgkj.parentscycle.bean.ParentsCyclePostsListItem;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.json.CommonListInfoPaser;
 import com.jgkj.parentscycle.json.ParentsCyclePostsListItemPaser;
@@ -49,16 +50,22 @@ public class ParentsCycleDetailActivity extends BaseActivity implements View.OnC
     @Bind(R.id.school_detail_activity_lv)
     ListView mListView;
 
+    TextView nameTv;
+    TextView timeTv;
+    TextView contentTv;
+
     TextView commentCountTv;
 
     TextView focusTv;
     int commentCount = 0;
+
+    ParentsCyclePostsListItem mParentsCyclePostsListItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.school_detail_activity);
         ButterKnife.bind(this);
-
+        mParentsCyclePostsListItem = (ParentsCyclePostsListItem)this.getIntent().getExtras().getSerializable("parentsinfo");
         mWrapTitleRel.setBackgroundColor(this.getResources().getColor(R.color.white));
         rightTitleTv.setVisibility(View.GONE);
         titleTv.setText("详情");
@@ -68,6 +75,15 @@ public class ParentsCycleDetailActivity extends BaseActivity implements View.OnC
         View headerView = inflater.inflate(R.layout.school_detail_activity_listview_headerview,null);
         focusTv = (TextView)headerView.findViewById(R.id.school_detail_activity_listview_header_view_focus_tv);
         commentCountTv = (TextView)headerView.findViewById(R.id.school_detail_activity_listview_header_view_comment_count_tv);
+
+        nameTv = (TextView)headerView.findViewById(R.id.school_detail_activity_listview_header_view_name_tv);
+        timeTv = (TextView)headerView.findViewById(R.id.school_detail_activity_listview_header_view_time_tv);
+        contentTv = (TextView)headerView.findViewById(R.id.school_detail_activity_listview_header_view_content_tv);
+
+        nameTv.setText(mParentsCyclePostsListItem.getTopic());
+        timeTv.setText(mParentsCyclePostsListItem.getUpdatetime());
+        contentTv.setText(mParentsCyclePostsListItem.getTopictext());
+
         focusTv.setOnClickListener(this);
         mListView.addHeaderView(headerView);
 
