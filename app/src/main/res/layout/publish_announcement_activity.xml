@@ -20,6 +20,7 @@
         android:background="@color/bg_gray">
 
         <Button
+            android:id="@+id/publish_announcement_activity_publish_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -46,6 +47,7 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/publish_announcement_activity_title_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -112,6 +114,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/publish_announcement_activity_content_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
