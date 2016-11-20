@@ -4,7 +4,7 @@ package com.jgkj.parentscycle.global;
  * Created by chen on 16/7/5.
  */
 public class BgGlobal {
-    public static final String IMG_SERVER_PRE_URL = "http://oalp3wrah.bkt.clouddn.com/";  //七牛服务器地址
+    public static final String IMG_SERVER_PRE_URL = "http://obb849fep.bkt.clouddn.com/";  //七牛服务器地址
     public static final String BASE_URL = "http://123.206.43.102:8080/support/";  //  自己的服务器地址
     public static final String CHEN_BASE_URL = "http://123.206.43.102:9999/";  //远端服务器地址
 //    public static final String CHEN_BASE_URL = "http://192.168.1.102:8080/";  //本地服务器地址
@@ -66,6 +66,9 @@ public class BgGlobal {
     public static final String PARENTS_CYCLE_POSTS_LIST = "parentTopic/parentTopicList"; //父母圈帖子列表查询
     public static final String COMMENTS_LIST = "tocipComment/tocipCommentList";//帖子評論列表
     public static final String COMMENTS_SAVE = "tocipComment/save";//帖子評論列表
-    public static final String QUERY_SCHOOLS_LIST = "schoolMGController/querySchoolList";//获取学校列表
 
+
+    public static final String QUERY_SCHOOLS_LIST = "schoolMGController/querySchoolList";//获取学校列表
+    public static final String GET_BABY_GROWTH_RECORD_LIST = "babyGrowthRecord/babyGrowthRecordList";//宝宝成长记录查询列表
+    public static final String QUERY_SCHOOL_LIST_BY_SCHOOL_NAME = "schoolMGController/querySchoolSerchList"; //学校查询列表
 }

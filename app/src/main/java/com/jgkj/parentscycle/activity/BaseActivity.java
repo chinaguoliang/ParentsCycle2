@@ -381,7 +381,7 @@ public abstract class BaseActivity extends FragmentActivity {
     private void requestGetSevenCowToken() {
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("bucketname", "testjg");
+        requestData.put("bucketname", "jgkjbuket");
         GetSevenCowTokenPaser lp = new GetSevenCowTokenPaser();
         NetRequest.getInstance().request(mQueue, new RequestImgTokenResponse(), BgGlobal.GET_SEVEN_COW_TOKEN, requestData, lp);
     }
