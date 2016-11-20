@@ -15,10 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.PublishGrowthRecordInfo;
 import com.jgkj.parentscycle.bean.PublishParentsCycleInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.ParentsParentsCycleInfoPaser;
+import com.jgkj.parentscycle.json.PublishGrowthRecordInfoPaser;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
@@ -130,7 +132,7 @@ public class PublishGrowthRecordActivity extends BaseActivity implements View.On
 
 
 
-        ResetPasswordPaser lp = new ResetPasswordPaser();
+        PublishGrowthRecordInfoPaser lp = new PublishGrowthRecordInfoPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.PUBLISH_BABY_GROW_RECORD, requestData, lp);
     }
@@ -161,7 +163,7 @@ public class PublishGrowthRecordActivity extends BaseActivity implements View.On
     public void requestResponse(Object obj) {
         hideProgressDialog();
         NetBeanSuper nbs = (NetBeanSuper)obj;
-        if (nbs.obj instanceof PublishParentsCycleInfo) {
+        if (nbs.obj instanceof PublishGrowthRecordInfo) {
             if (nbs.isSuccess()) {
                 finish();
             } else {
