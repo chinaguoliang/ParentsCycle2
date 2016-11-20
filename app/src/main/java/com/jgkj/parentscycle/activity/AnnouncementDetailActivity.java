@@ -1,5 +1,6 @@
 package com.jgkj.parentscycle.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -64,6 +65,9 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
     @Bind(R.id.announcement_detail_activity_top_time_tv)
     TextView topTimeTv;
 
+    @Bind(R.id.announcement_detail_activity_add_comment_tv)
+    TextView addCommentTv;
+
     AnnouncementListItem alii;
     private String annId;
     @Override
@@ -91,13 +95,18 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
 
     @OnClick({R.id.baby_document_activity_back_iv,
             R.id.baby_document_activity_title,
-            R.id.baby_document_right_title_tv
+            R.id.baby_document_right_title_tv,
+            R.id.announcement_detail_activity_add_comment_tv
 
     })
     @Override
     public void onClick(View v) {
         if (v == backIv) {
             finish();
+        } else if (v == addCommentTv) {
+            Intent intent = new Intent(this,CommentsSaveActivity.class);
+            intent.putExtra("topic_id",alii.getAnnounid());
+            startActivity(intent);
         }
     }
 

@@ -74,7 +74,8 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 //            requestAnnouncementDetailList();
 
 //             RequestAccessToken.getAccessToken();
-            testGetAccessToken();
+            //testGetAccessToken();
+            requestQuerySchoolList();
         }
     }
 
@@ -362,6 +363,18 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_DETAIL, requestData, lp);
     }
+
+
+    //获取学校列表
+    private void requestQuerySchoolList() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("rows","10");
+        requestData.put("page","1");
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_SCHOOLS_LIST, requestData, lp);
+    }
+
+
     @Override
     public void requestResponse(Object obj) {
 
