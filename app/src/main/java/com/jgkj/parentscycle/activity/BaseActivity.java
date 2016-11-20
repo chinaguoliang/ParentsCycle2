@@ -260,8 +260,8 @@ public abstract class BaseActivity extends FragmentActivity {
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 100);
-        intent.putExtra("outputY", 100);
+//        intent.putExtra("outputX", 100);
+//        intent.putExtra("outputY", 100);
         intent.putExtra("return-data", true);
         tempFile=new File(avatarTempPath);
         if (!tempFile.exists()) {
