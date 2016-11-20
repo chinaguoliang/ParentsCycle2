@@ -69,6 +69,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/growth_record_activity_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="爸爸"
@@ -83,6 +84,7 @@
                 />
 
             <TextView
+                android:id="@+id/growth_record_activity_content_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="这是一个不错的夜晚"

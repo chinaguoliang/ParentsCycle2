@@ -60,7 +60,7 @@ public class HallFindFragement extends Fragment {
         dataList.add("父母圈");
         dataList.add("成长纪录");
         dataList.add("新加入家长");
-        dataList.add("新加入老师");
+//        dataList.add("新加入老师");
         dataList.add("加入学校");
         dataList.add("咨询");
         //dataList.add("视频时段控制");
