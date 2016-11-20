@@ -300,7 +300,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         requestData.put("bgurl","1");
         SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(System.currentTimeMillis());
-        requestData.put("birthdate",date);
+        requestData.put("bobybirthdate",date);
         SimpleDateFormat sdf1 =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date1 = sdf.format(System.currentTimeMillis());
         requestData.put("bobyenrollmentdate",date1);

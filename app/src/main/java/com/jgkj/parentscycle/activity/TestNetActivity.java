@@ -26,6 +26,7 @@ import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.LogUtil;
 import com.videogo.RequestAccessToken;
 
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -209,28 +210,29 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
                 BgGlobal.PERFECT_PARENTS_INFO, requestData, lp);
     }
 
+
+    String temp = "http://123.206.43.102:8080/support/babyinfo/save?age=12&bgurl=1&bobybirthdate=2016-11-21&iocurl=321&bobyenrollmentdate=2016-11-20&isshool=1&nickname=1&ostmpid=98&sex=%E7%94%B7&username=beibei";
     // 宝宝信息完善
     public void requestPerfectBabyInfo() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("age", "5");
+        requestData.put("age", "12");
         requestData.put("bgurl","1");
         SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(System.currentTimeMillis());
-        requestData.put("birthdate",date);
-        SimpleDateFormat sdf1 =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        requestData.put("bobybirthdate","2016-11-21");
+        SimpleDateFormat sdf1 =   new SimpleDateFormat("yyyy-MM-dd");
         String date1 = sdf.format(System.currentTimeMillis());
-        requestData.put("bobyenrollmentdate",date1);
-        requestData.put("iocurl","1");
+        requestData.put("bobyenrollmentdate","2016-11-21");
+        requestData.put("iocurl","321");
         requestData.put("isshool","1");
 
         requestData.put("nickname","1");
-        requestData.put("ostmpid","66");
-        requestData.put("sex","1");
+        requestData.put("ostmpid","661");
+        requestData.put("sex", "男");
         requestData.put("username","liangliang");
 
         ResetPasswordPaser lp = new ResetPasswordPaser();
-        NetRequest.getInstance().request(mQueue, this,
-                BgGlobal.PERFECT_BYBY_INFO, requestData, lp);
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PERFECT_BYBY_INFO, requestData, lp);
     }
 
 
