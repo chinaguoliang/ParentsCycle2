@@ -85,7 +85,7 @@ public class PublishAnnouncementActivity extends BaseActivity implements View.On
                 return;
             }
 
-            requestAnnouncementCommentSave();
+            requestAnnouncementPublish();
         }
     }
 
@@ -119,24 +119,42 @@ public class PublishAnnouncementActivity extends BaseActivity implements View.On
 
     }
 
-    //公告评论保存
-    private void requestAnnouncementCommentSave() {
-        showProgressDialog();
+//    //公告评论保存
+//    private void requestAnnouncementCommentSave() {
+//        showProgressDialog();
+//        HashMap<String, String> requestData = new HashMap<String, String>();
+//        requestData.put("id", UserInfo.loginInfo.getRole().getId());
+//        requestData.put("title", titleStr);
+//        requestData.put("bannerimg", "1.jpg");
+//        requestData.put("announcement", contentStr);
+//        requestData.put("selectrange", "10");
+//        requestData.put("imags", coverUrl);
+//        requestData.put("voidurls", "6.avi");
+//        requestData.put("ospersion", "10");
+//        requestData.put("criticsid","2");
+//        requestData.put("announid","2");
+//        requestData.put("isdispy","1");
+//        requestData.put("critics","");
+//        PublishAnnouncementInfoPaser lp = new PublishAnnouncementInfoPaser();
+//        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_COMMENT_SAVE, requestData, lp);
+//    }
+
+
+    //公告发布
+    private void requestAnnouncementPublish() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("id", UserInfo.loginInfo.getRole().getId());
         requestData.put("title", titleStr);
-        requestData.put("bannerimg", "1.jpg");
+        requestData.put("bannerimg", "6");
         requestData.put("announcement", contentStr);
-        requestData.put("selectrange", "10");
+        requestData.put("selectrange", "6");
+//        ArrayList<String> result = new ArrayList<String>();
+//        result.add("1.jpg");
+//        result.add("2.jpg");
         requestData.put("imags", coverUrl);
-        requestData.put("voidurls", "6.avi");
-        requestData.put("ospersion", "10");
-        requestData.put("criticsid","2");
-        requestData.put("announid","2");
-        requestData.put("isdispy","1");
-        requestData.put("critics","");
+        requestData.put("voidurls", "6");
+        requestData.put("ospersion", "apple class");
         PublishAnnouncementInfoPaser lp = new PublishAnnouncementInfoPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_COMMENT_SAVE, requestData, lp);
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_PUBLISH, requestData, lp);
     }
 
     @Override
