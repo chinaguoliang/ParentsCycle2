@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <include
+        layout="@layout/title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="50dp"></include>
+
+    <EditText
+        android:id="@+id/comments_save_activity_content_et"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:gravity="top|left"
+        android:layout_margin="10dp"
+        android:hint="请输入评论内容"
+        android:background="@null"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/comments_save_activity_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/main_blue_color"
+            android:layout_alignParentBottom="true"
+            android:text="保存"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+</LinearLayout>
