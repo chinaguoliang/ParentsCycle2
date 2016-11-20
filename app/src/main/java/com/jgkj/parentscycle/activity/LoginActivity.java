@@ -20,6 +20,7 @@ import com.hyphenate.chatuidemo.db.DemoDBManager;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.LoginPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetRequest;
@@ -138,6 +139,8 @@ public class LoginActivity extends BaseActivity implements NetListener,View.OnCl
                 Log.d("result",nbs.getMsg());
                 UserInfo.isLogined = true;
                 UserInfo.loginInfo = loginInfo;
+                ConfigPara.SCHOOL_ID = loginInfo.getSchoolid();
+                LogUtil.d("get school id:","---->" + ConfigPara.SCHOOL_ID);
                 startActivity(new Intent(this,MainActivity.class));
                 finish();
             }

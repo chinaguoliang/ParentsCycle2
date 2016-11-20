@@ -8,11 +8,13 @@ import com.android.volley.toolbox.Volley;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.global.ConfigPara;
 import com.jgkj.parentscycle.json.LoginPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
+import com.jgkj.parentscycle.utils.LogUtil;
 import com.jgkj.parentscycle.utils.PreferenceUtil;
 import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.utils.UtilTools;
@@ -71,6 +73,8 @@ public class SplashActivity extends Activity implements NetListener {
                 Log.d("result",nbs.getMsg());
                 UserInfo.isLogined = true;
                 UserInfo.loginInfo = loginInfo;
+                ConfigPara.SCHOOL_ID = loginInfo.getSchoolid();
+                LogUtil.d("get school id:","---->" + ConfigPara.SCHOOL_ID);
                 startActivity(new Intent(this,MainActivity.class));
                 finish();
             }

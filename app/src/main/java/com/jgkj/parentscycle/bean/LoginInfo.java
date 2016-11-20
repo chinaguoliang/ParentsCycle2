@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class LoginInfo {
     LoginInfoObj info;
     LoginRoleObj role;
-
+    String schoolid = "-1"; //服务器返回－1表示没有所属学校
     public LoginInfoObj getInfo() {
         if (info == null) {
             return new LoginInfoObj();
@@ -33,5 +33,13 @@ public class LoginInfo {
 
     public void setRole(LoginRoleObj role) {
         this.role = role;
+    }
+
+    public String getSchoolid() {
+        return schoolid;
+    }
+
+    public void setSchoolid(String schoolid) {
+        this.schoolid = schoolid;
     }
 }
