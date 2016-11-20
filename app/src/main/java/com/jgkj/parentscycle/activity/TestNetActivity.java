@@ -77,7 +77,8 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //testGetAccessToken();
             //requestQuerySchoolList();
             //requestBabyGrowthList();
-            requestSearchSchoolList();
+            //requestSearchSchoolList();
+            requestPerfectBabyInfo();
         }
     }
 

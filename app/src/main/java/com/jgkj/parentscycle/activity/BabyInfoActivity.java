@@ -6,24 +6,36 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.BabyDocumentListInfoItem;
+import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
+import com.jgkj.parentscycle.bean.PerfectBabyInfo;
 import com.jgkj.parentscycle.bean.TeacherInfoListInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.PerfectBabyInfoPaser;
+import com.jgkj.parentscycle.json.ResetPasswordPaser;
+import com.jgkj.parentscycle.net.NetBeanSuper;
+import com.jgkj.parentscycle.net.NetListener;
+import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.AsyncImageUtil;
 import com.jgkj.parentscycle.utils.CircularImage;
+import com.jgkj.parentscycle.utils.ToastUtil;
 import com.jgkj.parentscycle.widget.ListViewForScrollView;
 import com.jgkj.parentscycle.widget.SexSelectDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,7 +46,7 @@ import butterknife.OnClick;
 /**
  * Created by chen on 16/8/30.
  */
-public class BabyInfoActivity extends BaseActivity implements View.OnClickListener,SexSelectDialog.SexSlectDialogFinish,DatePickerDialog.OnDateSetListener{
+public class BabyInfoActivity extends BaseActivity implements View.OnClickListener,SexSelectDialog.SexSlectDialogFinish,DatePickerDialog.OnDateSetListener,NetListener{
     @Bind(R.id.title_bar_layout_rel)
     View titleBg;
 
@@ -132,6 +144,15 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.baby_info_activity_leave_school_rel)
     RelativeLayout leaveSchoolRel;
 
+    @Bind(R.id.baby_info_activity_save_btn)
+    Button saveBtn;
+
+    private String nameStr;
+    private String ageStr;
+    private String sexStr;
+    private String birthdayStr;
+
+
     String headUrl = "";
 
     int selSex = -1;
@@ -167,7 +188,8 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
             R.id.baby_info_activity_transfer_class_rel,
             R.id.baby_info_activity_leave_school_rel,
             R.id.baby_info_activity_to_school_time_rel,
-            R.id.baby_info_activity_user_icon_iv
+            R.id.baby_info_activity_user_icon_iv,
+            R.id.baby_info_activity_save_btn
 
 
     })
@@ -189,7 +211,40 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
             showDateDialog(2);
         } else if (v == iconIv) {
             showChangePhotoDialog();
+        } else if (v == saveBtn) {
+            if (!checkInput()) {
+                return;
+            }
+            requestPerfectBabyInfo();
         }
+    }
+
+    private boolean checkInput() {
+        nameStr = nameet.getText().toString();
+        if (TextUtils.isEmpty(nameStr)) {
+            ToastUtil.showToast(this,"请输入姓名",Toast.LENGTH_SHORT);
+            return false;
+        }
+
+        ageStr = ageEt.getText().toString();
+        if (TextUtils.isEmpty(ageStr)) {
+            ToastUtil.showToast(this,"请输入年龄",Toast.LENGTH_SHORT);
+            return false;
+        }
+
+        sexStr = sexTv.getText().toString();
+        if (TextUtils.isEmpty(sexStr)) {
+            ToastUtil.showToast(this,"请输入性别",Toast.LENGTH_SHORT);
+            return false;
+        }
+
+        birthdayStr = birthdayTv.getText().toString();
+        if (TextUtils.isEmpty(birthdayStr)) {
+            ToastUtil.showToast(this,"请输入生日",Toast.LENGTH_SHORT);
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -234,5 +289,44 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         AsyncImageUtil.asyncLoadImage(iconIv,
                 headUrl,
                 R.mipmap.user_default_icon, true, false);
+    }
+
+
+    // 宝宝信息完善
+    public void requestPerfectBabyInfo() {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("age", ageStr);
+        requestData.put("bgurl","1");
+        SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(System.currentTimeMillis());
+        requestData.put("birthdate",date);
+        SimpleDateFormat sdf1 =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date1 = sdf.format(System.currentTimeMillis());
+        requestData.put("bobyenrollmentdate",date1);
+        requestData.put("iocurl","1");
+        requestData.put("isshool","1");
+
+        requestData.put("nickname","1");
+        requestData.put("ostmpid","66");
+        requestData.put("sex",sexStr);
+        requestData.put("username",nameStr);
+
+        PerfectBabyInfoPaser lp = new PerfectBabyInfoPaser();
+        NetRequest.getInstance().request(mQueue, this,
+                BgGlobal.PERFECT_BYBY_INFO, requestData, lp);
+    }
+
+    @Override
+    public void requestResponse(Object obj) {
+        hideProgressDialog();
+        NetBeanSuper nbs = (NetBeanSuper)obj;
+        if (nbs.obj instanceof PerfectBabyInfo) {
+            if (nbs.isSuccess()) {
+                finish();
+            } else {
+            }
+            ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
+        }
     }
 }
