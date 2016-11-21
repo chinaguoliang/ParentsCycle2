@@ -49,6 +49,7 @@ import com.videogo.openapi.bean.EZCameraInfo;
 import com.videogo.remoteplayback.list.PlayBackListActivity;
 import com.videogo.remoteplayback.list.RemoteListContant;
 import com.videogo.scan.main.CaptureActivity;
+import com.videogo.ui.devicelist.DeviceDiscoverActivity;
 import com.videogo.ui.discovery.SquareColumnActivity;
 import com.videogo.ui.message.EZMessageActivity2;
 import com.videogo.ui.realplay.EZRealPlayActivity;
@@ -476,22 +477,23 @@ public class EZCameraListActivity extends Activity implements OnClickListener  {
      * @since V1.0
      */
     private void popLogoutDialog() {
-        Builder exitDialog = new Builder(EZCameraListActivity.this);
-        exitDialog.setTitle(com.videogo.open.R.string.exit);
-        exitDialog.setMessage(com.videogo.open.R.string.exit_tip);
-        exitDialog.setPositiveButton(com.videogo.open.R.string.confirm, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                new LogoutTask().execute();
-            }
-        });
-        exitDialog.setNegativeButton(com.videogo.open.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        exitDialog.show();
+        startActivity(new Intent(this,DeviceDiscoverActivity.class));
+//        Builder exitDialog = new Builder(EZCameraListActivity.this);
+//        exitDialog.setTitle(com.videogo.open.R.string.exit);
+//        exitDialog.setMessage(com.videogo.open.R.string.exit_tip);
+//        exitDialog.setPositiveButton(com.videogo.open.R.string.confirm, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                new LogoutTask().execute();
+//            }
+//        });
+//        exitDialog.setNegativeButton(com.videogo.open.R.string.cancel, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//        exitDialog.show();
     }
     
     private class LogoutTask extends AsyncTask<Void, Void, Void> {
