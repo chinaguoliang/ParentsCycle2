@@ -283,6 +283,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
                 CustomVideoData.videoData = dataMap;
                 UtilTools.toVideoModule(this, Volley.newRequestQueue(this));
             } else {
+                UtilTools.toVideoModule(this, Volley.newRequestQueue(this));
                 ToastUtil.showToast(this, nbs.getMsg(), Toast.LENGTH_SHORT);
             }
         }

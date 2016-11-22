@@ -7,5 +7,5 @@ import java.util.List;
  * Created by chen on 16/10/25.
  */
 public class CustomVideoData {
-    public static HashMap<String,String> videoData;
+    public static HashMap<String,String> videoData = new HashMap<String,String>();
 }
