@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.fragement;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,9 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
     @Bind(R.id.baby_document_right_title_tv)
     TextView rightTitleTv;
 
+    @Bind(R.id.title_bar_layout_rel)
+    RelativeLayout titleBgRel;
+
     TextView  userNameTv;
     TextView  phoneNumTv;
     ImageView userIconIv;
@@ -70,7 +75,7 @@ public class HallMeFragement extends Fragment implements View.OnClickListener{
         titleTv.setText("个人中心");
         rightTitleTv.setText("    ");
         rightTitleTv.setPadding(30,10,30,10);
-
+        titleBgRel.setBackgroundColor(this.getResources().getColor(R.color.transparent));
         mMyItemContentLv = (ListViewForScrollView)view.findViewById(R.id.hall_mine_fragment_lv);
         View headerView = inflater.inflate(R.layout.hall_mine_fragment_lv_header_layout,null,false);
         mMyItemContentLv.addHeaderView(headerView, null, false);
