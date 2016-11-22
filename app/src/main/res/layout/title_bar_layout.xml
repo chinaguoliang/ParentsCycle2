@@ -12,12 +12,10 @@
         <ImageView
             android:id="@+id/baby_document_activity_back_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="15dp"
             android:paddingRight="30dp"
-            android:paddingTop="10dp"
             android:src="@mipmap/login_back" />
 
         <TextView
@@ -44,12 +42,13 @@
         <ImageView
             android:id="@+id/course_activity_filter_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:src="@mipmap/course_had_filter"
             android:layout_alignParentRight="true"
             android:visibility="gone"
+            android:paddingLeft="50dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
+            android:paddingRight="15dp"
             />
     </RelativeLayout>
 
