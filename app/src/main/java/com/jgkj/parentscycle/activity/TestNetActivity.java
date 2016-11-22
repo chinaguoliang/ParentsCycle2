@@ -24,6 +24,7 @@ import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.LogUtil;
+import com.jgkj.parentscycle.utils.UtilTools;
 import com.videogo.RequestAccessToken;
 
 import java.net.URLEncoder;
@@ -49,6 +50,7 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_net_activity);
+        LogUtil.d("result","-------------->" + UtilTools.dip2px(this,1));;
         ButterKnife.bind(this);
     }
 

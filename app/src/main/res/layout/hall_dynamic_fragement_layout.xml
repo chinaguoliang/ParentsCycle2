@@ -68,49 +68,61 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/hall_main_channel_fragment_layout_menu_2_rel"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/hall_main_channel_fragment_layout_menu_2_rel"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp"
+            android:background="#e6e5ff"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
 
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="#e6e5ff"
-        >
+            <TextView
+                android:id="@+id/hall_dynamic_frgement_list_item_school_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="学校"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="#7974e4"
+                />
 
-        <TextView
-            android:id="@+id/hall_dynamic_frgement_list_item_school_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="学校"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="30dp"
-            android:textSize="15dp"
-            android:textColor="#7974e4"
-            />
+            <TextView
+                android:id="@+id/hall_dynamic_frgement_list_item_class_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="班级"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_weight="1"
+                android:textColor="#9a98c1"
+                />
 
-        <TextView
-            android:id="@+id/hall_dynamic_frgement_list_item_class_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="班级"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:textSize="15dp"
-            android:textColor="#9a98c1"
-            />
+            <TextView
+                android:id="@+id/hall_dynamic_frgement_list_item_tip_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:text="小贴士"
+                android:layout_weight="1"
+                android:textColor="#9a98c1"
+                android:layout_marginRight="30dp"
+                />
 
-        <TextView
-            android:id="@+id/hall_dynamic_frgement_list_item_tip_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textSize="15dp"
-            android:text="小贴士"
-            android:textColor="#9a98c1"
-            android:layout_marginRight="30dp"
-            />
+        </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -118,16 +130,19 @@
             android:src="@mipmap/search_icon"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="50dp"
             />
     </RelativeLayout>
+
 
     <ListView
         android:id="@+id/hall_dynamic_frgement_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:dividerHeight="0dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="15dp"
+        android:dividerHeight="5dp"
         android:listSelector="@android:color/transparent"
         android:divider="#00000000"
         >
