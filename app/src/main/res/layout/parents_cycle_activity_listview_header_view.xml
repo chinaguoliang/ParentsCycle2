@@ -23,22 +23,23 @@
             android:id="@+id/parents_cycle_activity_listview_header_view_user_icon_iv"
             android:layout_width="@dimen/avatar_big_size"
             android:layout_height="@dimen/avatar_big_size"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="25dp"
             android:src="@mipmap/user_default_icon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="李方"
+            android:textSize="@dimen/mid_text_size"
             android:textColor="@color/black"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="15dp"
+            android:paddingBottom="19dp"
+            android:layout_marginTop="5dp"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -47,6 +48,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:textColor="@color/text_gray"
+                android:textSize="@dimen/normal_text_size"
                 android:paddingRight="15dp"
                 />
 
@@ -59,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="@dimen/normal_text_size"
                 android:textColor="@color/text_gray"
                 android:text="粉丝2548"
                 android:paddingLeft="15dp"
@@ -80,8 +83,9 @@
             android:textColor="@color/black"
             android:text="最新话题"
             android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textSize="@dimen/big_text_size"
             android:layout_weight="1"
             />
         <TextView
@@ -89,9 +93,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:text="推荐达人"
+            android:textSize="@dimen/big_text_size"
             android:gravity="center"
             android:layout_weight="1"
             />
@@ -100,8 +105,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/text_gray"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textSize="@dimen/big_text_size"
             android:text="我的圈子"
             android:gravity="center"
             android:layout_weight="1"
