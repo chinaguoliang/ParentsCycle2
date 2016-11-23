@@ -87,6 +87,8 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
 
         textGrayColor = this.getResources().getColor(R.color.text_gray);
         blackColor = this.getResources().getColor(R.color.black);
+        mWrapTitleRel.setBackgroundColor(this.getResources().getColor(R.color.transparent));
+        titleTv.setTextColor(this.getResources().getColor(R.color.white));
     }
 
 
