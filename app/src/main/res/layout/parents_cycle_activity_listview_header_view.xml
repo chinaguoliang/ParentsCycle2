@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/parents_cycle_icon" />
+        android:src="@mipmap/parents_cycle_top_bg" />
 
     <LinearLayout
         android:background="@color/white"
@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/parents_cycle_activity_listview_header_view_user_icon_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/avatar_big_size"
+            android:layout_height="@dimen/avatar_big_size"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:src="@mipmap/user_default_icon" />
