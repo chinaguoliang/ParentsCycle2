@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -65,6 +66,7 @@ public class BabyDocumentAdapter extends BaseAdapter {
             holder.chatTv = (TextView)convertView.findViewById(R.id.baby_document_activity_itme_chat_tv);
             holder.growthRecordTv = (TextView)convertView.findViewById(R.id.baby_document_activity_growth_record_tv);
             holder.babyDetailTv = (TextView)convertView.findViewById(R.id.baby_document_activity_baby_detail_tv);
+            holder.arrowIv = (ImageView)convertView.findViewById(R.id.baby_document_lv_item_arrow_iv);
         } else {
             holder = (MineViewHolder) convertView.getTag();
         }
@@ -73,8 +75,10 @@ public class BabyDocumentAdapter extends BaseAdapter {
         holder.babyNameTv.setText(bdlii.getUsername());
         if (showSecondPosition == position) {
             holder.secondMenu.setVisibility(View.VISIBLE);
+            holder.arrowIv.setImageResource(R.mipmap.down_arrow);
         } else {
             holder.secondMenu.setVisibility(View.GONE);
+            holder.arrowIv.setImageResource(R.mipmap.right_arrow);
         }
 
         holder.askForLeaveTv.setOnClickListener(new View.OnClickListener(){
@@ -123,5 +127,6 @@ public class BabyDocumentAdapter extends BaseAdapter {
         TextView chatTv;
         TextView growthRecordTv;
         TextView babyDetailTv;
+        ImageView arrowIv;
     }
 }
