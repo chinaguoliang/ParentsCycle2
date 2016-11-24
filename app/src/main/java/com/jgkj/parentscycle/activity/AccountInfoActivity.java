@@ -115,7 +115,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                 } else if (position == 6) {
                     //帐号信息
                     startActivity(new Intent(AccountInfoActivity.this,AccountSafeActivity.class));
-                } else if (position == 2) {
+                } else if (position == 3) {
                     SexSelectDialog.showSexSelectDialog(AccountInfoActivity.this,AccountInfoActivity.this);
                 } else if (position == 9) {
                     //选择班级
@@ -236,6 +236,8 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         ArrayList<String> data = new ArrayList<String>();
         data.add("昵称_" + tii.getNickname());
         data.add("姓名_" + tii.getTeachername());
+        data.add("地区_" + "");
+
         if (TextUtils.equals(tii.getTeachersex(),"0")) {
             data.add("性别_女");
         } else if (TextUtils.equals(tii.getTeachersex(),"1")) {
