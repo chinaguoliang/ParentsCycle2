@@ -152,7 +152,12 @@ public class PublishAnnouncementActivity extends BaseActivity implements View.On
 //        result.add("2.jpg");
         requestData.put("imags", coverUrl);
         requestData.put("voidurls", "6");
-        requestData.put("ospersion", "apple class");
+        if (TextUtils.isEmpty(UserInfo.loginInfo.getRole().getName())) {
+            requestData.put("ospersion", "匿名");
+        } else {
+            requestData.put("ospersion", UserInfo.loginInfo.getRole().getName());
+        }
+
         PublishAnnouncementInfoPaser lp = new PublishAnnouncementInfoPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_PUBLISH, requestData, lp);
     }

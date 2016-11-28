@@ -300,7 +300,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,N
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("id", UserInfo.loginInfo.getRole().getId());
         requestData.put("page", "1");
-        requestData.put("rows", "10");
+        requestData.put("rows", "30");
         AnnouncementListPaser lp = new AnnouncementListPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_LIST, requestData, lp);
     }

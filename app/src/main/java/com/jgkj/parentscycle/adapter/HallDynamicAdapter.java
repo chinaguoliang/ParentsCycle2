@@ -57,15 +57,17 @@ public class HallDynamicAdapter extends BaseAdapter{
             holder.iconIv = (ImageView)convertView.findViewById(R.id.hall_dynamic_frgement_list_item_user_icon_iv);
             holder.bigIconIv = (ImageView)convertView.findViewById(R.id.hall_dynamic_frgement_list_item_bg_icon_iv);
             holder.contentTv = (TextView)convertView.findViewById(R.id.hall_dynamic_frgement_list_item_content_tv);
+            holder.titleTv = (TextView)convertView.findViewById(R.id.hall_dynamic_frgement_list_item_title_tv);
         } else {
             holder = (HallMainChannelViewHolder) convertView.getTag();
         }
 
 
         AnnouncementListItem hallDynamicInfo = contentData.get(position);
-        holder.nameTv.setText(hallDynamicInfo.getTitle());
+        holder.nameTv.setText(hallDynamicInfo.getOspersion());
         holder.timeTv.setText(hallDynamicInfo.getCreatetime());
         holder.contentTv.setText(hallDynamicInfo.getAnnouncement());
+        holder.titleTv.setText(hallDynamicInfo.getTitle());
         return convertView;
     }
 
@@ -75,6 +77,6 @@ public class HallDynamicAdapter extends BaseAdapter{
         TextView contentTv;
         ImageView iconIv;
         ImageView bigIconIv;
-
+        TextView titleTv;
     }
 }
