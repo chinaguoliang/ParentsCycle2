@@ -142,7 +142,7 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
     //食谱发布
     public void requestParentsCycleList() {
         HashMap<String, String> requestData = new HashMap<String, String>();
-        requestData.put("rows", "10");
+        requestData.put("rows", "30");
         requestData.put("page","1");
         ParentsCyclePostsListItemPaser lp = new ParentsCyclePostsListItemPaser();
         NetRequest.getInstance().request(mQueue, this,
@@ -170,7 +170,7 @@ public class ParentsCycleActivity extends BaseActivity implements View.OnClickLi
         mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ParentsCyclePostsListItem pcpli = (ParentsCyclePostsListItem)mParentsCycleAdapter.getItem(position);
+                ParentsCyclePostsListItem pcpli = (ParentsCyclePostsListItem)mParentsCycleAdapter.getItem(position - 2);
                 Intent intent = new Intent(ParentsCycleActivity.this,ParentsCycleDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("parentsinfo",pcpli);

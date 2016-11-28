@@ -122,8 +122,8 @@ public class PublishParentsCycleActivity extends BaseActivity implements View.On
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("schoolid", ConfigPara.SCHOOL_ID);
-        requestData.put("address","空");
-        requestData.put("topic","空");
+        requestData.put("address","");
+        requestData.put("topic","标题");
         requestData.put("topictext",sendContentStr);
         requestData.put("topicimg",imgUrls);
         requestData.put("topictype","1");

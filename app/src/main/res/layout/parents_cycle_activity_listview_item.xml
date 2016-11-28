@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:src="@mipmap/parents_cycle_school"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
 
             />
 

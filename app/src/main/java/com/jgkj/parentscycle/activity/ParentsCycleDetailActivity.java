@@ -90,17 +90,7 @@ public class ParentsCycleDetailActivity extends BaseActivity implements View.OnC
         requestCommonList();
     }
 
-    private List<String> getTestData() {
-        ArrayList <String> data = new ArrayList<String>();
-        for (int i = 0 ; i < 30 ; i++) {
-            if (i % 2 == 0) {
-                data.add("李雷");
-            } else {
-                data.add("韩梅梅");
-            }
-        }
-        return data;
-    }
+
 
     @OnClick({R.id.baby_document_activity_back_iv})
     @Override
@@ -133,6 +123,7 @@ public class ParentsCycleDetailActivity extends BaseActivity implements View.OnC
         HashMap<String, String> requestData = new HashMap<String, String>();
         requestData.put("rows", "10");
         requestData.put("page","1");
+        requestData.put("tocipid",mParentsCyclePostsListItem.getId());
         CommonListInfoPaser lp = new CommonListInfoPaser();
         NetRequest.getInstance().request(mQueue, this,
                 BgGlobal.COMMENTS_LIST, requestData, lp);

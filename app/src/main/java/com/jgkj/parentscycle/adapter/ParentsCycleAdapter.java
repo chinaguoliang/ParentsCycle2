@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.ParentsCycleInfo;
 import com.jgkj.parentscycle.bean.ParentsCyclePostsListItem;
+import com.jgkj.parentscycle.utils.AsyncImageUtil;
 
 import java.util.List;
 
@@ -67,6 +68,9 @@ public class ParentsCycleAdapter extends BaseAdapter{
         holder.timeTv.setText(pci.getCreatetime());
         holder.conentTv.setText(pci.getTopictext());
         holder.schoolIv.setImageResource(R.mipmap.school2);
+        AsyncImageUtil.asyncLoadImage( holder.schoolIv,
+                pci.getTopicimg(),
+                0, false, false);
         return convertView;
     }
 
