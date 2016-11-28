@@ -11,12 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
+import com.jgkj.parentscycle.bean.AnnouncementCommentSaveInfo;
 import com.jgkj.parentscycle.bean.ClassedAndTeachersListInfo;
 import com.jgkj.parentscycle.bean.CommentSaveInfo;
 import com.jgkj.parentscycle.bean.CommonListInfo;
 import com.jgkj.parentscycle.bean.LoginInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
+import com.jgkj.parentscycle.json.AnnouncementCommentSaveInfoPaser;
 import com.jgkj.parentscycle.json.CommentSaveInfoPaser;
 import com.jgkj.parentscycle.json.PerfectInfoPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
@@ -24,7 +26,9 @@ import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
 import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ToastUtil;
+import com.jgkj.parentscycle.utils.UtilTools;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -95,18 +99,32 @@ public class CommentsSaveActivity extends BaseActivity implements View.OnClickLi
     private void requestSaveComments() {
         showProgressDialog();
         HashMap <String,String> requestData = new HashMap<String,String>();
+
+        requestData.put("id", UserInfo.loginInfo.getRole().getId());
+        requestData.put("title", "");
+        requestData.put("bannerimg", "1.jpg");
+        requestData.put("announcement", "bullshit");
+        requestData.put("selectrange", "10");
+        requestData.put("imags", "");
+        requestData.put("voidurls", "6.avi");
+        requestData.put("ospersion", "10");
+        requestData.put("criticsid","2");
+        requestData.put("announid",topicId);
+        requestData.put("isdispy","1");
+        requestData.put("critics",contentStr);
+
         requestData.put("tocipid", topicId);
         requestData.put("criticsid", UserInfo.loginInfo.getRole().getId());
         requestData.put("criticstext", contentStr);
-        if (TextUtils.isEmpty(UserInfo.loginInfo.getRole().getName())) {
-            requestData.put("critics","0");
-        } else {
-            requestData.put("critics",UserInfo.loginInfo.getRole().getName());
-        }
+//        if (TextUtils.isEmpty(UserInfo.loginInfo.getRole().getName())) {
+        requestData.put("critics",contentStr);
+//        } else {
+//            requestData.put("critics",UserInfo.loginInfo.getRole().getName());
+//        }
 
         requestData.put("isdispy","1");
-        CommentSaveInfoPaser lp = new CommentSaveInfoPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.COMMENTS_SAVE, requestData, lp);
+        AnnouncementCommentSaveInfoPaser lp = new AnnouncementCommentSaveInfoPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.ANNOUNCEMENT_COMMENT_SAVE, requestData, lp);
     }
 
 
@@ -114,8 +132,9 @@ public class CommentsSaveActivity extends BaseActivity implements View.OnClickLi
     public void requestResponse(Object obj) {
         hideProgressDialog();
         NetBeanSuper nbs = (NetBeanSuper)obj;
-        if (nbs.obj instanceof CommentSaveInfo) {
+        if (nbs.obj instanceof AnnouncementCommentSaveInfo) {
             if (nbs.isSuccess()) {
+                setResult(10);
                 finish();
             } else {
 

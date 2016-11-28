@@ -106,7 +106,7 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
         } else if (v == addCommentTv) {
             Intent intent = new Intent(this,CommentsSaveActivity.class);
             intent.putExtra("topic_id",alii.getAnnounid());
-            startActivity(intent);
+            startActivityForResult(intent,10);
         }
     }
 
@@ -146,4 +146,13 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
         commentCountTv.setText("全部评论(" + dataList.size() + ")");
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 10) {
+            startActivity(this.getIntent());
+            //评论成功
+            finish();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
