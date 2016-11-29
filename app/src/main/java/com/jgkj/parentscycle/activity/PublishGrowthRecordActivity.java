@@ -25,6 +25,7 @@ import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
+import com.jgkj.parentscycle.user.UserInfo;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
 import java.text.SimpleDateFormat;
@@ -120,15 +121,22 @@ public class PublishGrowthRecordActivity extends BaseActivity implements View.On
 
     // 宝宝成长记录发布
     public void requestPublishBabyGrowRecord() {
+        showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(System.currentTimeMillis());
-        requestData.put("babyid", "80");
-        requestData.put("publisher","123");
-        requestData.put("publishername","1");
-        requestData.put("publishertext","1");
+        requestData.put("babyid", "11");
+        requestData.put("publisher",UserInfo.loginInfo.getRole().getId());
+        String name = UserInfo.loginInfo.getRole().getName();
+        if (TextUtils.isEmpty(name)) {
+            requestData.put("publishername", "匿名");
+        } else {
+            requestData.put("publishername", name);
+        }
+
+        requestData.put("publishertext",sendContentStr);
         requestData.put("bobypublisherdate",date);
-        requestData.put("publisherimge","321");
+        requestData.put("publisherimge",imgUrls);
 
 
 

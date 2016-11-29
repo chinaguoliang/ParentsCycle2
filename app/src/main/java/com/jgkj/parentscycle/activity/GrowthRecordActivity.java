@@ -66,21 +66,11 @@ public class GrowthRecordActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView() {
-
         rightTitleTv.setVisibility(View.GONE);
         titleTv.setText("成长记录");
         titleBg.setBackgroundColor(Color.TRANSPARENT);
     }
 
-    private ArrayList<String> initTestData() {
-        ArrayList<String> temp = new ArrayList<String>();
-        temp.add("今天");
-        temp.add("昨天");
-        temp.add("明天");
-        temp.add("后天");
-        temp.add("今天");
-        return temp;
-    }
 
     @OnClick({R.id.baby_document_activity_back_iv,R.id.growth_record_activity_send_record_iv})
     @Override
