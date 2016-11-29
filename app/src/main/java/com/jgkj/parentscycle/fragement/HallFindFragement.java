@@ -76,13 +76,15 @@ public class HallFindFragement extends Fragment {
                     startActivity(new Intent(view.getContext(),GrowthRecordActivity.class));
                 } else if (position == 2) {
                     startActivity(new Intent(view.getContext(),MakeClassAddPersonActivity.class));
-                } else if (position == 3) {
-                    startActivity(new Intent(view.getContext(),MakeClassAddPersonActivity.class));
-                } else if (position == 4) {
+                }
+//                else if (position == 3) {
+//                    startActivity(new Intent(view.getContext(),MakeClassAddPersonActivity.class));
+//                }
+                else if (position == 3) {
                     startActivity(new Intent(view.getContext(),SearchSchoolActivity.class));
-                } else if (position == 5) {
+                } else if (position == 4) {
                     UtilTools.toChatModule(getContext());
-                } else if (position == 6) {
+                } else if (position == 5) {
                     startActivity(new Intent(view.getContext(),SelectClassActivity.class));
                 }
 
