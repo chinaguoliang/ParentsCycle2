@@ -98,12 +98,12 @@ public class BabyShowActivity extends BaseActivity implements View.OnClickListen
 //                .findViewById(R.id.change_photo_camera_btn);
 //        Button albumBtn = (Button) contentView
 //                .findViewById(R.id.change_photo_album_btn);
-//        Button cancelBtn = (Button) contentView
+//        Button searchBtn = (Button) contentView
 //                .findViewById(R.id.change_photo_cancel_btn);
 //
 //        cameraBtn.setOnClickListener(changePhotoListener);
 //        albumBtn.setOnClickListener(changePhotoListener);
-//        cancelBtn.setOnClickListener(changePhotoListener);
+//        searchBtn.setOnClickListener(changePhotoListener);
 //
 //        mChangePhotoDialog.setContentView(contentView);
 //        mChangePhotoDialog.setCanceledOnTouchOutside(true);

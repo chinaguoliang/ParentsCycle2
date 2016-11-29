@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.ClassesAndTeachersListItemInfo;
+import com.jgkj.parentscycle.bean.SearchSchoolItemInfo;
 import com.jgkj.parentscycle.utils.UtilTools;
 
 import java.util.List;
@@ -22,12 +23,12 @@ import java.util.Map;
 public class AddSchoolExpanLvAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;
-    private List<String> groupTitle;
+    private List<SearchSchoolItemInfo> groupTitle;
     //子项是一个map，key是group的id，每一个group对应一个ChildItem的list
     private Map<Integer, List<ClassesAndTeachersListItemInfo>> childMap;
     private Button groupButton;//group上的按钮
 
-    public AddSchoolExpanLvAdapter(Context context, List<String> groupTitle, Map<Integer, List<ClassesAndTeachersListItemInfo>> childMap) {
+    public AddSchoolExpanLvAdapter(Context context, List<SearchSchoolItemInfo> groupTitle, Map<Integer, List<ClassesAndTeachersListItemInfo>> childMap) {
         this.mContext = context;
         this.groupTitle = groupTitle;
         this.childMap = childMap;
@@ -74,6 +75,10 @@ public class AddSchoolExpanLvAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         // TODO Auto-generated method stub
+        if (childMap.get(groupPosition) == null) {
+            return 0;
+        }
+
         return childMap.get(groupPosition).size();
     }
 
@@ -120,10 +125,10 @@ public class AddSchoolExpanLvAdapter extends BaseExpandableListAdapter {
         if (isExpanded) {
             groupHolder.groupImg.setImageResource(R.mipmap.down_arrow);
         }else {
-            groupHolder.groupImg.setImageResource(R.mipmap.right_arraw);
+            groupHolder.groupImg.setImageResource(R.mipmap.right_arrow);
         }
 
-        groupHolder.groupText.setText(groupTitle.get(groupPosition));
+        groupHolder.groupText.setText(groupTitle.get(groupPosition).getSchoolname());
 
 //        groupButton = (Button) convertView.findViewById(R.id.btn_group_function);
 //        groupButton.setOnClickListener(this);
