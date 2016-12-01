@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
+import com.jgkj.parentscycle.bean.ParentsListItemInfo;
 import com.jgkj.parentscycle.bean.TeachersListItemInfo;
 
 import java.util.HashMap;
@@ -22,10 +23,10 @@ import java.util.Map;
  * Created by chen on 16/8/3.
  */
 public class MakeClassAddPersonAdapter extends BaseAdapter {
-    private  List<TeachersListItemInfo>  contentData;
+    private  List<ParentsListItemInfo>  contentData;
     private HashMap<Integer,Integer> selectedData = new HashMap<Integer,Integer>();
     private Context mContext;
-    public MakeClassAddPersonAdapter(Context context,  List<TeachersListItemInfo>  data){
+    public MakeClassAddPersonAdapter(Context context,  List<ParentsListItemInfo>  data){
         contentData = data;
         mContext = context;
     }
@@ -52,8 +53,8 @@ public class MakeClassAddPersonAdapter extends BaseAdapter {
     }
 
     public void setSelectPosition(int position) {
-        TeachersListItemInfo makeClassAddPersonInfo= contentData.get(position);
-
+        ParentsListItemInfo makeClassAddPersonInfo= contentData.get(position);
+        selectedData.clear();
         if (selectedData.get(position) == null || selectedData.get(position) == 0) {
             selectedData.put(position,Integer.parseInt(makeClassAddPersonInfo.getTmpinfoid()));
         } else {
@@ -93,8 +94,8 @@ public class MakeClassAddPersonAdapter extends BaseAdapter {
             holder = (MineViewHolder) convertView.getTag();
         }
 
-        TeachersListItemInfo makeClassAddPersonInfo = contentData.get(position);
-        holder.nameTv.setText(makeClassAddPersonInfo.getTeachername());
+        ParentsListItemInfo makeClassAddPersonInfo = contentData.get(position);
+        holder.nameTv.setText(makeClassAddPersonInfo.getBabyname());
         if (selectedData.get(position) != null) {
             if (selectedData.get(position) > 0) {
                 holder.rightSymbleIv.setVisibility(View.VISIBLE);

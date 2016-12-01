@@ -71,4 +71,6 @@ public class BgGlobal {
     public static final String QUERY_SCHOOLS_LIST = "schoolMGController/querySchoolList";//获取学校列表
     public static final String GET_BABY_GROWTH_RECORD_LIST = "babyGrowthRecord/babyGrowthRecordList";//宝宝成长记录查询列表
     public static final String QUERY_SCHOOL_LIST_BY_SCHOOL_NAME = "schoolMGController/querySchoolSerchList"; //学校查询列表
+    public static final String PARENTS_LIST_INFO = "parentinfo/parentinfoList"; //家长信息列表
+    public static final String PARENTS_INFO_AUDIT = "parentinfo/updateParentinfo"; //家长信息审核验证
 }

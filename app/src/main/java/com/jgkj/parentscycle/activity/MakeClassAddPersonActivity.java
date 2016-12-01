@@ -14,20 +14,18 @@ import android.widget.Toast;
 
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.adapter.MakeClassAddPersonAdapter;
-import com.jgkj.parentscycle.adapter.SelectTeacherListAdapter;
-import com.jgkj.parentscycle.bean.MakeClassAddPersonInfo;
+import com.jgkj.parentscycle.bean.AuditParentsInfo;
+import com.jgkj.parentscycle.bean.ParentsListInfo;
 import com.jgkj.parentscycle.bean.TeachersListInfo;
-import com.jgkj.parentscycle.bean.TeachersListItemInfo;
 import com.jgkj.parentscycle.global.BgGlobal;
+import com.jgkj.parentscycle.json.AuditParentsInfoPaser;
+import com.jgkj.parentscycle.json.ParentsListInfoPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
 import com.jgkj.parentscycle.net.NetBeanSuper;
 import com.jgkj.parentscycle.net.NetListener;
 import com.jgkj.parentscycle.net.NetRequest;
-import com.jgkj.parentscycle.utils.ActivityUtils;
 import com.jgkj.parentscycle.utils.ToastUtil;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.Bind;
@@ -63,22 +61,21 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
         setContentView(R.layout.make_class_add_person_activity);
         ButterKnife.bind(this);
         initViews();
-        requestTeachersList();
+        requestParentsInfoList();
     }
 
-    private void requestTeachersList() {
+    private void requestParentsInfoList() {
         showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
-        TeacherListPaser lp = new TeacherListPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHERS_LIST, requestData, lp);
+        ParentsListInfoPaser lp = new ParentsListInfoPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_LIST_INFO, requestData, lp);
     }
 
     private void initViews() {
         rightTv.setVisibility(View.GONE);
-        titleTv.setText("添加老师");
+        titleTv.setText("新加入家长");
         titleTv.setTextColor(Color.BLACK);
-        titleBg.setBackgroundColor(Color.WHITE);
-
+        //titleBg.setBackgroundColor(Color.WHITE);
     }
 
     @OnClick({R.id.baby_document_activity_back_iv,R.id.make_class_add_person_activity_submit_btn})
@@ -90,7 +87,6 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
             finish();
         } else if (v == confirmBtn) {
             setIdsData();
-            finish();
         }
     }
 
@@ -100,6 +96,17 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
         String idsData = makeClassAddPersonAdapter.getIdsData();
         intent.putExtra("teacher_ids_data",idsData);
         setResult(1, intent);
+        requestAuditParentsInfo(idsData);
+    }
+
+    private void requestAuditParentsInfo(String id) {
+        showProgressDialog();
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        AuditParentsInfoPaser lp = new AuditParentsInfoPaser();
+        requestData.put("iseffectives","1");
+        requestData.put("tmpinfoid",id);
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_INFO_AUDIT, requestData, lp);
+
     }
 
     @Override
@@ -111,10 +118,10 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
     public void requestResponse(Object obj) {
         hideProgressDialog();
         NetBeanSuper nbs = (NetBeanSuper)obj;
-        if (nbs.obj instanceof TeachersListInfo) {
+        if (nbs.obj instanceof ParentsListInfo) {
             if (nbs.isSuccess()) {
-                TeachersListInfo tii = (TeachersListInfo)nbs.obj;
-                makeClassAddPersonAdapter = new MakeClassAddPersonAdapter(this,tii.getData());
+                ParentsListInfo tii = (ParentsListInfo)nbs.obj;
+                makeClassAddPersonAdapter = new MakeClassAddPersonAdapter(this,tii.getObj());
                 mContentLv.setAdapter(makeClassAddPersonAdapter);
                 mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -125,6 +132,11 @@ public class MakeClassAddPersonActivity extends BaseActivity implements View.OnC
             } else {
                 ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
             }
+        } else if (nbs.obj instanceof AuditParentsInfo) {
+            if (nbs.isSuccess()) {
+                finish();
+            }
+            ToastUtil.showToast(this,nbs.getMsg(), Toast.LENGTH_SHORT);
         }
     }
 }
