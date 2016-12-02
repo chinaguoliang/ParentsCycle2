@@ -279,6 +279,17 @@
 
         </ScrollView>
 
+        <TextView
+            android:id="@+id/setting_activity_layout_curr_version_tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/big_text_size"
+            android:text="当前版本:"
+            />
 
     </RelativeLayout>
 

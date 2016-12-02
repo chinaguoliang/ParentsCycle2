@@ -74,15 +74,27 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.setting_activity_layout_check_update_tv)
     TextView checkUpdateTv;
 
+    @Bind(R.id.setting_activity_layout_curr_version_tv)
+    TextView currVersionTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_activity_layout);
         ButterKnife.bind(this);
         titleTv.setText("设置");
-        titleTv.setTextColor(Color.BLACK);
+        titleTv.setTextColor(Color.WHITE);
         rightTitleTv.setVisibility(View.GONE);
-        mWrapTitleRel.setBackgroundColor(Color.WHITE);
+        //mWrapTitleRel.setBackgroundColor(Color.WHITE);
+
+        try {
+            String pkName = this.getPackageName();
+            String versionName = this.getPackageManager().getPackageInfo(
+                    pkName, 0).versionName;
+            currVersionTv.setText("当前版本号:" + versionName);
+        } catch (Exception e) {
+        }
+
     }
 
 

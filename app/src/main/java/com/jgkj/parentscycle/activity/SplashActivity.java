@@ -48,7 +48,13 @@ public class SplashActivity extends Activity implements NetListener {
         UtilTools.SCREEN_HEIGHT = wm.getDefaultDisplay().getHeight();
 
         if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(password)) {
-            requestLogin(userName,password);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    requestLogin(userName,password);
+                }
+            }, 2000);
+
         } else {
             UserInfo.isLogined = false;
             new Handler().postDelayed(new Runnable() {
