@@ -80,8 +80,8 @@ public class MakeClassActivity extends BaseActivity implements NetListener,View.
         submitTv.setText("提交");
         submitTv.setTextColor(this.getResources().getColor(R.color.text_gray));
         titleTv.setText("建立班级");
-        titleTv.setTextColor(Color.BLACK);
-        titleBg.setBackgroundColor(Color.WHITE);
+        //titleTv.setTextColor(Color.BLACK);
+        //titleBg.setBackgroundColor(Color.WHITE);
     }
 
     @OnClick({R.id.baby_document_activity_back_iv,R.id.make_class_activity_add_teacher_rel,R.id.baby_document_right_title_tv,R.id.make_class_activity_add_adviser_rel})
