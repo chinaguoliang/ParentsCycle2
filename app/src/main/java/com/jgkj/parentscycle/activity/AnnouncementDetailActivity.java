@@ -68,6 +68,12 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
     @Bind(R.id.announcement_detail_activity_add_comment_tv)
     TextView addCommentTv;
 
+    @Bind(R.id.announcement_detail_activity_pl_num_tv)
+    TextView plTv;
+
+    @Bind(R.id.announcement_detail_activity_dz_num_tv)
+    TextView dzTv;
+
     AnnouncementListItem alii;
     private String annId;
     @Override
@@ -83,6 +89,8 @@ public class AnnouncementDetailActivity extends BaseActivity implements View.OnC
         commentContentTv.setText(alii.getAnnouncement());
         topNameTv.setText(alii.getOspersion());
         topTimeTv.setText(alii.getCreatetime());
+        plTv.setText(alii.getPlnum());
+        dzTv.setText(alii.getDznum());
         requestAnnounceMentList(id);
     }
 

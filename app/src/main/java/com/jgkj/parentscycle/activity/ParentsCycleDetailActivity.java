@@ -66,10 +66,10 @@ public class ParentsCycleDetailActivity extends BaseActivity implements View.OnC
         setContentView(R.layout.school_detail_activity);
         ButterKnife.bind(this);
         mParentsCyclePostsListItem = (ParentsCyclePostsListItem)this.getIntent().getExtras().getSerializable("parentsinfo");
-        mWrapTitleRel.setBackgroundColor(this.getResources().getColor(R.color.white));
+        mWrapTitleRel.setBackgroundColor(this.getResources().getColor(R.color.transparent));
         rightTitleTv.setVisibility(View.GONE);
         titleTv.setText("详情");
-        titleTv.setTextColor(this.getResources().getColor(R.color.black));
+        titleTv.setTextColor(this.getResources().getColor(R.color.white));
 
         LayoutInflater inflater = LayoutInflater.from(this);
         View headerView = inflater.inflate(R.layout.school_detail_activity_listview_headerview,null);

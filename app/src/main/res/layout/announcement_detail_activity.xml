@@ -56,13 +56,14 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/announcement_detail_activity_dz_num_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:drawableLeft="@mipmap/after_set_good"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
-                    android:text="1026"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="@dimen/normal_text_size" />
             </RelativeLayout>
@@ -73,13 +74,14 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/announcement_detail_activity_pl_num_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:drawableLeft="@mipmap/comment_icon"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
-                    android:text="152"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="@dimen/normal_text_size" />
             </RelativeLayout>
