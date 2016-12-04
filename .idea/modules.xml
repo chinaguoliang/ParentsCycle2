@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EaseUI/EaseUI.iml" filepath="$PROJECT_DIR$/EaseUI/EaseUI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ParentsCycle.iml" filepath="$PROJECT_DIR$/ParentsCycle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParentsCycleHome.iml" filepath="$PROJECT_DIR$/ParentsCycleHome.iml" />
       <module fileurl="file://$PROJECT_DIR$/YingShiVideo/YingShiVideo.iml" filepath="$PROJECT_DIR$/YingShiVideo/YingShiVideo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/huanxin/huanxin.iml" filepath="$PROJECT_DIR$/huanxin/huanxin.iml" />
