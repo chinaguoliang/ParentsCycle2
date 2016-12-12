@@ -26,6 +26,7 @@ public class BgGlobal {
     public static final String CHECK_RESET_PASSWORD = "jgkj/jgkjGetPassCheck";  //找回密码校验
     public static final String LOGIN_URL = "jgkj/loginUser";
     public static final String TEACHER_INFO_SAVE = "jgkj/teacherinfoSave"; //教师完善个人信息
+    public static final String PARENTS_INFO_SAVE = "jgkj/Parentinfo/Save";//家长信息完善
     public static final String TEACHER_INFO_LIST = "teacherinfo/getTeacherinfo";  //教师个人中心
 
     public static final String CREATE_CLASS = "classinfo/save";  //建立班级

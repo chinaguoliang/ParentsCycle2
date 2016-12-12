@@ -81,7 +81,8 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestQuerySchoolList();
             //requestBabyGrowthList();
             //requestSearchSchoolList();
-            requestPerfectBabyInfo();
+            //requestPerfectBabyInfo();
+            requestSaveParentsInfo();
         }
     }
 
@@ -400,6 +401,26 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
         NetRequest.getInstance().request(mQueue, this, BgGlobal.QUERY_SCHOOL_LIST_BY_SCHOOL_NAME, requestData, lp);
     }
 
+    //保存父母信息
+    private void requestSaveParentsInfo() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        requestData.put("account","111");
+        requestData.put("babyage","87");
+        requestData.put("babyname","asdasda");
+        requestData.put("babysex","1");
+        requestData.put("familyrole","123123");
+        requestData.put("fmbg","231312.jpg");
+        requestData.put("headportrait","http://oalp3wrah.bkt.clouddn.com/FlkYjsieyMjin2emixUGtzq8nTln");
+        requestData.put("nickname","123123");
+        requestData.put("region","21323");
+        requestData.put("sex","1");
+        requestData.put("tmpinfoid","4");
+        requestData.put("isdaren","0");  //默认不是达人
+
+
+        TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_INFO_SAVE, requestData, lp);
+    }
 
 
     @Override

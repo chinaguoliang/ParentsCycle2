@@ -392,7 +392,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
         requestData.put("schoolid", ConfigPara.SCHOOL_ID);  //暂时传1
         PerfectInfoPaser lp = new PerfectInfoPaser();
-        NetRequest.getInstance().request(mQueue, this, BgGlobal.TEACHER_INFO_SAVE, requestData, lp);
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_INFO_SAVE, requestData, lp);
     }
 
 
