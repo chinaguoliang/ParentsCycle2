@@ -15,6 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.jgkj.parentscycle.R;
 import com.jgkj.parentscycle.global.BgGlobal;
 import com.jgkj.parentscycle.global.ConfigPara;
+import com.jgkj.parentscycle.json.ParentsListInfoPaser;
 import com.jgkj.parentscycle.json.ResetPasswordPaser;
 import com.jgkj.parentscycle.json.TeacherInfoLIstPaser;
 import com.jgkj.parentscycle.json.TeacherListPaser;
@@ -82,7 +83,8 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
             //requestBabyGrowthList();
             //requestSearchSchoolList();
             //requestPerfectBabyInfo();
-            requestSaveParentsInfo();
+            //requestSaveParentsInfo();
+            requestParentsInfo();
         }
     }
 
@@ -420,6 +422,14 @@ public class TestNetActivity extends BaseActivity implements View.OnClickListene
 
         TeacherInfoLIstPaser lp = new TeacherInfoLIstPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_INFO_SAVE, requestData, lp);
+    }
+
+
+    public void requestParentsInfo() {
+        HashMap<String, String> requestData = new HashMap<String, String>();
+        ParentsListInfoPaser lp = new ParentsListInfoPaser();
+        NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_LIST_INFO, requestData, lp);
+
     }
 
 

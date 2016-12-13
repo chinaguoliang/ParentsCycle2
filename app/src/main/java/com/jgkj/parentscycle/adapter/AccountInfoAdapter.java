@@ -1,6 +1,7 @@
 package com.jgkj.parentscycle.adapter;
 
 import android.content.Context;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,12 +103,19 @@ public class AccountInfoAdapter extends BaseAdapter {
 
 
 
-        if (position == 2 || position == 4 || position == 6 || position == 7 || position == 8 || position == 9) {
+        if (position == 3 || position == 4 || position == 6 || position == 7 || position == 10) {
             holder.contentEt.setVisibility(View.GONE);
             holder.contentTv.setVisibility(View.VISIBLE);
         } else {
             holder.contentEt.setVisibility(View.VISIBLE);
             holder.contentTv.setVisibility(View.GONE);
+        }
+
+        if (position == 9) {
+            //宝宝年龄
+            holder.contentEt.setInputType(InputType.TYPE_CLASS_NUMBER);
+        } else {
+            holder.contentEt.setInputType(InputType.TYPE_NULL);
         }
 
         return convertView;

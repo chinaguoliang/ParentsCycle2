@@ -12,11 +12,11 @@ import com.jgkj.parentscycle.R;
  */
 public class SexSelectDialog {
     public interface SexSlectDialogFinish {
-        public void finishSlecct(int index);
+        public void finishSlecct(int index,int position);
     }
 
-    public static  void showSexSelectDialog(final Context context,final  SexSlectDialogFinish ssdf) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    public static  void showSexSelectDialog(final Context context,final  SexSlectDialogFinish ssdf,final int position) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("请选择性别");
         final String[] sex = {"女","男" };
         //    设置一个单项选择下拉框
@@ -31,7 +31,8 @@ public class SexSelectDialog {
             public void onClick(DialogInterface dialog, int which)
             {
                 Toast.makeText(context, "性别为：" + sex[which], Toast.LENGTH_SHORT).show();
-                ssdf.finishSlecct(which);
+                ssdf.finishSlecct(which,position);
+
             }
         });
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener()

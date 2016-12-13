@@ -200,7 +200,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
         } else if (v == joinClassRel) {
 
         } else if (v == sexRel) {
-            SexSelectDialog.showSexSelectDialog(BabyInfoActivity.this,BabyInfoActivity.this);
+            SexSelectDialog.showSexSelectDialog(BabyInfoActivity.this,BabyInfoActivity.this,0);
         } else if (v == birthdayRel) {
             showDateDialog(1);
         } else if (v == transferClassRel) {
@@ -261,7 +261,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void finishSlecct(int index) {
+    public void finishSlecct(int index,int position) {
         if (index == 1) {
             sexTv.setText("男");
             selSex = 1;

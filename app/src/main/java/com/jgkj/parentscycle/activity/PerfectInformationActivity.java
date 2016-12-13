@@ -120,7 +120,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
                     //家长性别
                     SexSelectDialog.showSexSelectDialog(PerfectInformationActivity.this,new SexSelectDialog.SexSlectDialogFinish(){
                         @Override
-                        public void finishSlecct(int index) {
+                        public void finishSlecct(int index,int position) {
                             String sexResult = "";
                             if (index == 1) {
                                 sexResult = "性别_男";
@@ -131,12 +131,12 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
                             }
                             mPerfectInformationAdapter.setPositionData(4,sexResult);
                         }
-                    });
+                    },position);
                 } else if (position == 7) {
                     //宝宝性别
                     SexSelectDialog.showSexSelectDialog(PerfectInformationActivity.this,new SexSelectDialog.SexSlectDialogFinish(){
                         @Override
-                        public void finishSlecct(int index) {
+                        public void finishSlecct(int index,int position) {
                             String sexResult = "";
                             if (index == 1) {
                                 sexResult = "性别_男";
@@ -147,7 +147,7 @@ public class PerfectInformationActivity extends BaseActivity implements View.OnC
                             }
                             mPerfectInformationAdapter.setPositionData(7,sexResult);
                         }
-                    });
+                    },position);
                 }
             }
         });

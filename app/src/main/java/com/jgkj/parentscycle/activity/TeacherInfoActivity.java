@@ -118,7 +118,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
                 } else if (position == 6) {
                     showDateDialog();
                 } else if (position == 4) {
-                    SexSelectDialog.showSexSelectDialog(TeacherInfoActivity.this,TeacherInfoActivity.this);
+                    SexSelectDialog.showSexSelectDialog(TeacherInfoActivity.this,TeacherInfoActivity.this,position);
                 }
             }
         });
@@ -484,7 +484,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    public void finishSlecct(int index) {
+    public void finishSlecct(int index,int position) {
         String sexResult = "";
         if (index == 1) {
             sex = "1";

@@ -95,7 +95,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     Dialog mModifyClassDialog;
     String classesIds = ""; //classid 的组合
     String selBirthday = "";
-    int selSex = -1;
+    HashMap <Integer,Integer> sexMap = new HashMap<Integer, Integer>();
     TeacherInfoListInfo mTeacherInfoListInfo;
 
     private String headUrl = "";
@@ -115,12 +115,16 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                 } else if (position == 6) {
                     //帐号信息
                     startActivity(new Intent(AccountInfoActivity.this,AccountSafeActivity.class));
-                } else if (position == 3) {
-                    SexSelectDialog.showSexSelectDialog(AccountInfoActivity.this,AccountInfoActivity.this);
-                } else if (position == 9) {
-                    //选择班级
-                    requestClassListBySchoolId();
+                } else if (position == 3 || position == 10) {
+                    SexSelectDialog.showSexSelectDialog(AccountInfoActivity.this,AccountInfoActivity.this,position);
                 }
+
+
+
+//                else if (position == 9) {
+//                    //选择班级
+//                    requestClassListBySchoolId();
+//                }
 
 
 //                if (position == 0 || position == 1 || position == 3) {
@@ -236,7 +240,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         ArrayList<String> data = new ArrayList<String>();
         data.add("昵称_" + tii.getNickname());
         data.add("姓名_" + tii.getTeachername());
-        data.add("地区_" + "");
+        data.add("地区_" + " ");
 
         if (TextUtils.equals(tii.getTeachersex(),"0")) {
             data.add("性别_女");
@@ -252,9 +256,11 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         data.add("手机号_" + tii.getPhone());
         data.add("账户安全_ ");
-//        data.add("捆绑微信_ ");
-//        data.add("捆绑QQ_ ");
-//        data.add("选择班级_");
+        data.add("宝宝姓名_");
+        data.add("宝宝年龄_ ");
+        data.add("宝宝性别_ ");
+        data.add("家庭角色_ ");
+
         mAccountInfoAdapter = new AccountInfoAdapter(this, data);
         mContentLv.setAdapter(mAccountInfoAdapter);
     }
@@ -326,71 +332,22 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
 
     public void requestSave() {
+        showProgressDialog();
         HashMap<String, String> requestData = new HashMap<String, String>();
         HashMap<Integer,String> data = mAccountInfoAdapter.getData();
-        requestData.put("analysis",mTeacherInfoListInfo.getAnalysis());
+        requestData.put("isdaren","0");  //默认不是达人
+        requestData.put("account","");
+        requestData.put("babyage",data.get(9));
+        requestData.put("babyname",data.get(8));
+        requestData.put("babysex",sexMap.get(10) + "");
+        requestData.put("familyrole",data.get(11));
+        requestData.put("fmbg","");
 
-
-        if (TextUtils.isEmpty(selBirthday)) {
-            requestData.put("birthdate",mTeacherInfoListInfo.getBirthdate());
-        } else {
-            requestData.put("birthdate",selBirthday);
-        }
-
-        if (TextUtils.isEmpty(classesIds)) {
-            requestData.put("classid",mTeacherInfoListInfo.getClassid());
-        } else {
-            requestData.put("classid",classesIds);
-        }
-
-        if (TextUtils.isEmpty(headUrl)) {
-            requestData.put("headportrait",mTeacherInfoListInfo.getHeadportrait());
-        } else {
-            requestData.put("headportrait",headUrl);
-        }
-        requestData.put("kbwx",mTeacherInfoListInfo.getKbwx()); //1: 是  0：否
-        requestData.put("kbqq",mTeacherInfoListInfo.getKbqq());
-
-        String nationality = data.get(3);
-        if (TextUtils.isEmpty(nationality)) {
-            requestData.put("nationality",mTeacherInfoListInfo.getNationality());
-        } else {
-            requestData.put("nationality",nationality);
-        }
-
-        if (TextUtils.isEmpty(data.get(0))) {
-            requestData.put("nickname",mTeacherInfoListInfo.getNickname());
-        } else {
-            requestData.put("nickname",data.get(0));
-        }
-
-        requestData.put("onthejob",mTeacherInfoListInfo.getOnthejob()); // 1:在职  0： 离职
-        requestData.put("permissions",mTeacherInfoListInfo.getPermissions());
-        String phone = data.get(5);
-        if (TextUtils.isEmpty(phone)) {
-            requestData.put("phone",mTeacherInfoListInfo.getPhone());
-        } else {
-            requestData.put("phone",phone);
-        }
-
-
-        requestData.put("schoolname",mTeacherInfoListInfo.getSchoolname());
-        requestData.put("teacherid",mTeacherInfoListInfo.getTeacherid());
-        if (TextUtils.isEmpty(data.get(1))) {
-            requestData.put("teachername",mTeacherInfoListInfo.getTeachername());
-        } else {
-            requestData.put("teachername",data.get(1));
-        }
-
-        if (selSex == -1) {
-            requestData.put("teachersex",mTeacherInfoListInfo.getTeachersex());
-        } else {
-            requestData.put("teachersex",selSex + "");
-        }
-
-
+        requestData.put("sex",sexMap.get(3) + "");
+        requestData.put("headportrait",headUrl);
+        requestData.put("nickname",data.get(0));
+        requestData.put("region",data.get(2));
         requestData.put("tmpinfoid", UserInfo.loginInfo.getRole().getId());
-        requestData.put("schoolid", ConfigPara.SCHOOL_ID);  //暂时传1
         PerfectInfoPaser lp = new PerfectInfoPaser();
         NetRequest.getInstance().request(mQueue, this, BgGlobal.PARENTS_INFO_SAVE, requestData, lp);
     }
@@ -405,17 +362,17 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    public void finishSlecct(int index) {
+    public void finishSlecct(int index,int position) {
         List<String> dataList = mAccountInfoAdapter.getList();
         if (index == 1) {
-            dataList.set(2,"性别_男");
-            selSex = 1;
+            dataList.set(position,"性别_男");
+            sexMap.put(position,index);
         } else if (index == 0) {
-            dataList.set(2,"性别_女");
-            selSex = 0;
+            dataList.set(position,"性别_女");
+            sexMap.put(position,index);
         }
 
-        mAccountInfoAdapter.getData().put(2,index + "");
+        mAccountInfoAdapter.getData().put(position,index + "");
         mAccountInfoAdapter.notifyDataSetChanged();
     }
 }
