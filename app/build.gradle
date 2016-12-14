@@ -12,7 +12,7 @@ android {
     signingConfigs {
         HomeKeyStore {
             keyPassword '111111'
-            storeFile file('D:/pworkspace/ParentsCycleHome/keystore/home')
+            storeFile file('../keystore/home')
             storePassword '111111'
             keyAlias 'ParentsCycleHome'
         }
