@@ -32,7 +32,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:background="@mipmap/landscape_icon"
+                    android:background="@mipmap/common_top_bg"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -47,7 +47,6 @@
                             android:id="@+id/baby_info_activity_user_icon_iv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:src="@mipmap/user_default_icon" />
 
                         <TextView
