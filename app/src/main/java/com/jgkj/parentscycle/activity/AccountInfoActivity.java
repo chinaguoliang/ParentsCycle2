@@ -117,6 +117,9 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
                     startActivity(new Intent(AccountInfoActivity.this,AccountSafeActivity.class));
                 } else if (position == 3) {
                     SexSelectDialog.showSexSelectDialog(AccountInfoActivity.this,AccountInfoActivity.this,position);
+                } else if (position == 8) {
+                    //添加宝宝
+                    startActivity(new Intent(AccountInfoActivity.this,AddBabyActivity.class));
                 }
 
 
