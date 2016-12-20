@@ -103,7 +103,7 @@ public class AccountInfoAdapter extends BaseAdapter {
 
 
 
-        if (position == 3 || position == 4 || position == 6 || position == 7 || position == 10) {
+        if (position == 3 || position == 5 || position == 7) {
             holder.contentEt.setVisibility(View.GONE);
             holder.contentTv.setVisibility(View.VISIBLE);
         } else {
@@ -111,12 +111,12 @@ public class AccountInfoAdapter extends BaseAdapter {
             holder.contentTv.setVisibility(View.GONE);
         }
 
-        if (position == 9) {
-            //宝宝年龄
-            holder.contentEt.setInputType(InputType.TYPE_CLASS_NUMBER);
-        } else {
-            holder.contentEt.setInputType(InputType.TYPE_NULL);
-        }
+//        if (position == 9) {
+//            //宝宝年龄
+//            holder.contentEt.setInputType(InputType.TYPE_CLASS_NUMBER);
+//        } else {
+//            holder.contentEt.setInputType(InputType.TYPE_NULL);
+//        }
 
         return convertView;
     }

@@ -110,12 +110,12 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         mContentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 4) {
+                if (position == 5) {
                     showDateDialog();
-                } else if (position == 6) {
+                } else if (position == 7) {
                     //帐号信息
                     startActivity(new Intent(AccountInfoActivity.this,AccountSafeActivity.class));
-                } else if (position == 3 || position == 10) {
+                } else if (position == 3) {
                     SexSelectDialog.showSexSelectDialog(AccountInfoActivity.this,AccountInfoActivity.this,position);
                 }
 
@@ -182,9 +182,9 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
         List<String> dataList = mAccountInfoAdapter.getList();
         String date = year + "-" + (monthOfYear + 1) + "-" +dayOfMonth;
 //        dataList.remove(4);
-        dataList.set(4,"出生日期_" + date);
+        dataList.set(5,"出生日期_" + date);
         selBirthday = date;
-        mAccountInfoAdapter.getData().put(4,date);
+        mAccountInfoAdapter.getData().put(5,date);
         mAccountInfoAdapter.notifyDataSetChanged();
     }
 
@@ -256,10 +256,10 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         data.add("手机号_" + tii.getPhone());
         data.add("账户安全_ ");
-        data.add("宝宝姓名_");
-        data.add("宝宝年龄_ ");
-        data.add("宝宝性别_ ");
-        data.add("家庭角色_ ");
+//        data.add("宝宝姓名_");
+//        data.add("宝宝年龄_ ");
+//        data.add("宝宝性别_ ");
+//        data.add("家庭角色_ ");
 
         mAccountInfoAdapter = new AccountInfoAdapter(this, data);
         mContentLv.setAdapter(mAccountInfoAdapter);
@@ -362,17 +362,17 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    public void finishSlecct(int index,int position) {
+    public void finishSlecct(int index) {
         List<String> dataList = mAccountInfoAdapter.getList();
         if (index == 1) {
-            dataList.set(position,"性别_男");
-            sexMap.put(position,index);
+            dataList.set(3,"性别_男");
+            sexMap.put(3,index);
         } else if (index == 0) {
-            dataList.set(position,"性别_女");
-            sexMap.put(position,index);
+            dataList.set(3,"性别_女");
+            sexMap.put(3,index);
         }
 
-        mAccountInfoAdapter.getData().put(position,index + "");
+        mAccountInfoAdapter.getData().put(3,index + "");
         mAccountInfoAdapter.notifyDataSetChanged();
     }
 }

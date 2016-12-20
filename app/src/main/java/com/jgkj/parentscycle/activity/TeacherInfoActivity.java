@@ -484,7 +484,7 @@ public class TeacherInfoActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    public void finishSlecct(int index,int position) {
+    public void finishSlecct(int index) {
         String sexResult = "";
         if (index == 1) {
             sex = "1";

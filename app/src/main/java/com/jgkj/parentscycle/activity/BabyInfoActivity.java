@@ -261,7 +261,7 @@ public class BabyInfoActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void finishSlecct(int index,int position) {
+    public void finishSlecct(int index) {
         if (index == 1) {
             sexTv.setText("男");
             selSex = 1;
