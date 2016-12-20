@@ -256,6 +256,7 @@ public class AccountInfoActivity extends BaseActivity implements View.OnClickLis
 
         data.add("手机号_" + tii.getPhone());
         data.add("账户安全_ ");
+        data.add("添加宝宝_ ");
 //        data.add("宝宝姓名_");
 //        data.add("宝宝年龄_ ");
 //        data.add("宝宝性别_ ");
